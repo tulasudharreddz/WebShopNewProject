@@ -195,7 +195,7 @@ public class WebSharpTestCase
 	b) Enter the valid 'User Name' & Invalid 'Captcha' 
 	c) Enter the Invalid 'User Name' & valid 'Captcha'
 	d) Enter the Invalid 'User Name' & Invalid 'Captcha'
-	Note: - Valid User Name  = user’s email address
+	Note: - Valid User Name  = userï¿½s email address
 
 	 */
 
@@ -227,7 +227,7 @@ public class WebSharpTestCase
 	/*TC05: Verify the GUI of "Request Registration" Section
 
 	The "Request Registration" Section should be displayed with the following
-	a) Label Text - “If your company is not yet a registered client of Dimension Data, or you would like user-access to the Dimension Data Store for your registered company, click below to request registration”  
+	a) Label Text - ï¿½If your company is not yet a registered client of Dimension Data, or you would like user-access to the Dimension Data Store for your registered company, click below to request registrationï¿½  
 	c) Button - Request Registration
 
 	 */
@@ -258,6 +258,10 @@ public class WebSharpTestCase
 	public void Close() throws IOException
 	{
 		driver.quit();
+
+		driver.close();
+		
+
 	}
 
 	public void screenShot() throws IOException
