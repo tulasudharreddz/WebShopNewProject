@@ -1,0 +1,8 @@
+2016-10-25 11:57:38 INFO [main] (WebSharpTestCase.java:82)- Chrome Browser Opened
+2016-10-25 11:57:50 INFO [main] (WebSharpTestCase.java:87)- URL: https://directqa2.dimensiondata.com/Webshop/login
+2016-10-25 11:58:30 INFO [main] (WebSharpTestCase.java:82)- Chrome Browser Opened
+2016-10-25 11:58:44 INFO [main] (WebSharpTestCase.java:87)- URL: https://directqa2.dimensiondata.com/Webshop/login
+2016-10-25 11:58:45 INFO [main] (WebSharpTestCase.java:99)- Number of rows in sheet: 0
+2016-10-25 11:58:46 INFO [main] (WebSharpTestCase.java:241)- Label Text for Request registration  is .
+2016-10-25 11:58:46 INFO [main] (WebSharpTestCase.java:245)- Request Registration is exist with link Register here
+2016-10-25 11:58:46 INFO [main] (WebSharpTestCase.java:247)- test cases is verified and Passed
