@@ -247,7 +247,47 @@ public class WebSharpTestCase
 		log.info("test cases is verified and Passed");
 
 	}
+	// Verify that all the static links are working or not.
+	@Test
+	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException
+	{
 
+		LoginPage.AsertVerifyForAboutUSLinkHomePage(driver);
+
+		log.info("AboutUS link Asert is verified");
+
+		LoginPage.AsertVerifyForNEWSLinkHomePage(driver);
+
+		log.info("Asert for NEWS link is verified");
+
+		LoginPage.AsertVerifyForCareerLinkHomePage(driver);
+
+		log.info("Asert for Career link is verified");
+
+		LoginPage.AsertVerifyForSafeHarborPolicyLinkHomePage(driver);
+
+		log.info("Asert for Safe Harbor Policy link is verified");
+
+		LoginPage.AsertVerifyForServiceCenterLinkHomePage(driver);
+
+		log.info("Asert for ServiceCenter link is verified");
+
+		LoginPage.AsertVerifyForPrivacyPolicyLinkHomePage(driver);
+
+		log.info("Asert for Privacy Policy link is verified");
+
+		LoginPage.AsertVerifyForTermsConditionsLinkHomePage(driver);
+
+		log.info("Asert for Terms Conditions link is verified");
+
+		LoginPage.AsertVerifyForCookiePolicyLinkHomePage(driver);
+
+		log.info("Asert for Cookie Policy link is verified");
+
+		LoginPage.AsertVerifyForContactDDLinkHomePage(driver);
+
+		log.info("Asert for ContactDD link is verified");
+	}
 
 
 
