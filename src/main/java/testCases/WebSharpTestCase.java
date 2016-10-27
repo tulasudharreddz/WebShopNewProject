@@ -235,10 +235,10 @@ public class WebSharpTestCase
 	@Test
 	public void TC05() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
-
+		Thread.sleep(2000);
 		String labeltext= LoginPage.LableForRegistration(driver).getText();
 
-		log.info("Label Text for Request registration  is " +labeltext);
+		log.info("Label Text for Request registration  is  " +labeltext);
 
 		//check that Button for Request Registration is exist or not.
 		

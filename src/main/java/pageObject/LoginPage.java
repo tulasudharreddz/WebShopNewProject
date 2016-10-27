@@ -146,7 +146,7 @@ public class LoginPage {
 	public static WebElement LableForRegistration(WebDriver driver)
 	{	  
 
-		element = driver.findElement(By.xpath("//p[@class='login-desc']"));
+		element = driver.findElement(By.xpath("//a[contains(text(),'Register Here')]"));
 		return element;
 	}
 
