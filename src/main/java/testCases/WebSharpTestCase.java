@@ -101,17 +101,14 @@ public class WebSharpTestCase
 
 	}
 
-
-
-	/*
-	TC01: Verify the launch of Login page & and its content
+	/*TC01: Verify the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections
 		Sections:
 		1. Login
 		2. Reset Password
-		3. Request Registration*/
-
+		3. Request Registration
+	*/
 
 
 	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException
@@ -125,14 +122,10 @@ public class WebSharpTestCase
 		LoginPage.RegisterAsert(driver);
 
 		screenShot();
-
-
 	}
 
-
-
 	/*	  
-	TC01: Validate the Login functionality
+	TC02: Validate the Login functionality
 	a) Select a value from "Select your language" dropdown
 	b) Enter valid User Name and Password
 

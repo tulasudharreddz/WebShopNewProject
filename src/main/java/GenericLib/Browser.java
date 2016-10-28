@@ -15,9 +15,6 @@ public class Browser {
 
 	WebDriver driver;
 
-
-
-
 	@Parameters("browser")
 	public WebDriver selectbrowser(String browser){
 

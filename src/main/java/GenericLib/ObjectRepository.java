@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class ObjectRepository {

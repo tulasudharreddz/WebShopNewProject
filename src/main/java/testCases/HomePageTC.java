@@ -14,7 +14,10 @@ import org.testng.annotations.Parameters;
 import java.io.IOException;
 import GenericLib.*;
 import org.testng.annotations.Test;
+import pageObject.HomePage;
 import pageObject.LoginPage;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 
 /**
@@ -29,6 +32,7 @@ public class HomePageTC {
     WebElement element;
     Sheet sheet;
     WritableSheet wsheet;
+    Logger log=Logger.getLogger("Test Cases");
 
 
     @Parameters("browser")
@@ -40,6 +44,7 @@ public class HomePageTC {
 
         sheet = excel.ReadSheet(sheet);
         wsheet = excel.writeSheet(wsheet, "test", "TestCase1");
+        PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
 
         ob.repository(driver);
         driver.get(ob.obj.getProperty("url"));
@@ -50,6 +55,18 @@ public class HomePageTC {
 
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
+        Thread.sleep(2000);
+        //To verify Shoping cart link
+        HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
+        log.info("Shopping Cart link Asert is verified");
+        //To verify Home link
+
+        HomePage.AsertVerifyForHomeLinkHomePage(driver);
+        log.info("Home link on home page Asert is verified");
+
+
+
+
 
 
 
