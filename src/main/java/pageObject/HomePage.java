@@ -1,5 +1,8 @@
 package pageObject;
 
+import GenericLib.ObjectRepository;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,14 +14,16 @@ public class HomePage {
 
 	public static WebElement element;
 	public static By by;
+	static Logger log = Logger.getLogger("Home Page");
+
 	
 	
 	public static void PageTitle(WebDriver driver)
 	{
 		//WebDriver driver = null;
 		String Actualtext= driver.getTitle();
-		
-		System.out.println("title of the page is " + Actualtext);
+
+		log.info("title of the page is " + Actualtext);
 		
 		Assert.assertEquals(Actualtext, "Dimension Data Direct");
 
@@ -38,13 +43,13 @@ public class HomePage {
 		Thread.sleep(2000);
 
 		String Title = driver.findElement(by.xpath("//span[contains(text(),'Shopping Cart')]")).getText();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 
 		Assert.assertEquals(Title, "Shopping Cart");
 
 	}
-	public static WebElement HomeCartLinkHomePage(WebDriver driver)
-	{
+	public static WebElement HomeCartLinkHomePage(WebDriver driver){
+
 
 		element = driver.findElement(By.xpath("//div[@class='header-links']/ul/li[1]/a[contains(text(),'Home')]"));
 		return element;
@@ -53,16 +58,21 @@ public class HomePage {
 	public static void AsertVerifyForHomeLinkHomePage(WebDriver driver) throws InterruptedException
 	{
 		AsertVerifyForShoppingCartLinkHomePage(driver);
-		System.out.println("System is navigate to the Shipping page");
-		System.out.println("Now clicking on Home link");
+		log.info("System is navigate to the Shipping page");
+		log.info("Now clicking on Home link");
 
 		HomeCartLinkHomePage(driver).click();
 		Thread.sleep(2000);
 
-		String Title = driver.findElement(by.xpath("//header[@class='content-header']/h2")).getText();
-		System.out.println("Title of the page is "+Title);
+		/*String Title = driver.findElement(by.xpath("//header[@class='content-header']/h2")).getText();
+		log.info("Title of the page is "+Title);
 
-		Assert.assertEquals(Title, "Welcome Standard User");
+		Assert.assertEquals(Title, "Welcome Standard User");*/
+
+		String Title = driver.findElement(by.xpath("//h2[contains(text(),'Best Sellers')]")).getText();
+		log.info("Title of the page is "+Title);
+
+		Assert.assertEquals(Title, "Best Sellers");
 
 	}
 

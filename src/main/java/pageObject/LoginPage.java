@@ -3,10 +3,13 @@ package pageObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class LoginPage {
@@ -14,13 +17,15 @@ public class LoginPage {
 
 	public static WebElement element;
 	public static By by;
+	static Logger log = Logger.getLogger("Login Page");
 	public static String PageTitle(WebDriver driver) 
 	{
 		//WebDriver driver = null;
 		String Actualtext= driver.getTitle();
 		Assert.assertEquals(Actualtext, "Dimension Data Direct");
 
-		System.out.println("title of the page is " + Actualtext);
+
+		log.info("title of the page is " + Actualtext);
 
 
 
@@ -34,7 +39,7 @@ public class LoginPage {
 		String LoginTitle = driver.findElement(By.xpath("//span[@class='login-header']")).getText();
 
 		Assert.assertEquals(LoginTitle, "Log In");
-		System.out.println("Title of the Log in page is " + LoginTitle);
+		log.info("Title of the Log in page is " + LoginTitle);
 		return element;
 	}
 
@@ -47,10 +52,10 @@ public class LoginPage {
 
 			Assert.assertEquals(ResetPassword, "Reset Password.");
 			//Assert.assertEquals(>0, driver.findElements(By.xpath("//a[@routerlink='resetpassword']")).size());
-			System.out.println("Reset Password link available on landing page");
+			log.info("Reset Password link available on landing page");
 		}
 		else{
-			System.out.println("Failed : Reset Password link is not available");
+			log.info("Failed : Reset Password link is not available");
 		}
 		return element;
 	}
@@ -63,10 +68,10 @@ public class LoginPage {
 			String RegisterAsert = driver.findElement(By.xpath("//a[contains(text(),'Register here')]")).getText();
 
 			Assert.assertEquals(RegisterAsert, "Register here");
-			System.out.println("Register here link available on landing page");
+			log.info("Register here link available on landing page");
 		}
 		else{
-			System.out.println("Failed : Register here link is not available");
+			log.info("Failed : Register here link is not available");
 		}
 		return element;
 	}
@@ -167,7 +172,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "About");
 		
@@ -194,7 +199,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "News and Events");
 		
@@ -221,7 +226,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "Careers | Dimension Data");
 		
@@ -248,7 +253,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "U.S. Safe Harbor Policy");
 		
@@ -270,7 +275,7 @@ public class LoginPage {
 		
 		String HREFValue = ServiceCenterLinkHomePage(driver).getAttribute("href");
 		
-		System.out.println("Service center link will navigate to  "+HREFValue);
+		log.info("Service center link will navigate to  "+HREFValue);
 		
 		Assert.assertEquals(HREFValue, "mailto:client.contact@dimensiondata.com");
 		
@@ -293,7 +298,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "Dimension Data Privacy Policy");
 		
@@ -321,7 +326,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "Terms and Conditions of Use of the Dimension Data Website");
 		
@@ -349,7 +354,7 @@ public class LoginPage {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "Dimension Data Cookie Policy");
 		
@@ -378,7 +383,7 @@ public class LoginPage {
 		ContactDDLinkHomePage(driver).click();
 		Thread.sleep(3000);		
 		String Title = driver.findElement(By.xpath("//div[contains(text(),'Contact Dimension Data')]")).getText();
-		System.out.println("Title of the page is "+Title);
+		log.info("Title of the page is "+Title);
 		
 		Assert.assertEquals(Title, "Contact Dimension Data");	
 		
@@ -388,12 +393,14 @@ public class LoginPage {
 	}
 
 	public static boolean Loginfunctionality(WebDriver driver) 
-	{	  
-
+	{	log.info("1");
+		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
+		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
+		log.info("2");
 		LoginPage.Language(driver).click();
 		LoginPage.Selectlanguage(driver).click();
 		LoginPage.UserName(driver).sendKeys("t.mirasipally@dimensiondata.com");
-		LoginPage.Password(driver).sendKeys("abcd12345");
+		LoginPage.Password(driver).sendKeys("Password12");
 
 		LoginPage.ClickLogin(driver).click();
 		return true;

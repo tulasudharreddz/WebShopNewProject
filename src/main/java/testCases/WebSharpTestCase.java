@@ -110,7 +110,7 @@ public class WebSharpTestCase
 		3. Request Registration
 	*/
 
-
+@Test
 	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		//check that user able to login with valid credentials or not
