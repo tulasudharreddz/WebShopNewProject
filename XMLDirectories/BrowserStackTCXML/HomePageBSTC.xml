@@ -8,7 +8,7 @@
         <parameter name="osVersion" value="8"/>
         <parameter name="resolution" value="2048x1536"/>
         <classes>
-            <class name="testCases.HomePageTC">
+            <class name="localTestCases.HomePageTC">
                 <methods>
                     <include name="TC_Home_01"/>
                     <include name="TC_Home_02"/>

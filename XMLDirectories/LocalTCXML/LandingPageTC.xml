@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Home Page Test cases Executions with browser stack">
+    <test name="ChromewithWin7">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="localTestCases.LandingPageTC">
+                <methods>
+                    <include name="TC01"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

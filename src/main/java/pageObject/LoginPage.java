@@ -1,8 +1,10 @@
 package pageObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import GenericLib.ObjectRepository;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,7 +16,7 @@ import org.testng.Assert;
 
 public class LoginPage {
 
-
+	static ObjectRepository obje = new ObjectRepository();
 	public static WebElement element;
 	public static By by;
 	static Logger log = Logger.getLogger("Login Page");
@@ -46,9 +48,9 @@ public class LoginPage {
 	public static WebElement ResetPasswordAssert(WebDriver driver) 
 	{	  
 
-		if(driver.findElements(By.xpath("//a[@routerlink='resetpassword']")).size() > 0){
+		if(driver.findElements(By.xpath("//a[contains(text(),'Reset Password.')]")).size() > 0){
 
-			String ResetPassword = driver.findElement(By.xpath("//a[@routerlink='resetpassword']")).getText();
+			String ResetPassword = driver.findElement(By.xpath("//a[contains(text(),'Reset Password.')]")).getText();
 
 			Assert.assertEquals(ResetPassword, "Reset Password.");
 			//Assert.assertEquals(>0, driver.findElements(By.xpath("//a[@routerlink='resetpassword']")).size());
@@ -63,11 +65,11 @@ public class LoginPage {
 	public static WebElement RegisterAsert(WebDriver driver) 
 	{	  
 
-		if(driver.findElements(By.xpath("//a[contains(text(),'Register here')]")).size() > 0){
+		if(driver.findElements(By.xpath("//a[contains(text(),'Register Here')]")).size() > 0){
 
-			String RegisterAsert = driver.findElement(By.xpath("//a[contains(text(),'Register here')]")).getText();
+			String RegisterAsert = driver.findElement(By.xpath("//a[contains(text(),'Register Here')]")).getText();
 
-			Assert.assertEquals(RegisterAsert, "Register here");
+			Assert.assertEquals(RegisterAsert, "Register Here");
 			log.info("Register here link available on landing page");
 		}
 		else{
@@ -119,7 +121,7 @@ public class LoginPage {
 	public static WebElement Register(WebDriver driver) 
 	{	  
 
-		element = driver.findElement(By.xpath("//a[contains(text(),'Register here')]"));
+		element = driver.findElement(By.xpath("//a[contains(text(),'Register Here')]"));
 		return element;
 	}
 	
@@ -392,15 +394,14 @@ public class LoginPage {
 		Thread.sleep(2000);
 	}
 
-	public static boolean Loginfunctionality(WebDriver driver) 
-	{	log.info("1");
+	public static boolean Loginfunctionality(WebDriver driver) throws IOException {
 		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
 		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
-		log.info("2");
 		LoginPage.Language(driver).click();
 		LoginPage.Selectlanguage(driver).click();
-		LoginPage.UserName(driver).sendKeys("t.mirasipally@dimensiondata.com");
-		LoginPage.Password(driver).sendKeys("Password12");
+		obje.repository(driver);
+		LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
+		LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
 
 		LoginPage.ClickLogin(driver).click();
 		return true;

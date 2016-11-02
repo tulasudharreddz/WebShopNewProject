@@ -1,0 +1,14 @@
+{
+  "name": "HomePage",
+  "platform": "Desktop",
+  "uiElements": [
+    {
+      "SHOPINGCART": "XPATH;//a[contains(text(),'Shopping Cart')]"
+    },
+    {
+      "elementName": "Close",
+      "by": "id",
+      "locator": "close-ItemLayout"
+    }
+  ]
+}

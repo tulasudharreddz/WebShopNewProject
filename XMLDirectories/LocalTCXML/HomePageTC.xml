@@ -3,10 +3,10 @@
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="testCases.HomePageTC">
+            <class name="localTestCases.HomePageTC">
                 <methods>
                     <include name="TC_Home_01"/>
-                    <include name="TC_Home_02"/>
+                    <!--<include name="TC_Home_02"/>-->
                 </methods>
             </class>
         </classes>
