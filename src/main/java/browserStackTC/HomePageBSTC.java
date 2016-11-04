@@ -37,25 +37,9 @@ public class HomePageBSTC {
     Sheet sheet;
     WritableSheet wsheet;
     Logger log = Logger.getLogger("Test Cases");
-
-    @Parameters("browser")
     @BeforeTest
-    public WebDriver start(String browser) throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException {
-        if (browser.equalsIgnoreCase(browser)) {
-            driver = brow.selectbrowser(browser);
-        }
-        /*sheet = excel.ReadSheet(sheet);
-        wsheet = excel.writeSheet(wsheet, "test", "TestCase1");*/
-        ob.repository(driver);
-        PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-        driver.get(ob.obj.getProperty("url"));
-        return driver;
-    }
 
-
-    @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
-
-    //@org.testng.annotations.Parameters(value={"browser","os","device"})
+    /*@Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
     public WebDriver startB(String browserN, String version, String os, String osVersion, String resolution) throws Exception {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability("os", os);
@@ -76,15 +60,39 @@ public class HomePageBSTC {
         PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
         driver.get(ob.obj.getProperty("url"));
         return driver;
+    }*/
+
+    //@Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
+    public WebDriver startB() throws Exception {
+        DesiredCapabilities capability = new DesiredCapabilities();
+        capability.setCapability("os", "WINDOWS");
+        capability.setCapability("os_version", "8");
+        capability.setCapability("browserName", "chrome");
+        capability.setCapability("browserVersion", "53");
+        capability.setCapability("resolution", "2048x1536");
+        capability.setCapability("project", "P1");
+        capability.setCapability("build", "1.0");
+
+        driver = new RemoteWebDriver(
+                new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
+                //new URL("https://tulasidharreddy1:f31sxqeNs6UPCinLrkD1@hub-cloud.browserstack.com/wd/hub"),
+                //new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
+                capability);
+
+        ob.repository(driver);
+        PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
+        driver.get(ob.obj.getProperty("url"));
+        return driver;
     }
 
     @Test
     public void TC_Home_01() throws InterruptedException, WriteException, IOException, BiffException {
         popup.implicitlyWait(driver);
-
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         Thread.sleep(2000);
+        log.info("URL entered and page is loaded");
+
         LoginPage.Loginfunctionality(driver);
+        log.info("Log into the application successfully");
         Thread.sleep(2000);
         //To verify Shoping cart link
         HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
@@ -100,16 +108,12 @@ public class HomePageBSTC {
     public void TC_Home_02() throws InterruptedException, IOException {
 
         log.info("Second method");
-
     }
 
     @AfterTest
     public void Close() throws IOException
     {
         driver.quit();
-
-
-
 
     }
 }

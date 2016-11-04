@@ -4,8 +4,7 @@ import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +15,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.net.URL;
+import java.util.List;
 
 import GenericLib.*;
 
@@ -33,6 +32,7 @@ public class HomePageTC {
     DataDriven excel = new DataDriven();
     AlertHandle popup = new AlertHandle();
     ObjectRepository ob = new ObjectRepository();
+    ScreenShots sc = new ScreenShots();
     WebElement element;
     Sheet sheet;
     WritableSheet wsheet;
@@ -53,55 +53,104 @@ public class HomePageTC {
     }
 
 
-    @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
-
-    //@org.testng.annotations.Parameters(value={"browser","os","device"})
-    public WebDriver startB(String browserN, String version, String os, String osVersion, String resolution) throws Exception {
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("os", os);
-        capability.setCapability("os_version", osVersion);
-        capability.setCapability("browserName", browserN);
-        capability.setCapability("browserVersion", version);
-        capability.setCapability("resolution", resolution);
-        capability.setCapability("project", "P1");
-        capability.setCapability("build", "1.0");
-
-        driver = new RemoteWebDriver(
-                new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://tulasidharreddy1:f31sxqeNs6UPCinLrkD1@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
-                capability);
-
-        ob.repository(driver);
-        PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-        driver.get(ob.obj.getProperty("url"));
-        return driver;
-    }
 
     @Test
-    public void TC_Home_01() throws InterruptedException, WriteException, IOException, BiffException {
+    public void TC_Home_01() throws Exception {
         popup.implicitlyWait(driver);
 
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+        sc.screenshots(driver ,"HomePage","TC_Home_01");
+        log.info("URL entered and page is loaded");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
+        sc.screenshots(driver ,"HomePage","TC_Home_01");
         Thread.sleep(2000);
         //To verify Shoping cart link
         HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
+        sc.screenshots(driver ,"HomePage","TC_Home_01");
         log.info("Shopping Cart link Asert is verified");
 
         //To verify Home link
         HomePage.AsertVerifyForHomeLinkHomePage(driver);
         log.info("Home link on home page Asert is verified");
+        sc.screenshots(driver ,"HomePage","TC_Home_01");
+
 
     }
 
+    /*
 
+    TC_Home_02: Verify that My menu button is displaying or not and options under menu are available or not
+
+    */
+
+    @Test
     public void TC_Home_02() throws InterruptedException, IOException {
+        log.info("TC_Home_02: Verify that My menu button is displaying or not and options under menu are available or not");
+        popup.implicitlyWait(driver);
 
-        log.info("Second method");
+        Thread.sleep(4000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(2000);
+        HomePage.AssertVerifyForHomePage(driver);
+        log.info("Login in to the webshop application");
+        HomePage.ListOfOptionsMyAccountMenu(driver);
+
+        log.info("TC_Home_02: Verified");
+    }
+
+    /*
+
+    TC_Home_03: Verify that Shop menu button is displaying or not and options under Shop menu are available or not
+
+    */
+
+    @Test
+    public void TC_Home_03() throws InterruptedException, IOException {
+        log.info("TC_Home_03: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        popup.implicitlyWait(driver);
+
+        Thread.sleep(2000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(2000);
+        log.info("Login in to the webshop application");
+        HomePage.AssertVerifyForHomePage(driver);
+        HomePage.VerifyDropDownListUnderShopMenu(driver);
+        log.info("TC_Home_03: Verified");
+    }
+
+    /*
+
+    TC_Home_04: Verify Each menu under Shop Menu
+
+    */
+
+    @Test
+    public void TC_Home_04() throws InterruptedException, IOException {
+
+        log.info("TC_Home_03: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        popup.implicitlyWait(driver);
+
+        Thread.sleep(2000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(2000);
+        log.info("Login in to the webshop application");
+        HomePage.AssertVerifyForHomePage(driver);
+        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
+
 
     }
+    @Test
+    public void TC_Home_05() throws InterruptedException, IOException {
+
+        List<WebElement> MenuList = driver.findElements(By.id("email"));
+        int NoOfSubMenuList = MenuList.size();
+        log.info("Number of Sub menu under shop button " + NoOfSubMenuList);
+
+
+
+    }
+
 
     @AfterTest
     public void Close() throws IOException

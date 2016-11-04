@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Home Page Test cases Executions with browser stack">
     <test name="SecondTest">
-        <parameter name="plot" value="BrowserStack"/>
         <parameter name="browserN" value="chrome"/>
         <parameter name="version" value="53"/>
         <parameter name="os" value="WINDOWS"/>
         <parameter name="osVersion" value="8"/>
         <parameter name="resolution" value="2048x1536"/>
         <classes>
-            <class name="localTestCases.HomePageTC">
+            <class name="browserStackTC.HomePageBSTC">
                 <methods>
                     <include name="TC_Home_01"/>
                     <include name="TC_Home_02"/>
+                    <include name="TC_Home_03"/>
                 </methods>
             </class>
         </classes>

@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Home Page Test cases Executions with Local browsers">
+
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="localTestCases.HomePageTC">
                 <methods>
-                    <include name="TC_Home_01"/>
-                    <!--<include name="TC_Home_02"/>-->
+                    <!--<include name="TC_Home_01"/>
+                    <include name="TC_Home_02"/>
+                    <include name="TC_Home_03"/>-->
+                    <include name="TC_Home_04"/>
                 </methods>
             </class>
         </classes>
     </test>
+
 </suite>

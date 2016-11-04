@@ -37,7 +37,7 @@ public class DataDriven {
 		
 		obr.repository(driver);
 		book = Workbook.getWorkbook(new File(obr.obj.getProperty("testData")));
-		sheet = book.getSheet("test");	
+		sheet = book.getSheet("BrowserStac");
 		
 		return sheet;
 		
