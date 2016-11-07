@@ -103,6 +103,107 @@ public class HomePage {
         return MenuList;
     }
 
+    public static WebElement ClickOnProfile(WebDriver driver) throws InterruptedException {
+
+        MyAccountMenuonHomePage(driver).click();
+        log.info("Clicked on my account");
+        MyAccountMenuDropDownListonHomePage(driver).get(0).click();
+        log.info("Clicked on Profile" +MyAccountMenuDropDownListonHomePage(driver).get(0).getText());
+        Thread.sleep(3000);
+        return element;
+    }
+
+    public static WebElement AssertVerifyForFieldsOFProfile(WebDriver driver) {
+
+        if (driver.findElements(By.id("firstName")).size()>0){
+            log.info("Assert is verified for first Name Field");
+        }
+        else{
+            log.info("Assert failed for first Name Field");
+        }
+        if (driver.findElements(By.id("email")).size()>0){
+            log.info("Assert is verified for User ID Field");
+        }
+        else{
+            log.info("Assert failed for User ID Field");
+        }
+        if (driver.findElements(By.id("lastName")).size()>0){
+            log.info("Assert is verified for last Name Field");
+        }
+        else{
+            log.info("Assert failed for last Name Field");
+        }
+        if (driver.findElements(By.id("password")).size()>0){
+            log.info("Assert is verified for password Field");
+        }
+        else{
+            log.info("Assert failed for password Field");
+        }
+        if (driver.findElements(By.id("phone")).size()>0){
+            log.info("Assert is verified for phone Field");
+        }
+        else{
+            log.info("Assert failed for phone Field");
+        }
+        if (driver.findElements(By.id("confirmPassword")).size()>0){
+            log.info("Assert is verified for confirm Password Field");
+        }
+        else{
+            log.info("Assert failed for confirm Password Field");
+        }
+        if (driver.findElements(By.xpath("//label[contains(text(),'Office')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
+            log.info("Assert is verified for password Field");
+        }
+        else{
+            log.info("Assert failed for Office Field");
+        }
+        if (driver.findElements(By.xpath("//label[contains(text(),'Language')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
+            log.info("Assert is verified for Language Field");
+        }
+        else{
+            log.info("Assert failed for Language Field");
+        }
+        if (driver.findElements(By.xpath("//label[contains(text(),'Timezone')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
+            log.info("Assert is verified for Timezone Field");
+        }
+        else{
+            log.info("Assert failed for Timezone Field");
+        }
+        if (driver.findElements(By.xpath("//button[contains(text(),'Save')]")).size()>0){
+            log.info("Assert is verified for Save Button");
+        }
+        else{
+            log.info("Assert failed for Save Button");
+        }
+        if (driver.findElements(By.xpath("//label[contains(text(),'Clear All')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
+            log.info("Assert is verified for Clear All Field");
+        }
+        else{
+            log.info("Assert failed for Clear All Field");
+        }
+
+        return element;
+    }
+
+
+
+    public static boolean AssertVerifyForTitleProfile(WebDriver driver) {
+
+        String ProfileTitle = driver.findElement(By.xpath("//h2")).getText();
+
+        try {
+            Assert.assertEquals("My Account",ProfileTitle);
+            log.info("Assert is verified for Profile Page Title");
+        }catch (Exception e){
+            log.info("Assert is failed for Profile page Title");
+        }
+
+        return true;
+    }
+
+
+
+
     public static WebElement ListOfOptionsMyAccountMenu(WebDriver driver) {
 
         String MyAccountTitle = MyAccountMenuonHomePage(driver).getText();
@@ -128,6 +229,15 @@ public class HomePage {
 
 
         element = driver.findElement(By.xpath("(//a[contains(text(),'Shop')])[2]"));
+        return element;
+    }
+    public static WebElement ClicoOnShopMenuMobile(WebDriver driver) {
+
+
+        driver.findElement(By.xpath("//i[@class='fa fa-bars']")).click();
+        driver.findElement(By.xpath("//li[contains(text(),'Shop')]")).click();
+        driver.findElement(By.xpath("//li[contains(text(),'Applications')]")).click();
+        driver.findElement(By.xpath("//li[contains(text(),'Antivirus & Security Software')]")).click();
         return element;
     }
 
@@ -216,6 +326,36 @@ public class HomePage {
         }
         return element;
     }
+
+    public static WebElement SearchField(WebDriver driver) {
+
+
+        element = driver.findElement(By.xpath("//is-typeahead/span/input"));
+        return element;
+    }
+
+    public static List<WebElement> PartNumber(WebDriver driver) {
+
+
+        List<WebElement> PartNumberResult = driver.findElements(By.xpath("//div[@class='m-t-b-15']/div[1]"));
+        return PartNumberResult;
+    }
+
+    public static List<WebElement> LearnMoreButtons(WebDriver driver) {
+
+
+        List<WebElement> LearnMoreButtons = driver.findElements(By.xpath("//button[contains(text(),'Learn More')]"));
+        return LearnMoreButtons;
+    }
+    public static WebElement UnitCost(WebDriver driver) {
+
+
+        element = driver.findElement(By.xpath("//p[@class='product-price']"));
+        return element;
+    }
+
+
+
 
 
 }

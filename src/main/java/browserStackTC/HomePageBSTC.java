@@ -39,7 +39,7 @@ public class HomePageBSTC {
     Logger log = Logger.getLogger("Test Cases");
     @BeforeTest
 
-    /*@Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
+    @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
     public WebDriver startB(String browserN, String version, String os, String osVersion, String resolution) throws Exception {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability("os", os);
@@ -60,7 +60,7 @@ public class HomePageBSTC {
         PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
         driver.get(ob.obj.getProperty("url"));
         return driver;
-    }*/
+    }
 
     //@Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
     public WebDriver startB() throws Exception {
@@ -108,6 +108,22 @@ public class HomePageBSTC {
     public void TC_Home_02() throws InterruptedException, IOException {
 
         log.info("Second method");
+    }
+
+    @Test
+    public void WS_TC_31() throws InterruptedException, IOException {
+
+        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        popup.implicitlyWait(driver);
+
+        Thread.sleep(2000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(2000);
+        log.info("Login in to the webshop application");
+        HomePage.AssertVerifyForHomePage(driver);
+        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
+
+
     }
 
     @AfterTest

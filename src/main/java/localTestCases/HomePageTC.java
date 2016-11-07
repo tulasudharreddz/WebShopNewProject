@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.util.List;
 
 import GenericLib.*;
-
 import pageObject.*;
 import org.apache.log4j.Logger;
 
@@ -57,8 +56,6 @@ public class HomePageTC {
     @Test
     public void TC_Home_01() throws Exception {
         popup.implicitlyWait(driver);
-
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         sc.screenshots(driver ,"HomePage","TC_Home_01");
         log.info("URL entered and page is loaded");
         Thread.sleep(2000);
@@ -80,34 +77,13 @@ public class HomePageTC {
 
     /*
 
-    TC_Home_02: Verify that My menu button is displaying or not and options under menu are available or not
+    WS_TC_30: Verify that Shop menu button is displaying or not and options under Shop menu are available or not
 
     */
 
     @Test
-    public void TC_Home_02() throws InterruptedException, IOException {
-        log.info("TC_Home_02: Verify that My menu button is displaying or not and options under menu are available or not");
-        popup.implicitlyWait(driver);
-
-        Thread.sleep(4000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(2000);
-        HomePage.AssertVerifyForHomePage(driver);
-        log.info("Login in to the webshop application");
-        HomePage.ListOfOptionsMyAccountMenu(driver);
-
-        log.info("TC_Home_02: Verified");
-    }
-
-    /*
-
-    TC_Home_03: Verify that Shop menu button is displaying or not and options under Shop menu are available or not
-
-    */
-
-    @Test
-    public void TC_Home_03() throws InterruptedException, IOException {
-        log.info("TC_Home_03: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+    public void WS_TC_30() throws InterruptedException, IOException {
+        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
 
         Thread.sleep(2000);
@@ -116,19 +92,20 @@ public class HomePageTC {
         log.info("Login in to the webshop application");
         HomePage.AssertVerifyForHomePage(driver);
         HomePage.VerifyDropDownListUnderShopMenu(driver);
-        log.info("TC_Home_03: Verified");
+        log.info("WS_TC_30: Verified");
     }
 
     /*
 
-    TC_Home_04: Verify Each menu under Shop Menu
+    WS_TC_31: Verify Each menu under Shop Menu
+
 
     */
 
     @Test
-    public void TC_Home_04() throws InterruptedException, IOException {
+    public void WS_TC_31() throws InterruptedException, IOException {
 
-        log.info("TC_Home_03: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
 
         Thread.sleep(2000);
@@ -140,14 +117,53 @@ public class HomePageTC {
 
 
     }
+
+     /*
+
+    WS_TC_32: Verify that My menu button is displaying or not and options under menu are available or not
+
+    */
+
     @Test
-    public void TC_Home_05() throws InterruptedException, IOException {
+    public void WS_TC_32() throws InterruptedException, IOException {
+        log.info("WS_TC_32: Verify that My menu button is displaying or not and options under menu are available or not");
+        popup.implicitlyWait(driver);
 
-        List<WebElement> MenuList = driver.findElements(By.id("email"));
-        int NoOfSubMenuList = MenuList.size();
-        log.info("Number of Sub menu under shop button " + NoOfSubMenuList);
+        Thread.sleep(4000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(2000);
+        HomePage.AssertVerifyForHomePage(driver);
+        log.info("Login in to the webshop application");
+        HomePage.ListOfOptionsMyAccountMenu(driver);
 
+        log.info("WS_TC_32: Verified");
+    }
 
+    /*WS_TC_34: Verify the GUI of  'User Profile' page
+    a) Verify the title
+    b) Verify the display of controls
+
+    Steps:
+    a) The title should be displayed as 'Profile'
+    b) Following controls should be displayed in 'Profile Page'
+    Textboxes Controls: First Name, Last Name, Email, Phone, Password, Confirm Password, Office Section
+    Label Names - Department/Division, Emp ID, Roles
+    Dropdown Controls - Language, Regional Setting, Font Size for Order Extracts, Lead time in order extracts
+    Calendar Control - Time zone
+    Button Controls - Clear All, Save*/
+
+    @Test
+    public void WS_TC_34() throws InterruptedException, IOException {
+
+        log.info("WS_TC_30: Verify the GUI of  'User Profile' page a) Verify the title  b) Verify the display of controls");
+        popup.implicitlyWait(driver);
+
+        Thread.sleep(2000);
+        LoginPage.Loginfunctionality(driver);
+        HomePage.ClickOnProfile(driver);
+        log.info("Clicked on User Profile option under My Account ");
+        HomePage.AssertVerifyForTitleProfile(driver);
+        HomePage.AssertVerifyForFieldsOFProfile(driver);
 
     }
 
