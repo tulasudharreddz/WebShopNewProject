@@ -354,6 +354,45 @@ public class HomePage {
         return element;
     }
 
+    public static double UnitPrice(WebDriver driver) {
+
+        double ListPrice= 333.2;
+        double DiscountListRate= 25;
+        double Surcharge=2.5;
+        log.info("List Price for the product is " + ListPrice);
+        double Discount = ListPrice*(1 - (DiscountListRate/100));
+        log.info("Discount for the product is " + DiscountListRate  +"Product price after Discount is "+Discount);
+        double ListFactor = ListPrice*Surcharge/100;
+        log.info("Surcharge for the product is " + Surcharge  +"Surcharge amount is "+ListFactor);
+        double DiscountedByPrice = Discount+ListFactor;
+        log.info("Product Price after discount is " + DiscountedByPrice);
+        double CostFactor1=1;
+        double CostFactor2=1;
+        double CostFactor3=1;
+        double CostFactor4=1;
+        double CostFactor5=1;
+        double CostFactor1Value = DiscountedByPrice*CostFactor1/100;
+        log.info("Cost Factor for the product is " + CostFactor1  +"Cost factor 1 price for the product is "+CostFactor1Value);
+        double CostFactor2Value = DiscountedByPrice*CostFactor2/100;
+        log.info("Cost Factor for the product is " + CostFactor2  +"Cost factor 2 price for the product is "+CostFactor2Value);
+        double CostFactor3Value = DiscountedByPrice*CostFactor3/100;
+        log.info("Cost Factor for the product is " + CostFactor3  +"Cost factor 3 price for the product is "+CostFactor3Value);
+        double CostFactor4Value = DiscountedByPrice*CostFactor4/100;
+        log.info("Cost Factor for the product is " + CostFactor4  +"Cost factor 4 price for the product is "+CostFactor4Value);
+        double CostFactor5Value = DiscountedByPrice*CostFactor5/100;
+        log.info("Cost Factor for the product is " + CostFactor5  +"Cost factor 5 price for the product is "+CostFactor5Value);
+        double CostOFItem = DiscountedByPrice+CostFactor1Value+CostFactor2Value+CostFactor3Value+CostFactor4Value+CostFactor5Value;
+        log.info("Product Price with Cost Factors is " + CostOFItem);
+        double Margin = 10;
+        log.info("Margin for the product is " + Margin);
+        double UnitPrice = CostOFItem/(1- (Margin/100));
+        log.info("Final Unit Price for the product is " + UnitPrice);
+
+
+        return UnitPrice;
+
+    }
+
 
 
 

@@ -6,17 +6,15 @@ import jxl.write.biff.RowsExceededException;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import jxl.Sheet;
 import jxl.write.WritableSheet;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import GenericLib.*;
 
@@ -37,10 +35,10 @@ public class HomePageBSTC {
     Sheet sheet;
     WritableSheet wsheet;
     Logger log = Logger.getLogger("Test Cases");
-    @BeforeTest
 
+    @BeforeClass
     @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
-    public WebDriver startB(String browserN, String version, String os, String osVersion, String resolution) throws Exception {
+    public void start(String browserN, String version, String os, String osVersion, String resolution) throws Exception {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setCapability("os", os);
         capability.setCapability("os_version", osVersion);
@@ -52,40 +50,26 @@ public class HomePageBSTC {
 
         driver = new RemoteWebDriver(
                 new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://tulasidharreddy1:f31sxqeNs6UPCinLrkD1@hub-cloud.browserstack.com/wd/hub"),
                 //new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
                 capability);
-
         ob.repository(driver);
         PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         driver.get(ob.obj.getProperty("url"));
-        return driver;
+
     }
 
-    //@Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
-    public WebDriver startB() throws Exception {
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("os", "WINDOWS");
-        capability.setCapability("os_version", "8");
-        capability.setCapability("browserName", "chrome");
-        capability.setCapability("browserVersion", "53");
-        capability.setCapability("resolution", "2048x1536");
-        capability.setCapability("project", "P1");
-        capability.setCapability("build", "1.0");
-
-        driver = new RemoteWebDriver(
-                new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://tulasidharreddy1:f31sxqeNs6UPCinLrkD1@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
-                capability);
-
+   /* public WebDriver startUrl() throws IOException {
         ob.repository(driver);
         PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-        driver.get(ob.obj.getProperty("url"));
+        //driver.get(ob.obj.getProperty("url"));
+        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+        popup.implicitlyWait(driver);
         return driver;
-    }
 
-    @Test
+    }*/
+
     public void TC_Home_01() throws InterruptedException, WriteException, IOException, BiffException {
         popup.implicitlyWait(driver);
         Thread.sleep(2000);
@@ -105,22 +89,17 @@ public class HomePageBSTC {
     }
 
 
-    public void TC_Home_02() throws InterruptedException, IOException {
-
-        log.info("Second method");
-    }
-
     @Test
     public void WS_TC_31() throws InterruptedException, IOException {
 
-        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
-        popup.implicitlyWait(driver);
 
+        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(2000);
         log.info("Login in to the webshop application");
         HomePage.AssertVerifyForHomePage(driver);
+        Thread.sleep(1000);
         HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
 
 

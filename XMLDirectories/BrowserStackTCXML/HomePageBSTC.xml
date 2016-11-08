@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Home Page Test cases Executions with browser stack">
+<!--<suite name="Home Page Test cases Executions with browser stack">-->
+<suite thread-count="3" name="Suite" parallel="tests">
     <test name="SecondTest">
-        <!--<parameter name="browserName" value="iPhone"/>
-        <parameter name="device" value="iPhone 5"/>
-        <parameter name="os" value="WINDOWS"/>
-        <parameter name="osVersion" value="8"/>
-        <parameter name="resolution" value="2048x1536"/>-->
+        <parameter name="browserN" value="Edge" />
+        <parameter name="version" value="13.0" />
+        <parameter name="os" value="WINDOWS" />
+        <parameter name="osVersion" value="10" />
+        <parameter name="resolution" value="1366x768"/>
         <classes>
-            <class name="localTestCases.DemoLocal">
+            <class name="browserStackTC.HomePageBSTC">
                 <methods>
-                    <include name="MobileAutomation"/>
+                    <include name="WS_TC_31"/>
+                </methods>
+            </class>
+        </classes>
+    </test><!-- Test -->
+    <test name="SecondTest1">
+        <parameter name="browserN" value="chrome" />
+        <parameter name="version" value="54" />
+        <parameter name="os" value="WINDOWS" />
+        <parameter name="osVersion" value="7" />
+        <parameter name="resolution" value="1366x768"/>
+        <classes>
+            <class name="browserStackTC.HomePageBSTC">
+                <methods>
+                    <include name="WS_TC_31"/>
                 </methods>
             </class>
         </classes>
     </test>
+    <test name="SecondTest2">
+        <parameter name="browserN" value="Safari" />
+        <parameter name="version" value="10.0" />
+        <parameter name="os" value="OS X" />
+        <parameter name="osVersion" value="Sierra" />
+        <parameter name="resolution" value="1366x768"/>
+        <classes>
+            <class name="browserStackTC.HomePageBSTC">
+                <methods>
+                    <include name="WS_TC_31"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 
 </suite>

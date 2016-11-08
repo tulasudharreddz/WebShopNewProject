@@ -394,19 +394,19 @@ public class LoginPage {
 		Thread.sleep(2000);
 	}
 
-	public static boolean Loginfunctionality(WebDriver driver) throws IOException, InterruptedException {
+	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException {
 		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
 		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 		Thread.sleep(2000);
 		LoginPage.Language(driver).click();
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		LoginPage.Selectlanguage(driver).click();
 		obje.repository(driver);
 		LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
 		LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
 
 		LoginPage.ClickLogin(driver).click();
-		return true;
+
 	}
 
 

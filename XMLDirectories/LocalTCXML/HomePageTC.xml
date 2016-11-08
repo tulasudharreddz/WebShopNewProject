@@ -4,12 +4,12 @@
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="localTestCases.DemoLocal">
+            <class name="localTestCases.HomePageTC">
                 <methods>
                     <!--<include name="TC_Home_01"/>
                     <include name="WS_TC_32"/>
                     <include name="WS_TC_30"/>-->
-                    <include name="TC_Home_01"/>
+                    <include name="WS_TC_31"/>
                 </methods>
             </class>
         </classes>

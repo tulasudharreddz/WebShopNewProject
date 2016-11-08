@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -61,13 +62,12 @@ public class DemoLocal {
 
 		driver = new RemoteWebDriver(
 				new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-				//new URL("https://tulasidharreddy1:f31sxqeNs6UPCinLrkD1@hub-cloud.browserstack.com/wd/hub"),
 				//new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
 				capability);
 
 		ob.repository(driver);
 		PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-		//driver.get(ob.obj.getProperty("url"));
+		driver.get(ob.obj.getProperty("url"));
 		return driver;
 	}
 
@@ -86,11 +86,11 @@ public class DemoLocal {
 		log.info("Searched for the product with part number '2486-825-109'");
 		//HomePage.SearchField(driver).submit();
 		//log.info("Entered the text");
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		String PartNumber =HomePage.PartNumber(driver).get(0).getText();
 		log.info("Partnumber for the product is: "+ PartNumber);
-		HomePage.LearnMoreButtons(driver).get(0).click();
-		log.info("Clicked on Learn more button");
+		/*HomePage.LearnMoreButtons(driver).get(0).click();
+		log.info("Clicked on Learn more button");*/
 		String UnitCost= HomePage.UnitCost(driver).getText();
 		Thread.sleep(3000);
 		log.info("Unit cost of the Selected item is : "+ UnitCost);
@@ -102,7 +102,7 @@ public class DemoLocal {
 
 	@Test
 	public void MobileAutomation() throws Exception {
-		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
 		popup.implicitlyWait(driver);
 		Thread.sleep(2000);
@@ -113,11 +113,17 @@ public class DemoLocal {
 		Thread.sleep(2000);
 		String PartNumber =HomePage.PartNumber(driver).get(0).getText();
 		log.info("Partnumber for the product is: "+ PartNumber);
-		HomePage.LearnMoreButtons(driver).get(0).click();
-		log.info("Clicked on Learn more button");
+		/*HomePage.LearnMoreButtons(driver).get(0).click();
+		log.info("Clicked on Learn more button");*/
 		String UnitCost= HomePage.UnitCost(driver).getText();
 		Thread.sleep(3000);
 		log.info("Unit cost of the Selected item is : "+ UnitCost);
+
+        Double UnitPrice = HomePage.UnitPrice(driver);
+        Assert.assertEquals(UnitCost, "$"+UnitPrice);
+
+
+
 
 
 

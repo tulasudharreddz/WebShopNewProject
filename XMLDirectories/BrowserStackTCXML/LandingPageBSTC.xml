@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="tests" thread-count="2" >
+    <test name="FirstTest">
+        <parameter name="browserN" value="chrome" />
+        <parameter name="version" value="54" />
+        <parameter name="os" value="WINDOWS" />
+        <parameter name="osVersion" value="10" />
+        <parameter name="resolution" value="1366x768"/>
+        <classes>
+            <class name="browserStackTC.HomePageBSTC"/>
+        </classes>
+    </test>
+    <test name="SecondTest">
+        <parameter name="browserN" value="chrome" />
+        <parameter name="version" value="54" />
+        <parameter name="os" value="WINDOWS" />
+        <parameter name="osVersion" value="8" />
+        <parameter name="resolution" value="1366x768"/>
+        <classes>
+            <class name="browserStackTC.HomePageBSTC"/>
+        </classes>
+    </test> <!-- Test -->
+    <!--<test name="ThirdTest">
+        <parameter name="browser" value="safari"/>
+        <parameter name="version" value="6.0"/>
+        <parameter name="platform" value="MAC"/>
+        <classes>
+            <class name="browserStackTC.HomePageBSTC"/>
+        </classes>
+    </test>&lt;!&ndash; Test &ndash;&gt;-->
+</suite> <!-- Suite -->
