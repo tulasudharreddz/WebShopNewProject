@@ -18,17 +18,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import pageObject.HomePage;
 import pageObject.LoginPage;
 
-public class DemoLocal {
+public class DemoLocal extends BrowserStack{
 
-	public static WebDriver driver;
+
 	Browser brow = new Browser();
 	DataDriven excel = new DataDriven();
 	AlertHandle popup = new AlertHandle();
@@ -37,9 +34,9 @@ public class DemoLocal {
 	WebElement element;
 	Sheet sheet;
 	WritableSheet wsheet;
-	Logger log = Logger.getLogger("Test Cases");
+	Logger log = Logger.getLogger("Testing Cases");
 
-	@Parameters("browser")
+	/*@Parameters("browser")
 
 	public WebDriver start(String browser) throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException {
 		if (browser.equalsIgnoreCase(browser)) {
@@ -49,26 +46,14 @@ public class DemoLocal {
 		PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
 		driver.get(ob.obj.getProperty("url"));
 		return driver;
-	}
-	@BeforeTest
+	}*/
 
-	public WebDriver startB() throws Exception {
-		DesiredCapabilities capability = new DesiredCapabilities();
-		capability.setCapability("browserName", "iPhone");
-		capability.setCapability("platform", "MAC");
-		capability.setCapability("device", "iPhone 5");
-		capability.setCapability("project", "P1");
-		capability.setCapability("build", "1.0");
 
-		driver = new RemoteWebDriver(
-				new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-				//new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
-				capability);
+	private WebDriver driver;
 
-		ob.repository(driver);
-		PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-		driver.get(ob.obj.getProperty("url"));
-		return driver;
+	@BeforeClass
+	public void setUp() {
+		driver=getDriver();
 	}
 
 	@Test

@@ -3,11 +3,13 @@ package browserStackTC;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import GenericLib.*;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -25,9 +27,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.*;
 
 import pageObject.ForgotPassword;
 import pageObject.HomePage;
@@ -35,61 +37,23 @@ import pageObject.LoginPage;
 import pageObject.RegistrationPage;
 
 
-public class LandingPageBSTC
+public class LandingPageBSTC extends BrowserStack
 {
-	Logger log=Logger.getLogger("Test Cases");
-	WebDriver driver;
-	Workbook book;
-	WritableWorkbook wbook;
+
+	Browser brow = new Browser();
+	DataDriven excel = new DataDriven();
+	AlertHandle popup = new AlertHandle();
+	ObjectRepository ob = new ObjectRepository();
+	WebElement element;
 	Sheet sheet;
 	WritableSheet wsheet;
-	static int count = 1;
-	int num_rows;
-	int reg_value = (8 + 1), flag = 0, sacFlag = 0;
-	WebElement culture1;
-	DateFormat dateFormat;
-	Date date;
-	Properties obj;
-	FileInputStream objFile;
-	String packageName = "localTestCases";
-	String className = "LandingPageBSTC";
+	Logger log = Logger.getLogger("Testing Cases");
 
+	private WebDriver driver;
 
-
-	@BeforeTest
-	public void start() throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException
-	{
-		// Configure Objects properties.
-		obj = new Properties();
-		objFile = new FileInputStream(System.getProperty("user.dir") + "./utility/objects.properties");
-		obj.load(objFile);
-
-		// Configure log4j property file
-		PropertyConfigurator.configure(obj.getProperty("log4j"));
-
-		System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
-
-		driver = new ChromeDriver();
-		log.info("Chrome Browser Opened");
-
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		driver.get(obj.getProperty("url"));
-		log.info("URL: " + driver.getCurrentUrl());
-
-		// Configured excel sheet for input data
-		book = Workbook.getWorkbook(new File("./testData.xls"));
-		sheet = book.getSheet("Sheet1");
-
-		// Create a new excel sheet for output result
-		wbook = Workbook.createWorkbook(new File("./TestData/" + packageName + "/" + className + ".xls"), book);
-		wsheet = wbook.getSheet("Sheet1");
-
-		// Count number of scenario in excel sheet.
-		num_rows = sheet.getRows();
-		log.info("Number of rows in sheet: " + num_rows);
-
-
+	@BeforeClass
+	public void setUp() {
+		driver=getDriver();
 	}
 
 	/*TC01: Verify the launch of Login page & and its content
@@ -112,7 +76,7 @@ public class LandingPageBSTC
 		LoginPage.ResetPasswordAssert(driver);
 		LoginPage.RegisterAsert(driver);
 
-		screenShot();
+
 	}
 
 	/*	  
@@ -134,7 +98,7 @@ public class LandingPageBSTC
 
 		HomePage.PageTitle(driver);
 
-		screenShot();
+
 
 
 	}
@@ -170,7 +134,7 @@ public class LandingPageBSTC
 		else{
 			log.info("Robot Check is not visible, test case fail");
 		} 	
-		screenShot();
+
 	}
 	/*
 
@@ -271,30 +235,6 @@ public class LandingPageBSTC
 		LoginPage.AsertVerifyForContactDDLinkHomePage(driver);
 
 		log.info("Asert for ContactDD link is verified");
-	}
-
-
-
-
-
-
-	@AfterTest
-	public void Close() throws IOException
-	{
-		driver.quit();
-
-
-
-
-	}
-
-	public void screenShot() throws IOException
-	{
-
-		File screen = (File)((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(screen, new File("./ScreenShot/" + packageName + "/" + className + "/screen-" + count + ".jpg"));
-		log.info("Screen: " + "./ScreenShot/" + packageName + "/" + className + "/screen-" + count + ".jpg");
-		count++;
 	}
 
 

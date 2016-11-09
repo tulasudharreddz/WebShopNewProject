@@ -2,14 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="deb1ee6b-41d0-492c-adaf-1a7bb3b98516" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/GenericLib/BrowserStack.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/browserStackTC/ProfilePageBSTC.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pageObject/Testing.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageObject/HomePage.class" afterPath="$PROJECT_DIR$/target/classes/pageObject/HomePage.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/pageObject/LoginPage.class" afterPath="$PROJECT_DIR$/target/classes/pageObject/LoginPage.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/HomePageBSTC.xml" afterPath="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/HomePageBSTC.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XMLDirectories/LocalTCXML/HomePageTC.xml" afterPath="$PROJECT_DIR$/XMLDirectories/LocalTCXML/HomePageTC.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" afterPath="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/GenericLib/AlertHandle.java" afterPath="$PROJECT_DIR$/src/main/java/GenericLib/AlertHandle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/GenericLib/Browser.java" afterPath="$PROJECT_DIR$/src/main/java/GenericLib/Browser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/browserStackTC/HomePageBSTC.java" afterPath="$PROJECT_DIR$/src/main/java/browserStackTC/HomePageBSTC.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java" afterPath="$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/localTestCases/BrowserStackTC.java" afterPath="$PROJECT_DIR$/src/main/java/localTestCases/BrowserStackTC.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java" afterPath="$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java" afterPath="$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java" afterPath="$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageObject/HomePage.java" afterPath="$PROJECT_DIR$/src/main/java/pageObject/HomePage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pageObject/LoginPage.java" afterPath="$PROJECT_DIR$/src/main/java/pageObject/LoginPage.java" />
     </list>
@@ -33,12 +41,68 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HomePageBSTC.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomePageBSTC.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/HomePageBSTC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
+            <state relative-caret-position="240">
+              <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1160#1161#0" expanded="true" />
+                <element signature="e#1194#1195#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LandingPageBSTC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="39" column="49" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+              <folding>
+                <element signature="e#1495#1496#0" expanded="true" />
+                <element signature="e#1520#1521#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProfilePageBSTC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/ProfilePageBSTC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#962#963#0" expanded="true" />
+                <element signature="e#996#997#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BrowserStackTC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/BrowserStackTC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-212">
+              <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Browser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/Browser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="65" column="15" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
+              <folding>
+                <element signature="e#836#837#0" expanded="true" />
+                <element signature="e#856#857#0" expanded="true" />
+                <element signature="e#1755#1756#0" expanded="true" />
+                <element signature="e#1775#1776#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -46,19 +110,66 @@
       <file leaf-file-name="LoginPage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/LoginPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5128">
-              <caret line="90" column="29" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
-              <folding />
+            <state relative-caret-position="368">
+              <caret line="408" column="49" selection-start-line="408" selection-start-column="49" selection-end-line="408" selection-end-column="49" />
+              <folding>
+                <element signature="e#714#715#0" expanded="true" />
+                <element signature="e#741#742#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LandingPageBSTC.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml">
+      <file leaf-file-name="HomePageTC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="523">
+              <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#997#998#0" expanded="true" />
+                <element signature="e#1031#1032#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DemoLocal.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-615">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding>
+                <element signature="e#1531#1532#0" expanded="true" />
+                <element signature="e#1556#1557#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LandingPageTC.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+              <folding>
+                <element signature="e#1403#1404#0" expanded="true" />
+                <element signature="e#1428#1429#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Testing.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/Testing.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#271#272#0" expanded="true" />
+                <element signature="e#307#308#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -95,11 +206,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/Test/HomePageTC.xml" />
         <option value="$PROJECT_DIR$/src/main/java/testCases/WebSharpTestCase.java" />
         <option value="$PROJECT_DIR$/XMLDirectories/BrowserStackTC.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/GenericLib/Browser.java" />
         <option value="$PROJECT_DIR$/src/main/java/GenericLib/WindowBrowser.java" />
         <option value="$PROJECT_DIR$/XMLDirectories/exte.xml" />
         <option value="$PROJECT_DIR$/XMLDirectories/HomePageTC.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/GenericLib/AlertHandle.java" />
         <option value="$PROJECT_DIR$/src/main/java/testCases/BrowserStackTC.java" />
         <option value="$PROJECT_DIR$/src/Resources/Elementslocators/HomePageElements.json" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -108,19 +217,25 @@
         <option value="$PROJECT_DIR$/src/main/java/browserStackTC/HomePageTC.java" />
         <option value="$PROJECT_DIR$/src/main/java/browserStackTC/WebSharpTestCase.java" />
         <option value="$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageTC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java" />
         <option value="$PROJECT_DIR$/XMLDirectories/LocalTCXML/LandingPageTC.xml" />
         <option value="$PROJECT_DIR$/utility/objects.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java" />
         <option value="$PROJECT_DIR$/src/main/java/localTestCases/SauceLabTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pageObject/HomePage.java" />
         <option value="$PROJECT_DIR$/XMLDirectories/LocalTCXML/HomePageTC.xml" />
         <option value="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/HomePageBSTC.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/browserStackTC/HomePageBSTC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pageObject/Test.java" />
         <option value="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/GenericLib/BrowserStack.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pageObject/Testing.java" />
         <option value="$PROJECT_DIR$/src/main/java/pageObject/LoginPage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pageObject/HomePage.java" />
+        <option value="$PROJECT_DIR$/src/main/java/browserStackTC/ProfilePageBSTC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GenericLib/AlertHandle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/GenericLib/Browser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/browserStackTC/HomePageBSTC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java" />
+        <option value="$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java" />
       </list>
     </option>
   </component>
@@ -187,6 +302,8 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -236,8 +353,18 @@
               <option name="myItemId" value="XMLDirectories" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="BrowserStackTCXML" />
+              <option name="myItemId" value="WebShop" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebShopNewProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utility" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -274,6 +401,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pageObject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -357,8 +488,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -366,7 +495,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="SearchEverywhereHistoryKey" value="brow&#9;FILE&#9;file://D:/Projects_Idea/WebShopNewProject/src/main/java/GenericLib/Browser.java&#10;hom&#9;FILE&#9;file://D:/Projects_Idea/WebShopNewProject/XMLDirectories/HomePageTCXML.xml&#10;homepage&#9;FILE&#9;file://D:/Projects_Idea/WebShopNewProject/XMLDirectories/HomePageTCXML.xml&#10;home&#9;FILE&#9;file://D:/Projects_Idea/WebShopNewProject/XMLDirectories/HomePageTCXML.xml&#10;ind&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_25/jre/lib/rt.jar!/com/sun/xml/internal/bind/v2/runtime/output/IndentingUTF8XmlOutput.class&#10;index&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_25/jre/lib/jfxswt.jar!/META-INF/INDEX.LIST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" />
+    <property name="last_opened_file_path" value="D:/Automation/Automate3.0/eclipse_automation" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -375,7 +504,7 @@
       <recent name="D:\Projects_Idea\WebShopNewProject\XMLDirectories" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml">
+  <component name="RunManager" selected="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml">
     <configuration default="false" name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/HomePageBSTC.xml" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="WebShopNewProject" />
@@ -740,9 +869,9 @@
     </list>
     <recent_temporary>
       <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/HomePageBSTC.xml" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml" />
+        <item index="0" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/HomePageBSTC.xml" />
         <item index="3" class="java.lang.String" itemvalue="TestNG.D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/LandingPageTC.xml" />
       </list>
     </recent_temporary>
@@ -810,39 +939,46 @@
       <option name="project" value="LOCAL" />
       <updated>1478523789914</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="NewTestcases">
+      <created>1478610836307</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1478610836307</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 06m 50s.xml">
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.09 at 12h 09m 11s.xml">
       <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 08m 01s.xml">
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.09 at 12h 21m 57s.xml">
       <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 14m 11s.xml">
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.09 at 14h 46m 53s.xml">
       <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 18m 28s.xml">
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.09 at 14h 54m 58s.xml">
       <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 24m 20s.xml">
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.09 at 14h 57m 16s.xml">
       <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 26m 57s.xml">
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.09 at 15h 24m 55s.xml">
       <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 29m 07s.xml">
-      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_LocalTCXML_HomePageTC_xml - 2016.11.09 at 15h 59m 36s.xml">
+      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 32m 08s.xml">
-      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_LocalTCXML_HomePageTC_xml - 2016.11.09 at 16h 01m 38s.xml">
+      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 33m 38s.xml">
-      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_LocalTCXML_HomePageTC_xml - 2016.11.09 at 16h 05m 06s.xml">
+      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_BrowserStackTCXML_LandingPageBSTC_xml - 2016.11.08 at 18h 38m 50s.xml">
-      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml" configurationId="TestNG" />
+    <history-entry file="D__Projects_Idea_WebShopNewProject_XMLDirectories_LocalTCXML_HomePageTC_xml - 2016.11.09 at 16h 15m 28s.xml">
+      <configuration name="D:/Projects_Idea/WebShopNewProject/XMLDirectories/LocalTCXML/HomePageTC.xml" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -860,23 +996,23 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55829227" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3004926" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32840723" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28407225" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17064847" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32676518" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19838946" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19765739" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47783253" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5862069" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -906,7 +1042,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/pageObject/HomePage.java</url>
-          <line>109</line>
+          <line>114</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -920,29 +1056,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/jre/lib/jfxswt.jar!/META-INF/INDEX.LIST">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/jre/lib/rt.jar!/com/sun/xml/internal/bind/v2/runtime/output/IndentingUTF8XmlOutput.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -1008,13 +1121,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.8/testng-6.8.jar!/org/testng/SuiteRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="278" column="0" selection-start-line="278" selection-start-column="0" selection-end-line="278" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.8/testng-6.8.jar!/org/testng/internal/MethodInvocationHelper.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1030,13 +1136,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/AlertHandle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1072,34 +1171,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/BrowserStackTC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="286" column="0" selection-start-line="286" selection-start-column="0" selection-end-line="286" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/debug.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1128,23 +1203,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="967" column="18" selection-start-line="967" selection-start-column="18" selection-end-line="967" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/XMLDirectories/LocalTCXML/HomePageTC.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="122" column="53" selection-start-line="122" selection-start-column="53" selection-end-line="122" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1156,19 +1214,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utility/objects.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="53" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_25/src.zip!/java/util/concurrent/ThreadPoolExecutor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="1151" column="27" selection-start-line="1151" selection-start-column="27" selection-end-line="1151" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,32 +1237,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/HomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="230" column="0" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/Browser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="80" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="43" column="49" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/ObjectRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1222,27 +1245,182 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/LoginPage.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.8/testng-6.8.jar!/org/testng/SuiteRunner.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5128">
-          <caret line="90" column="29" selection-start-line="90" selection-start-column="29" selection-end-line="90" selection-end-column="29" />
+        <state relative-caret-position="113">
+          <caret line="542" column="0" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/XMLDirectories/BrowserStackTCXML/LandingPageBSTC.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="28" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+        <state relative-caret-position="425">
+          <caret line="25" column="46" selection-start-line="25" selection-start-column="46" selection-end-line="25" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/AlertHandle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/BrowserStack.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="46" column="67" selection-start-line="46" selection-start-column="67" selection-end-line="46" selection-end-column="67" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+            <element signature="e#486#487#0" expanded="true" />
+            <element signature="e#1920#1921#0" expanded="true" />
+            <element signature="e#1949#1950#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/HomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#461#462#0" expanded="true" />
+            <element signature="e#497#498#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XMLDirectories/LocalTCXML/HomePageTC.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utility/objects.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="53" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/LoginPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="408" column="49" selection-start-line="408" selection-start-column="49" selection-end-line="408" selection-end-column="49" />
+          <folding>
+            <element signature="e#714#715#0" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/GenericLib/Browser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="65" column="15" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
+          <folding>
+            <element signature="e#836#837#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#1755#1756#0" expanded="true" />
+            <element signature="e#1775#1776#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/LandingPageBSTC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="39" column="49" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+          <folding>
+            <element signature="e#1495#1496#0" expanded="true" />
+            <element signature="e#1520#1521#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/HomePageBSTC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
+        <state relative-caret-position="240">
+          <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/browserStackTC/ProfilePageBSTC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="24" column="41" selection-start-line="24" selection-start-column="41" selection-end-line="24" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#962#963#0" expanded="true" />
+            <element signature="e#996#997#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/BrowserStackTC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-212">
+          <caret line="24" column="16" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/DemoLocal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-615">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding>
+            <element signature="e#1531#1532#0" expanded="true" />
+            <element signature="e#1556#1557#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/HomePageTC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="523">
+          <caret line="53" column="22" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#997#998#0" expanded="true" />
+            <element signature="e#1031#1032#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/localTestCases/LandingPageTC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
+          <folding>
+            <element signature="e#1403#1404#0" expanded="true" />
+            <element signature="e#1428#1429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pageObject/Testing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#271#272#0" expanded="true" />
+            <element signature="e#307#308#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -29,10 +29,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import pageObject.ForgotPassword;
 import pageObject.HomePage;
@@ -40,81 +37,21 @@ import pageObject.LoginPage;
 import pageObject.RegistrationPage;
 
 
-public class LandingPageTC
+public class LandingPageTC extends Browser
 {
 	Browser brow = new Browser();
 	DataDriven excel = new DataDriven();
 	AlertHandle popup = new AlertHandle();
 	ObjectRepository ob = new ObjectRepository();
-	Logger log=Logger.getLogger("Test Cases");
-	WebDriver driver;
-	Workbook book;
-	WritableWorkbook wbook;
-	Sheet sheet;
-	WritableSheet wsheet;
-	static int count = 1;
-	int num_rows;
-	int reg_value = (8 + 1), flag = 0, sacFlag = 0;
-	WebElement culture1;
-	DateFormat dateFormat;
-	Date date;
-	Properties obj;
-	FileInputStream objFile;
-	String packageName = "localTestCases";
-	String className = "LandingPageBSTC";
+	Logger log=Logger.getLogger("Testing Cases");
 
+	private WebDriver driver;
 
-
-
-	public void start() throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException
-	{
-		// Configure Objects properties.
-		obj = new Properties();
-		objFile = new FileInputStream(System.getProperty("user.dir") + "./utility/objects.properties");
-		obj.load(objFile);
-
-		// Configure log4j property file
-		PropertyConfigurator.configure(obj.getProperty("log4j"));
-
-		System.setProperty("webdriver.chrome.driver", "lib/chromedriver.exe");
-
-		driver = new ChromeDriver();
-		log.info("Chrome Browser Opened");
-
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-		driver.get(obj.getProperty("url"));
-		log.info("URL: " + driver.getCurrentUrl());
-
-		// Configured excel sheet for input data
-		book = Workbook.getWorkbook(new File("./testData.xls"));
-		sheet = book.getSheet("Sheet1");
-
-		// Create a new excel sheet for output result
-		wbook = Workbook.createWorkbook(new File("./TestData/" + packageName + "/" + className + ".xls"), book);
-		wsheet = wbook.getSheet("Sheet1");
-
-		// Count number of scenario in excel sheet.
-		num_rows = sheet.getRows();
-		log.info("Number of rows in sheet: " + num_rows);
-
-
+	@BeforeClass
+	public void setUp() {
+		driver=getDriver();
 	}
-	@Parameters("browser")
-	@BeforeTest
-	public WebDriver start(String browser) throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException {
-		if (browser.equalsIgnoreCase(browser)) {
-			driver = brow.selectbrowser(browser);
-		}
-        /*sheet = excel.ReadSheet(sheet);
-        wsheet = excel.writeSheet(wsheet, "test", "TestCase1");*/
-		ob.repository(driver);
-		PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-		driver.get(ob.obj.getProperty("url"));
-		return driver;
-	}
-
-	/*TC01: Verify the launch of Login page & and its content
+		/*TC01: Verify the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections
 		Sections:
@@ -123,18 +60,17 @@ public class LandingPageTC
 		3. Request Registration
 	*/
 
-@Test
+	@Test
 	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		//check that user able to login with valid credentials or not
-		Thread.sleep(3000);		
+		Thread.sleep(3000);
 
 		LoginPage.PageTitle(driver);
 		LoginPage.LoginPageTitle(driver);
 		LoginPage.ResetPasswordAssert(driver);
 		LoginPage.RegisterAsert(driver);
 
-		screenShot();
 	}
 
 	/*	  
@@ -155,9 +91,6 @@ public class LandingPageTC
 		LoginPage.Loginfunctionality(driver);
 
 		HomePage.PageTitle(driver);
-
-		screenShot();
-
 
 	}
 
@@ -191,8 +124,8 @@ public class LandingPageTC
 		}
 		else{
 			log.info("Robot Check is not visible, test case fail");
-		} 	
-		screenShot();
+		}
+
 	}
 	/*
 
@@ -206,7 +139,7 @@ public class LandingPageTC
 	 */
 
 
-	
+
 	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 
@@ -218,7 +151,7 @@ public class LandingPageTC
 		if(driver.findElements(By.xpath("//div[@class='text-danger']")).size()>0){
 
 			//String  ErrorMessageForEmail = ForgotPassword.ErrorMessageForEmail(driver).getText();
-			log.info("Error message showing for the email blank is "+ForgotPassword.ErrorMessageForEmail(driver));			
+			log.info("Error message showing for the email blank is "+ForgotPassword.ErrorMessageForEmail(driver));
 
 		}
 
@@ -247,9 +180,9 @@ public class LandingPageTC
 		log.info("Label Text for Request registration  is  " +labeltext);
 
 		//check that Button for Request Registration is exist or not.
-		
+
 		log.info("Request Registration is exist with link " + LoginPage.Register(driver).getText());
-		
+
 		log.info("test cases is verified and Passed");
 
 	}
@@ -295,29 +228,6 @@ public class LandingPageTC
 		log.info("Asert for ContactDD link is verified");
 	}
 
-
-
-
-
-
-	@AfterTest
-	public void Close() throws IOException
-	{
-		driver.quit();
-
-
-
-
-	}
-
-	public void screenShot() throws IOException
-	{
-
-		File screen = (File)((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(screen, new File("./ScreenShot/" + packageName + "/" + className + "/screen-" + count + ".jpg"));
-		log.info("Screen: " + "./ScreenShot/" + packageName + "/" + className + "/screen-" + count + ".jpg");
-		count++;
-	}
 
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--<suite name="Home Page Test cases Executions with browser stack">-->
+<!--<suite name="Home Page Testing cases Executions with browser stack">-->
 <suite thread-count="3" name="Suite" parallel="tests">
     <test name="SecondTest">
         <parameter name="browserN" value="Edge" />
@@ -14,7 +14,7 @@
                 </methods>
             </class>
         </classes>
-    </test><!-- Test -->
+    </test><!-- Testing -->
     <test name="SecondTest1">
         <parameter name="browserN" value="chrome" />
         <parameter name="version" value="54" />

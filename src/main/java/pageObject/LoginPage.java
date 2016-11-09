@@ -20,6 +20,12 @@ public class LoginPage {
 	public static WebElement element;
 	public static By by;
 	static Logger log = Logger.getLogger("Login Page");
+
+	static protected WebDriver driver;
+
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
+	}
 	public static String PageTitle(WebDriver driver) 
 	{
 		//WebDriver driver = null;

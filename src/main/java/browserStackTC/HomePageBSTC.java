@@ -25,8 +25,8 @@ import org.apache.log4j.Logger;
 /**
  * Created by t.mirasipally on 10/27/2016.
  */
-public class HomePageBSTC {
-    public static WebDriver driver;
+public class HomePageBSTC extends BrowserStack{
+
     Browser brow = new Browser();
     DataDriven excel = new DataDriven();
     AlertHandle popup = new AlertHandle();
@@ -34,30 +34,17 @@ public class HomePageBSTC {
     WebElement element;
     Sheet sheet;
     WritableSheet wsheet;
-    Logger log = Logger.getLogger("Test Cases");
+    Logger log = Logger.getLogger("Testing Cases");
+
+    /*public HomePageBSTC(WebDriver driver) {
+        this.driver=driver;
+    }*/
+
+    private WebDriver driver;
 
     @BeforeClass
-    @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
-    public void start(String browserN, String version, String os, String osVersion, String resolution) throws Exception {
-        DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("os", os);
-        capability.setCapability("os_version", osVersion);
-        capability.setCapability("browserName", browserN);
-        capability.setCapability("browserVersion", version);
-        capability.setCapability("resolution", resolution);
-        capability.setCapability("project", "P1");
-        capability.setCapability("build", "1.0");
-
-        driver = new RemoteWebDriver(
-                new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
-                capability);
-        ob.repository(driver);
-        PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-        driver.get(ob.obj.getProperty("url"));
-
+    public void setUp() {
+        driver=getDriver();
     }
 
    /* public WebDriver startUrl() throws IOException {
@@ -89,7 +76,7 @@ public class HomePageBSTC {
     }
 
 
-    @Test
+
     public void WS_TC_31() throws InterruptedException, IOException {
 
 
@@ -99,16 +86,10 @@ public class HomePageBSTC {
         Thread.sleep(2000);
         log.info("Login in to the webshop application");
         HomePage.AssertVerifyForHomePage(driver);
-        Thread.sleep(1000);
-        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
+        /*Thread.sleep(1000);
+        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);*/
 
 
     }
 
-    @AfterTest
-    public void Close() throws IOException
-    {
-        driver.quit();
-
-    }
 }

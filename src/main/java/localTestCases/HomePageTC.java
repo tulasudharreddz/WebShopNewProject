@@ -5,14 +5,11 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import jxl.Sheet;
 import jxl.write.WritableSheet;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,8 +22,7 @@ import org.apache.log4j.Logger;
 /**
  * Created by t.mirasipally on 10/27/2016.
  */
-public class HomePageTC {
-    public static WebDriver driver;
+public class HomePageTC extends Browser{
     Browser brow = new Browser();
     DataDriven excel = new DataDriven();
     AlertHandle popup = new AlertHandle();
@@ -35,21 +31,28 @@ public class HomePageTC {
     WebElement element;
     Sheet sheet;
     WritableSheet wsheet;
-    Logger log = Logger.getLogger("Test Cases");
+    Logger log = Logger.getLogger("Testing Cases");
 
-    @Parameters("browser")
+    private WebDriver driver;
+
+    @BeforeClass
+    public void setUp() {
+        driver=getDriver();
+    }
+
+    /*@Parameters("browser")
     @BeforeTest
     public WebDriver start(String browser) throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException {
-        if (browser.equalsIgnoreCase(browser)) {
+        *//*if (browser.equalsIgnoreCase(browser)) {
             driver = brow.selectbrowser(browser);
         }
-        /*sheet = excel.ReadSheet(sheet);
-        wsheet = excel.writeSheet(wsheet, "test", "TestCase1");*/
+        *//**//*sheet = excel.ReadSheet(sheet);
+        wsheet = excel.writeSheet(wsheet, "test", "TestCase1");*//*
         ob.repository(driver);
         PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
         driver.get(ob.obj.getProperty("url"));
         return driver;
-    }
+    }*/
 
 
 
@@ -168,13 +171,5 @@ public class HomePageTC {
     }
 
 
-    @AfterTest
-    public void Close() throws IOException
-    {
-        driver.quit();
 
-
-
-
-    }
 }

@@ -7,7 +7,11 @@
         <parameter name="osVersion" value="10" />
         <parameter name="resolution" value="1366x768"/>
         <classes>
-            <class name="browserStackTC.HomePageBSTC"/>
+            <class name="browserStackTC.ProfilePageBSTC">
+                <methods>
+                    <include name="WS_TC_31"/>
+                </methods>
+            </class>
         </classes>
     </test>
     <test name="SecondTest">
@@ -17,9 +21,13 @@
         <parameter name="osVersion" value="8" />
         <parameter name="resolution" value="1366x768"/>
         <classes>
-            <class name="browserStackTC.HomePageBSTC"/>
+            <class name="browserStackTC.ProfilePageBSTC">
+                <methods>
+                    <include name="WS_TC_31"/>
+                </methods>
+            </class>
         </classes>
-    </test> <!-- Test -->
+    </test> <!-- Testing -->
     <!--<test name="ThirdTest">
         <parameter name="browser" value="safari"/>
         <parameter name="version" value="6.0"/>
@@ -27,5 +35,5 @@
         <classes>
             <class name="browserStackTC.HomePageBSTC"/>
         </classes>
-    </test>&lt;!&ndash; Test &ndash;&gt;-->
+    </test>&lt;!&ndash; Testing &ndash;&gt;-->
 </suite> <!-- Suite -->

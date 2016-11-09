@@ -14,6 +14,11 @@ public class HomePage {
     public static WebElement element;
     public static By by;
     static Logger log = Logger.getLogger("Home Page");
+    static protected WebDriver driver;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+    }
 
 
     public static void PageTitle(WebDriver driver) {

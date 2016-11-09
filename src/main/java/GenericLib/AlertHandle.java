@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AlertHandle {
 
-	WebDriver driver;
+
 	Browser brow = new Browser();
     static Logger log = Logger.getLogger("Alert Handle page");
 

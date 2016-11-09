@@ -19,7 +19,7 @@ import pageObject.LoginPage;
 public class BrowserStackTC {
     WebDriver driver;
     ObjectRepository ob = new ObjectRepository();
-    Logger log=Logger.getLogger("Test Cases");
+    Logger log=Logger.getLogger("Testing Cases");
 
 
     @BeforeClass
