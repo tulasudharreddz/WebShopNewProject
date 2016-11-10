@@ -76,7 +76,7 @@ public class HomePageBSTC extends BrowserStack{
     }
 
 
-
+@Test
     public void WS_TC_31() throws InterruptedException, IOException {
 
 
@@ -85,9 +85,9 @@ public class HomePageBSTC extends BrowserStack{
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(2000);
         log.info("Login in to the webshop application");
-        HomePage.AssertVerifyForHomePage(driver);
-        /*Thread.sleep(1000);
-        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);*/
+        //HomePage.AssertVerifyForHomePage(driver);
+        Thread.sleep(1000);
+        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
 
 
     }

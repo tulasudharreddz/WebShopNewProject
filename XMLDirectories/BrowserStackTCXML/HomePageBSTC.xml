@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<suite name="Home Page Testing cases Executions with browser stack">-->
 <suite thread-count="3" name="Suite" parallel="tests">
-    <test name="SecondTest">
+ <!--   <test name="SecondTest">
         <parameter name="browserN" value="Edge" />
         <parameter name="version" value="13.0" />
         <parameter name="os" value="WINDOWS" />
@@ -14,7 +14,7 @@
                 </methods>
             </class>
         </classes>
-    </test><!-- Testing -->
+    </test>&lt;!&ndash; Testing &ndash;&gt;
     <test name="SecondTest1">
         <parameter name="browserN" value="chrome" />
         <parameter name="version" value="54" />
@@ -28,13 +28,13 @@
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
     <test name="SecondTest2">
         <parameter name="browserN" value="Safari" />
         <parameter name="version" value="10.0" />
         <parameter name="os" value="OS X" />
         <parameter name="osVersion" value="Sierra" />
-        <parameter name="resolution" value="1366x768"/>
+        <parameter name="resolution" value="1920x1080"/>
         <classes>
             <class name="browserStackTC.HomePageBSTC">
                 <methods>

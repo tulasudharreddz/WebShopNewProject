@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by t.mirasipally on 11/9/2016.
@@ -34,10 +35,13 @@ public class BrowserStack {
 
         driver = new RemoteWebDriver(
                 //new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-                new URL("https://password395:xzEpbNtzmWrgnBAQPA1W@hub-cloud.browserstack.com/wd/hub"),
+                //new URL("https://password395:xzEpbNtzmWrgnBAQPA1W@hub-cloud.browserstack.com/wd/hub"),
 
-                //new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
+                new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
                 capability);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
     }
     @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
