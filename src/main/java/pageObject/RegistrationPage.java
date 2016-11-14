@@ -286,12 +286,9 @@ public class RegistrationPage {
 		Thread.sleep(15000);
 		
 		RegistrationPage.RequestRegistration2(driver).click();
-		
-		
 
 		return null;
-
-
-
 	}
+
+
 }

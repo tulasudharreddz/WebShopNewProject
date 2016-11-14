@@ -118,77 +118,7 @@ public class HomePage {
         return element;
     }
 
-    public static WebElement AssertVerifyForFieldsOFProfile(WebDriver driver) {
 
-        if (driver.findElements(By.id("firstName")).size()>0){
-            log.info("Assert is verified for first Name Field");
-        }
-        else{
-            log.info("Assert failed for first Name Field");
-        }
-        if (driver.findElements(By.id("email")).size()>0){
-            log.info("Assert is verified for User ID Field");
-        }
-        else{
-            log.info("Assert failed for User ID Field");
-        }
-        if (driver.findElements(By.id("lastName")).size()>0){
-            log.info("Assert is verified for last Name Field");
-        }
-        else{
-            log.info("Assert failed for last Name Field");
-        }
-        if (driver.findElements(By.id("password")).size()>0){
-            log.info("Assert is verified for password Field");
-        }
-        else{
-            log.info("Assert failed for password Field");
-        }
-        if (driver.findElements(By.id("phone")).size()>0){
-            log.info("Assert is verified for phone Field");
-        }
-        else{
-            log.info("Assert failed for phone Field");
-        }
-        if (driver.findElements(By.id("confirmPassword")).size()>0){
-            log.info("Assert is verified for confirm Password Field");
-        }
-        else{
-            log.info("Assert failed for confirm Password Field");
-        }
-        if (driver.findElements(By.xpath("//label[contains(text(),'Office')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
-            log.info("Assert is verified for password Field");
-        }
-        else{
-            log.info("Assert failed for Office Field");
-        }
-        if (driver.findElements(By.xpath("//label[contains(text(),'Language')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
-            log.info("Assert is verified for Language Field");
-        }
-        else{
-            log.info("Assert failed for Language Field");
-        }
-        if (driver.findElements(By.xpath("//label[contains(text(),'Timezone')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
-            log.info("Assert is verified for Timezone Field");
-        }
-        else{
-            log.info("Assert failed for Timezone Field");
-        }
-        if (driver.findElements(By.xpath("//button[contains(text(),'Save')]")).size()>0){
-            log.info("Assert is verified for Save Button");
-        }
-        else{
-            log.info("Assert failed for Save Button");
-        }
-        if (driver.findElements(By.xpath("//label[contains(text(),'Clear All')]/following-sibling::div/is-select/span/span/span/span")).size()>0){
-            log.info("Assert is verified for Clear All Field");
-        }
-        else{
-            log.info("Assert failed for Clear All Field");
-        }
-
-        return element;
-    }
 
 
 
@@ -197,7 +127,7 @@ public class HomePage {
         String ProfileTitle = driver.findElement(By.xpath("//h2")).getText();
 
         try {
-            Assert.assertEquals("My Account",ProfileTitle);
+            Assert.assertEquals("Profile",ProfileTitle);
             log.info("Assert is verified for Profile Page Title");
         }catch (Exception e){
             log.info("Assert is failed for Profile page Title");
@@ -352,11 +282,11 @@ public class HomePage {
         List<WebElement> LearnMoreButtons = driver.findElements(By.xpath("//button[contains(text(),'Learn More')]"));
         return LearnMoreButtons;
     }
-    public static WebElement UnitCost(WebDriver driver) {
+    public static List<WebElement> UnitCost(WebDriver driver) {
 
 
-        element = driver.findElement(By.xpath("//p[@class='product-price']"));
-        return element;
+        List<WebElement> UnitCost = driver.findElements(By.xpath("//p[@class='product-price']"));
+        return UnitCost;
     }
 
     public static double UnitPrice(WebDriver driver) {
@@ -391,10 +321,11 @@ public class HomePage {
         double Margin = 10;
         log.info("Margin for the product is " + Margin);
         double UnitPrice = CostOFItem/(1- (Margin/100));
+        double FinalUnitPrice = Math.round(UnitPrice * 100.0) / 100.0;
         log.info("Final Unit Price for the product is " + UnitPrice);
 
 
-        return UnitPrice;
+        return FinalUnitPrice;
 
     }
 

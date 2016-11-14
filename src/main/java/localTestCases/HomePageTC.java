@@ -142,34 +142,5 @@ public class HomePageTC extends Browser{
         log.info("WS_TC_32: Verified");
     }
 
-    /*WS_TC_34: Verify the GUI of  'User Profile' page
-    a) Verify the title
-    b) Verify the display of controls
-
-    Steps:
-    a) The title should be displayed as 'Profile'
-    b) Following controls should be displayed in 'Profile Page'
-    Textboxes Controls: First Name, Last Name, Email, Phone, Password, Confirm Password, Office Section
-    Label Names - Department/Division, Emp ID, Roles
-    Dropdown Controls - Language, Regional Setting, Font Size for Order Extracts, Lead time in order extracts
-    Calendar Control - Time zone
-    Button Controls - Clear All, Save*/
-
-    @Test
-    public void WS_TC_34() throws InterruptedException, IOException {
-
-        log.info("WS_TC_30: Verify the GUI of  'User Profile' page a) Verify the title  b) Verify the display of controls");
-        popup.implicitlyWait(driver);
-
-        Thread.sleep(2000);
-        LoginPage.Loginfunctionality(driver);
-        HomePage.ClickOnProfile(driver);
-        log.info("Clicked on User Profile option under My Account ");
-        HomePage.AssertVerifyForTitleProfile(driver);
-        HomePage.AssertVerifyForFieldsOFProfile(driver);
-
-    }
-
-
 
 }

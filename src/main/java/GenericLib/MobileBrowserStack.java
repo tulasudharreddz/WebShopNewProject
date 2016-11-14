@@ -11,9 +11,10 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by t.mirasipally on 11/9/2016.
+ * Created by t.mirasipally on 11/10/2016.
  */
-public class BrowserStack {
+public class MobileBrowserStack {
+
     private WebDriver driver;
 
     public WebDriver getDriver() {
@@ -21,14 +22,12 @@ public class BrowserStack {
     }
 
 
-    private void setDriver(String browserN, String version, String os, String osVersion, String resolution) throws Exception{
+    private void setDriver(String browserName, String platform, String device) throws Exception{
 
         DesiredCapabilities capability = new DesiredCapabilities();
-        capability.setCapability("os", os);
-        capability.setCapability("os_version", osVersion);
-        capability.setCapability("browserName", browserN);
-        capability.setCapability("browserVersion", version);
-        capability.setCapability("resolution", resolution);
+        capability.setCapability("browserName", browserName);
+        capability.setCapability("platform", platform);
+        capability.setCapability("device", device);
         capability.setCapability("project", "P1");
         capability.setCapability("build", "1.0");
 
@@ -39,16 +38,16 @@ public class BrowserStack {
 
                 new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
                 capability);
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
     }
-    @Parameters(value = {"browserN", "version", "os", "osVersion","resolution"})
+    @Parameters(value = {"browserName", "platform", "device"})
     @BeforeClass
-    public void initializeTestBaseSetup(String browserN, String version, String os, String osVersion, String resolution) {
+    public void initializeTestBaseSetup(String browserName, String platform, String device) {
         try {
-            setDriver(browserN, version,os, osVersion, resolution);
+            setDriver(browserName,  platform, device);
 
         } catch (Exception e) {
             System.out.println("Error....." + e.getStackTrace());
@@ -58,5 +57,4 @@ public class BrowserStack {
     public void tearDown() {
         driver.quit();
     }
-
 }

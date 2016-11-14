@@ -401,11 +401,11 @@ public class LoginPage {
 	}
 
 	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException {
-		//WebDriverWait waitCulture = new WebDriverWait(driver, 40);
-		//waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
+		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
+		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 		Thread.sleep(2000);
 		LoginPage.Language(driver).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		LoginPage.Selectlanguage(driver).click();
 		obje.repository(driver);
 		LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));

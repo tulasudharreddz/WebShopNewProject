@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<suite name="Home Page Testing cases Executions with browser stack">-->
 <suite thread-count="3" name="Suite" parallel="tests">
- <!--   <test name="SecondTest">
+     <!--<test name="SecondTest">
         <parameter name="browserN" value="Edge" />
         <parameter name="version" value="13.0" />
         <parameter name="os" value="WINDOWS" />
@@ -14,35 +14,33 @@
                 </methods>
             </class>
         </classes>
-    </test>&lt;!&ndash; Testing &ndash;&gt;
-    <test name="SecondTest1">
+    </test>-->
+<!--    <test name="SecondTest1">
         <parameter name="browserN" value="chrome" />
         <parameter name="version" value="54" />
         <parameter name="os" value="WINDOWS" />
         <parameter name="osVersion" value="7" />
         <parameter name="resolution" value="1366x768"/>
         <classes>
-            <class name="browserStackTC.HomePageBSTC">
+            <class name="localTestCases.DemoLocal">
                 <methods>
-                    <include name="WS_TC_31"/>
+                    <include name="TC_Home_01"/>
                 </methods>
             </class>
         </classes>
     </test>-->
     <test name="SecondTest2">
-        <parameter name="browserN" value="Safari" />
-        <parameter name="version" value="10.0" />
-        <parameter name="os" value="OS X" />
-        <parameter name="osVersion" value="Sierra" />
-        <parameter name="resolution" value="1920x1080"/>
+        <parameter name="browserName" value="iPhone" />
+        <parameter name="platform" value="MAC" />
+        <parameter name="device" value="iPhone 6S Plus" />
         <classes>
-            <class name="browserStackTC.HomePageBSTC">
+            <class name="localTestCases.DemoLocal">
                 <methods>
-                    <include name="WS_TC_31"/>
+                    <include name="MobileAutomation"/>
                 </methods>
             </class>
         </classes>
-    </test>
+    </test>-->
 
 
 </suite>

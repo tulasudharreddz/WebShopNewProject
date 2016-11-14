@@ -9,7 +9,7 @@
                     <!--<include name="TC_Home_01"/>
                     <include name="WS_TC_32"/>
                     <include name="WS_TC_30"/>-->
-                    <include name="WS_TC_31"/>
+                    <include name="WS_TC_37"/>
                 </methods>
             </class>
         </classes>
