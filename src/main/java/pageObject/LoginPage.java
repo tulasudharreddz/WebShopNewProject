@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 public class LoginPage {
 
-	static ObjectRepository obje = new ObjectRepository();
+	static protected ObjectRepository obje = new ObjectRepository();
 	public static WebElement element;
 	public static By by;
 	static Logger log = Logger.getLogger("Login Page");

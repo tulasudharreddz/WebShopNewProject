@@ -79,7 +79,7 @@ public class HomePageBSTC extends BrowserStack{
 @Test
     public void WS_TC_31() throws InterruptedException, IOException {
 
-        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(2000);

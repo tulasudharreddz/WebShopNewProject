@@ -1,6 +1,7 @@
 package localTestCases;
 
 import GenericLib.Browser;
+import GenericLib.ObjectRepository;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
@@ -9,15 +10,15 @@ import pageObject.HomePage;
 import pageObject.LoginPage;
 import pageObject.ProfilePage;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
  * Created by t.mirasipally on 14-Nov-16.
  */
 public class MyAccountModuleTC extends Browser {
-
-
-    Logger log = Logger.getLogger("Testing Cases");
+    static ObjectRepository obje = new ObjectRepository();
+    static Logger log = Logger.getLogger("Testing Cases");
 
     private WebDriver driver;
 
@@ -27,9 +28,9 @@ public class MyAccountModuleTC extends Browser {
     }
 
 
-    /*WS_TC_34: Verify the GUI of  'User Profile' page
-    a) Verify the title
-    b) Verify the display of controls
+    /*WS_TC_34: AssertVerifyForDefaultAddress the GUI of  'User Profile' page
+    a) AssertVerifyForDefaultAddress the title
+    b) AssertVerifyForDefaultAddress the display of controls
 
     Steps:
     a) The title should be displayed as 'Profile'
@@ -43,7 +44,7 @@ public class MyAccountModuleTC extends Browser {
     @Test
     public void WS_TC_34() throws InterruptedException, IOException {
 
-        log.info("WS_TC_30: Verify the GUI of  'User Profile' page a) Verify the title  b) Verify the display of controls");
+        log.info("WS_TC_30: AssertVerifyForDefaultAddress the GUI of  'User Profile' page a) AssertVerifyForDefaultAddress the title  b) AssertVerifyForDefaultAddress the display of controls");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
         HomePage.ClickOnProfile(driver);
@@ -75,7 +76,7 @@ public class MyAccountModuleTC extends Browser {
     }
 
 
-   /* WS_TC_37: Verify the GUI of  'Addresses' page
+   /* WS_TC_37: AssertVerifyForDefaultAddress the GUI of  'Addresses' page
     a) The title should be displayed as 'Addresses'
     b) Following accordion headers should be displayed in 'Addresses' page
     1. Billing Addresses  2. Delivery Addresses  3.Install Addresses
@@ -84,7 +85,7 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_37() throws InterruptedException, IOException {
-        log.info("WS_TC_37: Verify the GUI of  'Addresses' page");
+        log.info("WS_TC_37: AssertVerifyForDefaultAddress the GUI of  'Addresses' page");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
@@ -108,7 +109,7 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_38() throws InterruptedException, IOException {
-
+        obje.repository(driver);
         log.info("WS_TC_38: Validate the expand & collapse functionality for the following headers");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -124,12 +125,12 @@ public class MyAccountModuleTC extends Browser {
     /*
     WS_TC_41: Validate the 'Request Delete' button functionality
     a. Click on Request Delete button
-    b. Verify the 'Delete Request email' content
+    b. AssertVerifyForDefaultAddress the 'Delete Request email' content
     */
     @Test
-    public void WS_TC_41() throws InterruptedException, IOException {
-
-        log.info("WS_TC_38: Validate the expand & collapse functionality for the following headers");
+    public void WS_TC_41() throws InterruptedException, IOException, AWTException {
+        obje.repository(driver);
+        log.info("WS_TC_41: Validate the 'Request Delete' button functionality");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
@@ -137,11 +138,33 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
+        ProfilePage.RequestDeleteFunctionality(driver);
+        Thread.sleep(1000);
+        ProfilePage.VerifyEmailInOutLook(driver);
+        log.info("WS_TC_38: 'Request Delete' button functionality is verified");
+    }
+    /*
+    WS_TC_42: Validate the default billing address setup functionality
+    a) Setup the  default address using radio button
+    b) Setup up default address without selecting any of the radio buttons against billing address
+    */
+
+    @Test
+    public void WS_TC_42() throws IOException, InterruptedException {
+
+        obje.repository(driver);
+        log.info("WS_TC_41: Validate the default billing address setup functionality");
+        Thread.sleep(1000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(1000);
+        HomePage.MyAccountMenuonHomePage(driver).click();
+        Thread.sleep(1000);
+        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        Thread.sleep(1000);
+        ProfilePage.AssertVerifyForDefaultAddress(driver);
 
 
     }
-
-
 
 
 }

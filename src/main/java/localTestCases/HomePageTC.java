@@ -80,13 +80,13 @@ public class HomePageTC extends Browser{
 
     /*
 
-    WS_TC_30: Verify that Shop menu button is displaying or not and options under Shop menu are available or not
+    WS_TC_30: AssertVerifyForDefaultAddress that Shop menu button is displaying or not and options under Shop menu are available or not
 
     */
 
     @Test
     public void WS_TC_30() throws InterruptedException, IOException {
-        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
 
         Thread.sleep(2000);
@@ -100,7 +100,7 @@ public class HomePageTC extends Browser{
 
     /*
 
-    WS_TC_31: Verify Each menu under Shop Menu
+    WS_TC_31: AssertVerifyForDefaultAddress Each menu under Shop Menu
 
 
     */
@@ -108,7 +108,7 @@ public class HomePageTC extends Browser{
     @Test
     public void WS_TC_31() throws InterruptedException, IOException {
 
-        log.info("WS_TC_30: Verify that Shop button is displaying or not and options under Shop Menu are available or not");
+        log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
 
         Thread.sleep(2000);
@@ -123,13 +123,13 @@ public class HomePageTC extends Browser{
 
      /*
 
-    WS_TC_32: Verify that My menu button is displaying or not and options under menu are available or not
+    WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not
 
     */
 
     @Test
     public void WS_TC_32() throws InterruptedException, IOException {
-        log.info("WS_TC_32: Verify that My menu button is displaying or not and options under menu are available or not");
+        log.info("WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not");
         popup.implicitlyWait(driver);
 
         Thread.sleep(4000);

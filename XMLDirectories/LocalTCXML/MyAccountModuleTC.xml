@@ -9,8 +9,10 @@
                     <!--<include name="WS_TC_34"/>
                     <include name="WS_TC_35"/>
                     <include name="WS_TC_36"/>
-                    <include name="WS_TC_37"/>-->
+                    <include name="WS_TC_37"/>
                     <include name="WS_TC_38"/>
+                    <include name="WS_TC_41"/>-->
+                    <include name="WS_TC_42"/>
                 </methods>
             </class>
         </classes>

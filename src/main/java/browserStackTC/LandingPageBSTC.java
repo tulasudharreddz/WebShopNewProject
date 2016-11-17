@@ -56,7 +56,7 @@ public class LandingPageBSTC extends BrowserStack
 		driver=getDriver();
 	}
 
-	/*TC01: Verify the launch of Login page & and its content
+	/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections
 		Sections:
@@ -104,7 +104,7 @@ public class LandingPageBSTC extends BrowserStack
 	}
 
 	/*
-	 TC03: Verify the GUI of 'Reset Password' Section
+	 TC03: AssertVerifyForDefaultAddress the GUI of 'Reset Password' Section
 	 Below controls should be displayed in Reset Password' Page
 		Textbox - User Name
 		Label Text - "if you forgot your password, please enter your user name below and click on email password"
@@ -172,7 +172,7 @@ public class LandingPageBSTC extends BrowserStack
 
 	}
 
-	/*TC05: Verify the GUI of "Request Registration" Section
+	/*TC05: AssertVerifyForDefaultAddress the GUI of "Request Registration" Section
 
 	The "Request Registration" Section should be displayed with the following
 	a) Label Text - �If your company is not yet a registered client of Dimension Data, or you would like user-access to the Dimension Data Store for your registered company, click below to request registration�  
@@ -195,7 +195,7 @@ public class LandingPageBSTC extends BrowserStack
 		log.info("test cases is verified and Passed");
 
 	}
-	// Verify that all the static links are working or not.
+	// AssertVerifyForDefaultAddress that all the static links are working or not.
 	@Test
 	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{

@@ -1,5 +1,6 @@
 package pageObject;
 
+import GenericLib.ObjectRepository;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -7,7 +8,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by t.mirasipally on 11/10/2016.
@@ -16,8 +21,10 @@ public class ProfilePage {
 
     public static WebElement element;
     public static By by;
-    static Logger log = Logger.getLogger("Home Page");
+    static Logger log = Logger.getLogger("Profile Page");
     static protected WebDriver driver;
+    static protected ObjectRepository obje = new ObjectRepository();
+
 
     //Page Elements
     static private By Email_Field = By.id("email");
@@ -36,12 +43,7 @@ public class ProfilePage {
     static private By Address = By.xpath("//div[@class='accordion-header']/div/div[1]");
     static private By OpenAddress = By.xpath("//div[@class='panel-heading']/following-sibling::div[@class='panel-collapse collapse in']");
     static private By TitleForOenBlock = By.xpath("//div[@class='panel-collapse collapse in']/preceding-sibling::div/a/div/div/div[1]");
-    //static private By ExpandCollapse = By.xpath("//div[@class='panel-heading']/following-sibling::div[@class='panel-collapse collapse in']");
     static private By PannelHeading = By.xpath("//div[@class='panel-heading']");
-
-
-
-
 
 
     public ProfilePage(WebDriver driver) {
@@ -381,10 +383,113 @@ public class ProfilePage {
                 log.info("Assert verification is failed for "+ HeaderTitle );
             }
         }
+    }
 
+    public static void OutLookAccess(WebDriver driver) throws InterruptedException, AWTException{
+
+        Robot r = new Robot();
+        r.keyPress(KeyEvent.VK_CONTROL);
+        r.keyPress(KeyEvent.VK_T);
+        r.keyRelease(KeyEvent.VK_CONTROL);
+        r.keyRelease(KeyEvent.VK_T);
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
+
+        driver.get("https://webemail.ap.dimensiondata.com/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fwebemail.ap.dimensiondata.com%2fowa%2f");
+
+        Thread.sleep(1000);
+        driver.findElement(By.id("rdoPrvt")).click();
+        driver.findElement(By.id("chkBsc")).click();
+        driver.findElement(By.id("username")).sendKeys("t.mirasipally");
+        driver.findElement(By.id("password")).sendKeys("Chaitu@0068");
+        driver.findElement(By.xpath("//input[@type='submit']")).click();
+    }
+
+    public static void VerifyEmailInOutLook(WebDriver driver) throws InterruptedException, AWTException {
+        OutLookAccess(driver);
+        Thread.sleep(1000);
+        driver.findElement(By.xpath(".//*[@id='lnkHdrcheckmessages']/img")).click();
+        if(driver.findElements(By.xpath("//td[@class='frst']/h1/a[contains(text(),'Address Delete Request')]")).size()>0){
+            driver.findElement(By.xpath("//td[@class='frst']/h1/a")).click();
+            String Subject = driver.findElement(By.xpath("//td[@class='sub']")).getText();
+            try{
+                Assert.assertEquals(Subject , "Address Delete Request");
+                log.info("Assert is verified " );
+                String MailSender=driver.findElement(By.xpath("//span[@class='rwRRO']")).getText();
+                String[] splited = MailSender.split("\\s+");
+                String split_one= splited[0];
+                log.info("Email sender is  " + split_one);
+                obje.repository(driver);
+                String email = obje.obj.getProperty("email");
+                Assert.assertEquals(split_one , email);
+                log.info("Assert Verified for Email sender" );
+
+            }
+            catch (Exception e){
+
+                log.info("Assert verification failed " );
+            }
+        }
+        else{
+            log.info("Email is not received for address request" );
+        }
 
     }
 
+    public static List<WebElement> RequestDeleteElement(WebDriver driver) {
+
+        List<WebElement> DeleteButton=  driver.findElements(By.xpath("//button[contains(text(),'Request Delete')]"));
+        return DeleteButton;
+    }
+
+    public static void RequestDeleteFunctionality(WebDriver driver){
+
+        RequestDeleteElement(driver).get(1).click();
+        log.info("Clicked on Request Delete button " );
+        driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
+        log.info("Clicked on OK button to confirm " );
+
+    }
+
+    public static List<WebElement> LabelSymbol(WebDriver driver) {
+
+        List<WebElement> Label=  driver.findElements(By.xpath("//label[@class='is-check-radio-label']"));
+        return Label;
+    }
+
+    public static void AssertVerifyForDefaultAddress(WebDriver driver){
+        //String Defaultxpath =LabelSymbol(driver).get(0)+"/i[@class='is-check-radio-helper on']";
+        String Defaultxpath = "(//label[@class='is-check-radio-label'])[1]/i[@class='is-check-radio-helper on']";
+        By PannelHeading = By.xpath(Defaultxpath);
+        log.info("Xpath" + PannelHeading);
+        if (driver.findElements(PannelHeading).size() > 0) {
+            log.info("Default Address is located First in the address list");
+            String NextItemXpath = "(//label[@class='is-check-radio-label'])[2]";
+            log.info("Clicking on next item to make default address");
+            By NextItem = By.xpath(NextItemXpath);
+            driver.findElement(NextItem).click();
+            log.info("Clicked on Second address to make Default");
+            boolean selectStatus = driver.findElement(NextItem).isEnabled();
+            if (selectStatus == true) {
+                log.info("Default address functionallity is verified");
+            } else {
+                log.info("Failed: Default address functionality is not working");
+            }
+        } else {
+            log.info(" Default Address is not located at First in the address list ");
+            log.info(" Making first Address as Default  ");
+            driver.findElement(By.xpath("(//label[@class='is-check-radio-label'])[1]")).click();
+            log.info("Clicked on First address to make Default");
+            boolean selectStatus = driver.findElement(By.xpath("(//label[@class='is-check-radio-label'])[1]")).isEnabled();
+            if (selectStatus == true) {
+                log.info("Default address functionallity is verified");
+            } else {
+                log.info("Failed: Default address functionality is not working");
+            }
 
 
+        }
+
+
+    }
 }
