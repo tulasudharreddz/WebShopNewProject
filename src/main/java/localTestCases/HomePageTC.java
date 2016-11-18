@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import jxl.Sheet;
 import jxl.write.WritableSheet;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -141,6 +142,29 @@ public class HomePageTC extends Browser{
 
         log.info("WS_TC_32: Verified");
     }
+ /*
+    WS_TC_57: Verify the display of search results page
 
+    1. Click on category menu and Enter search criteria
+    2. Go to the Search bar in Home page and enter search criteria
+    a) Search by MFR Part#
+    b) Search By Product Name
+    c) Wild Card/ Like Search
+    d) Search by Manfacturer
+    e) Search by Family
+    f) Search by Category
+    */
+
+    @Test
+    public void WS_TC_57() throws IOException, InterruptedException {
+        ob.repository(driver);
+        log.info("WS_TC_43: Verify the GUI of Request new address page");
+        Thread.sleep(1000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(1000);
+
+
+
+    }
 
 }

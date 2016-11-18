@@ -3,7 +3,10 @@ package localTestCases;
 import GenericLib.Browser;
 import GenericLib.ObjectRepository;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
@@ -11,7 +14,9 @@ import pageObject.LoginPage;
 import pageObject.ProfilePage;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by t.mirasipally on 14-Nov-16.
@@ -43,8 +48,9 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_34() throws InterruptedException, IOException {
-
+        obje.repository(driver);
         log.info("WS_TC_30: AssertVerifyForDefaultAddress the GUI of  'User Profile' page a) AssertVerifyForDefaultAddress the title  b) AssertVerifyForDefaultAddress the display of controls");
+        log.debug("Expected Result");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
         HomePage.ClickOnProfile(driver);
@@ -63,7 +69,7 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_35() throws InterruptedException, IOException {
-
+        obje.repository(driver);
         log.info("WS_TC_35: Validate the Save button functionality in Profile Page");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
@@ -85,6 +91,7 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_37() throws InterruptedException, IOException {
+        obje.repository(driver);
         log.info("WS_TC_37: AssertVerifyForDefaultAddress the GUI of  'Addresses' page");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -153,7 +160,7 @@ public class MyAccountModuleTC extends Browser {
     public void WS_TC_42() throws IOException, InterruptedException {
 
         obje.repository(driver);
-        log.info("WS_TC_41: Validate the default billing address setup functionality");
+        log.info("WS_TC_42: Validate the default billing address setup functionality");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
@@ -163,6 +170,53 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         ProfilePage.AssertVerifyForDefaultAddress(driver);
 
+    }
+    /*
+    WS_TC_43: Verify the GUI of "Request new address page
+    a) Click on the Request New address button against a billing
+    b) Verify the GUI of Create New Billing Address Page
+    */
+    @Test
+    public void WS_TC_43() throws IOException, InterruptedException {
+        obje.repository(driver);
+        log.info("WS_TC_43: Verify the GUI of Request new address page");
+        Thread.sleep(1000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(1000);
+        HomePage.MyAccountMenuonHomePage(driver).click();
+        Thread.sleep(1000);
+        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        Thread.sleep(1000);
+        ProfilePage.ClickonNewBillingAddress(driver);
+        Thread.sleep(1000);
+        ProfilePage.AssertVerifyForLable(driver);
+        log.info("WS_TC_43: GUI of Request new address lables are successfully verified");
+    }
+
+    /*
+    WS_TC_43: Validate the Create New Billing Address functionality
+    a) Click on Save button by entering all mandatory fields.
+    b) Click on Save button without enetering any of the mandatory fields
+    */
+
+    @Test
+    public void WS_TC_44() throws IOException, InterruptedException, AWTException {
+        obje.repository(driver);
+        log.info("WS_TC_43: Verify the GUI of Request new address page");
+        Thread.sleep(1000);
+        LoginPage.Loginfunctionality(driver);
+        Thread.sleep(1000);
+        HomePage.MyAccountMenuonHomePage(driver).click();
+        Thread.sleep(1000);
+        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        Thread.sleep(1000);
+        ProfilePage.ClickonNewBillingAddress(driver);
+        Thread.sleep(1000);
+        ProfilePage.VerifySaveNewAddressFunctionalityWithOutData(driver);
+        Thread.sleep(1000);
+        ProfilePage.VerifySaveNewAddressFunctionalityWithData(driver);
+        Thread.sleep(1000);
+        ProfilePage.EmailVerificationForNewAddress(driver);
 
     }
 

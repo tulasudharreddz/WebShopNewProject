@@ -1,0 +1,6 @@
+<suite name="suite of suites">
+    <suite-files>
+        <suite-file path="./LocalTCXML/MyAccountModuleTC.xml" />
+        <suite-file path="./LocalTCXML/HomePageTC.xml" />
+    </suite-files>
+</suite>

@@ -44,7 +44,7 @@ public class ProfilePage {
     static private By OpenAddress = By.xpath("//div[@class='panel-heading']/following-sibling::div[@class='panel-collapse collapse in']");
     static private By TitleForOenBlock = By.xpath("//div[@class='panel-collapse collapse in']/preceding-sibling::div/a/div/div/div[1]");
     static private By PannelHeading = By.xpath("//div[@class='panel-heading']");
-
+    static private By RequestNewAddress = By.xpath("//button[contains(text(),'Request New Address')]");
 
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
@@ -387,13 +387,13 @@ public class ProfilePage {
 
     public static void OutLookAccess(WebDriver driver) throws InterruptedException, AWTException{
 
-        Robot r = new Robot();
+        /*Robot r = new Robot();
         r.keyPress(KeyEvent.VK_CONTROL);
         r.keyPress(KeyEvent.VK_T);
         r.keyRelease(KeyEvent.VK_CONTROL);
         r.keyRelease(KeyEvent.VK_T);
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+        driver.switchTo().window(tabs.get(1));*/
 
         driver.get("https://webemail.ap.dimensiondata.com/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fwebemail.ap.dimensiondata.com%2fowa%2f");
 
@@ -403,6 +403,7 @@ public class ProfilePage {
         driver.findElement(By.id("username")).sendKeys("t.mirasipally");
         driver.findElement(By.id("password")).sendKeys("Chaitu@0068");
         driver.findElement(By.xpath("//input[@type='submit']")).click();
+
     }
 
     public static void VerifyEmailInOutLook(WebDriver driver) throws InterruptedException, AWTException {
@@ -423,7 +424,6 @@ public class ProfilePage {
                 String email = obje.obj.getProperty("email");
                 Assert.assertEquals(split_one , email);
                 log.info("Assert Verified for Email sender" );
-
             }
             catch (Exception e){
 
@@ -461,7 +461,7 @@ public class ProfilePage {
         //String Defaultxpath =LabelSymbol(driver).get(0)+"/i[@class='is-check-radio-helper on']";
         String Defaultxpath = "(//label[@class='is-check-radio-label'])[1]/i[@class='is-check-radio-helper on']";
         By PannelHeading = By.xpath(Defaultxpath);
-        log.info("Xpath" + PannelHeading);
+        //log.info("Xpath" + PannelHeading);
         if (driver.findElements(PannelHeading).size() > 0) {
             log.info("Default Address is located First in the address list");
             String NextItemXpath = "(//label[@class='is-check-radio-label'])[2]";
@@ -491,5 +491,164 @@ public class ProfilePage {
         }
 
 
+    };
+
+    public static List<WebElement> RequestNewAdd(WebDriver driver) {
+
+        List<WebElement> NewAddress=  driver.findElements(RequestNewAddress);
+        return NewAddress;
     }
+
+    public static void ClickonNewBillingAddress(WebDriver driver){
+
+        RequestNewAdd(driver).get(0).click();
+    }
+    public static List<WebElement> LableForNewAddress(WebDriver driver) {
+
+        List<WebElement> Lable=  driver.findElements(By.xpath("//label"));
+        return Lable;
+    }
+    public static void AssertVerifyForLable(WebDriver driver){
+
+        int noOfLable = LableForNewAddress(driver).size();
+
+        for (int i=0;i<=noOfLable-1;i++) {
+
+            ArrayList<String> al=new ArrayList<String>();//creating arraylist
+
+            al.add("Billing Address Name *");//adding object in arraylist
+            al.add("Address Line 1 *");
+            al.add("Address Line 2");
+            al.add("City *");
+            al.add("State/Province");
+            al.add("Postal Code");
+            al.add("Country *");
+            al.add("Contact Name");
+            al.add("Phone");
+
+            String ActualLableName = LableForNewAddress(driver).get(i).getText();
+
+            log.info("Actual Lablename is " + ActualLableName);
+            log.info("Expected Lablename is " + al.get(i));
+            try{
+                Assert.assertEquals(ActualLableName, al.get(i));
+                log.info("Assert is successfully verified for " + ActualLableName);
+            }
+            catch (Exception e){
+                log.info("Assert verification is failed for " + ActualLableName);
+            }
+
+        }
+
+    }
+
+    private static boolean statusOfSaveButton(WebDriver driver){
+        boolean status = driver.findElement(by.xpath("//button[contains(text(),'Create')]")).isEnabled();
+        return status;
+    }
+
+    public static void VerifySaveNewAddressFunctionalityWithOutData(WebDriver driver) throws InterruptedException {
+
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        else{
+            log.info("Verification is successful for save button functionality");
+        }
+        driver.findElement(by.id("name")).sendKeys("test");
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        else{
+            log.info("Verification is successful for save button functionality");
+            driver.findElement(by.id("name")).clear();
+        }
+        driver.findElement(by.id("line1")).sendKeys("test");
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        else{
+            log.info("Verification is successful for save button functionality");
+            driver.findElement(by.id("line1")).clear();
+        }
+
+        driver.findElement(by.id("city")).sendKeys("test");
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        else{
+            log.info("Verification is successful for save button functionality");
+            driver.findElement(by.id("city")).clear();
+        }
+        driver.findElement(by.xpath("//span[@class='select2-selection select2-selection--single']")).click();
+        Thread.sleep(1000);
+        driver.findElement(by.xpath("//li[contains(text(),'India')]")).click();
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        else{
+            log.info("Verification is successful for save button functionality");
+            driver.findElement(by.xpath("//span[@class='select2-selection select2-selection--single']")).clear();
+        }
+
+    }
+
+    public static void VerifySaveNewAddressFunctionalityWithData(WebDriver driver) throws InterruptedException {
+
+        driver.navigate().refresh();
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        else{
+            log.info("Verification is successful for save button functionality");
+        }
+        driver.findElement(by.id("name")).sendKeys("test");
+        driver.findElement(by.id("line1")).sendKeys("test");
+        driver.findElement(by.id("city")).sendKeys("test");
+        driver.findElement(by.xpath("//span[@class='select2-selection select2-selection--single']")).click();
+        Thread.sleep(1000);
+        driver.findElement(by.xpath("//li[contains(text(),'India')]")).click();
+        if(statusOfSaveButton(driver)== true){
+            log.info("Verification is successful for save button functionality");
+        }
+        else{
+            log.info("Verification is faiiiled for save button functionality");
+        }
+        //ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        //driver.switchTo().window(tabs.get(1));
+        driver.findElement(By.xpath("//button[contains(text(),'Create')]")).click();
+        Thread.sleep(5000);
+
+    }
+    public static void EmailVerificationForNewAddress(WebDriver driver) throws AWTException, InterruptedException {
+        OutLookAccess(driver);
+        Thread.sleep(1000);
+        driver.findElement(By.xpath(".//*[@id='lnkHdrcheckmessages']/img")).click();
+        Thread.sleep(5000);
+        if(driver.findElements(By.xpath("//td[@class='frst']/h1/a[contains(text(),'Address Create Request')]")).size()>0){
+            driver.findElement(By.xpath("//td[@class='frst']/h1/a")).click();
+            String Subject = driver.findElement(By.xpath("//td[@class='sub']")).getText();
+            try{
+                Assert.assertEquals(Subject , "Address Create Request");
+                log.info("Assert is verified " );
+                String MailSender=driver.findElement(By.xpath("//span[@class='rwRRO']")).getText();
+                String[] splited = MailSender.split("\\s+");
+                String split_one= splited[0];
+                log.info("Email sender is  " + split_one);
+                obje.repository(driver);
+                String email = obje.obj.getProperty("email");
+                Assert.assertEquals(split_one , email);
+                log.info("Assert Verified for Email sender" );
+            }
+            catch (Exception e){
+
+                log.info("Assert verification failed " );
+            }
+        }
+        else{
+            log.info("Email is not received for address request" );
+        }
+    }
+
+
 }

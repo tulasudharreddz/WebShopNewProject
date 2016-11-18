@@ -401,6 +401,8 @@ public class LoginPage {
 	}
 
 	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException {
+
+		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
 		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 		Thread.sleep(2000);
