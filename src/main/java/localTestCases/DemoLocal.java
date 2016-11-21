@@ -89,11 +89,6 @@ public class DemoLocal extends MobileBrowserStack{
 
 	}
 
-	@AfterTest
-	public void Close() throws IOException
-	{
-		driver.quit();
 
-	}
 
 }
