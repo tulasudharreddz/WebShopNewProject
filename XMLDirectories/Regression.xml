@@ -2,5 +2,6 @@
     <suite-files>
         <suite-file path="./LocalTCXML/MyAccountModuleTC.xml" />
         <suite-file path="./LocalTCXML/HomePageTC.xml" />
+        <suite-file path="./LocalTCXML/LandingPageTC.xml" />
     </suite-files>
 </suite>

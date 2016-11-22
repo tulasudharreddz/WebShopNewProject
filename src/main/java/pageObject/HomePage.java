@@ -55,7 +55,8 @@ public class HomePage {
     public static WebElement HomeCartLinkHomePage(WebDriver driver) {
 
 
-        element = driver.findElement(By.xpath("//div[@class='header-links']/ul/li[1]/a[contains(text(),'Home')]"));
+        //element = driver.findElement(By.xpath("//div[@class='header-links']/ul/li[1]/a[contains(text(),'Home')]"));
+        element = driver.findElement(By.xpath("//ol[@class = 'breadcrumb']/li/a[contains(text(),'Home')]"));
         return element;
     }
     public static WebElement AssertVerifyForHomePage(WebDriver driver) {

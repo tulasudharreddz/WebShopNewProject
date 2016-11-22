@@ -53,11 +53,11 @@ public class LandingPageTC extends Browser
 	}
 
 
-    @BeforeMethod
-    public void Url(){
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-        log.info("URL entered in browser");
-    }
+	@BeforeMethod
+	public void Url(){
+		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+		log.info("URL entered in browser");
+	}
 		/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections
@@ -87,7 +87,7 @@ public class LandingPageTC extends Browser
 
 	Expe result : Login should be successful and user should be redirected to 'Home' page
 	 */
-
+	@Test
 	public void TC02() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		//check that user able to login with valid credentials or not
@@ -111,7 +111,7 @@ public class LandingPageTC extends Browser
 		Button - Email Password
 
 	 */
-
+	@Test
 	public void TC03() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		//check that user able to login with valid credentials or not
@@ -146,7 +146,7 @@ public class LandingPageTC extends Browser
 	 */
 
 
-
+	@Test
 	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 

@@ -81,10 +81,14 @@ public class MyAccountModuleTC extends Browser {
         log.info("WS_TC_35: Validate the Save button functionality in Profile Page");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
+        Thread.sleep(1000);
         HomePage.ClickOnProfile(driver);
         log.info("Clicked on User Profile option under My Account ");
+        Thread.sleep(1000);
         HomePage.AssertVerifyForTitleProfile(driver);
+        Thread.sleep(1000);
         ProfilePage.AssertVerifyForFieldsOFProfile(driver);
+        Thread.sleep(1000);
         ProfilePage.MandatoryFieldsProfilePage(driver);
 
     }

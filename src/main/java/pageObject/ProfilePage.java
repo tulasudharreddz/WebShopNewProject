@@ -133,7 +133,7 @@ public class ProfilePage {
         int NoOfMandatory = NoOfMandatoryFields(driver).size();
         log.info("No of mandatory fields in Profile page is " +NoOfMandatory);
 
-        for(int i=0;i<=NoOfMandatory;i++){
+        for(int i=0;i<=NoOfMandatory-1;i++){
             NoOfMandatoryFields(driver).get(i).clear();
             NoOfMandatoryFields(driver).get(i).sendKeys(Keys.TAB);
             List<WebElement> Lablename =driver.findElements(By.xpath("//label"));

@@ -6,6 +6,11 @@
             <class name="localTestCases.LandingPageTC">
                 <methods>
                     <include name="TC01"/>
+                    <include name="TC02"/>
+                    <include name="TC03"/>
+                    <include name="TC04"/>
+                    <include name="TC05"/>
+                    <include name="TC06"/>
                 </methods>
             </class>
         </classes>
