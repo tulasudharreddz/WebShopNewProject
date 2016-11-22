@@ -41,6 +41,13 @@ public class HomePageTC extends Browser{
         driver=getDriver();
     }
 
+
+    @BeforeMethod
+    public void Url(){
+        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+        log.info("URL entered in browser");
+    }
+
     /*@Parameters("browser")
     @BeforeTest
     public WebDriver start(String browser) throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException {
@@ -162,8 +169,6 @@ public class HomePageTC extends Browser{
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
-
-
 
     }
 

@@ -51,6 +51,13 @@ public class LandingPageTC extends Browser
 	public void setUp() {
 		driver=getDriver();
 	}
+
+
+    @BeforeMethod
+    public void Url(){
+        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+        log.info("URL entered in browser");
+    }
 		/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections

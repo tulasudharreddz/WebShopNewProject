@@ -8,6 +8,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
 import pageObject.LoginPage;
@@ -30,6 +31,13 @@ public class MyAccountModuleTC extends Browser {
     @BeforeClass
     public void setUp() {
         driver=getDriver();
+    }
+
+
+    @BeforeMethod
+    public void Url(){
+        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+        log.info("URL entered in browser");
     }
 
 
