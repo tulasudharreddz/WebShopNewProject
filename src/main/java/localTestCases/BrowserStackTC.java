@@ -1,6 +1,7 @@
 package localTestCases;
 
 import GenericLib.ObjectRepository;
+import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -40,7 +41,7 @@ public class BrowserStackTC {
     }
 
     @Test
-    public void TC_Home_01() throws InterruptedException, IOException {
+    public void TC_Home_01() throws InterruptedException, IOException ,WriteException {
 
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         Thread.sleep(2000);

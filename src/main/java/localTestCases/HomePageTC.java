@@ -93,7 +93,7 @@ public class HomePageTC extends Browser{
     */
 
     @Test
-    public void WS_TC_30() throws InterruptedException, IOException {
+    public void WS_TC_30() throws InterruptedException, IOException, WriteException {
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
 
@@ -114,7 +114,7 @@ public class HomePageTC extends Browser{
     */
 
     @Test
-    public void WS_TC_31() throws InterruptedException, IOException {
+    public void WS_TC_31() throws InterruptedException, IOException, WriteException {
 
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
@@ -136,7 +136,7 @@ public class HomePageTC extends Browser{
     */
 
     @Test
-    public void WS_TC_32() throws InterruptedException, IOException {
+    public void WS_TC_32() throws InterruptedException, IOException ,WriteException{
         log.info("WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not");
         popup.implicitlyWait(driver);
 
@@ -163,7 +163,7 @@ public class HomePageTC extends Browser{
     */
 
     @Test
-    public void WS_TC_57() throws IOException, InterruptedException {
+    public void WS_TC_57() throws IOException, InterruptedException ,WriteException{
         ob.repository(driver);
         log.info("WS_TC_43: Verify the GUI of Request new address page");
         Thread.sleep(1000);

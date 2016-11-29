@@ -2,6 +2,7 @@ package localTestCases;
 
 import GenericLib.Browser;
 import GenericLib.ObjectRepository;
+import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -55,7 +56,7 @@ public class MyAccountModuleTC extends Browser {
     Button Controls - Clear All, Save*/
 
     @Test
-    public void WS_TC_34() throws InterruptedException, IOException {
+    public void WS_TC_34() throws InterruptedException, IOException ,WriteException {
         obje.repository(driver);
         log.info("WS_TC_30: AssertVerifyForDefaultAddress the GUI of  'User Profile' page a) AssertVerifyForDefaultAddress the title  b) AssertVerifyForDefaultAddress the display of controls");
         log.debug("Expected Result");
@@ -76,7 +77,7 @@ public class MyAccountModuleTC extends Browser {
 
 
     @Test
-    public void WS_TC_35() throws InterruptedException, IOException {
+    public void WS_TC_35() throws InterruptedException, IOException ,WriteException{
         obje.repository(driver);
         log.info("WS_TC_35: Validate the Save button functionality in Profile Page");
         Thread.sleep(2000);
@@ -102,7 +103,7 @@ public class MyAccountModuleTC extends Browser {
    */
 
     @Test
-    public void WS_TC_37() throws InterruptedException, IOException {
+    public void WS_TC_37() throws InterruptedException, IOException ,WriteException{
         obje.repository(driver);
         log.info("WS_TC_37: AssertVerifyForDefaultAddress the GUI of  'Addresses' page");
         Thread.sleep(1000);
@@ -127,7 +128,7 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_38() throws InterruptedException, IOException {
+    public void WS_TC_38() throws InterruptedException, IOException,WriteException {
         obje.repository(driver);
         log.info("WS_TC_38: Validate the expand & collapse functionality for the following headers");
         Thread.sleep(1000);
@@ -147,7 +148,7 @@ public class MyAccountModuleTC extends Browser {
     b. AssertVerifyForDefaultAddress the 'Delete Request email' content
     */
     @Test
-    public void WS_TC_41() throws InterruptedException, IOException, AWTException {
+    public void WS_TC_41() throws InterruptedException, IOException, AWTException ,WriteException{
         obje.repository(driver);
         log.info("WS_TC_41: Validate the 'Request Delete' button functionality");
         Thread.sleep(1000);
@@ -169,7 +170,7 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_42() throws IOException, InterruptedException {
+    public void WS_TC_42() throws IOException, InterruptedException ,WriteException{
 
         obje.repository(driver);
         log.info("WS_TC_42: Validate the default billing address setup functionality");
@@ -189,7 +190,7 @@ public class MyAccountModuleTC extends Browser {
     b) Verify the GUI of Create New Billing Address Page
     */
     @Test
-    public void WS_TC_43() throws IOException, InterruptedException {
+    public void WS_TC_43() throws IOException, InterruptedException ,WriteException{
         obje.repository(driver);
         log.info("WS_TC_43: Verify the GUI of Request new address page");
         Thread.sleep(1000);
@@ -212,7 +213,7 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_44() throws IOException, InterruptedException, AWTException {
+    public void WS_TC_44() throws IOException, InterruptedException, AWTException,WriteException {
         obje.repository(driver);
         log.info("WS_TC_43: Verify the GUI of Request new address page");
         Thread.sleep(1000);

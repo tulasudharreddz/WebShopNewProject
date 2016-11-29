@@ -3,6 +3,7 @@ package localTestCases;
 import java.io.IOException;
 
 import GenericLib.*;
+import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -38,7 +39,7 @@ public class DemoLocal extends MobileBrowserStack{
 	}
 
 	@Test
-	public void TC_Home_01() throws Exception {
+	public void TC_Home_01() throws Exception ,WriteException {
 
 		popup.implicitlyWait(driver);
 		Thread.sleep(2000);
@@ -65,7 +66,7 @@ public class DemoLocal extends MobileBrowserStack{
 	}
 
 	@Test
-	public void MobileAutomation() throws Exception {
+	public void MobileAutomation() throws Exception ,WriteException{
 		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
 		//popup.implicitlyWait(driver);

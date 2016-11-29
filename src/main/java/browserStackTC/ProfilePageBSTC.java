@@ -1,6 +1,7 @@
 package browserStackTC;
 
 import GenericLib.Browser;
+import jxl.write.WriteException;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +37,7 @@ public class ProfilePageBSTC extends BrowserStack{
 
 
     @Test
-    public void WS_TC_31() throws InterruptedException, IOException {
+    public void WS_TC_31() throws InterruptedException, IOException, WriteException {
 
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
