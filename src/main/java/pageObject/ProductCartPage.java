@@ -1,11 +1,17 @@
 package pageObject;
 
+import GenericLib.DataDriven;
 import GenericLib.ObjectRepository;
+import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.io.IOException;
+
+import static GenericLib.DataDriven.StepLable;
 
 /**
  * Created by t.mirasipally on 22-Nov-16.
@@ -24,8 +30,10 @@ public class ProductCartPage {
 
 
 
-    public static String  AssertVerifyForProduct(WebDriver driver){
-
+    public static String  AssertVerifyForProduct(WebDriver driver) throws IOException, WriteException {
+        DataDriven.ImplicitWait(driver);
+        obje.repository(driver);
+        StepLable("Verify Learn More Button Functionality");
         String SelectedProductName = driver.findElement(ProductName).getText();
         log.info("Product name on Cart page is : "+ SelectedProductName);
 

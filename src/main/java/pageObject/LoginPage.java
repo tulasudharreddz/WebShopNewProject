@@ -22,6 +22,7 @@ import jxl.write.WriteException;
 
 import static GenericLib.DataDriven.ActualLable;
 import static GenericLib.DataDriven.ExpectedLable;
+import static GenericLib.DataDriven.StepLable;
 
 public class LoginPage {
 
@@ -37,60 +38,51 @@ public class LoginPage {
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
-	public static String PageTitle(WebDriver driver)
+	public static void PageTitle(WebDriver driver)
 	{
 		//WebDriver driver = null;
 		String Actualtext= driver.getTitle();
 		Assert.assertEquals(Actualtext, "Dimension Data Direct");
-
-
 		log.info("title of the page is " + Actualtext);
-
-
-
-		return null;
 	}
 
 
-	public static WebElement LoginPageTitle(WebDriver driver)
-	{
-
+	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException {
 		String LoginTitle = driver.findElement(By.xpath("//span[@class='login-header']")).getText();
-
+		ExpectedLable("Login fields should available");
 		Assert.assertEquals(LoginTitle, "Log In");
 		log.info("Title of the Log in page is " + LoginTitle);
-		return element;
+		ActualLable("Successfully verified Login fields and Title of the Log in page is " + LoginTitle,"Pass");
 	}
 
-	public static WebElement ResetPasswordAssert(WebDriver driver)
-	{
-
+	public static void ResetPasswordAssert(WebDriver driver) throws IOException, WriteException {
+		ExpectedLable("Reset password link should available on home page");
 		if(driver.findElements(By.xpath("//a[contains(text(),'Reset Password.')]")).size() > 0){
-
 			String ResetPassword = driver.findElement(By.xpath("//a[contains(text(),'Reset Password.')]")).getText();
-
 			Assert.assertEquals(ResetPassword, "Reset Password.");
+			ActualLable("Reset password link on home page is successfully verified","Pass");
 			//Assert.assertEquals(>0, driver.findElements(By.xpath("//a[@routerlink='resetpassword']")).size());
 			log.info("Reset Password link available on landing page");
 		}
 		else{
+			ActualLable("Failed : Reset Password link is not available","Fail");
 			log.info("Failed : Reset Password link is not available");
 		}
-		return element;
 	}
 
-	public static WebElement RegisterAsert(WebDriver driver)
-	{
-
+	public static WebElement RegisterAsert(WebDriver driver) throws IOException, WriteException {
+		ExpectedLable("Register Here link should available on home page");
 		if(driver.findElements(By.xpath("//a[contains(text(),'Register Here')]")).size() > 0){
 
 			String RegisterAsert = driver.findElement(By.xpath("//a[contains(text(),'Register Here')]")).getText();
 
 			Assert.assertEquals(RegisterAsert, "Register Here");
+			ActualLable("Register Here link on home page is successfully verified","Pass");
 			log.info("Register here link available on landing page");
 		}
 		else{
 			log.info("Failed : Register here link is not available");
+			ActualLable("Failed : Register Here link is not available","Fail");
 		}
 		return element;
 	}
@@ -146,6 +138,7 @@ public class LoginPage {
 	{
 
 		element = driver.findElement(By.xpath("//a[contains(text(),'Reset Password')]"));
+
 		return element;
 	}
 
@@ -175,6 +168,32 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//p[@class='login-desc']"));
 		return element;
 	}
+	public static List<WebElement> FooterLinks(WebDriver driver) {
+
+		List<WebElement> FooterLink = driver.findElements(By.xpath("//div[@class='footer-links col-xl-9 col-lg-12 col-md-12 col-sm-12']/ul/li/a"));
+
+		return FooterLink;
+	}
+	public static void AsertVerifyForFooterLinksHomePage(WebDriver driver) throws InterruptedException
+	{
+		int noOfLinks= FooterLinks(driver).size();
+		for (int i=0;i<=noOfLinks;i++) {
+			String linkName = FooterLinks(driver).get(i).getText();
+			FooterLinks(driver).get(i).click();
+			Thread.sleep(3000);
+			ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+			driver.switchTo().window(tabs.get(1));
+			String Title = driver.getTitle();
+			log.info("Title of the page is " + Title);
+
+			Assert.assertEquals(Title, linkName);
+
+			driver.close();
+
+			driver.switchTo().window(tabs.get(0));
+		}
+
+	}
 
 	public static WebElement AboutUSLinkHomePage(WebDriver driver)
 	{
@@ -183,22 +202,20 @@ public class LoginPage {
 		return element;
 	}
 
-	public static void AsertVerifyForAboutUSLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForAboutUSLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on About us link on landing page");
 		AboutUSLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on About us link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "About");
-
+		ActualLable("About us page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}
 
 	public static WebElement NEWSLinkHomePage(WebDriver driver)
@@ -208,24 +225,20 @@ public class LoginPage {
 		return element;
 	}
 
-
-
-	public static void AsertVerifyForNEWSLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForNEWSLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on News and Events link on landing page");
 		NEWSLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on News and Events link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "News and Events");
-
+		ActualLable("News and Events page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}
 
 	public static WebElement CareerLinkHomePage(WebDriver driver)
@@ -234,25 +247,20 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Careers')]"));
 		return element;
 	}
-
-
-
-	public static void AsertVerifyForCareerLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForCareerLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on Careers | Dimension Data link on landing page");
 		CareerLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on Careers | Dimension Data link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "Careers | Dimension Data");
-
+		ActualLable("Careers | Dimension Data page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}
 
 	public static WebElement SafeHarborPolicyLinkHomePage(WebDriver driver)
@@ -261,25 +269,20 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Safe Harbor Policy')]"));
 		return element;
 	}
-
-
-
-	public static void AsertVerifyForSafeHarborPolicyLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForSafeHarborPolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on U.S. Safe Harbor Policy link on landing page");
 		SafeHarborPolicyLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on U.S. Safe Harbor Policy link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "U.S. Safe Harbor Policy");
-
+		ActualLable("U.S. Safe Harbor Policy page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}
 
 	public static WebElement ServiceCenterLinkHomePage(WebDriver driver)
@@ -289,15 +292,14 @@ public class LoginPage {
 		return element;
 	}
 
-	public static void AsertVerifyForServiceCenterLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForServiceCenterLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Verify Service Center link available on landing page");
 		String HREFValue = ServiceCenterLinkHomePage(driver).getAttribute("href");
-
+		ActualLable("Successfully Verified Service Center link available on landing page","Pass");
 		log.info("Service center link will navigate to  "+HREFValue);
-
+		ExpectedLable("Verify mail address link for  Service Center");
 		Assert.assertEquals(HREFValue, "mailto:client.contact@dimensiondata.com");
-
+		ActualLable("Href link is verified successfully ","Pass");
 	}
 
 	public static WebElement PrivacyPolicyLinkHomePage(WebDriver driver)
@@ -306,27 +308,21 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Privacy')]"));
 		return element;
 	}
-
-
-
-	public static void AsertVerifyForPrivacyPolicyLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForPrivacyPolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on Dimension Data Privacy Policy link on landing page");
 		PrivacyPolicyLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on Dimension Data Privacy Policy link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "Dimension Data Privacy Policy");
-
+		ActualLable("Dimension Data Privacy Policy page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}//	Terms and Conditions of Use of the Dimension Data Website
-
 
 	public static WebElement TermsConditionsLinkHomePage(WebDriver driver)
 	{
@@ -334,27 +330,21 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Terms of Use')]"));
 		return element;
 	}
-
-
-
-	public static void AsertVerifyForTermsConditionsLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForTermsConditionsLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on Terms and Conditions link on landing page");
 		TermsConditionsLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on Terms and Conditions link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "Terms and Conditions of Use of the Dimension Data Website");
-
+		ActualLable("Terms and Conditions page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}//Cookie Policy
-
 
 	public static WebElement CookiePolicyLinkHomePage(WebDriver driver)
 	{
@@ -362,28 +352,21 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Cookie Policy')]"));
 		return element;
 	}
-
-
-
-	public static void AsertVerifyForCookiePolicyLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForCookiePolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on Cookie Policy link on landing page");
 		CookiePolicyLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on Cookie Policy link","Pass");
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "Dimension Data Cookie Policy");
-
+		ActualLable("Cookie Policy page is opened and Assert verified ","Pass");
 		driver.close();
-
 		driver.switchTo().window(tabs.get(0));
-
 	}
-
-	//Contact Dimension Data
 
 	public static WebElement ContactDDLinkHomePage(WebDriver driver)
 	{
@@ -392,19 +375,19 @@ public class LoginPage {
 		return element;
 	}
 
-
-	public static void AsertVerifyForContactDDLinkHomePage(WebDriver driver) throws InterruptedException
-	{
-
+	public static void AsertVerifyForContactDDLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on Contact Dimension Data link on landing page");
 		ContactDDLinkHomePage(driver).click();
 		Thread.sleep(3000);
+		ActualLable("Successfully clicked on Contact Dimension Data link","Pass");
 		String Title = driver.findElement(By.xpath("//div[contains(text(),'Contact Dimension Data')]")).getText();
 		log.info("Title of the page is "+Title);
-
+		ExpectedLable("Corresponding Page should be open and assert should verify");
 		Assert.assertEquals(Title, "Contact Dimension Data");
-
+		ActualLable("Contact Dimension Data page is opened and Assert verified ","Pass");
+		ExpectedLable("Close the alert");
 		driver.findElement(By.xpath("//button[@class='is-alert-close']")).click();
-
+		ActualLable("Alert successfully closed","Pass");
 		Thread.sleep(2000);
 	}
 
@@ -414,35 +397,29 @@ public class LoginPage {
 			WebDriverWait waitCulture = new WebDriverWait(driver, 40);
 			waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 			Thread.sleep(2000);
-
-			ExpectedLable("Set value as:"+ Selectlanguage(driver).getText());
+			StepLable("Verify User Login");
 			LoginPage.Language(driver).click();
+			ExpectedLable("Set Language as:"+ Selectlanguage(driver).getText());
 			Thread.sleep(2000);
 			LoginPage.Selectlanguage(driver).click();
-			ActualLable("Successfully Placed/Selected value as:"+ Selectlanguage(driver).getText());
-
+			ActualLable("Successfully Placed/Selected Language ","Pass");
 			obje.repository(driver);
-
 			ExpectedLable("Set value as: "+obje.obj.getProperty("email")+"for User name");
 			LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
-			ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("email"));
+			ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("email"),"Pass");
 
 			ExpectedLable("Set value as: "+obje.obj.getProperty("password")+"for User name");
 			LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
-			ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("password"));
+			ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("password"),"Pass");
 
 			ExpectedLable("Verify User Login function");
 			LoginPage.ClickLogin(driver).click();
-			ActualLable("Successfully Loged into the application");
+			ActualLable("Successfully Loged into the application","Pass");
 		}
 		catch (Exception e){
 			log.info("Exception for the product is " + e);
 		}
 
 	}
-
-
-
-
 
 }

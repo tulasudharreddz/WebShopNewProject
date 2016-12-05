@@ -19,19 +19,22 @@ import GenericLib.*;
 import pageObject.*;
 import org.apache.log4j.Logger;
 
+import static GenericLib.DataDriven.ActualLable;
+import static GenericLib.DataDriven.StepLable;
+
 
 /**
  * Created by t.mirasipally on 10/27/2016.
  */
 public class HomePageTC extends Browser{
-    Browser brow = new Browser();
-    DataDriven excel = new DataDriven();
-    AlertHandle popup = new AlertHandle();
-    ObjectRepository ob = new ObjectRepository();
-    ScreenShots sc = new ScreenShots();
-    WebElement element;
-    Sheet sheet;
-    WritableSheet wsheet;
+    private Browser brow = new Browser();
+    private DataDriven excel = new DataDriven();
+    private AlertHandle popup = new AlertHandle();
+    private ObjectRepository ob = new ObjectRepository();
+    private ScreenShots sc = new ScreenShots();
+    private WebElement element;
+    private Sheet sheet;
+    private WritableSheet wsheet;
     Logger log = Logger.getLogger("Testing Cases");
 
     private WebDriver driver;
@@ -43,9 +46,15 @@ public class HomePageTC extends Browser{
 
 
     @BeforeMethod
-    public void Url(){
+    public void Url() throws WriteException, IOException, BiffException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
+        sheet = excel.ReadSheet(sheet);
+    }
+    @AfterMethod
+    public void EndMethod() throws IOException, BiffException, WriteException {
+        excel.closedoc();
+
     }
 
     /*@Parameters("browser")
@@ -66,24 +75,23 @@ public class HomePageTC extends Browser{
 
     @Test
     public void TC_Home_01() throws Exception {
-        popup.implicitlyWait(driver);
-        sc.screenshots(driver ,"HomePage","TC_Home_01");
-        log.info("URL entered and page is loaded");
-        Thread.sleep(2000);
-        LoginPage.Loginfunctionality(driver);
-        sc.screenshots(driver ,"HomePage","TC_Home_01");
-        Thread.sleep(2000);
-        //To verify Shoping cart link
-        HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
-        sc.screenshots(driver ,"HomePage","TC_Home_01");
-        log.info("Shopping Cart link Asert is verified");
+        try {
+            popup.implicitlyWait(driver);
+            log.info("URL entered and page is loaded");
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(2000);
+            //To verify Shoping cart link
+            HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
+            log.info("Shopping Cart link Asert is verified");
 
-        //To verify Home link
-        HomePage.AsertVerifyForHomeLinkHomePage(driver);
-        log.info("Home link on home page Asert is verified");
-        sc.screenshots(driver ,"HomePage","TC_Home_01");
-
-
+            //To verify Home link
+            HomePage.AsertVerifyForHomeLinkHomePage(driver);
+            log.info("Home link on home page Asert is verified");
+        }
+        catch (Exception e){
+            ActualLable("Verification failed with exception "+e,"Fail");
+        }
     }
 
     /*
@@ -118,26 +126,19 @@ public class HomePageTC extends Browser{
 
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
-
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(2000);
         log.info("Login in to the webshop application");
         HomePage.AssertVerifyForHomePage(driver);
         HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
-
-
     }
-
      /*
-
     WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not
-
     */
-
     @Test
     public void WS_TC_32() throws InterruptedException, IOException ,WriteException{
-        log.info("WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not");
+        log.info("WS_TC_32: Assert verify that My menu button is displaying or not and options under menu are available or not");
         popup.implicitlyWait(driver);
 
         Thread.sleep(4000);
@@ -146,7 +147,7 @@ public class HomePageTC extends Browser{
         HomePage.AssertVerifyForHomePage(driver);
         log.info("Login in to the webshop application");
         HomePage.ListOfOptionsMyAccountMenu(driver);
-
+        StepLable("WS_TC_32: Successfully Verified");
         log.info("WS_TC_32: Verified");
     }
  /*

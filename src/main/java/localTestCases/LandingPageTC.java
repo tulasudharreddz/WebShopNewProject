@@ -36,16 +36,21 @@ import pageObject.HomePage;
 import pageObject.LoginPage;
 import pageObject.RegistrationPage;
 
+import static GenericLib.DataDriven.ActualLable;
+import static GenericLib.DataDriven.ExpectedLable;
+import static GenericLib.DataDriven.StepLable;
+
 
 public class LandingPageTC extends Browser
 {
-	Browser brow = new Browser();
+
 	DataDriven excel = new DataDriven();
-	AlertHandle popup = new AlertHandle();
 	ObjectRepository ob = new ObjectRepository();
 	Logger log=Logger.getLogger("Testing Cases");
 
 	private WebDriver driver;
+	private Sheet sheet;
+	private WritableSheet wsheet;
 
 	@BeforeClass
 	public void setUp() {
@@ -54,9 +59,16 @@ public class LandingPageTC extends Browser
 
 
 	@BeforeMethod
-	public void Url(){
+	public void Url() throws WriteException, IOException, BiffException {
 		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 		log.info("URL entered in browser");
+		sheet = excel.ReadSheet(sheet);
+	}
+
+	@AfterMethod
+	public void EndMethod() throws IOException, BiffException, WriteException {
+		excel.closedoc();
+
 	}
 		/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 
@@ -68,16 +80,16 @@ public class LandingPageTC extends Browser
 	*/
 
 	@Test
-	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException
+	public void TC01(WebDriver driver) throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		//check that user able to login with valid credentials or not
 		Thread.sleep(3000);
-
 		LoginPage.PageTitle(driver);
+		StepLable("Verify links available on landing page");
 		LoginPage.LoginPageTitle(driver);
 		LoginPage.ResetPasswordAssert(driver);
 		LoginPage.RegisterAsert(driver);
-
+		StepLable("TC01: Successfully verified following sections on landing page 1.Login 2.Reset Password 3.Request Registration");
 	}
 
 	/*	  
@@ -88,17 +100,15 @@ public class LandingPageTC extends Browser
 	Expe result : Login should be successful and user should be redirected to 'Home' page
 	 */
 	@Test
-	public void TC02() throws RowsExceededException, WriteException, IOException, InterruptedException
+	public void TC02(WebDriver driver) throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		//check that user able to login with valid credentials or not
 		Thread.sleep(2000);
-
 		LoginPage.PageTitle(driver);
 		log.info("Assert verified");
 		LoginPage.Loginfunctionality(driver);
-
 		HomePage.PageTitle(driver);
-
+		StepLable("TC02: Successfully verified Login functionality and user lander into home page");
 	}
 
 	/*
@@ -119,23 +129,33 @@ public class LandingPageTC extends Browser
 
 		LoginPage.PageTitle(driver);
 		LoginPage.ResetPasswordAssert(driver);
+		ExpectedLable("Click on Reset password link");
 		LoginPage.ResetPasswordLink(driver).click();
+		ActualLable("Successfully clicked on reset password link","Pass");
 		Thread.sleep(3000);
-
+		ExpectedLable("Enter user name into email blank");
 		LoginPage.ResetPasswordEmail(driver).sendKeys("t.mirasipally@dimensiondata.com");
+		ActualLable("Successfully entered user name into email blank","Pass");
 		//Assert.assertNotNull(RegistrationPage.AmNotRobot(driver));
+		ExpectedLable("Click on AmNotRobot check box");
 		if(driver.findElements(By.xpath("//*[@id='recaptcha-anchor']/div[5]")).size()>0){
 			RegistrationPage.AmNotRobot(driver).click();
+			ActualLable("Successfully clicked on AmNotRobot check box","Pass");
+			ExpectedLable("Wait till robot functionality completed");
 			Thread.sleep(15000);
+			ActualLable("Waiting completed for robot functionality","Pass");
+			ExpectedLable("Click on Reset password button check box");
 			LoginPage.SubmitOnResetPassword(driver).click();
+			ActualLable("Successfully clicked on Reset password button","Pass");
+			StepLable("TE03: Successfully completed");
 		}
 		else{
 			log.info("Robot Check is not visible, test case fail");
+			ActualLable("Failed to execute Robot functionality","Fail");
 		}
 
 	}
 	/*
-
 	Validate the Email Password functionality
 	a) Enter the valid 'User Name' & valid 'Captcha' 
 	b) Enter the valid 'User Name' & Invalid 'Captcha' 
@@ -144,27 +164,28 @@ public class LandingPageTC extends Browser
 	Note: - Valid User Name  = user�s email address
 
 	 */
-
-
 	@Test
 	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 
+		ExpectedLable("Click on Reset password link");
 		LoginPage.ResetPasswordLink(driver).click();
-
+		ActualLable("Successfully clicked on reset password link","Pass");
+		ExpectedLable("Enter invalid user name into email blank");
 		LoginPage.ResetPasswordEmail(driver).sendKeys("tt");
+		ActualLable("Successfully entered invalid user name into email blank","Pass");
 
-
+		ExpectedLable("Check for error message for invalid data");
 		if(driver.findElements(By.xpath("//div[@class='text-danger']")).size()>0){
 
 			//String  ErrorMessageForEmail = ForgotPassword.ErrorMessageForEmail(driver).getText();
 			log.info("Error message showing for the email blank is "+ForgotPassword.ErrorMessageForEmail(driver));
-
+			ActualLable("Successfully showing error message for email blank","Pass");
+			StepLable("Verified Reset password field functionality");
 		}
 
 		else{
-
-
+			ActualLable("Error message for email blank is not showing","Fail");
 
 		}
 
@@ -182,59 +203,46 @@ public class LandingPageTC extends Browser
 	public void TC05() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
 		Thread.sleep(2000);
+		StepLable("Assert Verify For the GUI of 'Request Registration'  Section");
+		ExpectedLable("Check Label Text available on Landing page");
 		String labeltext= LoginPage.LableForRegistration(driver).getText();
 
 		log.info("Label Text for Request registration  is  " +labeltext);
-
+		ActualLable("Successfully verified Label Text "+labeltext,"Pass");
 		//check that Button for Request Registration is exist or not.
-
+		ExpectedLable("Check Registration link is available on Landing page");
 		log.info("Request Registration is exist with link " + LoginPage.Register(driver).getText());
-
+		ActualLable("Successfully verified Registration link on home page ","Pass");
 		log.info("test cases is verified and Passed");
+		StepLable("TC05: Assert Verification For the GUI of 'Request Registration'  Section is verified successfully");
 
 	}
+
 	// AssertVerifyForDefaultAddress that all the static links are working or not.
 	@Test
 	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException
 	{
-
+		StepLable("Verify All static links on Landing page");
 		LoginPage.AsertVerifyForAboutUSLinkHomePage(driver);
-
 		log.info("AboutUS link Asert is verified");
-
 		LoginPage.AsertVerifyForNEWSLinkHomePage(driver);
-
 		log.info("Asert for NEWS link is verified");
-
 		LoginPage.AsertVerifyForCareerLinkHomePage(driver);
-
 		log.info("Asert for Career link is verified");
-
 		LoginPage.AsertVerifyForSafeHarborPolicyLinkHomePage(driver);
-
 		log.info("Asert for Safe Harbor Policy link is verified");
-
 		LoginPage.AsertVerifyForServiceCenterLinkHomePage(driver);
-
 		log.info("Asert for ServiceCenter link is verified");
-
 		LoginPage.AsertVerifyForPrivacyPolicyLinkHomePage(driver);
-
 		log.info("Asert for Privacy Policy link is verified");
-
 		LoginPage.AsertVerifyForTermsConditionsLinkHomePage(driver);
-
 		log.info("Asert for Terms Conditions link is verified");
-
 		LoginPage.AsertVerifyForCookiePolicyLinkHomePage(driver);
-
 		log.info("Asert for Cookie Policy link is verified");
-
 		LoginPage.AsertVerifyForContactDDLinkHomePage(driver);
-
 		log.info("Asert for ContactDD link is verified");
+		StepLable("TC06:Successfully verified all static links");
+		//LoginPage.AsertVerifyForFooterLinksHomePage(driver);
 	}
-
-
 
 }

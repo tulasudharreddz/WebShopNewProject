@@ -1,13 +1,15 @@
 package localTestCases;
 
 import GenericLib.Browser;
+import GenericLib.DataDriven;
 import GenericLib.ObjectRepository;
+import jxl.Sheet;
+import jxl.read.biff.BiffException;
+import jxl.write.WritableSheet;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -16,9 +18,9 @@ import pageObject.LoginPage;
 import pageObject.ProfilePage;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.ArrayList;
+
+import static GenericLib.DataDriven.StepLable;
 
 /**
  * Created by t.mirasipally on 14-Nov-16.
@@ -26,8 +28,11 @@ import java.util.ArrayList;
 public class MyAccountModuleTC extends Browser {
     static ObjectRepository obje = new ObjectRepository();
     static Logger log = Logger.getLogger("Testing Cases");
+    static protected DataDriven excel = new DataDriven();
 
     private WebDriver driver;
+    private Sheet sheet;
+    private WritableSheet wsheet;
 
     @BeforeClass
     public void setUp() {
@@ -36,11 +41,16 @@ public class MyAccountModuleTC extends Browser {
 
 
     @BeforeMethod
-    public void Url(){
+    public void Url() throws WriteException, IOException, BiffException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
+        sheet = excel.ReadSheet(sheet);
     }
+    @AfterMethod
+    public void EndMethod() throws IOException, BiffException, WriteException {
+        excel.closedoc();
 
+    }
 
     /*WS_TC_34: AssertVerifyForDefaultAddress the GUI of  'User Profile' page
     a) AssertVerifyForDefaultAddress the title
@@ -109,14 +119,16 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuonHomePage(driver).click();
+        HomePage.ClickonMyAccount(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
-        ProfilePage.VerifyBillingAddress(driver);
+        ProfilePage.VerifyAddressHeaders(driver);
         Thread.sleep(1000);
         ProfilePage.VerifyDefaultOpenBlocks(driver);
         log.info("WS_TC_37: The GUI of  'Addresses' page is verified");
+        StepLable("WS_TC_37: is successfully verified");
 
     }
 
@@ -134,12 +146,14 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuonHomePage(driver).click();
+        HomePage.ClickonMyAccount(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
         ProfilePage.VerifyExpandCollapse(driver);
         log.info("WS_TC_38: Expand & Collapse functionality is verified");
+        StepLable("WS_TC_38: is successfully verified");
 
     }
     /*
@@ -154,14 +168,16 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuonHomePage(driver).click();
+        HomePage.ClickonMyAccount(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
         ProfilePage.RequestDeleteFunctionality(driver);
         Thread.sleep(1000);
         ProfilePage.VerifyEmailInOutLook(driver);
-        log.info("WS_TC_38: 'Request Delete' button functionality is verified");
+        log.info("WS_TC_41: 'Request Delete' button functionality is verified");
+        StepLable("WS_TC_41: is successfully verified");
     }
     /*
     WS_TC_42: Validate the default billing address setup functionality
@@ -177,12 +193,13 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuonHomePage(driver).click();
+        HomePage.ClickonMyAccount(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
         ProfilePage.AssertVerifyForDefaultAddress(driver);
-
+        StepLable("WS_TC_42: is successfully verified");
     }
     /*
     WS_TC_43: Verify the GUI of "Request new address page
@@ -196,14 +213,16 @@ public class MyAccountModuleTC extends Browser {
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuonHomePage(driver).click();
+        HomePage.ClickonMyAccount(driver);
         Thread.sleep(1000);
-        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
         ProfilePage.ClickonNewBillingAddress(driver);
         Thread.sleep(1000);
         ProfilePage.AssertVerifyForLable(driver);
         log.info("WS_TC_43: GUI of Request new address lables are successfully verified");
+        StepLable("WS_TC_43: is successfully verified");
     }
 
     /*
@@ -216,12 +235,15 @@ public class MyAccountModuleTC extends Browser {
     public void WS_TC_44() throws IOException, InterruptedException, AWTException,WriteException {
         obje.repository(driver);
         log.info("WS_TC_43: Verify the GUI of Request new address page");
+        StepLable("WS_TC_44: Validate the Create New Billing Address functionality");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
+        log.info("Login Functionality is completed");
+        HomePage.ClickonMyAccount(driver);
+        log.info("Clicked on My Account");
         Thread.sleep(1000);
-        HomePage.MyAccountMenuonHomePage(driver).click();
-        Thread.sleep(1000);
-        HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
         ProfilePage.ClickonNewBillingAddress(driver);
         Thread.sleep(1000);
@@ -230,6 +252,7 @@ public class MyAccountModuleTC extends Browser {
         ProfilePage.VerifySaveNewAddressFunctionalityWithData(driver);
         Thread.sleep(1000);
         ProfilePage.EmailVerificationForNewAddress(driver);
+        StepLable("WS_TC_44: Successfully verified Create New Billing Address functionality");
 
     }
 

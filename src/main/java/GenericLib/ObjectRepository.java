@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 public class ObjectRepository {
 	public Properties obj;
 	FileInputStream objFile;
+	private WebDriver driver;
 
 	public void repository(WebDriver driver) throws IOException{
 
@@ -24,15 +25,23 @@ public class ObjectRepository {
 		PropertyConfigurator.configure(obj.getProperty("log4j"));
 	}
 
-
-	public static String dateString(WebDriver driver){
+	public static String dateString(){
 		Date dNow = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat ("dd_mm_yyyy_hh_mm_ss");
-
+		SimpleDateFormat ft = new SimpleDateFormat ("dd_MM_yyyy_hh_mm_ss");
 		String finaldate = ft.format(dNow);
 		return finaldate;
 	}
-
-
+	public static String TimeSt(){
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("hh:mm:ss");
+		String finalTime = ft.format(dNow);
+		return finalTime;
+	}
+	public static String DateSt(){
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("dd-MM-yyyy");
+		String finalDate = ft.format(dNow);
+		return finalDate;
+	}
 
 }

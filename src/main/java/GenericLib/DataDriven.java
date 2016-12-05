@@ -4,10 +4,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import jxl.format.*;
 import jxl.format.Border;
 import jxl.format.BorderLineStyle;
+import jxl.format.Colour;
 import jxl.write.*;
 import org.openqa.selenium.WebDriver;
 
@@ -19,31 +22,37 @@ import jxl.read.biff.BiffException;
 public class DataDriven {
 
 	private static Workbook book;
+	private static Workbook book1;
 	private static WritableWorkbook wbook;
 	private static Sheet sheet;
+	private static Sheet sheet1;
 	private static WritableSheet wsheet;
-	
-	ObjectRepository obr = new ObjectRepository();
+
+	static ObjectRepository obr = new ObjectRepository();
 	//Properties obj;
 	FileInputStream objFile;
-	WebDriver driver;
-	
-	public Sheet ReadSheet(Sheet sheet) throws BiffException, IOException{
+	static private WebDriver driver;
+
+	public Sheet ReadSheet(Sheet sheet) throws BiffException, IOException, WriteException {
 		obr.repository(driver);
 		book = Workbook.getWorkbook(new File(obr.obj.getProperty("testData")));
 		sheet = book.getSheet("ResultSheet");
-		wbook = Workbook.createWorkbook(new File("./TestData/testCases/"+"WS_TC_59" +ObjectRepository.dateString(driver)+".xls"), book);
+		wbook = Workbook.createWorkbook(new File("./TestData/testCases/"+"WS_TC_59" +ObjectRepository.dateString()+".xls"), book);
+		wsheet = wbook.getSheet("ResultSheet");
+		wsheet.addCell(new Label(1 , 4 ,ObjectRepository.DateSt()));
 		return sheet;
 	}
-	
-public static WritableSheet writeSheet(WebDriver driver) throws IOException{
+
+	public static WritableSheet writeSheet(WebDriver driver) throws IOException{
 
 		wsheet = wbook.getSheet("ResultSheet");
-		
+
 		return wsheet;
 	}
-	private static final AtomicInteger count = new AtomicInteger(13);
-	private static final AtomicInteger count1 = new AtomicInteger(13);
+	private static final AtomicInteger count = new AtomicInteger(12);
+	private static final AtomicInteger count1 = new AtomicInteger(12);
+	private static final AtomicInteger count2 = new AtomicInteger(12);
+	private static final AtomicInteger count3 = new AtomicInteger(12);
 
 	public static int DataDriven(){
 		//int counted = 14;
@@ -52,47 +61,78 @@ public static WritableSheet writeSheet(WebDriver driver) throws IOException{
 	}
 	public static int DataDriven1(){
 		//int counted = 14;
-		int Actucounted = count1.incrementAndGet();
+		int expcounted = count1.incrementAndGet();
+		return expcounted;
+	}
+	public static int DataDriven2(){
+		//int counted = 14;
+		int Actucounted = count2.incrementAndGet();
 		return Actucounted;
+	}
+	public static int DataDriven3(){
+		//int counted = 14;
+		int Actucounted = count3.incrementAndGet();
+		return Actucounted;
+	}
+
+	public static WritableCellFormat CellFormat() throws WriteException {
+		//int counted = 14;
+		WritableCellFormat cellFormat = null;
+		WritableFont cellFont = null;
+		cellFont = new WritableFont(WritableFont.TIMES, 12);
+		cellFormat = new WritableCellFormat(cellFont);
+		cellFormat.setWrap(true);
+		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+		return cellFormat;
+	}
+
+	public static void StepLable(String resu) throws IOException, WriteException {
+		int i = DataDriven();DataDriven1();DataDriven2();DataDriven3();
+		wsheet = wbook.getSheet("ResultSheet");
+		WritableCellFormat cellFormat = null;
+		WritableFont cellFont = null;
+		cellFont = new WritableFont(WritableFont.TIMES, 12);
+		cellFormat = new WritableCellFormat(cellFont);
+		cellFormat.setWrap(true);
+		cellFormat.setBorder(Border.ALL, BorderLineStyle.MEDIUM);
+		cellFormat.setBackground(Colour.PERIWINKLE);
+		wsheet.mergeCells(0, i, 4, i);
+		wsheet.addCell(new Label(0 , i , resu, cellFormat));
 	}
 
 	public static void ExpectedLable(String resu) throws IOException, WriteException {
 
 		wsheet = wbook.getSheet("ResultSheet");
-		WritableCellFormat cellFormat = null;
-		WritableFont cellFont = null;
-		cellFont = new WritableFont(WritableFont.TIMES, 12);
-		cellFont.setBoldStyle(WritableFont.BOLD);
-		cellFormat = new WritableCellFormat(cellFont);
-		wsheet.addCell(new Label(1 , DataDriven() , resu));
-		//cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.BOTTOM,BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.TOP,BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.RIGHT,BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.LEFT,BorderLineStyle.THICK);
+		wsheet.addCell(new Label(1 , DataDriven() , resu, CellFormat()));
 	}
 
-	public static void ActualLable(String resu) throws IOException, WriteException {
+	public static void ActualLable(String ACText,String result) throws IOException, WriteException {
 
 		wsheet = wbook.getSheet("ResultSheet");
-		WritableCellFormat cellFormat = null;
-		WritableFont cellFont = null;
-		cellFont = new WritableFont(WritableFont.TIMES, 12);
-		cellFont.setBoldStyle(WritableFont.BOLD);
-		cellFormat = new WritableCellFormat(cellFont);
-		//cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.BOTTOM,BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.TOP,BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.RIGHT,BorderLineStyle.THICK);
-		cellFormat.setBorder(Border.LEFT,BorderLineStyle.THICK);
-
-		wsheet.addCell(new Label(2 , DataDriven1() , resu));
+		wsheet.addCell(new Label(2 , DataDriven1() , ACText,CellFormat()));
+		wsheet.addCell(new Label(3 , DataDriven2() , result,CellFormat()));
+		wsheet.addCell(new Label(4 , DataDriven3() , ObjectRepository.TimeSt(),CellFormat()));
 	}
 
+
 	public void closedoc() throws IOException, WriteException{
+
+		/*count.getAndSet(12);
+		count1.getAndSet(12);
+		count2.getAndSet(12);
+		count3.getAndSet(12);*/
 		wbook.write();
 		wbook.close();
 		book.close();
+	}
+	public static Sheet TCSheet(Sheet sheet1) throws BiffException, IOException, WriteException {
+		obr.repository(driver);
+		book1 = Workbook.getWorkbook(new File("D:\\TC.xls"));
+		sheet1 = book1.getSheet("Sheet1");
+		return sheet1;
+	}
+	public static void ImplicitWait(WebDriver driver) {
+		driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
 	}
 
 }
