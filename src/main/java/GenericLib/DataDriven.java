@@ -121,6 +121,8 @@ public class DataDriven {
 		count1.getAndSet(12);
 		count2.getAndSet(12);
 		count3.getAndSet(12);*/
+		wsheet.getSettings().setProtected(true);
+		wbook.setProtected(true);
 		wbook.write();
 		wbook.close();
 		book.close();
