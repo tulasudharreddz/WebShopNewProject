@@ -43,10 +43,6 @@ public class ShopModuleTC extends Browser {
     /*private WritableWorkbook wbook;*/
 
 
-
-
-
-
     @BeforeClass
     public void setUp() {
         driver=getDriver();
@@ -64,31 +60,65 @@ public class ShopModuleTC extends Browser {
         excel.closedoc();
 
     }
+
+    /*1. Verify the content in search results page
+      2. Validate the Pagination Functionality in search results page
+        a. Next Page
+        -Click on Next Icon
+        b. Previous Page
+        -Click on PreviousICON
+        c. Selected Page Navigation
+        - Click on a specific page number
+        d. No of Search Results Per Page
+        - Select a value from Display dropdown*/
+    @Test
+    public void WS_TC_58() throws IOException, InterruptedException, WriteException {
+        try {
+            obje.repository(driver);
+            log.info("WS_TC_58: 1. Verify the content in search results page, 2. Validate the Pagination Functionality in search results page");
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login in to the webshop application");
+            HomePage.ClickonShopmenuonHomePage(driver);
+            log.info("Cliked on Shop menu");
+            HomePage.ClickonCategoryinShopmenu(driver);
+            log.info("Clicked on sub menu");
+            ProductSearchPage.ContentinSearchReasult(driver);
+            log.info("Content verified on search result page");
+            ProductSearchPage.PaginationFunctionality(driver);
+            log.info("pagination verified on search result page");
+            StepLable("WS_TC_58: Successfully verified 1. content in search results page, 2. Pagination Functionality in search results page");
+
+        }catch (Exception e){
+            log.info("Exception for the product is " + e);
+            String error =  "Exception " +  e;
+            ActualLable(error,"Fail");
+        }
+    }
+
     /*
-
     WS_TC_59:  Validate the 'Learn More' button functionality - Click on the Learn More button against a selected record
-
     */
     @Test
     public void WS_TC_59() throws IOException, InterruptedException, WriteException {
         try {
-        DataDriven.ImplicitWait(driver);
-        obje.repository(driver);
-        log.info("WS_TC_59: Validate the 'Learn More' button functionality");
-        Thread.sleep(2000);
-        LoginPage.Loginfunctionality(driver);
-        log.info("Login in to the webshop application");
-        String NameonSearchPage = ProductSearchPage.SelectProductOnSearchResultPage(driver);
-        ExpectedLable("Expected Assert Name "+NameonSearchPage);
-        Thread.sleep(1000);
-        String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
-        ActualLable("Actual assert name: "+ NameonProductCartPage,"Pass");
-        ExpectedLable("Verify Assert for Learn more");
-        Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
-        ActualLable("Successfully verified for Learn more button functionality ","Pass");
-        log.info("Assert Verified for the selected Product ");
+            DataDriven.ImplicitWait(driver);
+            obje.repository(driver);
+            log.info("WS_TC_59: Validate the 'Learn More' button functionality");
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login in to the webshop application");
+            String NameonSearchPage = ProductSearchPage.SelectProductOnSearchResultPage(driver);
+            ExpectedLable("Expected Assert Name "+NameonSearchPage);
+            Thread.sleep(1000);
+            String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
+            ActualLable("Actual assert name: "+ NameonProductCartPage,"Pass");
+            ExpectedLable("Verify Assert for Learn more");
+            Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
+            ActualLable("Successfully verified for Learn more button functionality ","Pass");
+            log.info("Assert Verified for the selected Product ");
 
-        StepLable("WS_TC_59: Learn More button functionality is verified");
+            StepLable("WS_TC_59: Learn More button functionality is verified");
         }
         catch (Exception e){
             log.info("Exception for the product is " + e);
@@ -109,15 +139,15 @@ public class ShopModuleTC extends Browser {
     public void WS_TC_60() throws IOException, WriteException, InterruptedException {
 
         try {
-        obje.repository(driver);
-        log.info("WS_TC_60: Validate the display of 'Inventory Color' against the products in search results page");
-        Thread.sleep(2000);
-        LoginPage.Loginfunctionality(driver);
-        log.info("Login in to the webshop application");
-        ProductSearchPage.MovingToCategory(driver);
-        Thread.sleep(1000);
-        ProductSearchPage.StatusVerifyForProducts(driver);
-        StepLable("WS_TC_60: Successfully Validated the display of 'Inventory Color' against the products in search results page");
+            obje.repository(driver);
+            log.info("WS_TC_60: Validate the display of 'Inventory Color' against the products in search results page");
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login in to the webshop application");
+            ProductSearchPage.MovingToCategory(driver);
+            Thread.sleep(1000);
+            ProductSearchPage.StatusVerifyForProducts(driver);
+            StepLable("WS_TC_60: Successfully Validated the display of 'Inventory Color' against the products in search results page");
         }
         catch (Exception e){
             log.info("Exception for the product is " + e);

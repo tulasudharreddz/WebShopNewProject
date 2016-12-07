@@ -35,11 +35,23 @@ public class ProductSearchPage {
     //Page Elements
     static private By PartNumber = By.xpath("//div[@class='m-t-b-15']/div[1]");
     static private By LearnMore = By.xpath("//button[contains(text(),'Learn More')]");
+    static private By AddToCart = By.xpath("//button[contains(text(),'Add to Cart')]");
     static private By ProductName = By.xpath("//p[@class='product-name clickable']/a");
     static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
     static private By SearchField = By.xpath("//is-typeahead/span/input");
     static private By AvailabilityStatus = By.xpath("//is-availability/div/span");
-
+    static private By AvailabilityBlock = By.xpath("//is-availability");
+    static private By ProductPrice = By.xpath("//p[@class='product-price']");
+    static private By NoOfProducts = By.xpath("//div[@class='product-row']");
+    static private By Manufacturer = By.xpath("//span[contains(text(),'Manufacturer')]");
+    static private By Image = By.xpath("//img[@class='img-responsive']");
+    static private By MFRPart = By.xpath("//span[contains(text(),'Mfr Part')]");
+    static private By previousPage = By.xpath("(//a[@class='previous'])[1]");
+    static private By nextPage = By.xpath("(//a[@class='next'])[1]");
+    static private By ActivePage = By.xpath("(//ul[@class='pagination']/li[@class='active']/a)[1]");
+    static private By Select10 = By.xpath("//li[@class='select2-results__option'][contains(text(),'10')]");
+    static private By Select20 = By.xpath("//li[@class='select2-results__option'][contains(text(),'20')]");
+    static private By NoOfSearchResults = By.xpath("//div[@class='pager-count']");
 
 
 
@@ -143,5 +155,111 @@ public class ProductSearchPage {
         }
 
 
+    }
+
+    public static int NoofResults(WebDriver driver){
+        String noOfResu = driver.findElement(NoOfSearchResults).getText();
+        String s= noOfResu.substring(0,noOfResu.indexOf(' '));
+        int result = Integer.parseInt(s);
+        log.info(result);
+        return result;
+    }
+
+    public static void PaginationFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        StepLable("Pagination Functionality on Search result page");
+        //Verify no of products in result page
+        int NoOfResults = NoofResults(driver);
+        ExpectedLable("verify Next Page icon should navigate to next page");
+        if(NoOfResults>10){
+            String currentpage = driver.findElement(ActivePage).getText();
+            driver.findElement(nextPage).click();
+            Thread.sleep(1000);
+            String Presentpage = driver.findElement(ActivePage).getText();
+            if(currentpage==Presentpage){
+                ActualLable("next Page link functionality is not working", "Fail");
+            }
+            else{
+
+                ActualLable("Successfully verified next Page link functionality ", "Pass");
+            }
+
+            ExpectedLable("verify Previous Page link should navigate to Previous page");
+
+            String Presenpage1 = driver.findElement(ActivePage).getText();
+            driver.findElement(previousPage).click();
+            Thread.sleep(1000);
+            String Presenpage2 = driver.findElement(ActivePage).getText();
+            if(Presenpage1==Presenpage2){
+                ActualLable("Previous Page link functionality is not working", "Fail");
+            }
+            else{
+                ActualLable("Successfully verified Previous Page link functionality ", "Pass");
+            }
+        }
+        else{
+            ActualLable("Next Page link functionality is not working", "Fail");
+        }
+        ExpectedLable("verify Specific page number functionality it should navigate to Specific selected page");
+        if(NoOfResults>20){
+            String Previouspage = driver.findElement(ActivePage).getText();
+            driver.findElement(By.xpath("//a[@class='clickable'][contains(text(),'3')]")).click();
+            Thread.sleep(1000);
+            String Prepage = driver.findElement(ActivePage).getText();
+            if(Previouspage==Prepage){
+                ActualLable("Specific page link functionality is not working", "Fail");
+            }
+            else{
+                ActualLable("Successfully verified Specific page link functionality ", "Pass");
+            }
+        }
+
+
+    }
+
+    public static void ContentinSearchReasult(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(3000);
+        StepLable("Content verification on Search result page");
+        //Verify no of products in result page
+        ExpectedLable("verify No of products on product search page");
+        int NoProducts = driver.findElements(NoOfProducts).size();
+        ActualLable("Successfully verified no of products, products available on the result page is " + NoProducts, "Pass");
+
+        ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
+        AssertName.add("Product Name");//adding object in arraylist
+        AssertName.add("MFR Part number");
+        AssertName.add("Manufacturer name");
+        AssertName.add("Category name");
+        AssertName.add("ProductPrice name");
+        AssertName.add("Image");
+        AssertName.add("Learn More");
+        AssertName.add("AddTo Cart");
+        AssertName.add("Availability of product");
+
+        ArrayList<org.openqa.selenium.By> AssertXpath=new ArrayList<org.openqa.selenium.By>();
+        AssertXpath.add(ProductName);
+        AssertXpath.add(MFRPart);
+        AssertXpath.add(Manufacturer);
+        AssertXpath.add(Category);
+        AssertXpath.add(ProductPrice);
+        AssertXpath.add(Image);
+        AssertXpath.add(LearnMore);
+        AssertXpath.add(AddToCart);
+        AssertXpath.add(AvailabilityBlock);
+
+        for(int i=0; i<=8; i++) {
+            ExpectedLable("verify "+AssertName.get(i)+" for each product is displaying on product search page");
+            if (driver.findElement(AssertXpath.get(i)).isDisplayed()) {
+                ActualLable(""+AssertName.get(i)+" for each product is displaying on product search page ", "Pass");
+                int NOProductName = driver.findElements(AssertXpath.get(i)).size();
+                ExpectedLable("verify "+AssertName.get(i)+"  for each product is displaying for each product or not");
+                if (NoProducts == NOProductName) {
+                    ActualLable(""+AssertName.get(i)+" is displaying for all Products ", "Pass");
+                } else {
+                    ActualLable("no of "+AssertName.get(i)+"  for each product is not same as no of products", "Fail");
+                }
+            } else {
+                ActualLable(""+AssertName.get(i)+" for each product is not displaying on product search page ", "Fail");
+            }
+        }
     }
 }

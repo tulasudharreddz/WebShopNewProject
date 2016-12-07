@@ -177,9 +177,6 @@ public class HomePage {
         return true;
     }
 
-
-
-
     public static void ListOfOptionsMyAccountMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify List of My menu options");
         String MyAccountTitle = MyAccountMenuonHomePage(driver).getText();
@@ -246,25 +243,25 @@ public class HomePage {
             ShopMenuOnHomePage(driver).click();
             log.info("Clicked on Shop menu on home page");
 
-                for (WebElement e : CategoryListUnderShopMenu(driver)) {
-                    ExpectedLable("Check " + e.getText() + " is available under shop menu as main menu?");
-                    log.info("Main Category List under Shop Menu modules are " + e.getText());
-                    ActualLable(e.getText() + "is available under shop menu and verified successfully", "Pass");
-                }
-                for (WebElement Sub : SubCategoryListUnderShopMenu(driver)) {
-                    ExpectedLable("Check " + Sub.getText() + " is available under shop menu as sub category ?");
-                    log.info("Sub Category list under My Menu modules are " + Sub.getText());
-                    ActualLable(Sub.getText() + "is available under shop menu and verified successfully", "Pass");
-                }
-
+            for (WebElement e : CategoryListUnderShopMenu(driver)) {
+                ExpectedLable("Check " + e.getText() + " is available under shop menu as main menu?");
+                log.info("Main Category List under Shop Menu modules are " + e.getText());
+                ActualLable(e.getText() + "is available under shop menu and verified successfully", "Pass");
             }
-        else{
-                log.info("Failed: Assert is failed for My Account menu on Home page");
-                ActualLable("Shop menu is not available on home page","Fail");
+            for (WebElement Sub : SubCategoryListUnderShopMenu(driver)) {
+                ExpectedLable("Check " + Sub.getText() + " is available under shop menu as sub category ?");
+                log.info("Sub Category list under My Menu modules are " + Sub.getText());
+                ActualLable(Sub.getText() + "is available under shop menu and verified successfully", "Pass");
             }
 
-            return element;
         }
+        else{
+            log.info("Failed: Assert is failed for My Account menu on Home page");
+            ActualLable("Shop menu is not available on home page","Fail");
+        }
+
+        return element;
+    }
     public static WebElement AsertVerificationForCategoryUnderShopMenu(WebDriver driver) throws InterruptedException, IOException, WriteException {
         StepLable("Verify Category under Shop menu");
         String ShopTitle = ShopMenuOnHomePage(driver).getText();
@@ -390,8 +387,33 @@ public class HomePage {
 
     }
 
+    public static void ClickonShopmenuonHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        StepLable("Verify Category under Shop menu");
+        String ShopTitle = ShopMenuOnHomePage(driver).getText();
+        ExpectedLable("Check Shop menu is displaying or not");
+        Assert.assertEquals(ShopTitle, "Shop");
+        if (ShopMenuOnHomePage(driver).isDisplayed()) {
+            ActualLable("Shop menu verified successfully", "Pass");
+            log.info("Assert is verified for Shop menu on Home page");
+            Thread.sleep(3000);
+            ShopMenuOnHomePage(driver).click();
+        }
+        else{
+            ActualLable("Shop menu is not available", "Fail");
+        }
+    }
+    public static void ClickonCategoryinShopmenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(1000);
+        String SubmenuName = driver.findElement(By.xpath("(//div[@class='row']/div/ul/li/a)[1]")).getText();
+        ExpectedLable("Verify link is working for "+SubmenuName);
+        log.info("Name of Sub Category is  " +SubmenuName);
+        driver.findElement(By.xpath("(//div[@class='row']/div/ul/li/a)[1]")).click();
+        Thread.sleep(1000);
+        String AssertName = driver.findElement(By.xpath("//h2/i")).getText();
+        Assert.assertEquals(SubmenuName, AssertName);
+        log.info("Assert is verified for "+ AssertName);
+        ActualLable("Link is verified for "+ AssertName,"Pass");
 
-
-
+    }
 
 }

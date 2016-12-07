@@ -171,7 +171,6 @@ public class HomePageTC extends Browser{
         LoginPage.Loginfunctionality(driver);
         Thread.sleep(1000);
 
-
     }
 
 }
