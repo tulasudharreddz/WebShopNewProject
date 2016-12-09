@@ -24,9 +24,7 @@ import jxl.write.WriteException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static GenericLib.DataDriven.ActualLable;
-import static GenericLib.DataDriven.ExpectedLable;
-import static GenericLib.DataDriven.StepLable;
+import static GenericLib.DataDriven.*;
 
 
 /**
@@ -63,18 +61,15 @@ public class ShopModuleTC extends Browser {
 
     /*1. Verify the content in search results page
       2. Validate the Pagination Functionality in search results page
-        a. Next Page
-        -Click on Next Icon
-        b. Previous Page
-        -Click on PreviousICON
-        c. Selected Page Navigation
-        - Click on a specific page number
-        d. No of Search Results Per Page
-        - Select a value from Display dropdown*/
+        a. Next Page -Click on Next Icon
+        b. Previous Page -Click on PreviousICON
+        c. Selected Page Navigation - Click on a specific page number
+        d. No of Search Results Per Page - Select a value from Display dropdown*/
     @Test
     public void WS_TC_58() throws IOException, InterruptedException, WriteException {
         try {
             obje.repository(driver);
+            DataDriven.ReportStartup(58);
             log.info("WS_TC_58: 1. Verify the content in search results page, 2. Validate the Pagination Functionality in search results page");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
@@ -87,6 +82,8 @@ public class ShopModuleTC extends Browser {
             log.info("Content verified on search result page");
             ProductSearchPage.PaginationFunctionality(driver);
             log.info("pagination verified on search result page");
+            ProductSearchPage.NoOfReultsChangeFunctionality(driver);
+
             StepLable("WS_TC_58: Successfully verified 1. content in search results page, 2. Pagination Functionality in search results page");
 
         }catch (Exception e){
@@ -134,7 +131,6 @@ public class ShopModuleTC extends Browser {
     b. Vendor Inventory level <= 10 units
     c. Vendor Inventory level = 0 units
     */
-
     @Test
     public void WS_TC_60() throws IOException, WriteException, InterruptedException {
 

@@ -50,9 +50,9 @@ public class ProductSearchPage {
     static private By nextPage = By.xpath("(//a[@class='next'])[1]");
     static private By ActivePage = By.xpath("(//ul[@class='pagination']/li[@class='active']/a)[1]");
     static private By Select10 = By.xpath("//li[@class='select2-results__option'][contains(text(),'10')]");
-    static private By Select20 = By.xpath("//li[@class='select2-results__option'][contains(text(),'20')]");
+    static private By Select20 = By.xpath("//li[@class='select2-results__option'][contains(text(),'25')]");
     static private By NoOfSearchResults = By.xpath("//div[@class='pager-count']");
-
+    static private By CurrentShownResults = By.xpath("(//span[@class='select2-selection__rendered'])[2]");
 
 
     public static WebElement SearchField(WebDriver driver) {
@@ -157,11 +157,13 @@ public class ProductSearchPage {
 
     }
 
-    public static int NoofResults(WebDriver driver){
+    public static int NoofResults(WebDriver driver) throws IOException, WriteException {
+        ExpectedLable("verify total number of searched results");
         String noOfResu = driver.findElement(NoOfSearchResults).getText();
         String s= noOfResu.substring(0,noOfResu.indexOf(' '));
         int result = Integer.parseInt(s);
-        log.info(result);
+        log.info("Total no of searched results "+result);
+        ActualLable("Total no of searched results "+result, "Pass");
         return result;
     }
 
@@ -196,10 +198,15 @@ public class ProductSearchPage {
                 ActualLable("Successfully verified Previous Page link functionality ", "Pass");
             }
         }
-        else{
+        else if(NoOfResults<10) {
+            ActualLable("Cant verify Specific page link functionality", "Fail");
+        }
+        else {
             ActualLable("Next Page link functionality is not working", "Fail");
         }
+
         ExpectedLable("verify Specific page number functionality it should navigate to Specific selected page");
+        WebElement Secondpage =  driver.findElement(By.xpath("//a[@class='clickable'][contains(text(),'2')]"));
         if(NoOfResults>20){
             String Previouspage = driver.findElement(ActivePage).getText();
             driver.findElement(By.xpath("//a[@class='clickable'][contains(text(),'3')]")).click();
@@ -212,7 +219,21 @@ public class ProductSearchPage {
                 ActualLable("Successfully verified Specific page link functionality ", "Pass");
             }
         }
-
+        else if(NoOfResults>10&&Secondpage.isEnabled()){
+            String Previouspage = driver.findElement(ActivePage).getText();
+            driver.findElement(By.xpath("//a[@class='clickable'][contains(text(),'2')]")).click();
+            Thread.sleep(1000);
+            String Prepage = driver.findElement(ActivePage).getText();
+            if(Previouspage== Prepage){
+                ActualLable("Specific page link functionality is not working", "Fail");
+            }
+            else{
+                ActualLable("Successfully verified Specific page link functionality ", "Pass");
+            }
+        }
+        else if(NoOfResults<10){
+            ActualLable("Cant verify Specific page link functionality", "Fail");
+        }
 
     }
 
@@ -261,5 +282,56 @@ public class ProductSearchPage {
                 ActualLable(""+AssertName.get(i)+" for each product is not displaying on product search page ", "Fail");
             }
         }
+    }
+
+    public static void NoOfReultsChangeFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        StepLable("Verify No of records per page change functionality");
+        driver.navigate().refresh();
+        Thread.sleep(2000);
+        int NoOfResults = NoofResults(driver);
+        ExpectedLable("Default no of Search results per page should be 10 ");
+        String CurrentMaxNoOFResultsPerPage = driver.findElement(CurrentShownResults).getText();
+        int NoResult = Integer.parseInt(CurrentMaxNoOFResultsPerPage);
+        if(NoResult==10){
+            ActualLable("Successfully verified Default no of Search results per page, no of search reults are "+NoResult, "Pass");
+        }
+        else{
+            ActualLable("verification is Failed for Default no of Search results per page, no of search reults are "+NoResult, "Fail");
+        }
+
+        ExpectedLable("No of records per page should be equal to the value selected in display dropdown");
+
+        if(NoOfResults>=10){
+            int NoOfRecordsPerPage = driver.findElements(NoOfProducts).size();
+            if(NoOfRecordsPerPage<=NoResult){
+                ActualLable("Successfully verified no of Search results per page equal to the value selected in display dropdown, no of search results are "+NoOfRecordsPerPage, "Pass");
+            }
+            else {
+                ActualLable("verification is Failed for no of Search results per page iss not equal to the value selected in display dropdown, no of search results are "+NoOfRecordsPerPage, "Fail");
+            }
+        }
+        else{
+            ActualLable("Successfully verified no of Search results per page equal or less  than to the value selected in display dropdown", "Fail");
+        }
+        ExpectedLable("No of records per page should be equal to the value selected in display dropdown, when no of results more than 25");
+        if(NoOfResults>=25){
+
+            driver.findElement(CurrentShownResults).click();
+            driver.findElement(Select20).click();
+            Thread.sleep(1000);
+            int NoOfRecordsPerPage = driver.findElements(NoOfProducts).size();
+            String CurrentShownResultsAfterChange = driver.findElement(CurrentShownResults).getText();
+            int NoResultAfterChange = Integer.parseInt(CurrentShownResultsAfterChange);
+            if(NoOfRecordsPerPage<=NoResultAfterChange){
+                ActualLable("Successfully verified no of Search results per page equal to the value selected in display dropdown, no of search reults are "+NoOfRecordsPerPage, "Pass");
+            }
+            else {
+                ActualLable("verification is Failed for no of Search results per page equal to the value selected in display dropdown, no of search reults are "+NoResult, "Fail");
+            }
+        }
+        else {
+            ActualLable("Cant verify functionality because no of search results are "+NoResult, "Fail");
+        }
+
     }
 }
