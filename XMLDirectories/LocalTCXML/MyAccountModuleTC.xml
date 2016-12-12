@@ -4,9 +4,9 @@
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="localTestCases.BrowserStackTC">
+            <class name="localTestCases.MyAccountModuleTC">
                 <methods>
-                    <!--<include name="WS_TC_34"/>
+                    <include name="WS_TC_34"/>
                     <include name="WS_TC_35"/>
                     <include name="WS_TC_36"/>
                     <include name="WS_TC_37"/>
@@ -15,8 +15,7 @@
                     <include name="WS_TC_42"/>
                     <include name="WS_TC_43"/>
                     <include name="WS_TC_44"/>
-                    <include name="WS_TC_59"/>-->
-                    <include name="ExecutionWithExcel"/>
+                    <include name="WS_TC_59"/>
                 </methods>
             </class>
         </classes>

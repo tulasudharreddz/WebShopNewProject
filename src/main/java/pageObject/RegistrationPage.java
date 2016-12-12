@@ -240,7 +240,7 @@ public class RegistrationPage {
 	public static WebElement AmNotRobot(WebDriver driver)
 	{	  
 
-		element = driver.findElement(By.xpath("//*[@id='recaptcha-anchor']/div[5]"));
+		element = driver.findElement(By.xpath("//div[@class='recaptcha-checkbox-checkmark']"));
 		return element;
 	}
 

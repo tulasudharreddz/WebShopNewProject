@@ -53,8 +53,9 @@ public class LandingPageTC extends Browser
 	private WritableSheet wsheet;
 
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws WriteException, IOException, BiffException {
 		driver=getDriver();
+		//sheet = excel.ReadSheet(sheet);
 	}
 
 
@@ -62,14 +63,9 @@ public class LandingPageTC extends Browser
 	public void Url() throws WriteException, IOException, BiffException {
 		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 		log.info("URL entered in browser");
-		sheet = excel.ReadSheet(sheet);
-	}
-
-	@AfterMethod
-	public void EndMethod() throws IOException, BiffException, WriteException {
-		excel.closedoc();
 
 	}
+
 		/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections
@@ -80,10 +76,10 @@ public class LandingPageTC extends Browser
 	*/
 
 	@Test
-	public void TC01(WebDriver driver) throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
 		//check that user able to login with valid credentials or not
 		Thread.sleep(3000);
+		DataDriven.ReportStartup(1);
 		LoginPage.PageTitle(driver);
 		StepLable("Verify links available on landing page");
 		LoginPage.LoginPageTitle(driver);
@@ -100,10 +96,10 @@ public class LandingPageTC extends Browser
 	Expe result : Login should be successful and user should be redirected to 'Home' page
 	 */
 	@Test
-	public void TC02(WebDriver driver) throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC02() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
 		//check that user able to login with valid credentials or not
 		Thread.sleep(2000);
+		DataDriven.ReportStartup(2);
 		LoginPage.PageTitle(driver);
 		log.info("Assert verified");
 		LoginPage.Loginfunctionality(driver);
@@ -122,11 +118,10 @@ public class LandingPageTC extends Browser
 
 	 */
 	@Test
-	public void TC03() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC03() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
 		//check that user able to login with valid credentials or not
 		Thread.sleep(2000);
-
+		DataDriven.ReportStartup(3);
 		LoginPage.PageTitle(driver);
 		LoginPage.ResetPasswordAssert(driver);
 		ExpectedLable("Click on Reset password link");
@@ -138,7 +133,7 @@ public class LandingPageTC extends Browser
 		ActualLable("Successfully entered user name into email blank","Pass");
 		//Assert.assertNotNull(RegistrationPage.AmNotRobot(driver));
 		ExpectedLable("Click on AmNotRobot check box");
-		if(driver.findElements(By.xpath("//*[@id='recaptcha-anchor']/div[5]")).size()>0){
+		if(driver.findElements(By.xpath("//div[@class='recaptcha-checkbox-checkmark']")).size()>0){
 			RegistrationPage.AmNotRobot(driver).click();
 			ActualLable("Successfully clicked on AmNotRobot check box","Pass");
 			ExpectedLable("Wait till robot functionality completed");
@@ -165,9 +160,8 @@ public class LandingPageTC extends Browser
 
 	 */
 	@Test
-	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
-
+	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+		DataDriven.ReportStartup(4);
 		ExpectedLable("Click on Reset password link");
 		LoginPage.ResetPasswordLink(driver).click();
 		ActualLable("Successfully clicked on reset password link","Pass");
@@ -200,8 +194,8 @@ public class LandingPageTC extends Browser
 	 */
 
 	@Test
-	public void TC05() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC05() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+		DataDriven.ReportStartup(5);
 		Thread.sleep(2000);
 		StepLable("Assert Verify For the GUI of 'Request Registration'  Section");
 		ExpectedLable("Check Label Text available on Landing page");
@@ -220,8 +214,7 @@ public class LandingPageTC extends Browser
 
 	// AssertVerifyForDefaultAddress that all the static links are working or not.
 	@Test
-	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {DataDriven.ReportStartup(6);
 		StepLable("Verify All static links on Landing page");
 		LoginPage.AsertVerifyForAboutUSLinkHomePage(driver);
 		log.info("AboutUS link Asert is verified");

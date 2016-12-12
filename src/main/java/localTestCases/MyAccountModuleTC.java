@@ -35,7 +35,7 @@ public class MyAccountModuleTC extends Browser {
     private WritableSheet wsheet;
 
     @BeforeClass
-    public void setUp() {
+    public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
     }
 
@@ -44,13 +44,9 @@ public class MyAccountModuleTC extends Browser {
     public void Url() throws WriteException, IOException, BiffException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
-        sheet = excel.ReadSheet(sheet);
-    }
-    @AfterMethod
-    public void EndMethod() throws IOException, BiffException, WriteException {
-        excel.closedoc();
 
     }
+
 
     /*WS_TC_34: AssertVerifyForDefaultAddress the GUI of  'User Profile' page
     a) AssertVerifyForDefaultAddress the title
@@ -66,8 +62,9 @@ public class MyAccountModuleTC extends Browser {
     Button Controls - Clear All, Save*/
 
     @Test
-    public void WS_TC_34() throws InterruptedException, IOException ,WriteException {
+    public void WS_TC_34() throws InterruptedException, IOException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(34);
         log.info("WS_TC_30: AssertVerifyForDefaultAddress the GUI of  'User Profile' page a) AssertVerifyForDefaultAddress the title  b) AssertVerifyForDefaultAddress the display of controls");
         log.debug("Expected Result");
         Thread.sleep(2000);
@@ -87,8 +84,9 @@ public class MyAccountModuleTC extends Browser {
 
 
     @Test
-    public void WS_TC_35() throws InterruptedException, IOException ,WriteException{
+    public void WS_TC_35() throws InterruptedException, IOException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(35);
         log.info("WS_TC_35: Validate the Save button functionality in Profile Page");
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
@@ -113,8 +111,9 @@ public class MyAccountModuleTC extends Browser {
    */
 
     @Test
-    public void WS_TC_37() throws InterruptedException, IOException ,WriteException{
+    public void WS_TC_37() throws InterruptedException, IOException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(37);
         log.info("WS_TC_37: AssertVerifyForDefaultAddress the GUI of  'Addresses' page");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -140,8 +139,9 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_38() throws InterruptedException, IOException,WriteException {
+    public void WS_TC_38() throws InterruptedException, IOException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(38);
         log.info("WS_TC_38: Validate the expand & collapse functionality for the following headers");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -162,8 +162,9 @@ public class MyAccountModuleTC extends Browser {
     b. AssertVerifyForDefaultAddress the 'Delete Request email' content
     */
     @Test
-    public void WS_TC_41() throws InterruptedException, IOException, AWTException ,WriteException{
+    public void WS_TC_41() throws InterruptedException, IOException, AWTException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(41);
         log.info("WS_TC_41: Validate the 'Request Delete' button functionality");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -186,9 +187,10 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_42() throws IOException, InterruptedException ,WriteException{
+    public void WS_TC_42() throws IOException, InterruptedException, WriteException, BiffException {
 
         obje.repository(driver);
+        DataDriven.ReportStartup(42);
         log.info("WS_TC_42: Validate the default billing address setup functionality");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -207,8 +209,9 @@ public class MyAccountModuleTC extends Browser {
     b) Verify the GUI of Create New Billing Address Page
     */
     @Test
-    public void WS_TC_43() throws IOException, InterruptedException ,WriteException{
+    public void WS_TC_43() throws IOException, InterruptedException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(43);
         log.info("WS_TC_43: Verify the GUI of Request new address page");
         Thread.sleep(1000);
         LoginPage.Loginfunctionality(driver);
@@ -232,8 +235,9 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_44() throws IOException, InterruptedException, AWTException,WriteException {
+    public void WS_TC_44() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
         obje.repository(driver);
+        DataDriven.ReportStartup(44);
         log.info("WS_TC_43: Verify the GUI of Request new address page");
         StepLable("WS_TC_44: Validate the Create New Billing Address functionality");
         Thread.sleep(1000);

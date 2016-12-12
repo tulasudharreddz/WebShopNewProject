@@ -27,6 +27,7 @@ public class HomePage {
 
     //Page Elements
     static private By MyAccountMenuonHomePage = By.xpath("//a[contains(text(),'My Account')]");
+    static private By ShoppingCart = By.xpath("//a[@href='/Webshop/cart']");
 
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
@@ -414,6 +415,10 @@ public class HomePage {
         log.info("Assert is verified for "+ AssertName);
         ActualLable("Link is verified for "+ AssertName,"Pass");
 
+    }
+
+    public static void ClickonShoppingCart(WebDriver driver){
+        driver.findElement(By.xpath("ShoppingCart")).click();
     }
 
 }

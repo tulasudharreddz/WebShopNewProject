@@ -1,7 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <suite name="suite of suites">
-    <suite-files>
-        <suite-file path="./LocalTCXML/MyAccountModuleTC.xml" />
-        <suite-file path="./LocalTCXML/HomePageTC.xml" />
-        <suite-file path="./LocalTCXML/LandingPageTC.xml" />
-    </suite-files>
+    <test name="TotalExecution">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="localTestCases.ShopModuleTC">
+                <methods>
+                    <include name="WS_TC_58"/>
+                    <include name="WS_TC_59"/>
+                    <include name="WS_TC_60"/>
+                </methods>
+            </class>
+            <class name="localTestCases.LandingPageTC">
+                <methods>
+                    <include name="TC01"/>
+                    <include name="TC02"/>
+                    <include name="TC03"/>
+                    <include name="TC04"/>
+                    <include name="TC05"/>
+                    <include name="TC06"/>
+                </methods>
+            </class>
+            <class name="localTestCases.HomePageTC">
+                <methods>
+                    <include name="TC_Home_01"/>
+                    <include name="WS_TC_32"/>
+                    <include name="WS_TC_30"/>
+                    <include name="WS_TC_31"/>
+                </methods>
+            </class>
+            <class name="localTestCases.MyAccountModuleTC">
+                <methods>
+                    <include name="WS_TC_34"/>
+                    <include name="WS_TC_35"/>
+                    <include name="WS_TC_36"/>
+                    <include name="WS_TC_37"/>
+                    <include name="WS_TC_38"/>
+                    <include name="WS_TC_41"/>
+                    <include name="WS_TC_42"/>
+                    <include name="WS_TC_43"/>
+                    <include name="WS_TC_44"/>
+                    <include name="WS_TC_59"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>

@@ -7,6 +7,8 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import jxl.Cell;
+import jxl.CellReferenceHelper;
 import jxl.format.*;
 import jxl.format.Alignment;
 import jxl.format.Border;
@@ -67,7 +69,7 @@ public class DataDriven {
 		book = Workbook.getWorkbook(new File(obr.obj.getProperty("testData")));
 		sheet = book.getSheet("ResultSheet");
 		wbook = Workbook.createWorkbook(new File("./TestData/testCases/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
-		wsheet = wbook.getSheet("ResultSheet");
+		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(0 , 0 ,"DD WebShop Test Report",CellFormat3()));
 		wsheet.addCell(new Label(1 , 4 ,ObjectRepository.DateSt(),CellFormat2()));
 		return sheet;
@@ -85,12 +87,12 @@ public class DataDriven {
 
 		return wsheet;
 	}
-	private static final AtomicInteger count = new AtomicInteger(12);
-	private static final AtomicInteger count1 = new AtomicInteger(12);
-	private static final AtomicInteger count2 = new AtomicInteger(12);
-	private static final AtomicInteger count3 = new AtomicInteger(12);
-	private static final AtomicInteger count4 = new AtomicInteger(12);
-	private static final AtomicInteger count5 = new AtomicInteger(1);
+	private static final AtomicInteger count = new AtomicInteger(3);
+	private static final AtomicInteger count1 = new AtomicInteger(3);
+	private static final AtomicInteger count2 = new AtomicInteger(3);
+	private static final AtomicInteger count3 = new AtomicInteger(3);
+	private static final AtomicInteger count4 = new AtomicInteger(3);
+	private static final AtomicInteger count5 = new AtomicInteger(6);
 
 	public static int DataDriven(){
 		//int counted = 14;
@@ -170,7 +172,31 @@ public class DataDriven {
 
 		wsheet = wbook.getSheet("ResultSheet");
 		wsheet.addCell(new Label(2 , DataDriven1() , ACText,CellFormat()));
-		wsheet.addCell(new Label(3 , DataDriven2() , result,CellFormat1()));
+		if(result=="Fail"){
+			WritableCellFormat cellFormat = null;
+			WritableFont cellFont = null;
+			cellFont = new WritableFont(WritableFont.ARIAL, 9);
+			cellFormat = new WritableCellFormat(cellFont);
+			cellFormat.setWrap(true);
+			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat.setAlignment(Alignment.CENTRE);
+			cellFormat.setBackground(Colour.RED);
+			wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
+		}
+		else if(result=="Pass"){
+			WritableCellFormat cellFormat = null;
+			WritableFont cellFont = null;
+			cellFont = new WritableFont(WritableFont.ARIAL, 9);
+			cellFormat = new WritableCellFormat(cellFont);
+			cellFormat.setWrap(true);
+			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat.setAlignment(Alignment.CENTRE);
+			cellFormat.setBackground(Colour.GREEN);
+			wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
+		}
+		else{
+			wsheet.addCell(new Label(3 , DataDriven2() , result,CellFormat1()));
+		}
 		wsheet.addCell(new Label(4 , DataDriven3() , ObjectRepository.TimeSt(),CellFormat1()));
 		String numberAsString = Integer.toString(counting);
 		wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
@@ -183,21 +209,41 @@ public class DataDriven {
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
 		String ScDis= ReadTestCases(TestCasesheet).getCell(2,j).getContents();
 		String text = ScID+";"+ScName;
+		WritableCellFormat cellFormat = null;
+		WritableFont cellFont = null;
+		cellFont = new WritableFont(WritableFont.ARIAL, 9);
+		cellFormat = new WritableCellFormat(cellFont);
+		cellFormat.setWrap(true);
+		cellFormat.setBorder(Border.ALL, BorderLineStyle.MEDIUM);
+		cellFormat.setBackground(Colour.PINK);
 		wsheet = wbook.getSheet("ResultSheet");
-		wsheet.addCell(new Label(0 , k , text, CellFormat()));
-		wsheet = wbook.getSheet("TestCaseDiscription");
+		wsheet.mergeCells(0, k, 4, k);
+		wsheet.addCell(new Label(0 , k , text, cellFormat));
+		//wsheet = wbook.getSheet("TestCaseDiscription");
 		int i = DataDriven5();
-		wsheet.addCell(new Label(0 , i, ScID, CellFormat()));
+
+		WritableHyperlink hlk =new WritableHyperlink(0,i,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
+		wsheet = wbook.getSheet("TestCaseDiscription");
+		wsheet.addHyperlink(hlk);
+		wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , i, ScName, CellFormat()));
 		wsheet.addCell(new Label(2 , i, ScDis, CellFormat()));
+		counting=1;
 	}
 
 	public void closedoc() throws IOException, WriteException{
 
-		/*count.getAndSet(12);
-		count1.getAndSet(12);
-		count2.getAndSet(12);
-		count3.getAndSet(12);*/
+		count.getAndSet(3);
+		count1.getAndSet(3);
+		count2.getAndSet(3);
+		count3.getAndSet(3);
+		count4.getAndSet(3);
+		count5.getAndSet(6);
+
+		wsheet = wbook.getSheet("ResultSheet");
+		wsheet.getSettings().setProtected(true);
+		wbook.setProtected(true);
+		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.getSettings().setProtected(true);
 		wbook.setProtected(true);
 		wbook.write();

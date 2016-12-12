@@ -6,14 +6,8 @@ import jxl.write.Label;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
-import pageObject.HomePage;
-import pageObject.LoginPage;
-import pageObject.ProductCartPage;
-import pageObject.ProductSearchPage;
+import org.testng.annotations.*;
+import pageObject.*;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -35,15 +29,16 @@ public class ShopModuleTC extends Browser {
     static Logger log = Logger.getLogger("Testing Cases");
     static protected DataDriven excel = new DataDriven();
 
-    private WebDriver driver;
+    protected WebDriver driver;
     private Sheet sheet;
     private WritableSheet wsheet;
     /*private WritableWorkbook wbook;*/
 
 
     @BeforeClass
-    public void setUp() {
+    public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
+        //sheet = excel.ReadSheet(sheet);
     }
 
     @BeforeMethod
@@ -51,11 +46,6 @@ public class ShopModuleTC extends Browser {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         //driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
         log.info("URL entered in browser");
-        sheet = excel.ReadSheet(sheet);
-    }
-    @AfterMethod
-    public void EndMethod() throws IOException, BiffException, WriteException {
-        excel.closedoc();
 
     }
 
@@ -83,16 +73,15 @@ public class ShopModuleTC extends Browser {
             ProductSearchPage.PaginationFunctionality(driver);
             log.info("pagination verified on search result page");
             ProductSearchPage.NoOfReultsChangeFunctionality(driver);
-
             StepLable("WS_TC_58: Successfully verified 1. content in search results page, 2. Pagination Functionality in search results page");
 
         }catch (Exception e){
             log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e;
+            String error =  "Exception " +  e.getClass().getSimpleName();;
             ActualLable(error,"Fail");
+
         }
     }
-
     /*
     WS_TC_59:  Validate the 'Learn More' button functionality - Click on the Learn More button against a selected record
     */
@@ -100,14 +89,14 @@ public class ShopModuleTC extends Browser {
     public void WS_TC_59() throws IOException, InterruptedException, WriteException {
         try {
             DataDriven.ImplicitWait(driver);
+            DataDriven.ReportStartup(59);
             obje.repository(driver);
             log.info("WS_TC_59: Validate the 'Learn More' button functionality");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             log.info("Login in to the webshop application");
             String NameonSearchPage = ProductSearchPage.SelectProductOnSearchResultPage(driver);
-            ExpectedLable("Expected Assert Name "+NameonSearchPage);
-            Thread.sleep(1000);
+            ExpectedLable("Expected Assert Name: "+NameonSearchPage);
             String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
             ActualLable("Actual assert name: "+ NameonProductCartPage,"Pass");
             ExpectedLable("Verify Assert for Learn more");
@@ -119,12 +108,10 @@ public class ShopModuleTC extends Browser {
         }
         catch (Exception e){
             log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e;
+            String error =  "Exception " +  e.getClass().getSimpleName();;
             ActualLable(error,"Fail");
         }
-
     }
-
     /*
     WS_TC_60:  Validate the display of 'Inventory Color' against the products in search results page
     a. Vendor Inventory level > 10 units
@@ -136,6 +123,7 @@ public class ShopModuleTC extends Browser {
 
         try {
             obje.repository(driver);
+            DataDriven.ReportStartup(60);
             log.info("WS_TC_60: Validate the display of 'Inventory Color' against the products in search results page");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
@@ -150,5 +138,29 @@ public class ShopModuleTC extends Browser {
         }
     }
 
+    /*
+    WS_TC_60:  Validate the display of 'Inventory Color' against the products in search results page
+    a. Vendor Inventory level > 10 units
+    b. Vendor Inventory level <= 10 units
+    c. Vendor Inventory level = 0 units
+    */
+    @Test
+    public void WS_TC_61() throws IOException, WriteException, InterruptedException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(61);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login in to the webshop application");
+            HomePage.ClickonShoppingCart(driver);
+            ShoppingCart.OpenItemDetails(driver);
+            ShoppingCart.DeleteItem(driver);
+            ProductSearchPage.MovingToCategory(driver);
+
+
+        }
+        catch (Exception e){
+            log.info("Exception for the product is " + e);
+        }
+    }
 
 }

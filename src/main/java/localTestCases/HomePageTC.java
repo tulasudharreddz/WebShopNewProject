@@ -40,7 +40,7 @@ public class HomePageTC extends Browser{
     private WebDriver driver;
 
     @BeforeClass
-    public void setUp() {
+    public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
     }
 
@@ -49,13 +49,9 @@ public class HomePageTC extends Browser{
     public void Url() throws WriteException, IOException, BiffException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
-        sheet = excel.ReadSheet(sheet);
-    }
-    @AfterMethod
-    public void EndMethod() throws IOException, BiffException, WriteException {
-        excel.closedoc();
 
     }
+
 
     /*@Parameters("browser")
     @BeforeTest
@@ -76,6 +72,7 @@ public class HomePageTC extends Browser{
     @Test
     public void TC_Home_01() throws Exception {
         try {
+            DataDriven.ReportStartup(1);
             popup.implicitlyWait(driver);
             log.info("URL entered and page is loaded");
             Thread.sleep(2000);
@@ -101,9 +98,10 @@ public class HomePageTC extends Browser{
     */
 
     @Test
-    public void WS_TC_30() throws InterruptedException, IOException, WriteException {
+    public void WS_TC_30() throws InterruptedException, IOException, WriteException, BiffException {
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         popup.implicitlyWait(driver);
+        DataDriven.ReportStartup(30);
 
         Thread.sleep(2000);
         LoginPage.Loginfunctionality(driver);
@@ -122,33 +120,52 @@ public class HomePageTC extends Browser{
     */
 
     @Test
-    public void WS_TC_31() throws InterruptedException, IOException, WriteException {
-
-        log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
-        popup.implicitlyWait(driver);
-        Thread.sleep(2000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(2000);
-        log.info("Login in to the webshop application");
-        HomePage.AssertVerifyForHomePage(driver);
-        HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
+    public void WS_TC_31() throws InterruptedException, IOException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(31);
+            log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
+            popup.implicitlyWait(driver);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(2000);
+            log.info("Login in to the webshop application");
+            HomePage.AssertVerifyForHomePage(driver);
+            HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
+        }
+        catch (AssertionError e){
+            log.info("Exception for the product is " + e);
+            String error =  "Exception " +  e.getClass().getSimpleName();
+            ActualLable(error,"Fail");
+        }
+        catch (Exception e){
+            log.info("Exception for the product is " + e);
+            String error =  "Exception " +  e.getClass().getSimpleName();
+            ActualLable(error,"Fail");
+        }
     }
-     /*
-    WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not
-    */
+    /*
+   WS_TC_32: AssertVerifyForDefaultAddress that My menu button is displaying or not and options under menu are available or not
+   */
     @Test
-    public void WS_TC_32() throws InterruptedException, IOException ,WriteException{
-        log.info("WS_TC_32: Assert verify that My menu button is displaying or not and options under menu are available or not");
-        popup.implicitlyWait(driver);
-
-        Thread.sleep(4000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(2000);
-        HomePage.AssertVerifyForHomePage(driver);
-        log.info("Login in to the webshop application");
-        HomePage.ListOfOptionsMyAccountMenu(driver);
-        StepLable("WS_TC_32: Successfully Verified");
-        log.info("WS_TC_32: Verified");
+    public void WS_TC_32() throws InterruptedException, IOException, WriteException, BiffException {
+        try {
+            log.info("WS_TC_32: Assert verify that My menu button is displaying or not and options under menu are available or not");
+            popup.implicitlyWait(driver);
+            DataDriven.ReportStartup(32);
+            Thread.sleep(4000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(2000);
+            HomePage.AssertVerifyForHomePage(driver);
+            log.info("Login in to the webshop application");
+            HomePage.ListOfOptionsMyAccountMenu(driver);
+            //StepLable("WS_TC_32: Successfully Verified");
+            log.info("WS_TC_32: Verified");
+        }
+        catch (Exception e){
+            log.info("Exception for the product is " + e);
+            String error =  "Exception " +  e.getClass().getSimpleName();;
+            ActualLable(error,"Fail");
+        }
     }
  /*
     WS_TC_57: Verify the display of search results page

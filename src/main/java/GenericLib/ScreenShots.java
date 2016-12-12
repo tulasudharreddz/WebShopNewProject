@@ -1,11 +1,17 @@
 package GenericLib;
 
 import java.io.File;
+import java.io.IOException;
 
+import jxl.Sheet;
+import jxl.read.biff.BiffException;
+import jxl.write.WritableSheet;
+import jxl.write.WriteException;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeClass;
 
 public class ScreenShots {
 	static int count=0;
@@ -17,7 +23,6 @@ public class ScreenShots {
 		count++;
 
 	}
-
 
 
 
