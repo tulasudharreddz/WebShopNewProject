@@ -28,6 +28,7 @@ public class HomePage {
     //Page Elements
     static private By MyAccountMenuonHomePage = By.xpath("//a[contains(text(),'My Account')]");
     static private By ShoppingCart = By.xpath("//a[@href='/Webshop/cart']");
+    static private By NoOFCartItems = By.xpath("//b[@class='badge']");
 
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
@@ -418,7 +419,23 @@ public class HomePage {
     }
 
     public static void ClickonShoppingCart(WebDriver driver){
-        driver.findElement(By.xpath("ShoppingCart")).click();
+        driver.findElement(ShoppingCart).click();
+    }
+    public static List<WebElement> NoOfShoppingCartProducts(WebDriver driver){
+
+        List<WebElement> NoOFItems = driver.findElements(NoOFCartItems);
+        return NoOFItems;
     }
 
+    public static void VerifyCart(WebDriver driver) throws IOException, WriteException {
+        ExpectedLable("Check products available on shopping cart");
+        if(NoOfShoppingCartProducts(driver).size()>0){
+
+            String noOfCartItems = driver.findElement(NoOFCartItems).getText();
+            ActualLable("Successfully Verified number of products in shopping cart, no of products are " +noOfCartItems ,"Pass");
+        }
+        else{
+            ActualLable("Successfully Verified number of products in shopping cart, there are no products available on the shopping cart","Pass");
+        }
+    }
 }

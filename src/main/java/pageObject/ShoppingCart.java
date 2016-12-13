@@ -22,7 +22,8 @@ public class ShoppingCart {
             driver.findElement(ItemDetails).click();
         }
     }
-    public static void DeleteItem(WebDriver driver){
+    public static void DeleteItem(WebDriver driver) throws InterruptedException {
+        Thread.sleep(2000);
         if(driver.findElements(DeleteItem).size()>0){
             int noOfItem = driver.findElements(DeleteItem).size();
             for(int i=0; i<=noOfItem; i++) {
@@ -30,6 +31,11 @@ public class ShoppingCart {
             }
         }
     }
+    public static void DeleteExistItem(WebDriver driver) throws InterruptedException {
+        OpenItemDetails(driver);
+        DeleteItem(driver);
+    }
+
 
 
 }

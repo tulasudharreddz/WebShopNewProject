@@ -152,9 +152,9 @@ public class ShopModuleTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             log.info("Login in to the webshop application");
             HomePage.ClickonShoppingCart(driver);
-            ShoppingCart.OpenItemDetails(driver);
-            ShoppingCart.DeleteItem(driver);
+            ShoppingCart.DeleteExistItem(driver);
             ProductSearchPage.MovingToCategory(driver);
+            ProductSearchPage.AddToShoppingCart(driver);
 
 
         }
