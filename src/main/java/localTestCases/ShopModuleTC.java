@@ -44,7 +44,7 @@ public class ShopModuleTC extends Browser {
     @BeforeMethod
     public void Url() throws IOException, BiffException, WriteException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-        //driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+
         log.info("URL entered in browser");
 
     }
@@ -88,7 +88,7 @@ public class ShopModuleTC extends Browser {
     @Test
     public void WS_TC_59() throws IOException, InterruptedException, WriteException {
         try {
-            DataDriven.ImplicitWait(driver);
+
             DataDriven.ReportStartup(59);
             obje.repository(driver);
             log.info("WS_TC_59: Validate the 'Learn More' button functionality");

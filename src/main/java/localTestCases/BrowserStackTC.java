@@ -47,7 +47,6 @@ public class BrowserStackTC  extends Browser {
     @BeforeMethod
     public void Url() throws IOException, BiffException, WriteException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-        //driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
         log.info("URL entered in browser");
         sheet = excel.ReadSheet(sheet);
     }

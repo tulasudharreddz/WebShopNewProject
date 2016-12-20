@@ -9,12 +9,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static GenericLib.DataDriven.ActualLable;
 import static GenericLib.DataDriven.ExpectedLable;
@@ -77,22 +80,21 @@ public class ProductSearchPage {
         List<WebElement> Product = driver.findElements(ProductName);
         return Product;
     }
-
+    public static final AtomicInteger count6 = new AtomicInteger(-1);
     public static void AddToShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
 
         StepLable("Moving to Product Cart Page");
 
         String s=HomePage.ShopMenuOnHomePage(driver).getText();
-        ExpectedLable("Click on "+ s);
+        //ExpectedLable("Click on "+ s);
         Thread.sleep(2000);
-        HomePage.ShopMenuOnHomePage(driver).click();
+        //HomePage.ShopMenuOnHomePage(driver).click();
+        HomePage.ClickonShopmenuonHomePage(driver);
         log.info("Clicked on Shop menu");
-        ActualLable("Successfully clicked on Product","Pass");
-        ExpectedLable("Click on sub category item ");
-        HomePage.SubCategoryListUnderShopMenu(driver).get(0).click();
+        //HomePage.SubCategoryListUnderShopMenu(driver).get(1).click();
+        HomePage.ClickonCategoryinShopmenu(driver);
         log.info("Clicked on Accesseries Sub category");
         Thread.sleep(2000);
-        ActualLable("Successfully clicked on sub category item ","Pass");
         ExpectedLable("Get the Prooduct name and Part number for the first item in the list");
         String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
         log.info("Name of the for the product is: "+ NameOfItem);
@@ -100,12 +102,13 @@ public class ProductSearchPage {
         log.info("Partnumber for the product is: "+ PartNumber);
         ActualLable("Successfully Stored the product name and part number","Pass");
         ExpectedLable("Add the same product to 'Shopping cart'");
-        driver.findElements(AddToCart).get(0).click();
+
+        driver.findElements(AddToCart).get(count6.incrementAndGet()).click();
+        Thread.sleep(2000);
         ActualLable("Successfully Clicked on Add to cart button","Pass");
 
+
     }
-
-
 
     public static String SelectProductOnSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
 

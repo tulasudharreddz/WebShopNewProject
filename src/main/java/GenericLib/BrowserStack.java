@@ -40,7 +40,7 @@ public class BrowserStack {
                 new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
                 capability);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+       // driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
     }

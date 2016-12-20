@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import pageObject.ProductSearchPage;
 
 import javax.swing.tree.FixedHeightLayoutCache;
 
@@ -166,6 +167,9 @@ public class DataDriven {
 
 		wsheet = wbook.getSheet("ResultSheet");
 		wsheet.addCell(new Label(1 , DataDriven() , resu, CellFormat()));
+		String numberAsString = Integer.toString(counting);
+		wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
+		counting++;
 	}
 
 	public static void ActualLable(String ACText,String result) throws IOException, WriteException {
@@ -198,9 +202,9 @@ public class DataDriven {
 			wsheet.addCell(new Label(3 , DataDriven2() , result,CellFormat1()));
 		}
 		wsheet.addCell(new Label(4 , DataDriven3() , ObjectRepository.TimeSt(),CellFormat1()));
-		String numberAsString = Integer.toString(counting);
+		/*String numberAsString = Integer.toString(counting);
 		wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
-		counting++;
+		counting++;*/
 	}
 
 	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
@@ -239,6 +243,7 @@ public class DataDriven {
 		count3.getAndSet(3);
 		count4.getAndSet(3);
 		count5.getAndSet(6);
+		pageObject.ProductSearchPage.count6.getAndSet(0);
 
 		wsheet = wbook.getSheet("ResultSheet");
 		wsheet.getSettings().setProtected(true);
@@ -256,8 +261,6 @@ public class DataDriven {
 		sheet1 = book1.getSheet("Sheet1");
 		return sheet1;
 	}
-	public static void ImplicitWait(WebDriver driver) {
-		driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-	}
+
 
 }

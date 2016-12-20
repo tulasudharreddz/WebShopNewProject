@@ -31,7 +31,7 @@ public class ProductCartPage {
 
 
     public static String  AssertVerifyForProduct(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        DataDriven.ImplicitWait(driver);
+
         obje.repository(driver);
         //StepLable("Verify Learn More Button Functionality");
         Thread.sleep(2000);

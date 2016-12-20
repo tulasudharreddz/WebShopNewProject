@@ -6,6 +6,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.io.IOException;
@@ -210,6 +212,8 @@ public class HomePage {
         //element = driver.findElement(By.xpath("//i[@class='navbar-header-icon fa-shopping-bag']"));
         return element;
     }
+
+    //for mobile app
     public static WebElement ClicoOnShopMenuMobile(WebDriver driver) {
 
 
@@ -390,7 +394,7 @@ public class HomePage {
     }
 
     public static void ClickonShopmenuonHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        StepLable("Verify Category under Shop menu");
+        //StepLable("Verify Category under Shop menu");
         String ShopTitle = ShopMenuOnHomePage(driver).getText();
         ExpectedLable("Check Shop menu is displaying or not");
         Assert.assertEquals(ShopTitle, "Shop");
@@ -406,10 +410,10 @@ public class HomePage {
     }
     public static void ClickonCategoryinShopmenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
         Thread.sleep(1000);
-        String SubmenuName = driver.findElement(By.xpath("(//div[@class='row']/div/ul/li/a)[1]")).getText();
+        String SubmenuName = SubCategoryListUnderShopMenu(driver).get(1).getText();
         ExpectedLable("Verify link is working for "+SubmenuName);
         log.info("Name of Sub Category is  " +SubmenuName);
-        driver.findElement(By.xpath("(//div[@class='row']/div/ul/li/a)[1]")).click();
+        SubCategoryListUnderShopMenu(driver).get(1).click();
         Thread.sleep(1000);
         String AssertName = driver.findElement(By.xpath("//h2/i")).getText();
         Assert.assertEquals(SubmenuName, AssertName);
@@ -418,8 +422,16 @@ public class HomePage {
 
     }
 
-    public static void ClickonShoppingCart(WebDriver driver){
+    public static void ClickonShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+
+        ExpectedLable("Click on Shopping cart link");
         driver.findElement(ShoppingCart).click();
+        ActualLable("Successfully clicked on shopping cart page ","Pass");
+        Thread.sleep(5000);
+        ExpectedLable("Verify Assert for Shopping cart page");
+        String AssertName = driver.findElement(By.xpath("//h2")).getText();
+        Assert.assertEquals("Shopping Cart", AssertName);
+        ActualLable("Successfully verified asser for Shopping cart page","Pass");
     }
     public static List<WebElement> NoOfShoppingCartProducts(WebDriver driver){
 
@@ -427,15 +439,20 @@ public class HomePage {
         return NoOFItems;
     }
 
-    public static void VerifyCart(WebDriver driver) throws IOException, WriteException {
-        ExpectedLable("Check products available on shopping cart");
-        if(NoOfShoppingCartProducts(driver).size()>0){
+    public static double  VerifyCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(2000);
+        ExpectedLable("Check the products available on shopping cart");
+        double noOfCartItemsAavailable;
 
+        if(NoOfShoppingCartProducts(driver).size()>0){
             String noOfCartItems = driver.findElement(NoOFCartItems).getText();
+            noOfCartItemsAavailable = Integer.parseInt(noOfCartItems);
             ActualLable("Successfully Verified number of products in shopping cart, no of products are " +noOfCartItems ,"Pass");
         }
         else{
+            noOfCartItemsAavailable = 0;
             ActualLable("Successfully Verified number of products in shopping cart, there are no products available on the shopping cart","Pass");
         }
+        return noOfCartItemsAavailable;
     }
 }

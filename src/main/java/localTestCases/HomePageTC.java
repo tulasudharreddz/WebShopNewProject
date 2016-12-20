@@ -73,7 +73,6 @@ public class HomePageTC extends Browser{
     public void TC_Home_01() throws Exception {
         try {
             DataDriven.ReportStartup(1);
-            popup.implicitlyWait(driver);
             log.info("URL entered and page is loaded");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
@@ -100,7 +99,7 @@ public class HomePageTC extends Browser{
     @Test
     public void WS_TC_30() throws InterruptedException, IOException, WriteException, BiffException {
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
-        popup.implicitlyWait(driver);
+
         DataDriven.ReportStartup(30);
 
         Thread.sleep(2000);
@@ -124,7 +123,6 @@ public class HomePageTC extends Browser{
         try {
             DataDriven.ReportStartup(31);
             log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
-            popup.implicitlyWait(driver);
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             Thread.sleep(2000);
@@ -150,7 +148,6 @@ public class HomePageTC extends Browser{
     public void WS_TC_32() throws InterruptedException, IOException, WriteException, BiffException {
         try {
             log.info("WS_TC_32: Assert verify that My menu button is displaying or not and options under menu are available or not");
-            popup.implicitlyWait(driver);
             DataDriven.ReportStartup(32);
             Thread.sleep(4000);
             LoginPage.Loginfunctionality(driver);

@@ -12,7 +12,7 @@ public class AlertHandle {
 	Browser brow = new Browser();
     static Logger log = Logger.getLogger("Alert Handle page");
 
-	public void acceptAlert(WebDriver driver){		
+	public static void acceptAlert(WebDriver driver){
 
 		Alert alt=driver.switchTo().alert();
 		log.info(alt.getText());
@@ -34,11 +34,5 @@ public class AlertHandle {
 		log.info(alt.getText());
 		alt.getText();
 	}
-
-	public void implicitlyWait(WebDriver driver){
-		driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
-
-	}
-
 
 }

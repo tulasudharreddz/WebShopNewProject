@@ -58,7 +58,7 @@ public class HomePageBSTC extends BrowserStack{
     }*/
 
     public void TC_Home_01() throws InterruptedException, WriteException, IOException, BiffException {
-        popup.implicitlyWait(driver);
+
         Thread.sleep(2000);
         log.info("URL entered and page is loaded");
 
