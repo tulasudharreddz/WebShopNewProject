@@ -1,5 +1,6 @@
 package GenericLib;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -11,7 +12,10 @@ import jxl.read.biff.BiffException;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -23,7 +27,7 @@ import org.testng.annotations.*;
 
 public class Browser {
 
-	private WebDriver driver;
+	private static WebDriver driver;
 	DataDriven Broexcel = new DataDriven();
 
 	public WebDriver getDriver() {
@@ -59,8 +63,6 @@ public class Browser {
 	public void initializeTestBaseSetup(String browser) {
 		try {
 			setDriver(browser);
-
-
 		} catch (Exception e) {
 			System.out.println("Error....." + e.getStackTrace());
 		}
@@ -69,7 +71,6 @@ public class Browser {
 	public void Close() throws IOException, WriteException {
 		//Broexcel.closedoc();
 		driver.quit();
-
 	}
 
 	@BeforeSuite
@@ -79,6 +80,15 @@ public class Browser {
 	@AfterSuite
 	public void CloseExcel() throws IOException, WriteException {
 		Broexcel.closedoc();
+
+	}
+	public static String screenshots() throws IOException {
+		int count=0;
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		String name = ".\\screenshots\\screen-"+count+".jpeg";
+		FileUtils.copyFile(scrFile, new File(name));
+		count++;
+		return name;
 
 	}
 }

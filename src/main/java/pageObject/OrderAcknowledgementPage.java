@@ -39,9 +39,9 @@ public class OrderAcknowledgementPage {
         OrderAcknowledgementPageVerify(driver);
         int size = driver.findElements(AcknowledgementLines).size();
         for(int i = 0;i<size;i++){
-            ExpectedLable("Check 'Order Acknowledgement' line " + i+1);
+            ExpectedLable("Check 'Order Acknowledgement' line " + i);
             String orderAcknowledgementText= driver.findElements(AcknowledgementLines).get(i).getText();
-            ActualLable("line"+ i+1 +" "+ orderAcknowledgementText, "Pass");
+            ActualLable("line"+ i +" "+ orderAcknowledgementText, "Pass");
         }
 
     }

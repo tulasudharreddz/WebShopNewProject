@@ -61,20 +61,25 @@ public class ShoppingCart {
                 Thread.sleep(1000);
             }
             while (driver.findElements(DeleteItem).size()>0);
-            ActualLable("There are no items available in shopping cart" ,"Pass");
+            ActualLable("All products are deleted, items are not available in shopping cart" ,"Pass");
         }
         else{
-            ActualLable("Number of items available in the shopping cart are " ,"Pass");
+            ActualLable("Products are not available in shopping cart " ,"Pass");
         }
     }
-    public static void DeleteExistItem(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static double DeleteExistItem(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
         StepLable("Checking cart is already having products or not if yes delete all products");
         double noOfCartItemsAavailable = HomePage.VerifyCart(driver);
         if(noOfCartItemsAavailable>0){
             HomePage.ClickonShoppingCart(driver);
             ShoppingCart.DeleteItem(driver);
+            noOfCartItemsAavailable=0;
         }
+        else{
+            noOfCartItemsAavailable=0;
+        }
+        return noOfCartItemsAavailable;
     }
     public static List<WebElement> QuantityBlank(WebDriver driver) {
 

@@ -13,9 +13,7 @@ import org.testng.annotations.*;
 
 import pageObject.*;
 
-import static GenericLib.DataDriven.ActualLable;
-import static GenericLib.DataDriven.ExpectedLable;
-import static GenericLib.DataDriven.StepLable;
+import static GenericLib.DataDriven.*;
 
 public class DemoLocal extends Browser{
 
@@ -36,13 +34,14 @@ public class DemoLocal extends Browser{
 	}
 
 	@Test
-	public void DemoTC() throws Exception ,WriteException {
+	public void DemoTC() throws IOException, WriteException {
 		try {
+			DataDriven.ReportStartup(75);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
 			log.info("Login in to the webshop application");
-			ShoppingCart.DeleteExistItem(driver);
-			double noOfItems = HomePage.VerifyCart(driver);
+
+			double noOfItems = ShoppingCart.DeleteExistItem(driver);
 			ProductSearchPage.AddToShoppingCart(driver);
 			ProductSearchPage.AddToShoppingCart(driver);
 			double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
@@ -58,19 +57,23 @@ public class DemoLocal extends Browser{
 			else{
 				ActualLable("verification failed for cart Number functionality","Fail");
 			}
-
+			ReportResult("Pass");
 		/*Double UnitPrice = HomePage.UnitPrice(driver);
 		Assert.assertEquals(UnitCost, "$"+UnitPrice);*/
 		}
 		catch (AssertionError e){
 			log.info("Exception for the product is " + e);
 			String error =  "Exception " +  e.getClass().getSimpleName();
+			//ScreenShots.screenshots(driver);
 			ActualLable(error,"Fail");
+			ReportResult("Fail");
 		}
 		catch (Exception e){
 			log.info("Exception for the product is " + e);
 			String error =  "Exception " +  e.getClass().getSimpleName();
+			//ScreenShots.screenshots(driver);
 			ActualLable(error,"Fail");
+			ReportResult("Fail");
 		}
 	}
 

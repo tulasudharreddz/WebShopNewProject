@@ -74,7 +74,6 @@ public class CheckOutPage {
         }
     }
 
-
     public static void SelectAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
         VerifyCheckoutPageTitle(driver);
         //select Billing Address
@@ -111,7 +110,6 @@ public class CheckOutPage {
 
     }
 
-
     public static void ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Complete Check out page action");
         SelectingAddress(driver);
@@ -119,7 +117,7 @@ public class CheckOutPage {
         Random rand = new Random();
         int  ReferenceNumber = rand.nextInt(9999) + 1000;
         String ReferenceNumberString=Integer.toString(ReferenceNumber);
-        driver.findElement(refNumXpath).sendKeys(ReferenceNumberString);
+        driver.findElement(refNumXpath).sendKeys("IRN"+ReferenceNumberString);
         ActualLable("Successfully provided Refference number in the blank ", "Pass");
         String ProceedtoCheckoutText = driver.findElement(ReviewOrderXpath).getText();
 

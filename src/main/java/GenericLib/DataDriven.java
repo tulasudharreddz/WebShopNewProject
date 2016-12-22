@@ -15,6 +15,9 @@ import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.format.Colour;
 import jxl.write.*;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import jxl.Sheet;
@@ -35,8 +38,10 @@ public class DataDriven {
 	private static Sheet sheet1;
 	private static Sheet TestCasesheet;
 	private static WritableSheet wsheet;
+	static int SCcount=0;
 
 	static ObjectRepository obr = new ObjectRepository();
+	static ScreenShots Scr = new ScreenShots();
 	//Properties obj;
 	FileInputStream objFile;
 	static private WebDriver driver;
@@ -61,7 +66,8 @@ public class DataDriven {
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
 		cellFormat.setAlignment(Alignment.CENTRE);
-		cellFormat.setBackground(Colour.GREEN);
+		cellFormat.setBackground(Colour.BRIGHT_GREEN);
+
 		return cellFormat;
 	}
 
@@ -94,6 +100,7 @@ public class DataDriven {
 	private static final AtomicInteger count3 = new AtomicInteger(3);
 	private static final AtomicInteger count4 = new AtomicInteger(3);
 	private static final AtomicInteger count5 = new AtomicInteger(6);
+	private static final AtomicInteger count6 = new AtomicInteger(6);
 
 	public static int DataDriven(){
 		//int counted = 14;
@@ -123,6 +130,11 @@ public class DataDriven {
 	public static int DataDriven5(){
 		//int counted = 14;
 		int Actucounted = count5.incrementAndGet();
+		return Actucounted;
+	}
+	public static int DataDriven6(){
+		//int counted = 14;
+		int Actucounted = count6.incrementAndGet();
 		return Actucounted;
 	}
 
@@ -172,6 +184,7 @@ public class DataDriven {
 		counting++;
 	}
 
+
 	public static void ActualLable(String ACText,String result) throws IOException, WriteException {
 
 		wsheet = wbook.getSheet("ResultSheet");
@@ -185,7 +198,14 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
-			wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
+			int num = DataDriven2();
+
+			Browser.screenshots();
+			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\screenshots\\screen-"+SCcount+".jpeg"));
+			wsheet.addHyperlink(hlk);
+			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
+			wsheet.addCell(new Label(3 , num , result,cellFormat));
+			SCcount++;
 		}
 		else if(result=="Pass"){
 			WritableCellFormat cellFormat = null;
@@ -227,12 +247,45 @@ public class DataDriven {
 		int i = DataDriven5();
 
 		WritableHyperlink hlk =new WritableHyperlink(0,i,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
+
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addHyperlink(hlk);
-		wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
+		//wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , i, ScName, CellFormat()));
 		wsheet.addCell(new Label(2 , i, ScDis, CellFormat()));
 		counting=1;
+	}
+
+	public static void ReportResult(String Scresult) throws WriteException {
+		int ResultColumn= DataDriven6();
+		wsheet = wbook.getSheet("TestCaseDiscription");
+		if(Scresult=="Fail"){
+			WritableCellFormat cellFormat = null;
+			WritableFont cellFont = null;
+			cellFont = new WritableFont(WritableFont.ARIAL, 9);
+			cellFormat = new WritableCellFormat(cellFont);
+			cellFormat.setWrap(true);
+			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat.setAlignment(Alignment.CENTRE);
+			cellFormat.setBackground(Colour.RED);
+			int num = DataDriven2();
+			wsheet.addCell(new Label(3 , ResultColumn , Scresult,cellFormat));
+		}
+		else if(Scresult=="Pass"){
+			WritableCellFormat cellFormat = null;
+			WritableFont cellFont = null;
+			cellFont = new WritableFont(WritableFont.ARIAL, 9);
+			cellFormat = new WritableCellFormat(cellFont);
+			cellFormat.setWrap(true);
+			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat.setAlignment(Alignment.CENTRE);
+			cellFormat.setBackground(Colour.GREEN);
+			wsheet.addCell(new Label(3 , ResultColumn , Scresult,cellFormat));
+		}
+		else{
+			wsheet.addCell(new Label(3 , ResultColumn, Scresult,CellFormat1()));
+		}
+		wsheet.addCell(new Label(4 , ResultColumn , ObjectRepository.dateString(),CellFormat1()));
 	}
 
 	public void closedoc() throws IOException, WriteException{

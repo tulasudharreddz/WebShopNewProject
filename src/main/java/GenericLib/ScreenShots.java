@@ -14,13 +14,18 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 
 public class ScreenShots {
-	static int count=0;
+	private static int count=0;
+	//static protected WebDriver driver;
+Browser brow =  new Browser();
+	static private WebDriver driver;
 
-	public static void screenshots(WebDriver driver,String moduleName,String testcase) throws Exception{
+	public static String screenshots() throws IOException {
 
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(scrFile, new File(".\\screenshots\\"+moduleName+"\\"+testcase+"\\screen-"+count+".jpeg"));
+		String name = ".\\screenshots\\screen-"+count+".jpeg";
+		FileUtils.copyFile(scrFile, new File(name));
 		count++;
+		return name;
 
 	}
 

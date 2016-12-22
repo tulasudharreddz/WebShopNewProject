@@ -1,12 +1,16 @@
 package GenericLib;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +19,7 @@ import java.text.SimpleDateFormat;
 public class ObjectRepository {
 	public Properties obj;
 	FileInputStream objFile;
-	private WebDriver driver;
+	static private WebDriver driver;
 
 	public void repository(WebDriver driver) throws IOException{
 
