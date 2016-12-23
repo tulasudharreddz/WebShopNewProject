@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import org.w3c.dom.css.RGBColor;
 import pageObject.ProductSearchPage;
 
 import javax.swing.tree.FixedHeightLayoutCache;
@@ -66,7 +67,8 @@ public class DataDriven {
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
 		cellFormat.setAlignment(Alignment.CENTRE);
-		cellFormat.setBackground(Colour.BRIGHT_GREEN);
+		//Colour colour = Colour.getInternalColour(RGBColor(255,0,0));
+		cellFormat.setBackground(Colour.BRIGHT_GREEN);//BRIGHT_GREEN
 
 		return cellFormat;
 	}

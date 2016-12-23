@@ -29,7 +29,7 @@ public class Browser {
 
 	private static WebDriver driver;
 	DataDriven Broexcel = new DataDriven();
-
+	private static int SCcount=1;
 	public WebDriver getDriver() {
 		return driver;
 	}
@@ -83,11 +83,11 @@ public class Browser {
 
 	}
 	public static String screenshots() throws IOException {
-		int count=0;
+
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String name = ".\\screenshots\\screen-"+count+".jpeg";
+		String name = ".\\screenshots\\screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
-		count++;
+		SCcount++;
 		return name;
 
 	}
