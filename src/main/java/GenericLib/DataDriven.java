@@ -39,7 +39,7 @@ public class DataDriven {
 	private static Sheet sheet1;
 	private static Sheet TestCasesheet;
 	private static WritableSheet wsheet;
-	static int SCcount=0;
+	static int SCcount=1;
 
 	static ObjectRepository obr = new ObjectRepository();
 	static ScreenShots Scr = new ScreenShots();
@@ -78,6 +78,7 @@ public class DataDriven {
 		book = Workbook.getWorkbook(new File(obr.obj.getProperty("testData")));
 		sheet = book.getSheet("ResultSheet");
 		wbook = Workbook.createWorkbook(new File("./TestData/testCases/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
+		//wbook = Workbook.createWorkbook(new File("//10.45.34.14//DDUS_Team//WebShopAutomation//Result//"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(0 , 0 ,"DD WebShop Test Report",CellFormat3()));
 		wsheet.addCell(new Label(1 , 4 ,ObjectRepository.DateSt(),CellFormat2()));
@@ -228,10 +229,11 @@ public class DataDriven {
 		wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
 		counting++;*/
 	}
-
+	static String ScID;
 	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
 		int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
-		String ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
+		 ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
+
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
 		String ScDis= ReadTestCases(TestCasesheet).getCell(2,j).getContents();
 		String text = ScID+";"+ScName;
@@ -252,11 +254,17 @@ public class DataDriven {
 
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addHyperlink(hlk);
-		//wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
+		wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , i, ScName, CellFormat()));
 		wsheet.addCell(new Label(2 , i, ScDis, CellFormat()));
 		counting=1;
+
 	}
+	public static String FolderName() throws WriteException, IOException {
+		String FolderNameS = ScID;
+		return FolderNameS;
+	}
+
 
 	public static void ReportResult(String Scresult) throws WriteException {
 		int ResultColumn= DataDriven6();

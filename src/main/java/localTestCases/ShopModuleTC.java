@@ -138,29 +138,6 @@ public class ShopModuleTC extends Browser {
         }
     }
 
-    /*
-    WS_TC_60:  Validate the display of 'Inventory Color' against the products in search results page
-    a. Vendor Inventory level > 10 units
-    b. Vendor Inventory level <= 10 units
-    c. Vendor Inventory level = 0 units
-    */
-    @Test
-    public void WS_TC_61() throws IOException, WriteException, InterruptedException {
-        try {
-            obje.repository(driver);
-            DataDriven.ReportStartup(61);
-            LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
-            HomePage.ClickonShoppingCart(driver);
-            ShoppingCart.DeleteExistItem(driver);
-            ProductSearchPage.MovingToCategory(driver);
-            ProductSearchPage.AddToShoppingCart(driver);
 
-
-        }
-        catch (Exception e){
-            log.info("Exception for the product is " + e);
-        }
-    }
 
 }

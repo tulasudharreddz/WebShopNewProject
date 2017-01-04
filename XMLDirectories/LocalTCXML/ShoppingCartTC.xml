@@ -3,11 +3,9 @@
     <test name="LocalExecution">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="localTestCases.ShopModuleTC">
+            <class name="localTestCases.ShoppingCartTC">
                 <methods>
-                    <include name="WS_TC_58"/>
-                    <include name="WS_TC_59"/>
-                    <!--<include name="WS_TC_60"/>-->
+                    <include name="WS_TC_61"/>
                 </methods>
             </class>
         </classes>

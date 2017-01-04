@@ -50,7 +50,6 @@ public class ShoppingCart {
         ExpectedLable("Verify number of items available in the shopping cart");
         if(driver.findElements(DeleteItem).size()>0){
             double noOfItem = driver.findElements(DeleteItem).size();
-            log.info(noOfItem);
             ActualLable("Number of items available in the shopping cart are "+noOfItem ,"Pass");
             ExpectedLable("Now Delete all items from shopping cart");
             //for(double i=1; i<=noOfItem; i++) {
@@ -68,7 +67,7 @@ public class ShoppingCart {
         }
     }
     public static double DeleteExistItem(WebDriver driver) throws InterruptedException, IOException, WriteException {
-
+        Thread.sleep(1000);
         StepLable("Checking cart is already having products or not if yes delete all products");
         double noOfCartItemsAavailable = HomePage.VerifyCart(driver);
         if(noOfCartItemsAavailable>0){

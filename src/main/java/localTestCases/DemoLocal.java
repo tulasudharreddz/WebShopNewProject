@@ -36,11 +36,10 @@ public class DemoLocal extends Browser{
 	@Test
 	public void DemoTC() throws IOException, WriteException {
 		try {
-			DataDriven.ReportStartup(75);
+			DataDriven.ReportStartup(149);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
 			log.info("Login in to the webshop application");
-
 			double noOfItems = ShoppingCart.DeleteExistItem(driver);
 			ProductSearchPage.AddToShoppingCart(driver);
 			ProductSearchPage.AddToShoppingCart(driver);

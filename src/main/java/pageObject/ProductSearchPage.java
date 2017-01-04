@@ -43,12 +43,13 @@ public class ProductSearchPage {
     static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
     static private By SearchField = By.xpath("//is-typeahead/span/input");
     static private By AvailabilityStatus = By.xpath("//is-availability/div/span");
-    static private By AvailabilityBlock = By.xpath("//is-availability");
+    static private By AvailabilityBlock = By.xpath("//span[@class='product-availability-text text-right']");
     static private By ProductPrice = By.xpath("//p[@class='product-price']");
     static private By NoOfProducts = By.xpath("//div[@class='product-row']");
     static private By Manufacturer = By.xpath("//span[contains(text(),'Manufacturer')]");
     static private By Image = By.xpath("//img[@class='img-responsive']");
     static private By MFRPart = By.xpath("//span[contains(text(),'Mfr Part')]");
+    static private By CategoryName = By.xpath("//span[contains(text(),'Category:')]");
     static private By previousPage = By.xpath("(//a[@class='previous'])[1]");
     static private By nextPage = By.xpath("(//a[@class='next'])[1]");
     static private By ActivePage = By.xpath("(//ul[@class='pagination']/li[@class='active']/a)[1]");
@@ -56,6 +57,10 @@ public class ProductSearchPage {
     static private By Select20 = By.xpath("//li[@class='select2-results__option'][contains(text(),'25')]");
     static private By NoOfSearchResults = By.xpath("//div[@class='pager-count']");
     static private By CurrentShownResults = By.xpath("(//span[@class='select2-selection__rendered'])[2]");
+    static private By AvailableProduct = By.xpath("//ul[@class='product-availability available']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Add to Cart')]");
+    static private By NotAvailableProduct = By.xpath("//ul[@class='product-availability not-available']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Add to Cart')]");
+    static private By LimitedProduct = By.xpath("//ul[@class='product-availability delayed']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Add to Cart')]");
+
 
 
     public static WebElement SearchField(WebDriver driver) {
@@ -84,7 +89,6 @@ public class ProductSearchPage {
     public static void AddToShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
 
         StepLable("Moving to Product Cart Page");
-
         String s=HomePage.ShopMenuOnHomePage(driver).getText();
         //ExpectedLable("Click on "+ s);
         Thread.sleep(2000);
@@ -106,29 +110,23 @@ public class ProductSearchPage {
         driver.findElements(AddToCart).get(count6.incrementAndGet()).click();
         Thread.sleep(2000);
         ActualLable("Successfully Clicked on Add to cart button","Pass");
-
-
     }
 
     public static String SelectProductOnSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
         StepLable("Moving to Product Cart Page");
-        String s=HomePage.ShopMenuOnHomePage(driver).getText();
-        ExpectedLable("Click on "+ s);
-        Thread.sleep(2000);
-        HomePage.ShopMenuOnHomePage(driver).click();
-        log.info("Clicked on Shop menu");
-        ActualLable("Successfully clicked on Product","Pass");
-        ExpectedLable("Click on sub category item ");
-        HomePage.SubCategoryListUnderShopMenu(driver).get(0).click();
-        log.info("Clicked on Accesseries Sub category");
-        Thread.sleep(2000);
-        ActualLable("Successfully clicked on sub category item ","Pass");
 
+        Thread.sleep(2000);
+        //HomePage.ShopMenuOnHomePage(driver).click();
+        HomePage.ClickonShopmenuonHomePage(driver);
+        HomePage.ClickonCategoryinShopmenu(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Get the Prooduct name and Part number for the first item in the list");
         String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
         log.info("Name of the for the product is: "+ NameOfItem);
         String PartNumber = ProductSearchPage.PartNumber(driver).get(0).getText();
         log.info("Partnumber for the product is: "+ PartNumber);
+        ActualLable("Successfully Stored the product name and part number","Pass");
         ExpectedLable("Click on Learn more button for perticular Item ");
         ProductSearchPage.LearnMoreButtons(driver).get(0).click();
         ActualLable("Successfully clicked on Learn more button for perticular Item ","Pass");
@@ -138,7 +136,6 @@ public class ProductSearchPage {
     public static void MovingToCategory(WebDriver driver) throws InterruptedException, IOException, WriteException {
         StepLable("Moving to Product Search Page");
         ExpectedLable("Clicking on Shop Menu");
-        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
         Thread.sleep(2000);
         HomePage.ShopMenuOnHomePage(driver).click();
         ActualLable("Successfully clicked Shop Menu","Pass");
@@ -150,8 +147,21 @@ public class ProductSearchPage {
         log.info("Clicked on Accesseries Sub category");
         Thread.sleep(2000);
         driver.findElement(Category).click();
-
     }
+
+    public static void MovingToProductSearch(WebDriver driver) throws InterruptedException, IOException, WriteException {
+
+        ExpectedLable("Clicking on Shop Menu");
+        Thread.sleep(2000);
+        HomePage.ShopMenuOnHomePage(driver).click();
+        ActualLable("Successfully clicked Shop Menu","Pass");
+        log.info("Clicked on Shop menu");
+        ExpectedLable("Clicking on Sub Category under Shop Menu");
+        Thread.sleep(1000);
+        HomePage.SubCategoryListUnderShopMenu(driver).get(0).click();
+        ActualLable("Successfully clicked on Sub Category under Shop Menu","Pass");
+    }
+
     public static void StatusVerifyForProducts(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Availability Status for the product with respect to no of Quantity availability");
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
@@ -185,7 +195,6 @@ public class ProductSearchPage {
             log.info("Assert is verified for the product with part number " + al.get(i));
             ActualLable("Assert verified successfully for the product"+al.get(i),"Pass");
         }
-
 
     }
 
@@ -292,7 +301,7 @@ public class ProductSearchPage {
         AssertXpath.add(ProductName);
         AssertXpath.add(MFRPart);
         AssertXpath.add(Manufacturer);
-        AssertXpath.add(Category);
+        AssertXpath.add(CategoryName);
         AssertXpath.add(ProductPrice);
         AssertXpath.add(Image);
         AssertXpath.add(LearnMore);
@@ -347,7 +356,6 @@ public class ProductSearchPage {
         }
         ExpectedLable("No of records per page should be equal to the value selected in display dropdown, when no of results more than 25");
         if(NoOfResults>=25){
-
             driver.findElement(CurrentShownResults).click();
             driver.findElement(Select20).click();
             Thread.sleep(1000);
@@ -366,4 +374,61 @@ public class ProductSearchPage {
         }
 
     }
+
+    public static double AddAvailableProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Adding Available Product to the cart");
+        MovingToProductSearch(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Add one Available product to cart, Product should added to cart and count should increase by '1'");
+        for(int i=0;i<10;i++) {
+            if (driver.findElements(AvailableProduct).size() > 0) {
+                driver.findElements(AvailableProduct).get(0).click();
+                break;
+            } else {
+                driver.findElement(nextPage).click();
+            }
+        }
+        ActualLable("Successfully Added Available product to the cart","Pass");
+        double noOfCartItemsAavailable = HomePage.VerifyCart(driver);
+        return noOfCartItemsAavailable;
+    }
+
+    public static double AddLimitedProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Adding Limited Available Product to the cart");
+        MovingToProductSearch(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Add one LImited Available product to cart, Product should added to cart and count should increase by '1'");
+        for(int i=0;i<10;i++) {
+            if (driver.findElements(LimitedProduct).size() > 0) {
+                driver.findElements(LimitedProduct).get(0).click();
+                break;
+            } else {
+                driver.findElement(nextPage).click();
+            }
+        }
+        ActualLable("Successfully Added Limited Available product to the cart","Pass");
+        double noOfCartItemsAavailable = HomePage.VerifyCart(driver);
+        return noOfCartItemsAavailable;
+    }
+
+    public static double AddNotAvailableProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Adding Not Available Product to the cart");
+        MovingToProductSearch(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Add one Not Available product to cart, Product should added to cart and count should increase by '1'");
+        for(int i=0;i<10;i++) {
+            if (driver.findElements(NotAvailableProduct).size() > 0) {
+                driver.findElements(NotAvailableProduct).get(0).click();
+                break;
+            } else {
+                driver.findElement(nextPage).click();
+            }
+        }
+        ActualLable("Successfully Added Not Available product to the cart","Pass");
+        double noOfCartItemsAavailable = HomePage.VerifyCart(driver);
+        return noOfCartItemsAavailable;
+    }
+
+
+
 }

@@ -31,7 +31,7 @@ public class HomePage {
     static private By MyAccountMenuonHomePage = By.xpath("//a[contains(text(),'My Account')]");
     static private By ShoppingCart = By.xpath("//a[@href='/Webshop/cart']");
     static private By NoOFCartItems = By.xpath("//b[@class='badge']");
-
+    static private By Favorites = By.xpath("//a[@href='/Webshop/users/favorites']");
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
         driver.findElement(byElementLocator).click();
@@ -327,28 +327,20 @@ public class HomePage {
     }
 
     public static WebElement SearchField(WebDriver driver) {
-
-
         element = driver.findElement(By.xpath("//is-typeahead/span/input"));
         return element;
     }
 
     public static List<WebElement> PartNumber(WebDriver driver) {
-
-
         List<WebElement> PartNumberResult = driver.findElements(By.xpath("//div[@class='m-t-b-15']/div[1]"));
         return PartNumberResult;
     }
 
     public static List<WebElement> LearnMoreButtons(WebDriver driver) {
-
-
         List<WebElement> LearnMoreButtons = driver.findElements(By.xpath("//button[contains(text(),'Learn More')]"));
         return LearnMoreButtons;
     }
     public static List<WebElement> UnitCost(WebDriver driver) {
-
-
         List<WebElement> UnitCost = driver.findElements(By.xpath("//p[@class='product-price']"));
         return UnitCost;
     }
@@ -443,16 +435,28 @@ public class HomePage {
         Thread.sleep(2000);
         ExpectedLable("Check the products available on shopping cart");
         double noOfCartItemsAavailable;
-
         if(NoOfShoppingCartProducts(driver).size()>0){
             String noOfCartItems = driver.findElement(NoOFCartItems).getText();
             noOfCartItemsAavailable = Integer.parseInt(noOfCartItems);
-            ActualLable("Successfully Verified number of products in shopping cart, no of products are " +noOfCartItems ,"Pass");
+            ActualLable("Successfully Verified number of products in shopping cart, no of products are ' " +noOfCartItems +" '","Pass");
         }
         else{
             noOfCartItemsAavailable = 0;
             ActualLable("Successfully Verified number of products in shopping cart, there are no products available on the shopping cart","Pass");
         }
         return noOfCartItemsAavailable;
+    }
+
+    public static void ClickOnFavoritesMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(1000);
+        ExpectedLable("Check ' Favorites ' menu is displaying on home page ");
+        if(driver.findElements(Favorites).size()>0) {
+            ActualLable("' Favorites ' menu is available on home page", "Pass");
+            ExpectedLable("Click on ' Favorites ' menu on home page ");
+            driver.findElement(Favorites).click();
+            ActualLable("successfully Clicked on ' Favorites ' menu on home page", "Pass");
+        }
+        else{  ActualLable("' Favorites ' menu is not on home page", "Fail");    }
+
     }
 }

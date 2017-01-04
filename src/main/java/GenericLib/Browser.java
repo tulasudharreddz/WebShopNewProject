@@ -37,12 +37,12 @@ public class Browser {
 	private void setDriver(String browser) throws Exception{
 
 		if (browser.equalsIgnoreCase("Firefox")) {
+			System.setProperty("webdriver.gecko.driver","lib/geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 
 		else if (browser.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver",
-					"lib/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","lib/chromedriver.exe");
 			driver = new ChromeDriver();
 		}
 
@@ -82,13 +82,13 @@ public class Browser {
 		Broexcel.closedoc();
 
 	}
-	public static String screenshots() throws IOException {
+	public static String screenshots() throws IOException, WriteException {
 
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String name = ".\\screenshots\\screen-"+SCcount+".jpeg";
+		String Folder = DataDriven.FolderName();
+		String name = ".\\screenshots\\"+Folder+"\\screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
 		SCcount++;
 		return name;
-
 	}
 }

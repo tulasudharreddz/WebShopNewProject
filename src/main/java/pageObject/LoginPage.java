@@ -185,14 +185,10 @@ public class LoginPage {
 			driver.switchTo().window(tabs.get(1));
 			String Title = driver.getTitle();
 			log.info("Title of the page is " + Title);
-
 			Assert.assertEquals(Title, linkName);
-
 			driver.close();
-
 			driver.switchTo().window(tabs.get(0));
 		}
-
 	}
 
 	public static WebElement AboutUSLinkHomePage(WebDriver driver)
