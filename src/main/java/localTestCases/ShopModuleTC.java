@@ -40,13 +40,10 @@ public class ShopModuleTC extends Browser {
         driver=getDriver();
         //sheet = excel.ReadSheet(sheet);
     }
-
     @BeforeMethod
     public void Url() throws IOException, BiffException, WriteException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-
         log.info("URL entered in browser");
-
     }
 
     /*1. Verify the content in search results page
@@ -79,7 +76,6 @@ public class ShopModuleTC extends Browser {
             log.info("Exception for the product is " + e);
             String error =  "Exception " +  e.getClass().getSimpleName();;
             ActualLable(error,"Fail");
-
         }
     }
     /*

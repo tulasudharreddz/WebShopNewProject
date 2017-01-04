@@ -20,6 +20,8 @@ import pageObject.ProfilePage;
 import java.awt.*;
 import java.io.IOException;
 
+import static GenericLib.DataDriven.ActualLable;
+import static GenericLib.DataDriven.ReportResult;
 import static GenericLib.DataDriven.StepLable;
 
 /**
@@ -163,22 +165,32 @@ public class MyAccountModuleTC extends Browser {
     */
     @Test
     public void WS_TC_41() throws InterruptedException, IOException, AWTException, WriteException, BiffException {
-        obje.repository(driver);
-        DataDriven.ReportStartup(41);
-        log.info("WS_TC_41: Validate the 'Request Delete' button functionality");
-        Thread.sleep(1000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(1000);
-        HomePage.ClickonMyAccount(driver);
-        Thread.sleep(1000);
-        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
-        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
-        Thread.sleep(1000);
-        ProfilePage.RequestDeleteFunctionality(driver);
-        Thread.sleep(1000);
-        ProfilePage.VerifyEmailInOutLook(driver);
-        log.info("WS_TC_41: 'Request Delete' button functionality is verified");
-        StepLable("WS_TC_41: is successfully verified");
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(41);
+            log.info("WS_TC_41: Validate the 'Request Delete' button functionality");
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.RequestDeleteFunctionality(driver);
+            Thread.sleep(1000);
+            ProfilePage.VerifyEmailInOutLook(driver);
+            log.info("WS_TC_41: 'Request Delete' button functionality is verified");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
     }
     /*
     WS_TC_42: Validate the default billing address setup functionality
@@ -188,20 +200,29 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_42() throws IOException, InterruptedException, WriteException, BiffException {
-
-        obje.repository(driver);
-        DataDriven.ReportStartup(42);
-        log.info("WS_TC_42: Validate the default billing address setup functionality");
-        Thread.sleep(1000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(1000);
-        HomePage.ClickonMyAccount(driver);
-        Thread.sleep(1000);
-        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
-        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
-        Thread.sleep(1000);
-        ProfilePage.AssertVerifyForDefaultAddress(driver);
-        StepLable("WS_TC_42: is successfully verified");
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(42);
+            log.info("WS_TC_42: Validate the default billing address setup functionality");
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.AssertVerifyForDefaultAddress(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
     }
     /*
     WS_TC_43: Verify the GUI of "Request new address page
@@ -210,22 +231,31 @@ public class MyAccountModuleTC extends Browser {
     */
     @Test
     public void WS_TC_43() throws IOException, InterruptedException, WriteException, BiffException {
-        obje.repository(driver);
-        DataDriven.ReportStartup(43);
-        log.info("WS_TC_43: Verify the GUI of Request new address page");
-        Thread.sleep(1000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(1000);
-        HomePage.ClickonMyAccount(driver);
-        Thread.sleep(1000);
-        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
-        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
-        Thread.sleep(1000);
-        ProfilePage.ClickonNewBillingAddress(driver);
-        Thread.sleep(1000);
-        ProfilePage.AssertVerifyForLable(driver);
-        log.info("WS_TC_43: GUI of Request new address lables are successfully verified");
-        StepLable("WS_TC_43: is successfully verified");
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(43);
+            log.info("WS_TC_43: Verify the GUI of Request new address page");
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.ClickonNewAddress(driver,0);
+            Thread.sleep(1000);
+            ProfilePage.AssertVerifyForLable(driver,"Billing Address");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
     }
 
     /*
@@ -249,7 +279,7 @@ public class MyAccountModuleTC extends Browser {
         HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
         //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
         Thread.sleep(1000);
-        ProfilePage.ClickonNewBillingAddress(driver);
+        ProfilePage.ClickonNewAddress(driver,0);
         Thread.sleep(1000);
         ProfilePage.VerifySaveNewAddressFunctionalityWithOutData(driver);
         Thread.sleep(1000);
@@ -260,5 +290,236 @@ public class MyAccountModuleTC extends Browser {
 
     }
 
+    @Test
+    public void WS_TC_47() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(47);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            ProfilePage.ExpandAddress(driver,"Shipping Addresses");
+            ProfilePage.RequestDeleteFunctionality(driver);
+            Thread.sleep(1000);
+            ProfilePage.VerifyEmailInOutLook(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_48() throws IOException, InterruptedException, WriteException, BiffException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(48);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            ProfilePage.ExpandAddress(driver,"Shipping Addresses");
+            Thread.sleep(1000);
+            ProfilePage.AssertVerifyForDefaultAddress(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_49() throws IOException, InterruptedException, WriteException, BiffException {
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(49);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.ClickonNewAddress(driver,1);
+            Thread.sleep(1000);
+            ProfilePage.AssertVerifyForLable(driver,"Shipping Address");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+
+    @Test
+    public void WS_TC_50() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(50);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login Functionality is completed");
+            HomePage.ClickonMyAccount(driver);
+            log.info("Clicked on My Account");
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.ClickonNewAddress(driver,1);
+            Thread.sleep(1000);
+            ProfilePage.VerifySaveNewAddressFunctionalityWithOutData(driver);
+            Thread.sleep(1000);
+            ProfilePage.VerifySaveNewAddressFunctionalityWithData(driver);
+            Thread.sleep(1000);
+            ProfilePage.EmailVerificationForNewAddress(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+
+    @Test
+    public void WS_TC_53() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(53);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            ProfilePage.ExpandAddress(driver,"Install Addresses");
+            ProfilePage.RequestDeleteFunctionality(driver);
+            Thread.sleep(1000);
+            ProfilePage.VerifyEmailInOutLook(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_54() throws IOException, InterruptedException, WriteException, BiffException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(54);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            ProfilePage.ExpandAddress(driver,"Install Addresses");
+            Thread.sleep(1000);
+            ProfilePage.AssertVerifyForDefaultAddress(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_55() throws IOException, InterruptedException, WriteException, BiffException {
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(55);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.ClickonNewAddress(driver,2);
+            Thread.sleep(1000);
+            ProfilePage.AssertVerifyForLable(driver,"Install Address");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_56() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(56);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login Functionality is completed");
+            HomePage.ClickonMyAccount(driver);
+            log.info("Clicked on My Account");
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.ClickonNewAddress(driver,2);
+            Thread.sleep(1000);
+            ProfilePage.VerifySaveNewAddressFunctionalityWithOutData(driver);
+            Thread.sleep(1000);
+            //ProfilePage.VerifySaveNewAddressFunctionalityWithData(driver);
+            Thread.sleep(1000);
+            //ProfilePage.EmailVerificationForNewAddress(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
 
 }

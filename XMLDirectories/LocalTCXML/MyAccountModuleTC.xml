@@ -6,7 +6,7 @@
         <classes>
             <class name="localTestCases.MyAccountModuleTC">
                 <methods>
-                    <include name="WS_TC_34"/>
+                    <!--<include name="WS_TC_34"/>
                     <include name="WS_TC_35"/>
                     <include name="WS_TC_36"/>
                     <include name="WS_TC_37"/>
@@ -15,7 +15,14 @@
                     <include name="WS_TC_42"/>
                     <include name="WS_TC_43"/>
                     <include name="WS_TC_44"/>
-                    <include name="WS_TC_59"/>
+                    <include name="WS_TC_47"/>
+                    <include name="WS_TC_48"/>
+                    <include name="WS_TC_49"/>
+                    <include name="WS_TC_50"/>
+                    <include name="WS_TC_53"/>
+                    <include name="WS_TC_54"/>
+                    <include name="WS_TC_55"/>-->
+                    <include name="WS_TC_56"/>
                 </methods>
             </class>
         </classes>
