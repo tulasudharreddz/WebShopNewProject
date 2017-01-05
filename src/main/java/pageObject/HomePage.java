@@ -32,6 +32,7 @@ public class HomePage {
     static private By ShoppingCart = By.xpath("//a[@href='/Webshop/cart']");
     static private By NoOFCartItems = By.xpath("//b[@class='badge']");
     static private By Favorites = By.xpath("//a[@href='/Webshop/users/favorites']");
+    static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
         driver.findElement(byElementLocator).click();
@@ -414,6 +415,27 @@ public class HomePage {
 
     }
 
+    public static void MovingToCategory(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Moving to Product Search Page");
+        //ExpectedLable("Clicking on Shop Menu");
+        Thread.sleep(2000);
+        /*HomePage.ShopMenuOnHomePage(driver).click();
+        ActualLable("Successfully clicked Shop Menu","Pass");
+        log.info("Clicked on Shop menu");
+        ExpectedLable("Clicking on Sub Category under Shop Menu");
+        Thread.sleep(1000);
+        HomePage.SubCategoryListUnderShopMenu(driver).get(0).click();*/
+        HomePage.ClickonShopmenuonHomePage(driver);
+        log.info("Clicked on Shop menu");
+        //HomePage.SubCategoryListUnderShopMenu(driver).get(1).click();
+        HomePage.ClickonCategoryinShopmenu(driver);
+        //ActualLable("Successfully clicked on Sub Category under Shop Menu","Pass");
+        log.info("Clicked on Accesseries Sub category");
+
+        driver.findElement(Category).click();
+        Thread.sleep(2000);
+    }
+
     public static void ClickonShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
 
         ExpectedLable("Click on Shopping cart link");
@@ -449,6 +471,7 @@ public class HomePage {
 
     public static void ClickOnFavoritesMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
         Thread.sleep(1000);
+        StepLable("Navigating to ' Favorites ' Page");
         ExpectedLable("Check ' Favorites ' menu is displaying on home page ");
         if(driver.findElements(Favorites).size()>0) {
             ActualLable("' Favorites ' menu is available on home page", "Pass");

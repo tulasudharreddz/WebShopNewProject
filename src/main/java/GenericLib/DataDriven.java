@@ -68,7 +68,7 @@ public class DataDriven {
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
 		cellFormat.setAlignment(Alignment.CENTRE);
 		//Colour colour = Colour.getInternalColour(RGBColor(255,0,0));
-		cellFormat.setBackground(Colour.BRIGHT_GREEN);//BRIGHT_GREEN
+		cellFormat.setBackground(Colour.GREEN);//BRIGHT_GREEN
 
 		return cellFormat;
 	}
@@ -77,7 +77,8 @@ public class DataDriven {
 		obr.repository(driver);
 		book = Workbook.getWorkbook(new File(obr.obj.getProperty("testData")));
 		sheet = book.getSheet("ResultSheet");
-		wbook = Workbook.createWorkbook(new File("./TestData/testCases/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
+		String folderName = ObjectRepository.DateSt();
+		wbook = Workbook.createWorkbook(new File("./ResultReports/" + folderName + "/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
 		//wbook = Workbook.createWorkbook(new File("//10.45.34.14//DDUS_Team//WebShopAutomation//Result//"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(0 , 0 ,"DD WebShop Test Report",CellFormat3()));
@@ -202,9 +203,9 @@ public class DataDriven {
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
 			int num = DataDriven2();
-
+			String folderName = ObjectRepository.DateSt();
 			Browser.screenshots();
-			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\screenshots\\screen-"+SCcount+".jpeg"));
+			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-screen-"+SCcount+".jpeg"));
 			wsheet.addHyperlink(hlk);
 			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
 			wsheet.addCell(new Label(3 , num , result,cellFormat));

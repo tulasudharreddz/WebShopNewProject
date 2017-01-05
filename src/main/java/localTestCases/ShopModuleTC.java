@@ -32,18 +32,51 @@ public class ShopModuleTC extends Browser {
     protected WebDriver driver;
     private Sheet sheet;
     private WritableSheet wsheet;
-    /*private WritableWorkbook wbook;*/
 
 
     @BeforeClass
     public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
-        //sheet = excel.ReadSheet(sheet);
     }
     @BeforeMethod
     public void Url() throws IOException, BiffException, WriteException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
+    }
+
+    /*
+    WS_TC_57: Verify the display of search results page
+
+    1. Click on category menu and Enter search criteria
+    2. Go to the Search bar in Home page and enter search criteria
+    a) Search by MFR Part#
+    b) Search By Product Name
+    c) Wild Card/ Like Search
+    d) Search by Manfacturer
+    e) Search by Family
+    f) Search by Category */
+
+    @Test
+    public void WS_TC_57() throws IOException, InterruptedException ,WriteException{
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(57);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Cliked on Shop menu");
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.SearchingFunctionality(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+
     }
 
     /*1. Verify the content in search results page
@@ -71,11 +104,15 @@ public class ShopModuleTC extends Browser {
             log.info("pagination verified on search result page");
             ProductSearchPage.NoOfReultsChangeFunctionality(driver);
             StepLable("WS_TC_58: Successfully verified 1. content in search results page, 2. Pagination Functionality in search results page");
-
-        }catch (Exception e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();;
-            ActualLable(error,"Fail");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
         }
     }
     /*
@@ -99,13 +136,15 @@ public class ShopModuleTC extends Browser {
             Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
             ActualLable("Successfully verified for Learn more button functionality ","Pass");
             log.info("Assert Verified for the selected Product ");
-
-            StepLable("WS_TC_59: Learn More button functionality is verified");
-        }
-        catch (Exception e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();;
-            ActualLable(error,"Fail");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
         }
     }
     /*
@@ -124,16 +163,65 @@ public class ShopModuleTC extends Browser {
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             log.info("Login in to the webshop application");
-            ProductSearchPage.MovingToCategory(driver);
+            HomePage.MovingToCategory(driver);
             Thread.sleep(1000);
             ProductSearchPage.StatusVerifyForProducts(driver);
-            StepLable("WS_TC_60: Successfully Validated the display of 'Inventory Color' against the products in search results page");
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+    @Test
+    public void WS_TC_61() throws IOException, WriteException, InterruptedException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(61);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login in to the webshop application");
+            double InitialnoOfProducts = HomePage.VerifyCart(driver);
+            double noOfItemsafterAddedNotAv =ProductSearchPage.AddNotAvailableProductToCart(driver);
+            ExpectedLable("Verify cart count functionality by adding Not Available product to cart");
+            if(noOfItemsafterAddedNotAv-InitialnoOfProducts==1){
+                ActualLable("successfully verified cart Count functionality for Not Available product and items in cart is increased by '1'","Pass");
+            }else{
+                ActualLable("Failed to Verify cart Count functionality for Not Available product","Fail");
+            }
+            double noOfItemsafterAddedAvailableProduct =ProductSearchPage.AddAvailableProductToCart(driver);
+            ExpectedLable("Verify cart count functionality by adding Available product to cart");
+            if(noOfItemsafterAddedAvailableProduct-noOfItemsafterAddedNotAv==1){
+                ActualLable("successfully verified cart Count functionality for Available product and items in cart is increased by '1'","Pass");
+            }else{
+                ActualLable("Failed to Verify cart Count functionality for Available product","Fail");
+            }
+            double noOfItemsafterAddedLimitedProduct =ProductSearchPage.AddLimitedProductToCart(driver);
+            ExpectedLable("Verify cart count functionality by adding Limited Available product to cart");
+            if(noOfItemsafterAddedLimitedProduct-noOfItemsafterAddedAvailableProduct==1){
+                ActualLable("successfully verified cart Count functionality for Limited Available product and items in cart is increased by '1'","Pass");
+            }else{
+                ActualLable("Failed to Verify cart Count functionality for Limited Available product","Fail");
+            }
+            ReportResult("Pass");
+        }
+        catch (AssertionError e){
+            log.info("Exception for the product is " + e);
+            String error =  "Exception " +  e.getClass().getSimpleName();
+            //ScreenShots.screenshots(driver);
+            ActualLable(error,"Fail");
+            ReportResult("Fail");
         }
         catch (Exception e){
             log.info("Exception for the product is " + e);
+            String error =  "Exception " +  e.getClass().getSimpleName();
+            //ScreenShots.screenshots(driver);
+            ActualLable(error,"Fail");
+            ReportResult("Fail");
         }
     }
-
-
 
 }

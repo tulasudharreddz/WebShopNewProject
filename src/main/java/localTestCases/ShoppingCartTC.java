@@ -47,50 +47,6 @@ public class ShoppingCartTC extends Browser {
    b. Vendor Inventory level <= 10 units
    c. Vendor Inventory level = 0 units
    */
-    @Test
-    public void WS_TC_61() throws IOException, WriteException, InterruptedException {
-        try {
-            obje.repository(driver);
-            DataDriven.ReportStartup(61);
-            LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
-            double InitialnoOfProducts = HomePage.VerifyCart(driver);
-            double noOfItemsafterAddedNotAv =ProductSearchPage.AddNotAvailableProductToCart(driver);
-            ExpectedLable("Verify cart count functionality by adding Not Available product to cart");
-            if(noOfItemsafterAddedNotAv-InitialnoOfProducts==1){
-                ActualLable("successfully verified cart Count functionality for Not Available product and items in cart is increased by '1'","Pass");
-            }else{
-                ActualLable("Failed to Verify cart Count functionality for Not Available product","Fail");
-            }
-            double noOfItemsafterAddedAvailableProduct =ProductSearchPage.AddAvailableProductToCart(driver);
-            ExpectedLable("Verify cart count functionality by adding Available product to cart");
-            if(noOfItemsafterAddedAvailableProduct-noOfItemsafterAddedNotAv==1){
-                ActualLable("successfully verified cart Count functionality for Available product and items in cart is increased by '1'","Pass");
-            }else{
-                ActualLable("Failed to Verify cart Count functionality for Available product","Fail");
-            }
-            double noOfItemsafterAddedLimitedProduct =ProductSearchPage.AddLimitedProductToCart(driver);
-            ExpectedLable("Verify cart count functionality by adding Limited Available product to cart");
-            if(noOfItemsafterAddedLimitedProduct-noOfItemsafterAddedAvailableProduct==1){
-                ActualLable("successfully verified cart Count functionality for Limited Available product and items in cart is increased by '1'","Pass");
-            }else{
-                ActualLable("Failed to Verify cart Count functionality for Limited Available product","Fail");
-            }
-            ReportResult("Pass");
-        }
-        catch (AssertionError e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();
-            //ScreenShots.screenshots(driver);
-            ActualLable(error,"Fail");
-            ReportResult("Fail");
-        }
-        catch (Exception e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();
-            //ScreenShots.screenshots(driver);
-            ActualLable(error,"Fail");
-            ReportResult("Fail");
-        }
-    }
+
+
 }

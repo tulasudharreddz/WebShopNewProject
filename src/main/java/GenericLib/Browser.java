@@ -75,6 +75,8 @@ public class Browser {
 
 	@BeforeSuite
 	public void initializeexc() throws WriteException, IOException, BiffException {
+		String folderName = ObjectRepository.DateSt();
+		new File(".\\ResultReports\\" + folderName + "").mkdir();
 		sheet = Broexcel.ReadSheet(sheet);
 	}
 	@AfterSuite
@@ -86,7 +88,8 @@ public class Browser {
 
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		String Folder = DataDriven.FolderName();
-		String name = ".\\screenshots\\"+Folder+"\\screen-"+SCcount+".jpeg";
+		String folderName = ObjectRepository.DateSt();
+		String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
 		SCcount++;
 		return name;

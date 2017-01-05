@@ -3,7 +3,9 @@ package localTestCases;
 import GenericLib.Browser;
 import GenericLib.DataDriven;
 import GenericLib.ObjectRepository;
+import jxl.Sheet;
 import jxl.read.biff.BiffException;
+import jxl.write.WritableSheet;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -20,75 +22,116 @@ import static GenericLib.DataDriven.ExpectedLable;
 import static GenericLib.DataDriven.ReportResult;
 
 /**
- * Created by t.mirasipally on 02-Jan-17.
+ * Created by t.mirasipally on 05-Jan-17.
  */
-public class ProductCartTC extends Browser {
+public class FavoritesTC extends Browser {
 
     static ObjectRepository obje = new ObjectRepository();
     static Logger log = Logger.getLogger("Testing Cases");
+    static protected DataDriven excel = new DataDriven();
+
     protected WebDriver driver;
+    private Sheet sheet;
+    private WritableSheet wsheet;
+
 
     @BeforeClass
     public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
     }
-
     @BeforeMethod
     public void Url() throws IOException, BiffException, WriteException {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
     }
 
-    /*
-  WS_TC_67:  Verify the content in Product Card Page
-  */
     @Test
-    public void WS_TC_67() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_90() throws IOException, InterruptedException ,WriteException{
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(90);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickOnFavoritesMenu(driver);
+            FavoriesPage.FavoritesPageVerify(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+
+    }
+
+    @Test
+    public void WS_TC_91() throws IOException, InterruptedException ,WriteException{
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(91);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickOnFavoritesMenu(driver);
+            FavoriesPage.FavoritesPageVerify(driver);
+            FavoriesPage.FavoritesPageContentVerify(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+
+    }
+    @Test
+    public void WS_TC_92() throws IOException, InterruptedException ,WriteException{
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(92);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItems =ShoppingCart.DeleteExistItem(driver);
+            HomePage.ClickOnFavoritesMenu(driver);
+            FavoriesPage.VerifyAddToCartOnFavoritesPage(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart count functionality by adding product to cart");
+            if(noOfItemsafterAddtoCart>noOfItems){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+            }
+            else{ ActualLable("verification failed for cart Number functionality","Fail"); }
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_93() throws IOException, InterruptedException ,WriteException {
         try {
             obje.repository(driver);
-            DataDriven.ReportStartup(67);
+            DataDriven.ReportStartup(93);
+            Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
-            String NameonSearchPage=ProductSearchPage.SelectProductOnSearchResultPage(driver);
-            ExpectedLable("Expected Assert Name: "+NameonSearchPage);
+            HomePage.ClickOnFavoritesMenu(driver);
+            String NameOnSearchPage = FavoriesPage.SelectProductOnFavoritesPage(driver);
+            ExpectedLable("Expected Assert Name: "+NameOnSearchPage);
             String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
             ActualLable("Actual assert name: "+ NameonProductCartPage,"Pass");
-            ExpectedLable("Verify Assert for Name Of the product");
-            Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
-            ActualLable("Successfully verified for Name of the product","Pass");
-            ProductCartPage.ContentVerifyForPCart(driver);
-            ReportResult("Pass");
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-            ReportResult("Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-            ReportResult("Fail");
-        }
-    }
-    /*
-  WS_TC_68:  Validate the "Add to Cart" button functionality
-  */
-    @Test
-    public void WS_TC_68() throws IOException, WriteException, InterruptedException {
-        try {
-            obje.repository(driver);
-            DataDriven.ReportStartup(68);
-            LoginPage.Loginfunctionality(driver);
-            double noOfItems = ShoppingCart.DeleteExistItem(driver);
-            log.info("Login in to the webshop application");
-            ProductSearchPage.SelectProductOnSearchResultPage(driver);
-            ProductCartPage.AddToCartFunctionalityPCart(driver);
-            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
-            ExpectedLable("Product Count in Shoping cart should increase by one");
-            if(noOfItemsafterAddtoCart-noOfItems==1){
-                ActualLable("successfully verified ' Add To Cart ' Button functionality and items in cart is increased by one ","Pass");
-            }
-            else{
-                ActualLable("verification failed for ' Add To Cart ' Button functionality","Fail");
-            }
+            ExpectedLable("Verify Assert for Learn more");
+            Assert.assertEquals(NameOnSearchPage, NameonProductCartPage);
+            ActualLable("Successfully verified for Learn more button functionality ","Pass");
             ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -101,44 +144,16 @@ public class ProductCartTC extends Browser {
         }
     }
 
-    /*
-    WS_TC_69:Validate the "Add to Favorites" button functionality
-    */
     @Test
-    public void WS_TC_69() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_95() throws IOException, InterruptedException ,WriteException {
         try {
             obje.repository(driver);
-            DataDriven.ReportStartup(69);
+            DataDriven.ReportStartup(95);
+            Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
-            FavoriesPage.DeleteFavorites(driver);
-            ProductSearchPage.SelectProductOnSearchResultPage(driver);
-            FavoriesPage.VerifyFavoritesFunctionality(driver);
-            ReportResult("Pass");
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-            ReportResult("Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-            ReportResult("Fail");
-        }
-    }
 
-    /*
-    WS_TC_70:  Validate the "Add to Cart" button functionality
-    */
-    @Test
-    public void WS_TC_70() throws IOException, WriteException, InterruptedException {
-        try {
-            obje.repository(driver);
-            DataDriven.ReportStartup(69);
-            LoginPage.Loginfunctionality(driver);
-            HomePage.ClickOnFavoritesMenu(driver);
-            FavoriesPage.DeleteFavorites(driver);
-            ProductSearchPage.SelectProductOnSearchResultPage(driver);
-            ProductCartPage.AddToFavoritesWithSameProductPCart(driver);
+
             ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();

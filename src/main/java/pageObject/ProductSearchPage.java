@@ -115,7 +115,6 @@ public class ProductSearchPage {
     public static String SelectProductOnSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
         StepLable("Moving to Product Cart Page");
-
         Thread.sleep(2000);
         //HomePage.ShopMenuOnHomePage(driver).click();
         HomePage.ClickonShopmenuonHomePage(driver);
@@ -133,21 +132,7 @@ public class ProductSearchPage {
         log.info("Clicked on Learn more button");
         return NameOfItem;
     }
-    public static void MovingToCategory(WebDriver driver) throws InterruptedException, IOException, WriteException {
-        StepLable("Moving to Product Search Page");
-        ExpectedLable("Clicking on Shop Menu");
-        Thread.sleep(2000);
-        HomePage.ShopMenuOnHomePage(driver).click();
-        ActualLable("Successfully clicked Shop Menu","Pass");
-        log.info("Clicked on Shop menu");
-        ExpectedLable("Clicking on Sub Category under Shop Menu");
-        Thread.sleep(1000);
-        HomePage.SubCategoryListUnderShopMenu(driver).get(0).click();
-        ActualLable("Successfully clicked on Sub Category under Shop Menu","Pass");
-        log.info("Clicked on Accesseries Sub category");
-        Thread.sleep(2000);
-        driver.findElement(Category).click();
-    }
+
 
     public static void MovingToProductSearch(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
@@ -429,6 +414,63 @@ public class ProductSearchPage {
         return noOfCartItemsAavailable;
     }
 
+    public static void SearchingFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Search engine functionality with different type of inputs");
+        ArrayList<String> SearchText =new ArrayList<String>();//creating arraylist
+        SearchText.add("ASR 9000 OAM 10Gbps Right to Use License 10-pack Bundle");
+        SearchText.add("Cisco");//adding object in arraylist
+        SearchText.add("S-A9K-OAMRTU-100");
+        SearchText.add("Cisco ASR 9000 Series");
+        SearchText.add("Gigabit Hubs & Switches");
+        ArrayList<String> FieldsXpaths=new ArrayList<String>();
+        FieldsXpaths.add("//p[@class='product-name clickable']");
+        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[3])[1]");
+        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[1])[1]");
+        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[2])[1]");
+        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[3])[1]");
+        ArrayList<String> TypeOfSearch =new ArrayList<String>();//creating arraylist
+        TypeOfSearch.add("Name Of the Product");
+        TypeOfSearch.add("Manufacturer");//adding object in arraylist
+        TypeOfSearch.add("Mfr Part#");
+        TypeOfSearch.add("Family");
+        TypeOfSearch.add("Category");
+
+
+        for(int i = 0;i<5;i++) {
+            ExpectedLable("Search Product with "+TypeOfSearch.get(i)+", Result should show related to search criteria");
+            Thread.sleep(1000);
+            SearchField(driver).clear();
+            System.out.println(1);
+            SearchField(driver).sendKeys(SearchText.get(i));
+            System.out.println(2);
+            Thread.sleep(1000);
+            SearchField(driver).sendKeys(Keys.ENTER);
+            Thread.sleep(2000);
+            String ResultText=driver.findElement(By.xpath(FieldsXpaths.get(i))).getText();
+
+            if(i==0){
+                ActualLable("Successfully with provided criteria i.e " + TypeOfSearch.get(i) + "", "Pass");
+
+                ExpectedLable("Verify result is related to searched criteria or not ?");
+                if (ResultText.contentEquals(SearchText.get(i))) {
+                    ActualLable("Searched result matched with entered text", "Pass");
+                } else {
+                    ActualLable("Failed to get searched result+", "Fail");
+                }
+            }
+            else {
+                ActualLable("Successfully with provided criteria i.e " + TypeOfSearch.get(i) + "", "Pass");
+                String[] parts = ResultText.split(": ");
+                String part1 = parts[1];
+                ExpectedLable("Verify result is related to searched criteria or not ?");
+                if (part1.contentEquals(SearchText.get(i))) {
+                    ActualLable("Searched result matched with entered text", "Pass");
+                } else {
+                    ActualLable("Failed to get searched result+", "Fail");
+                }
+            }
+        }
+    }
 
 
 }

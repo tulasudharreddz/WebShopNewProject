@@ -50,7 +50,6 @@ public class ProductCartPage {
     public static String  AssertVerifyForProduct(WebDriver driver) throws IOException, WriteException, InterruptedException {
         obje.repository(driver);
         Thread.sleep(2000);
-
         String SelectedProductName = driver.findElement(ProductName).getText();
         log.info("Product name on Cart page is : "+ SelectedProductName);
         return SelectedProductName;
