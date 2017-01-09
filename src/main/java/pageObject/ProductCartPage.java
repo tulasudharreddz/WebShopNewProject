@@ -122,13 +122,17 @@ public class ProductCartPage {
                 driver.findElement(AddToFavorites).click();
                 MFRPartNumberText= driver.findElement(PRODUCTName).getText();
                 ActualLable("Successful clicked on Add To Favorites Button", "Pass");
-                Thread.sleep(1000);
                 ExpectedLable("Confirmation Popup Should show ");
-                String AlertText = driver.findElement(ConfirmationAlert).getText();
-                if(AlertText.contentEquals("Product has been added to your favorites")){
-                    ActualLable("Successful Message shown ", "Pass");
-                }else if(AlertText.contentEquals("This product already exists in your favorites")){
-                    ActualLable("Warning message shown that the product is already added ", "Pass");
+                if(driver.findElements(ConfirmationAlert).size()>0) {
+                    String AlertText = driver.findElement(ConfirmationAlert).getText();
+                    if (AlertText.contentEquals("Product has been added to your favorites")) {
+                        ActualLable("Successful Message shown ", "Pass");
+                    } else if (AlertText.contentEquals("This product already exists in your favorites")) {
+                        ActualLable("Warning message shown that the product is already added ", "Pass");
+                    }
+                    else{
+                        ActualLable("Confirmation message is displayed with error message", "Fail");
+                    }
                 }
                 else{
                     ActualLable("Confirmation message is not displayed", "Fail");

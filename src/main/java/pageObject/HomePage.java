@@ -60,7 +60,6 @@ public class HomePage {
         return element;
     }
 
-
     public static void AsertVerifyForShoppingCartLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
         StepLable("Verify Shoping cart link on home page");
@@ -69,12 +68,11 @@ public class HomePage {
         ActualLable("Successfully clicked on shopping cart page","Pass");
         Thread.sleep(2000);
 
-        String Title = driver.findElement(by.xpath("//span[contains(text(),'Shopping Cart')]")).getText();
+        String Title = driver.findElement(by.xpath("//h2[contains(text(),'Shopping Cart')]")).getText();
         log.info("Title of the page is " + Title);
         ExpectedLable("Verify Shoping cart page is opened or not.?");
         Assert.assertEquals(Title, "Shopping Cart");
         ActualLable("Shoping cart page is opened","Pass");
-
     }
 
     public static WebElement HomeCartLinkHomePage(WebDriver driver) {
@@ -471,7 +469,7 @@ public class HomePage {
 
     public static void ClickOnFavoritesMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
         Thread.sleep(1000);
-        StepLable("Navigating to ' Favorites ' Page");
+
         ExpectedLable("Check ' Favorites ' menu is displaying on home page ");
         if(driver.findElements(Favorites).size()>0) {
             ActualLable("' Favorites ' menu is available on home page", "Pass");

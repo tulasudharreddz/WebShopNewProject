@@ -60,7 +60,12 @@ public class ProductSearchPage {
     static private By AvailableProduct = By.xpath("//ul[@class='product-availability available']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Add to Cart')]");
     static private By NotAvailableProduct = By.xpath("//ul[@class='product-availability not-available']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Add to Cart')]");
     static private By LimitedProduct = By.xpath("//ul[@class='product-availability delayed']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Add to Cart')]");
-
+    static private By AvailableStatusXpath = By.xpath("//ul[@class='product-availability available']/following-sibling::span[contains(text(),'Available')]");
+    static private By LearnMoreWithAvailableStatusXpath = By.xpath("//ul[@class='product-availability available']/following-sibling::span[contains(text(),'Available')]/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Learn More')]");
+    static private By NotAvailableStatusXpath = By.xpath("//ul[@class='product-availability not-available']/following-sibling::span[contains(text(),'Not Available')]");
+    static private By LimitedAvailableStatusXpath = By.xpath("//ul[@class='product-availability delayed']/following-sibling::span[contains(text(),'Limited Availability')]");
+    static private By LearnMoreWithNotAvailableStatusXpath = By.xpath("//ul[@class='product-availability not-available']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Learn More')]");
+    static private By LearnMoreWithLimitedAvailableStatusXpath = By.xpath("//ul[@class='product-availability delayed']/parent::div/parent::is-availability/preceding-sibling::div/button[contains(text(),'Learn More')]");
 
 
     public static WebElement SearchField(WebDriver driver) {
@@ -471,6 +476,53 @@ public class ProductSearchPage {
             }
         }
     }
+    public static void GetStatusProducts(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Verify Availability Status of the Products on Favorites Page");
+        ArrayList<org.openqa.selenium.By> al=new ArrayList<org.openqa.selenium.By>();//creating arraylist
+        al.add(AvailableStatusXpath);//adding object in arraylist
+        al.add(LimitedAvailableStatusXpath);
+        al.add(NotAvailableStatusXpath);
 
+        ArrayList<org.openqa.selenium.By> a2=new ArrayList<org.openqa.selenium.By>();//creating arraylist
+        a2.add(LearnMoreWithAvailableStatusXpath);//adding object in arraylist
+        a2.add(LearnMoreWithLimitedAvailableStatusXpath);
+        a2.add(LearnMoreWithNotAvailableStatusXpath);
+        ArrayList<String> a3=new ArrayList<String>();//creating arraylist
+        a3.add("Available");//adding object in arraylist
+        a3.add("Limited Available");
+        a3.add("Not Available");
+        for(int i=0;i<=2;i++){
+            HomePage.ClickonShopmenuonHomePage(driver);
+            HomePage.ClickonCategoryinShopmenu(driver);
+            GetS(driver,al.get(i),a2.get(i),a3.get(i));
 
+        }
+    }
+    public static void GetS(WebDriver driver,By x,By x1,String status) throws InterruptedException, IOException, WriteException {
+        ExpectedLable("Search for product which the status is "+status);
+        if(driver.findElements(x).size()>0){
+            ActualLable("Found Product with '" +status+ " '","Pass");
+            ExpectedLable("Clicking on Learn More button to the same product");
+            driver.findElements(x1).get(0).click();
+            ActualLable("Successfully clicked on Learn more button for selected Product ","Pass");
+            Thread.sleep(2000);
+            ExpectedLable("Trying to add Same Product to the ' Favorites '");
+            driver.findElement(By.xpath("//button [contains(text(),'Add to Favorites')]")).click();
+            ActualLable("Successfully clicked on Add to Favorites button for selected Product ","Pass");
+            HomePage.ClickOnFavoritesMenu(driver);
+            ExpectedLable("Assert Verify ' Availability Status ' for the product ");
+            System.out.println(driver.findElement(AvailabilityStatus).getText());
+            ActualLable("' Availability Status ' is verified successfully ","Pass");
+            ExpectedLable("Now Delete the Product from Favorites");
+            FavoriesPage.DeleteFavorites(driver);
+            ActualLable("Product deleted Successfully from Favorites ","Pass");
+        }
+        else{
+            ActualLable("Product not found with '" +status+ " '","Pass");
+            ExpectedLable("Click on next page and search for the " +status+ " status product");
+            driver.findElement(nextPage).click();
+            ActualLable("Clicked on Next page button","Pass");
+            GetS(driver,x,x1,status);
+        }
+    }
 }

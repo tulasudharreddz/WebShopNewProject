@@ -40,13 +40,44 @@ public class ShoppingCartTC extends Browser {
         log.info("URL entered in browser");
     }
 
+    @Test
+    public void WS_TC_98() throws IOException, InterruptedException ,WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(98);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
+            ShoppingCart.VerifyShoppingCartPageAsserts(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
 
-    /*
-   WS_TC_61:  Validate the display of 'Inventory Color' against the products in search results page
-   a. Vendor Inventory level > 10 units
-   b. Vendor Inventory level <= 10 units
-   c. Vendor Inventory level = 0 units
-   */
+    @Test
+    public void WS_TC_99() throws IOException, InterruptedException ,WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(99);
+            LoginPage.Loginfunctionality(driver);
 
+
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
 
 }

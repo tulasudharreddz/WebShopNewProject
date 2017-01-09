@@ -28,6 +28,9 @@ import pageObject.ProductSearchPage;
 
 import javax.swing.tree.FixedHeightLayoutCache;
 
+import static GenericLib.ObjectRepository.TimeConstatnt;
+import static GenericLib.ObjectRepository.timeString;
+
 
 public class DataDriven {
 
@@ -69,7 +72,6 @@ public class DataDriven {
 		cellFormat.setAlignment(Alignment.CENTRE);
 		//Colour colour = Colour.getInternalColour(RGBColor(255,0,0));
 		cellFormat.setBackground(Colour.GREEN);//BRIGHT_GREEN
-
 		return cellFormat;
 	}
 
@@ -205,7 +207,7 @@ public class DataDriven {
 			int num = DataDriven2();
 			String folderName = ObjectRepository.DateSt();
 			Browser.screenshots();
-			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-screen-"+SCcount+".jpeg"));
+			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
 			wsheet.addHyperlink(hlk);
 			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
 			wsheet.addCell(new Label(3 , num , result,cellFormat));

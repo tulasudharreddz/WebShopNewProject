@@ -36,6 +36,42 @@ public class ShoppingCart {
     static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Sales VAT')]/parent::div/following-sibling::div");
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ProceedtocheckoutXpath = By.xpath("//button[contains(text(),'Proceed to checkout')]");
+    static private By ContinueShoppingXpath = By.xpath("//button[contains(text(),'Continue Shopping')]");
+
+
+    public static void VerifyShoppingCartPageAsserts(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        Thread.sleep(2000);
+        //Item details verify
+        ExpectedLable("Verify ' Item Details ' section available in the shopping cart or not ?");
+        if(driver.findElements(ItemDetails).size()>0){
+            ActualLable("Assert verification is successful for ' Item Details ' section" ,"Pass");
+        }
+        else{
+            ActualLable("Failed to verify assert for ' Item Details ' section" ,"Fail");
+        }
+        ExpectedLable("Verify ' Cart SummeryPannel ' section available in the shopping cart or not ?");
+        if(driver.findElements(CartSummeryPannel).size()>0){
+            ActualLable("Assert verification is successful for ' Cart  SummeryPannel ' section" ,"Pass");
+        }
+        else{
+            ActualLable("Failed to verify assert for ' Cart SummeryPannel ' section" ,"Fail");
+        }
+        ExpectedLable("Verify ' Proceed to checkout ' Button available in the shopping cart or not ?");
+        if(driver.findElements(ProceedtocheckoutXpath).size()>0){
+            ActualLable("Assert verification is successful for ' Proceed to checkout ' button" ,"Pass");
+        }
+        else{
+            ActualLable("Failed to verify assert for ' Proceed to checkout ' Button" ,"Fail");
+        }
+        ExpectedLable("Verify ' Continue Shopping ' Button available in the shopping cart or not ?");
+        if(driver.findElements(ContinueShoppingXpath).size()>0){
+            ActualLable("Assert verification is successful for ' Continue Shopping ' Button" ,"Pass");
+        }
+        else{
+            ActualLable("Failed to verify assert for ' Continue Shopping ' button " ,"Fail");
+        }
+
+    }
 
 
     public static void OpenItemDetails(WebDriver driver){

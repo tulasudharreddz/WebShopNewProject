@@ -61,7 +61,7 @@ public class CheckOutPage {
                 driver.findElement(InstallAddressDropdown).click();
                 driver.findElement(SelectAddress).click();
                 driver.findElement(ConfirmAddress).click();
-                ActualLable("install address selected successfully ", "Pass");
+                ActualLable( i+"address selected successfully ", "Pass");
             }
             else{
                 driver.findElements(SelectAddressXpath).get(i).click();

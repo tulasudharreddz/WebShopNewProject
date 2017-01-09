@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Home Page Test cases Executions with browser stack">
     <test name="LocalExecution">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Edge"/>
         <classes>
             <class name="localTestCases.ShoppingCartTC">
                 <methods>
-                    <include name="WS_TC_61"/>
+                    <include name="WS_TC_98"/>
                 </methods>
             </class>
         </classes>

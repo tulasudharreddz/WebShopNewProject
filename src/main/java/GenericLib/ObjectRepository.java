@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import jxl.write.WriteException;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
@@ -47,5 +48,16 @@ public class ObjectRepository {
 		String finalDate = ft.format(dNow);
 		return finalDate;
 	}
+	public static String timeString;
+	public static String TimeFOrScreenShot(){
+		Date dNow = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("hh-mm");
+		timeString = ft.format(dNow);
+		return timeString;
+	}
+	public static String TimeConstatnt() throws WriteException, IOException {
+		String FolderNameS = TimeFOrScreenShot();
+		return FolderNameS;
 
+	}
 }

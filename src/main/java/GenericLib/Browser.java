@@ -18,11 +18,15 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
+
+import static GenericLib.ObjectRepository.TimeConstatnt;
+import static GenericLib.ObjectRepository.timeString;
 
 
 public class Browser {
@@ -47,10 +51,13 @@ public class Browser {
 		}
 
 		else if (browser.equalsIgnoreCase("IE")) {
-			System.setProperty("webdriver.ie.driver", "D:\\IEDriverServer.exe");
+			System.setProperty("webdriver.ie.driver", "lib/IEDriverServer.exe");
 			driver = new InternetExplorerDriver();
 		}
-
+		else if (browser.equalsIgnoreCase("Edge")) {
+			System.setProperty("webdriver.edge.driver", "lib/MicrosoftWebDriver.exe");
+			driver = new EdgeDriver();
+		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
@@ -89,7 +96,7 @@ public class Browser {
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		String Folder = DataDriven.FolderName();
 		String folderName = ObjectRepository.DateSt();
-		String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-screen-"+SCcount+".jpeg";
+		String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
 		SCcount++;
 		return name;

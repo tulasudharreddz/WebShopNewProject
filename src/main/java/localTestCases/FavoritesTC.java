@@ -145,15 +145,35 @@ public class FavoritesTC extends Browser {
     }
 
     @Test
+    public void WS_TC_94() throws IOException, InterruptedException ,WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(94);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickOnFavoritesMenu(driver);
+            FavoriesPage.DeleteFavoritesFunctionality(driver);
+            ReportResult("Pass");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+            ReportResult("Fail");
+        }
+    }
+
+    @Test
     public void WS_TC_95() throws IOException, InterruptedException ,WriteException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(95);
-            Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
-
-
+            FavoriesPage.DeleteFavorites(driver);
+            FavoriesPage.StatusVerifyForProducts(driver);
             ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
