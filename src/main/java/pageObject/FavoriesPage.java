@@ -69,6 +69,9 @@ public class FavoriesPage {
         ExpectedLable("verify No of products on ' Favorites ' page");
         int NoProducts = driver.findElements(NoOfProducts).size();
         ActualLable("Successfully verified no of products available on ' Favorites ' page is " + NoProducts, "Pass");
+        if(NoProducts==0){
+
+        }
 
         ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
         AssertName.add("Image");
@@ -88,7 +91,7 @@ public class FavoriesPage {
         AssertXpath.add(AvailabilityBlock);
         for(int i=0; i<=6; i++) {
             ExpectedLable("verify ' "+AssertName.get(i)+" ' is displaying for every Product on ' Favorites ' page");
-            if (driver.findElement(AssertXpath.get(i)).isDisplayed()) {
+            if (driver.findElements(AssertXpath.get(i)).size()>0) {
                 ActualLable(" ' "+AssertName.get(i)+" ' for each product is displaying on ' Favorites ' page ", "Pass");
                 int NOProductName = driver.findElements(AssertXpath.get(i)).size();
                 ExpectedLable("verify '"+AssertName.get(i)+"'  is displaying for each product or not");

@@ -5,11 +5,11 @@
         <classes>
             <class name="localTestCases.FavoritesTC">
                 <methods>
-                    <!--<include name="WS_TC_90"/>
+                    <include name="WS_TC_90"/>
                     <include name="WS_TC_91"/>
                     <include name="WS_TC_92"/>
                     <include name="WS_TC_93"/>
-                    <include name="WS_TC_94"/>-->
+                    <include name="WS_TC_94"/>
                     <include name="WS_TC_95"/>
                 </methods>
             </class>

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -25,6 +26,7 @@ public class ShoppingCart {
 
     //Page Elements
     static private By OpenItmDetailsPannel = By.xpath("//is-tabsetpanel[@header='Item Details']/div/div[@class='panel-collapse collapse in']");
+    static private By OpenCartSummeryPannel = By.xpath("//is-tabsetpanel[@header='Cart Summary']/div/div[@class='panel-collapse collapse in']");
     static private By ItemDetails = By.xpath("//a[contains(text(),'Item Details')]");
     static private By DeleteItem = By.xpath("//a[@class='anchor-delete']");
     static private By Quantity = By.xpath("//div[@class='text-center']/input");
@@ -37,19 +39,25 @@ public class ShoppingCart {
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ProceedtocheckoutXpath = By.xpath("//button[contains(text(),'Proceed to checkout')]");
     static private By ContinueShoppingXpath = By.xpath("//button[contains(text(),'Continue Shopping')]");
+    static private By NoOfCartProducts = By.xpath("//div[@class='product-row']");
+    static private By ImageXpath = By.xpath("//img[@class='img-responsive']");
+    static private By InventoryIcon = By.xpath("//is-availability[@class='hidden-xs']");
+    static private By ProductName = By.xpath("//p[@class='product-name clickable']");
+    static private By MfrPartText = By.xpath("//span[@class='field-name'][contains(text(),'Mfr Part#')]/parent::div");
+    static private By CartSummeryLabel = By.xpath("//div[@class='row totals']/div/label");
 
 
     public static void VerifyShoppingCartPageAsserts(WebDriver driver) throws InterruptedException, IOException, WriteException {
         Thread.sleep(2000);
-        //Item details verify
+
         ExpectedLable("Verify ' Item Details ' section available in the shopping cart or not ?");
-        if(driver.findElements(ItemDetails).size()>0){
-            ActualLable("Assert verification is successful for ' Item Details ' section" ,"Pass");
-        }
-        else{
-            ActualLable("Failed to verify assert for ' Item Details ' section" ,"Fail");
+        if (driver.findElements(ItemDetails).size() > 0) {
+            ActualLable("Assert verification is successful for ' Item Details ' section", "Pass");
+        } else {
+            ActualLable("Failed to verify assert for ' Item Details ' section", "Fail");
         }
         ExpectedLable("Verify ' Cart SummeryPannel ' section available in the shopping cart or not ?");
+
         if(driver.findElements(CartSummeryPannel).size()>0){
             ActualLable("Assert verification is successful for ' Cart  SummeryPannel ' section" ,"Pass");
         }
@@ -72,7 +80,6 @@ public class ShoppingCart {
         }
 
     }
-
 
     public static void OpenItemDetails(WebDriver driver){
         if(driver.findElements(OpenItmDetailsPannel).size()>0){
@@ -115,6 +122,24 @@ public class ShoppingCart {
             noOfCartItemsAavailable=0;
         }
         return noOfCartItemsAavailable;
+    }
+    public static void VerifyDeleteExistItem(WebDriver driver) throws IOException, WriteException, InterruptedException {
+
+        ExpectedLable("Verify Delete Shopping cart items functionality");
+        if (driver.findElements(DeleteItem).size() > 0) {
+            String partNumber = driver.findElements(MfrPartText).get(0).getText();
+            System.out.println(partNumber);
+            driver.findElements(DeleteItem).get(0).click();
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
+            Thread.sleep(3000);
+            if(driver.findElements(By.xpath("//*[contains(text(),'"+partNumber+"')]")).size()>0){
+                ActualLable("Product is not deleted ", "Fail");
+            }else{ ActualLable(" product deleted successfully ", "Pass");}
+        } else {
+            ActualLable("Delete button is not available", "Fail");
+        }
+
     }
     public static List<WebElement> QuantityBlank(WebDriver driver) {
 
@@ -193,8 +218,12 @@ public class ShoppingCart {
             ActualLable("There are no items available in Shoping cart" ,"Pass");
         }
         ExpectedLable("Open Cart Summery Pannel in Shopping cart page");
-        driver.findElement(CartSummeryPannel).click();
-        ActualLable("Cart Summery Pannel Opened successfully" ,"Pass");
+        if(driver.findElements(OpenCartSummeryPannel).size()>0) {
+            ActualLable("Cart Summery Panel already Opened" ,"Pass");
+        }else{
+            driver.findElement(CartSummeryPannel).click();
+            ActualLable("Cart Summery Pannel Opened successfully" ,"Pass");
+        }
         Thread.sleep(1000);
         String ActualCartSubtotalString = driver.findElement(ActualCartSubtotalXpath).getText();
         String s2 = ActualCartSubtotalString.replaceAll("[€$£₹,]","");
@@ -206,13 +235,40 @@ public class ShoppingCart {
 
         return ActualCartSubtotal;
     }
+    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException {
 
+        ExpectedLable("Open Cart Summery Panel in Shopping cart page");
+        if(driver.findElements(OpenCartSummeryPannel).size()>0) {
+            ActualLable("Cart Summery Panel already Opened" ,"Pass");
+        }else{
+            driver.findElement(CartSummeryPannel).click();
+            ActualLable("Cart Summery Panel Opened successfully" ,"Pass");
+        }
+        ArrayList<String> al=new ArrayList<String>();//creating arraylist
+        al.add("Cart Subtotal");
+        al.add("Shipping Charges");
+        al.add("Sales VAT");
+        al.add("Cart Grand Total");
+        for(int j=0;j<=3;j++) {
+            ExpectedLable("Verify assert for label '"+al.get(j)+"' in shopping cart");
+            for (int i = 0; i <= driver.findElements(CartSummeryLabel).size()- 1; i++) {
+                String LabelName = driver.findElements(CartSummeryLabel).get(i).getText();
+                System.out.println(LabelName);
+                if(LabelName.contentEquals(al.get(j))){
+                    ActualLable("assert verified successfully for label " +al.get(j) ,"Pass");
+                    break;
+                }
+            }
+        }
+    }
     public static Double VerifyCartGrandTotal(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        StepLable("Verify Cart Grand total");
+
         Double CartSubtotal = VerifyCartSubtotal(driver);
+        StepLable("Verify Cart Grand total");
         ExpectedLable("Get Shipping charges from Shopping cart");
-        Double ExpectedShippingCharges1 = CartSubtotal*10/100;
-        double ExpectedShippingCharges = Math.round( ExpectedShippingCharges1 * 100.0 ) / 100.0;
+        //Double ExpectedShippingCharges1 = CartSubtotal*10/100;
+        //double ExpectedShippingCharges = Math.round( ExpectedShippingCharges1 * 100.0 ) / 100.0;
+        double ExpectedShippingCharges = 6.50;
         String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
         ActualLable("Shipping Charges are "+ActualShippingChargesString  ,"Pass");
         String s1 = ActualShippingChargesString.replaceAll("[€$£₹,]","");
@@ -236,7 +292,7 @@ public class ShoppingCart {
         Double ExpectedCartGrandTotal1 = CartSubtotal+ExpectedShippingCharges+ExpectedSalesVatCharges;
         double ExpectedCartGrandTotal = Math.round( ExpectedCartGrandTotal1 * 100.0 ) / 100.0;
         String ActualCartGrandTotalString =  driver.findElement(ActualCartGrandTotalXpath).getText();
-        ActualLable("Cart Grand Total is "+ActualShippingChargesString  ,"Pass");
+        ActualLable("Cart Grand Total is "+ActualCartGrandTotalString  ,"Pass");
         String s3 = ActualCartGrandTotalString.replaceAll("[€$£₹,]","");
         Double ActualCartGrandTotal = Double.parseDouble(s3);
         ExpectedLable("Verify Cart Grand Total in shopping cart");
@@ -265,5 +321,126 @@ public class ShoppingCart {
             ActualLable("'Proceed to checkout' button is not available", "Fail");
         }
     }
+    public static void AssertVerifyForItemDetails(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        StepLable(" Content verification for Item details section ");
+        ExpectedLable("Verify Assert for ' Item Details ' panel title ");
+        String panelTitle=driver.findElement(ItemDetails).getText();
+        ActualLable("Assert verified successfully and panel title is "+panelTitle, "Pass");
+        ExpectedLable("Verify ' Item Details ' panel open by default when page is loaded or not ? ");
+        if(driver.findElements(OpenItmDetailsPannel).size()>0) {
+            ActualLable("Verification is successful, ' Item Details ' panel is opened by default", "Pass");
+        }
+        else{
+            ActualLable("Verification failed for default open pannel for ' Item Details ' section", "Fail");
+        }
 
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        ExpectedLable("Verify ' Image ' available for each product or not ?");
+        if (driver.findElements(ImageXpath).size() > 0) {
+            if(NoOfProductAddedToCart==driver.findElements(ImageXpath).size()){
+                ActualLable("Assert verification is successful for product ' Image ' ", "Pass");
+            }
+            else {
+                ActualLable("Number of images are not equal to no of product added in the cart", "Fail");
+            }
+
+        } else {
+            ActualLable("Failed to verify assert for product ' Image ' in ' Item Details ' section", "Fail");
+        }
+
+        ExpectedLable("Verify ' DeleteItem ' available for each product or not ?");
+        if (driver.findElements(DeleteItem).size() > 0) {
+            if(NoOfProductAddedToCart==driver.findElements(DeleteItem).size()){
+                ActualLable("Assert verification is successful for 'Delete Item' button ", "Pass");
+            }
+            else {
+                ActualLable("Number of Delete buttons are not equal to no of product added in the cart", "Fail");
+            }
+
+        } else {
+            ActualLable("Failed to verify assert for 'Delete buttons' in ' Item Details ' section", "Fail");
+        }
+
+        ExpectedLable("Verify ' Inventory  Icon ' available for each product or not ?");
+        if (driver.findElements(InventoryIcon).size() > 0) {
+            if(NoOfProductAddedToCart==driver.findElements(InventoryIcon).size()){
+                ActualLable("Assert verification is successful for 'Inventory Icon' ", "Pass");
+            }
+            else {
+                ActualLable("Number of Inventory Icons are not equal to no of product added in the cart", "Fail");
+            }
+
+        } else {
+            ActualLable("Failed to verify assert for 'Inventory Icon' in ' Item Details ' section", "Fail");
+        }
+    }
+
+    public static void VerifyEditQuantityfunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        ExpectedLable("Verify Assert for ' Quantity blank ' for every product");
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        if (driver.findElements(Quantity).size() > 0) {
+            if(NoOfProductAddedToCart==driver.findElements(Quantity).size()){
+                ActualLable("Assert verification is successful for product ' Quantity blank ' ", "Pass");
+            }
+            else {ActualLable("Number of images are not equal to no of product added in the cart", "Fail"); }
+        } else { ActualLable("Failed to verify assert for product ' Quantity blank ' in ' Item Details ' section", "Fail");}
+
+        ExpectedLable("Verify Quantity change functionality");
+        driver.findElements(Quantity).get(0).clear();
+        driver.findElements(Quantity).get(0).sendKeys("12");
+        String QuantityText = driver.findElements(Quantity).get(0).getAttribute("innerHTML");
+        System.out.println(QuantityText);
+        int QuantityInt = Integer.parseInt(QuantityText);
+        if(QuantityInt==12){
+            ActualLable("Quantity changed successfully", "Pass");
+        }else{ ActualLable("Edit Quantity functionality failed ", "Fail");}
+    }
+    public static void VerifyDisplayOfLineItem(WebDriver driver) throws IOException, WriteException, InterruptedException {
+
+        ExpectedLable("Verify line items are arranged as different items or not");
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        long NoOfProductNames = driver.findElements(ProductName).size();
+        if (NoOfProductNames==NoOfProductAddedToCart) {
+            ActualLable("No of Products in cart is same as no of products name, every product has different blocks for pproducts", "Pass");
+
+        } else { ActualLable("Line items are combined more than one product in one block", "Fail");}
+
+    }
+
+    public static void VerifyLogisticCharge(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        StepLable("Verify 'Shipping Charges' in shopping cart");
+        HomePage.ClickonShoppingCart(driver);
+        ExpectedLable("Open Cart Summery Panel in Shopping cart page");
+        if(driver.findElements(OpenCartSummeryPannel).size()>0) {
+            ActualLable("Cart Summery Panel already Opened" ,"Pass");
+        }else{
+            driver.findElement(CartSummeryPannel).click();
+            ActualLable("Cart Summery Panel Opened successfully" ,"Pass");
+        }
+
+        ExpectedLable("Verify assert for 'Shipping Charges' in shopping cart");
+        for (int i = 0; i <= driver.findElements(CartSummeryLabel).size()- 1; i++) {
+            String LabelName = driver.findElements(CartSummeryLabel).get(i).getText();
+            if(LabelName.contentEquals("Shipping Charges")){
+                ActualLable("assert verified successfully for label "  ,"Pass");
+
+                ExpectedLable("Get Shipping charges from Shopping cart");
+                double ExpectedShippingCharges = 6.50;
+                String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
+                ActualLable("Shipping Charges are "+ActualShippingChargesString  ,"Pass");
+                String s1 = ActualShippingChargesString.replaceAll("[€$£₹,]","");
+                Double ActualShippingCharges = Double.parseDouble(s1);
+                ExpectedLable("Verify Shipping charges in shopping cart");
+                Assert.assertEquals(ActualShippingCharges, ExpectedShippingCharges);
+                if(ActualShippingCharges.equals(ExpectedShippingCharges)) {
+                    ActualLable("Shipping Charges verified successfully", "Pass");
+                }
+                else{
+                    ActualLable("Shipping charges are not equals to 6.50", "Fail");
+                }
+                break;
+            }
+        }
+
+    }
 }

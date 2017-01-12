@@ -3,10 +3,12 @@ package GenericLib;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.Boolean;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import jdk.nashorn.internal.ir.Flags;
 import jxl.Cell;
 import jxl.CellReferenceHelper;
 import jxl.format.*;
@@ -70,7 +72,6 @@ public class DataDriven {
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THICK);
 		cellFormat.setAlignment(Alignment.CENTRE);
-		//Colour colour = Colour.getInternalColour(RGBColor(255,0,0));
 		cellFormat.setBackground(Colour.GREEN);//BRIGHT_GREEN
 		return cellFormat;
 	}
@@ -81,6 +82,7 @@ public class DataDriven {
 		sheet = book.getSheet("ResultSheet");
 		String folderName = ObjectRepository.DateSt();
 		wbook = Workbook.createWorkbook(new File("./ResultReports/" + folderName + "/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
+		//To save in commonShare
 		//wbook = Workbook.createWorkbook(new File("//10.45.34.14//DDUS_Team//WebShopAutomation//Result//"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(0 , 0 ,"DD WebShop Test Report",CellFormat3()));
@@ -211,6 +213,7 @@ public class DataDriven {
 			wsheet.addHyperlink(hlk);
 			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
 			wsheet.addCell(new Label(3 , num , result,cellFormat));
+			sResult = true;
 			SCcount++;
 		}
 		else if(result=="Pass"){
@@ -235,8 +238,7 @@ public class DataDriven {
 	static String ScID;
 	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
 		int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
-		 ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
-
+		ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
 		String ScDis= ReadTestCases(TestCasesheet).getCell(2,j).getContents();
 		String text = ScID+";"+ScName;
@@ -252,27 +254,25 @@ public class DataDriven {
 		wsheet.addCell(new Label(0 , k , text, cellFormat));
 		//wsheet = wbook.getSheet("TestCaseDiscription");
 		int i = DataDriven5();
-
 		WritableHyperlink hlk =new WritableHyperlink(0,i,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
-
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addHyperlink(hlk);
 		wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , i, ScName, CellFormat()));
 		wsheet.addCell(new Label(2 , i, ScDis, CellFormat()));
 		counting=1;
-
 	}
 	public static String FolderName() throws WriteException, IOException {
 		String FolderNameS = ScID;
 		return FolderNameS;
 	}
 
-
-	public static void ReportResult(String Scresult) throws WriteException {
+	static boolean sResult;
+	public static void ReportResult() throws WriteException {
 		int ResultColumn= DataDriven6();
-		wsheet = wbook.getSheet("TestCaseDiscription");
-		if(Scresult=="Fail"){
+		wsheet = wbook.getSheet("TestCaseDiscription");//sResult
+		if(sResult==true){
+			//if(Scresult=="Fail"){
 			WritableCellFormat cellFormat = null;
 			WritableFont cellFont = null;
 			cellFont = new WritableFont(WritableFont.ARIAL, 9);
@@ -281,10 +281,11 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
-			int num = DataDriven2();
-			wsheet.addCell(new Label(3 , ResultColumn , Scresult,cellFormat));
+			wsheet.addCell(new Label(3 , ResultColumn , "Fail",cellFormat));
+			sResult=false;
 		}
-		else if(Scresult=="Pass"){
+		else {
+			//else if(Scresult=="Pass"){
 			WritableCellFormat cellFormat = null;
 			WritableFont cellFont = null;
 			cellFont = new WritableFont(WritableFont.ARIAL, 9);
@@ -293,11 +294,11 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.GREEN);
-			wsheet.addCell(new Label(3 , ResultColumn , Scresult,cellFormat));
+			wsheet.addCell(new Label(3 , ResultColumn , "Pass",cellFormat));
 		}
-		else{
+		/*else{
 			wsheet.addCell(new Label(3 , ResultColumn, Scresult,CellFormat1()));
-		}
+		}*/
 		wsheet.addCell(new Label(4 , ResultColumn , ObjectRepository.dateString(),CellFormat1()));
 	}
 

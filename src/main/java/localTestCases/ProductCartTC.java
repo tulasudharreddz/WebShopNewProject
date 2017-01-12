@@ -8,6 +8,7 @@ import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -38,7 +39,8 @@ public class ProductCartTC extends Browser {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
     }
-
+    @AfterMethod
+    public void ResultStatus() throws WriteException { ReportResult();}
     /*
   WS_TC_67:  Verify the content in Product Card Page
   */
@@ -57,15 +59,15 @@ public class ProductCartTC extends Browser {
             Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
             ActualLable("Successfully verified for Name of the product","Pass");
             ProductCartPage.ContentVerifyForPCart(driver);
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         }
     }
     /*
@@ -89,15 +91,15 @@ public class ProductCartTC extends Browser {
             else{
                 ActualLable("verification failed for ' Add To Cart ' Button functionality","Fail");
             }
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         }
     }
 
@@ -114,15 +116,15 @@ public class ProductCartTC extends Browser {
             FavoriesPage.DeleteFavorites(driver);
             ProductSearchPage.SelectProductOnSearchResultPage(driver);
             FavoriesPage.VerifyFavoritesFunctionality(driver);
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         }
     }
 
@@ -139,15 +141,15 @@ public class ProductCartTC extends Browser {
             FavoriesPage.DeleteFavorites(driver);
             ProductSearchPage.SelectProductOnSearchResultPage(driver);
             ProductCartPage.AddToFavoritesWithSameProductPCart(driver);
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
+            
         }
     }
 }

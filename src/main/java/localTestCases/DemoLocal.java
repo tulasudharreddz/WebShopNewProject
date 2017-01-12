@@ -32,7 +32,8 @@ public class DemoLocal extends Browser{
 		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 		log.info("URL entered in browser");
 	}
-
+	@AfterMethod
+	public void ResultStatus() throws WriteException { ReportResult();}
 	@Test
 	public void DemoTC() throws IOException, WriteException {
 		try {
@@ -56,23 +57,16 @@ public class DemoLocal extends Browser{
 			else{
 				ActualLable("verification failed for cart Number functionality","Fail");
 			}
-			ReportResult("Pass");
-		/*Double UnitPrice = HomePage.UnitPrice(driver);
-		Assert.assertEquals(UnitCost, "$"+UnitPrice);*/
 		}
 		catch (AssertionError e){
 			log.info("Exception for the product is " + e);
 			String error =  "Exception " +  e.getClass().getSimpleName();
-			//ScreenShots.screenshots(driver);
 			ActualLable(error,"Fail");
-			ReportResult("Fail");
 		}
 		catch (Exception e){
 			log.info("Exception for the product is " + e);
 			String error =  "Exception " +  e.getClass().getSimpleName();
-			//ScreenShots.screenshots(driver);
 			ActualLable(error,"Fail");
-			ReportResult("Fail");
 		}
 	}
 

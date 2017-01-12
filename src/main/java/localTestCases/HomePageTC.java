@@ -20,6 +20,7 @@ import pageObject.*;
 import org.apache.log4j.Logger;
 
 import static GenericLib.DataDriven.ActualLable;
+import static GenericLib.DataDriven.ReportResult;
 import static GenericLib.DataDriven.StepLable;
 
 
@@ -51,23 +52,8 @@ public class HomePageTC extends Browser{
         log.info("URL entered in browser");
 
     }
-
-
-    /*@Parameters("browser")
-    @BeforeTest
-    public WebDriver start(String browser) throws BiffException, IOException, RowsExceededException, WriteException, InterruptedException {
-        *//*if (browser.equalsIgnoreCase(browser)) {
-            driver = brow.selectbrowser(browser);
-        }
-        *//**//*sheet = excel.ReadSheet(sheet);
-        wsheet = excel.writeSheet(wsheet, "test", "TestCase1");*//*
-        ob.repository(driver);
-        PropertyConfigurator.configure(ob.obj.getProperty("log4j"));
-        driver.get(ob.obj.getProperty("url"));
-        return driver;
-    }*/
-
-
+    @AfterMethod
+    public void ResultStatus() throws WriteException { ReportResult();}
 
     @Test
     public void TC_Home_01() throws Exception {
@@ -80,13 +66,15 @@ public class HomePageTC extends Browser{
             //To verify Shoping cart link
             HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
             log.info("Shopping Cart link Asert is verified");
-
             //To verify Home link
             HomePage.AsertVerifyForHomeLinkHomePage(driver);
             log.info("Home link on home page Asert is verified");
-        }
-        catch (Exception e){
-            ActualLable("Verification failed with exception "+e,"Fail");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
         }
     }
 
@@ -98,17 +86,24 @@ public class HomePageTC extends Browser{
 
     @Test
     public void WS_TC_30() throws InterruptedException, IOException, WriteException, BiffException {
-        log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
+        try{
+            log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
 
-        DataDriven.ReportStartup(30);
+            DataDriven.ReportStartup(30);
 
-        Thread.sleep(2000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(2000);
-        log.info("Login in to the webshop application");
-        HomePage.AssertVerifyForHomePage(driver);
-        HomePage.VerifyDropDownListUnderShopMenu(driver);
-        log.info("WS_TC_30: Verified");
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(2000);
+            log.info("Login in to the webshop application");
+            HomePage.AssertVerifyForHomePage(driver);
+            HomePage.VerifyDropDownListUnderShopMenu(driver);
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
     }
 
     /*
@@ -129,16 +124,13 @@ public class HomePageTC extends Browser{
             log.info("Login in to the webshop application");
             HomePage.AssertVerifyForHomePage(driver);
             HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
-        }
-        catch (AssertionError e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();
-            ActualLable(error,"Fail");
-        }
-        catch (Exception e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();
-            ActualLable(error,"Fail");
+
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
         }
     }
     /*
@@ -156,12 +148,10 @@ public class HomePageTC extends Browser{
             log.info("Login in to the webshop application");
             HomePage.ListOfOptionsMyAccountMenu(driver);
             //StepLable("WS_TC_32: Successfully Verified");
-            log.info("WS_TC_32: Verified");
-        }
-        catch (Exception e){
-            log.info("Exception for the product is " + e);
-            String error =  "Exception " +  e.getClass().getSimpleName();;
-            ActualLable(error,"Fail");
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
         }
     }
 

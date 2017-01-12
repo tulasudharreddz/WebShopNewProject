@@ -43,7 +43,8 @@ public class ShopModuleTC extends Browser {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
     }
-
+    @AfterMethod
+    public void ResultStatus() throws WriteException { ReportResult();}
     /*
     WS_TC_57: Verify the display of search results page
 
@@ -66,15 +67,13 @@ public class ShopModuleTC extends Browser {
             log.info("Cliked on Shop menu");
             HomePage.MovingToCategory(driver);
             ProductSearchPage.SearchingFunctionality(driver);
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
 
     }
@@ -104,15 +103,13 @@ public class ShopModuleTC extends Browser {
             log.info("pagination verified on search result page");
             ProductSearchPage.NoOfReultsChangeFunctionality(driver);
             StepLable("WS_TC_58: Successfully verified 1. content in search results page, 2. Pagination Functionality in search results page");
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
     /*
@@ -136,15 +133,13 @@ public class ShopModuleTC extends Browser {
             Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
             ActualLable("Successfully verified for Learn more button functionality ","Pass");
             log.info("Assert Verified for the selected Product ");
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
     /*
@@ -166,15 +161,13 @@ public class ShopModuleTC extends Browser {
             HomePage.MovingToCategory(driver);
             Thread.sleep(1000);
             ProductSearchPage.StatusVerifyForProducts(driver);
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
     @Test
@@ -206,21 +199,17 @@ public class ShopModuleTC extends Browser {
             }else{
                 ActualLable("Failed to Verify cart Count functionality for Limited Available product","Fail");
             }
-            ReportResult("Pass");
+            
         }
         catch (AssertionError e){
             log.info("Exception for the product is " + e);
             String error =  "Exception " +  e.getClass().getSimpleName();
-            //ScreenShots.screenshots(driver);
             ActualLable(error,"Fail");
-            ReportResult("Fail");
         }
         catch (Exception e){
             log.info("Exception for the product is " + e);
             String error =  "Exception " +  e.getClass().getSimpleName();
-            //ScreenShots.screenshots(driver);
             ActualLable(error,"Fail");
-            ReportResult("Fail");
         }
     }
 

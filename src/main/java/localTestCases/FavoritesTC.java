@@ -10,6 +10,7 @@ import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -44,6 +45,8 @@ public class FavoritesTC extends Browser {
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
         log.info("URL entered in browser");
     }
+    @AfterMethod
+    public void ResultStatus() throws WriteException { ReportResult();}
 
     @Test
     public void WS_TC_90() throws IOException, InterruptedException ,WriteException{
@@ -54,17 +57,14 @@ public class FavoritesTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
             FavoriesPage.FavoritesPageVerify(driver);
-            ReportResult("Pass");
+            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
-
     }
 
     @Test
@@ -77,17 +77,13 @@ public class FavoritesTC extends Browser {
             HomePage.ClickOnFavoritesMenu(driver);
             FavoriesPage.FavoritesPageVerify(driver);
             FavoriesPage.FavoritesPageContentVerify(driver);
-            ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
-
     }
     @Test
     public void WS_TC_92() throws IOException, InterruptedException ,WriteException{
@@ -105,15 +101,12 @@ public class FavoritesTC extends Browser {
                 ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
             }
             else{ ActualLable("verification failed for cart Number functionality","Fail"); }
-            ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
 
@@ -132,15 +125,12 @@ public class FavoritesTC extends Browser {
             ExpectedLable("Verify Assert for Learn more");
             Assert.assertEquals(NameOnSearchPage, NameonProductCartPage);
             ActualLable("Successfully verified for Learn more button functionality ","Pass");
-            ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
 
@@ -153,15 +143,12 @@ public class FavoritesTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
             FavoriesPage.DeleteFavoritesFunctionality(driver);
-            ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
 
@@ -174,15 +161,12 @@ public class FavoritesTC extends Browser {
             HomePage.ClickOnFavoritesMenu(driver);
             FavoriesPage.DeleteFavorites(driver);
             FavoriesPage.StatusVerifyForProducts(driver);
-            ReportResult("Pass");
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-            ReportResult("Fail");
         }
     }
 }
