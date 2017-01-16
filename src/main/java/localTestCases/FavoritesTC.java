@@ -76,7 +76,15 @@ public class FavoritesTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
             FavoriesPage.FavoritesPageVerify(driver);
-            FavoriesPage.FavoritesPageContentVerify(driver);
+            if(FavoriesPage.NoOfFavoritesProducts(driver)>0){
+                FavoriesPage.FavoritesPageContentVerify(driver);
+            }
+            else {
+                FavoriesPage.AddToFavoritesFunctionality(driver);
+                HomePage.ClickOnFavoritesMenu(driver);
+                FavoriesPage.FavoritesPageContentVerify(driver);
+            }
+
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
@@ -94,13 +102,27 @@ public class FavoritesTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             double noOfItems =ShoppingCart.DeleteExistItem(driver);
             HomePage.ClickOnFavoritesMenu(driver);
-            FavoriesPage.VerifyAddToCartOnFavoritesPage(driver);
-            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
-            ExpectedLable("Verify cart count functionality by adding product to cart");
-            if(noOfItemsafterAddtoCart>noOfItems){
-                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+            if(FavoriesPage.NoOfFavoritesProducts(driver)>0){
+                FavoriesPage.VerifyAddToCartOnFavoritesPage(driver);
+                double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+                ExpectedLable("Verify cart count functionality by adding product to cart");
+                if(noOfItemsafterAddtoCart>noOfItems){
+                    ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                }
+                else{ ActualLable("verification failed for cart Number functionality","Fail"); }
             }
-            else{ ActualLable("verification failed for cart Number functionality","Fail"); }
+            else {
+                FavoriesPage.AddToFavoritesFunctionality(driver);
+                HomePage.ClickOnFavoritesMenu(driver);
+                FavoriesPage.VerifyAddToCartOnFavoritesPage(driver);
+                double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+                ExpectedLable("Verify cart count functionality by adding product to cart");
+                if(noOfItemsafterAddtoCart>noOfItems){
+                    ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                }
+                else{ ActualLable("verification failed for cart Number functionality","Fail"); }
+            }
+
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
@@ -118,6 +140,10 @@ public class FavoritesTC extends Browser {
             Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
+            if(FavoriesPage.NoOfFavoritesProducts(driver)<=0){
+                FavoriesPage.AddToFavoritesFunctionality(driver);
+                HomePage.ClickOnFavoritesMenu(driver);
+            }
             String NameOnSearchPage = FavoriesPage.SelectProductOnFavoritesPage(driver);
             ExpectedLable("Expected Assert Name: "+NameOnSearchPage);
             String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
@@ -125,6 +151,7 @@ public class FavoritesTC extends Browser {
             ExpectedLable("Verify Assert for Learn more");
             Assert.assertEquals(NameOnSearchPage, NameonProductCartPage);
             ActualLable("Successfully verified for Learn more button functionality ","Pass");
+
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
@@ -142,6 +169,10 @@ public class FavoritesTC extends Browser {
             Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnFavoritesMenu(driver);
+            if(FavoriesPage.NoOfFavoritesProducts(driver)<=0){
+                FavoriesPage.AddToFavoritesFunctionality(driver);
+                HomePage.ClickOnFavoritesMenu(driver);
+            }
             FavoriesPage.DeleteFavoritesFunctionality(driver);
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();

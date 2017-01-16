@@ -63,6 +63,21 @@ public class FavoriesPage {
         }
     }
 
+    public static int NoOfFavoritesProducts(WebDriver driver) throws IOException, WriteException {
+
+        ExpectedLable("verify No of products on ' Favorites ' page");
+        int NoProducts;
+        if(driver.findElements(NoOfProducts).size()>0) {
+            NoProducts = driver.findElements(NoOfProducts).size();
+            ActualLable("Successfully verified no of products available on ' Favorites ' page is ' " + NoProducts, "Pass");
+        }
+        else{
+            NoProducts=0;
+            ActualLable("Products are not added to favorites ", "Pass");
+        }
+        return NoProducts;
+    }
+
     public static void FavoritesPageContentVerify(WebDriver driver) throws InterruptedException, IOException, WriteException {
         Thread.sleep(2000);
         StepLable("Content verification on ' Favorites ' page");
@@ -71,7 +86,6 @@ public class FavoriesPage {
         int NoProducts = driver.findElements(NoOfProducts).size();
         ActualLable("Successfully verified no of products available on ' Favorites ' page is " + NoProducts, "Pass");
         if(NoProducts==0){
-
         }
 
         ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
@@ -139,10 +153,10 @@ public class FavoriesPage {
             noOfItem = driver.findElements(DeleteItem).size();
             ActualLable("Number of items available in the ' Favorites ' list are "+noOfItem ,"Pass");
             ExpectedLable("Now Delete first product from ' Favorites ' menu");
-                driver.findElements(DeleteItem).get(0).click();
-                Thread.sleep(1000);
-                driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
-                Thread.sleep(1000);
+            driver.findElements(DeleteItem).get(0).click();
+            Thread.sleep(1000);
+            driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
+            Thread.sleep(1000);
             ActualLable("Product deleted successfully from ' Favorites ' menu" ,"Pass");
         }
         else{
@@ -261,6 +275,23 @@ public class FavoriesPage {
         }
 
     }
+    public static void AddToFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
+
+        ProductSearchPage.SelectProductOnSearchResultPage(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Verify Assert for Add to Favorites button ");
+        if(driver.findElements(AddToFavorites).size()>0){
+            ActualLable("Assert verified successfully for Add to Favorites button","Pass");
+            ExpectedLable("Now Click on Add to Favorites button");
+            driver.findElement(AddToFavorites).click();
+            ActualLable("Successfully clicked on Add to Favorites button","Pass");
+        }
+        else{
+            ActualLable("Assert verified Failed for Add to Favorites button","Fail");
+        }
+
+    }
+
 
     public static void StatusVerifyForProducts(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
