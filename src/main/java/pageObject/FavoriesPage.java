@@ -51,14 +51,15 @@ public class FavoriesPage {
 
 
     public static void FavoritesPageVerify(WebDriver driver) throws InterruptedException, IOException, WriteException {
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         ExpectedLable("Verify Assert for ' Favorites ' Page, Page Header Text Should be ' Favorites '");
-        String PageHeaderText = driver.findElement(PageHeader).getText();
-        if(PageHeaderText.contentEquals("Favorites")){
-            ActualLable("Successfully verified Assert for ' Favorites ' Page" ,"Pass");
-        }
-        else{
-            ActualLable("Failed to verify Assert for ' Favorites ' Page ","Fail");
+        if(driver.findElements(PageHeader).size()>0) {
+            String PageHeaderText = driver.findElement(PageHeader).getText();
+            if (PageHeaderText.contentEquals("Favorites")) {
+                ActualLable("Successfully verified Assert for ' Favorites ' Page", "Pass");
+            } else {
+                ActualLable("Failed to verify Assert for ' Favorites ' Page ", "Fail");
+            }
         }
     }
 

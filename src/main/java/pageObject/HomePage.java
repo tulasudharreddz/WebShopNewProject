@@ -470,7 +470,6 @@ public class HomePage {
 
     public static void ClickOnFavoritesMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
         Thread.sleep(1000);
-
         ExpectedLable("Check ' Favorites ' menu is displaying on home page ");
         if(driver.findElements(Favorites).size()>0) {
             ActualLable("' Favorites ' menu is available on home page", "Pass");
