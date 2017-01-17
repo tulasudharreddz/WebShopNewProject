@@ -25,6 +25,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
 
+import static GenericLib.DataDriven.ReportResult;
 import static GenericLib.ObjectRepository.TimeConstatnt;
 import static GenericLib.ObjectRepository.timeString;
 
@@ -101,4 +102,12 @@ public class Browser {
 		SCcount++;
 		return name;
 	}
+
+	@BeforeMethod
+	public void Url() throws IOException, BiffException, WriteException {
+		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+		//log.info("URL entered in browser");
+	}
+	@AfterMethod
+	public void ResultStatus() throws WriteException { ReportResult();}
 }

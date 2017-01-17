@@ -35,15 +35,6 @@ public class ShoppingCartTC extends Browser {
         driver = getDriver();
     }
 
-    @BeforeMethod
-    public void Url() throws IOException, BiffException, WriteException {
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-    }
-
-    @AfterMethod
-    public void ResultStatus() throws WriteException {
-        ReportResult();
-    }
 
     @Test
     public void WS_TC_98() throws IOException, InterruptedException, WriteException {

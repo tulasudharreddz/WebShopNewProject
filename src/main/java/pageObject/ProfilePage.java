@@ -138,14 +138,6 @@ public class ProfilePage {
             log.info("Assert failed for Save Button");
             ActualLable("Assert is verification is failed for Save", "Fail");
         }
-        ExpectedLable("Verify ClearAll button are availabel or not");
-        if (driver.findElements(ClearAll).size() > 0) {
-            log.info("Assert is verified for Clear All Field");
-            ActualLable("Assert is successfully verified for ClearAll", "Pass");
-        } else {
-            log.info("Assert failed for Clear All Field");
-            ActualLable("Assert is verification is failed for ClearAll", "Fail");
-        }
 
     }
 

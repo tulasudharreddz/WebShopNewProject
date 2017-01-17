@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Home Page Test cases Executions with browser stack">
+    <test name="LocalExecution">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="localTestCases.CheckOutTC">
+                <methods>
+                    <!--<include name="WS_TC_140"/>
+                    <include name="WS_TC_141"/>-->
+                    <include name="WS_TC_142"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

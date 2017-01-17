@@ -46,15 +46,6 @@ public class HomePageTC extends Browser{
     }
 
 
-    @BeforeMethod
-    public void Url() throws WriteException, IOException, BiffException {
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-        log.info("URL entered in browser");
-
-    }
-    @AfterMethod
-    public void ResultStatus() throws WriteException { ReportResult();}
-
     @Test
     public void TC_Home_01() throws Exception {
         try {

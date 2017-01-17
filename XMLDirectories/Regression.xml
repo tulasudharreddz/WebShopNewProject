@@ -3,13 +3,6 @@
     <test name="TotalExecution">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="localTestCases.ShopModuleTC">
-                <methods>
-                    <include name="WS_TC_58"/>
-                    <include name="WS_TC_59"/>
-                    <include name="WS_TC_60"/>
-                </methods>
-            </class>
             <class name="localTestCases.LandingPageTC">
                 <methods>
                     <include name="TC01"/>
@@ -39,7 +32,58 @@
                     <include name="WS_TC_42"/>
                     <include name="WS_TC_43"/>
                     <include name="WS_TC_44"/>
+                    <include name="WS_TC_47"/>
+                    <include name="WS_TC_48"/>
+                    <include name="WS_TC_49"/>
+                    <include name="WS_TC_50"/>
+                    <include name="WS_TC_53"/>
+                    <include name="WS_TC_54"/>
+                    <include name="WS_TC_55"/>
+                    <include name="WS_TC_56"/>
+                </methods>
+            </class>
+            <class name="localTestCases.ShopModuleTC">
+                <methods>
+                    <include name="WS_TC_57"/>
+                    <include name="WS_TC_58"/>
                     <include name="WS_TC_59"/>
+                    <include name="WS_TC_60"/>
+                    <include name="WS_TC_61"/>
+                </methods>
+            </class>
+            <class name="localTestCases.ProductCartTC">
+                <methods>
+                    <include name="WS_TC_67"/>
+                    <include name="WS_TC_68"/>
+                    <include name="WS_TC_69"/>
+                    <include name="WS_TC_70"/>
+                </methods>
+            </class>
+            <class name="localTestCases.FavoritesTC">
+                <methods>
+                    <include name="WS_TC_90"/>
+                    <include name="WS_TC_91"/>
+                    <include name="WS_TC_92"/>
+                    <include name="WS_TC_93"/>
+                    <include name="WS_TC_94"/>
+                    <include name="WS_TC_95"/>
+                </methods>
+            </class>
+            <class name="localTestCases.ShoppingCartTC">
+                <methods>
+                    <include name="WS_TC_98"/>
+                    <include name="WS_TC_102"/>
+                    <include name="WS_TC_103"/>
+                    <include name="WS_TC_105"/>
+                    <include name="WS_TC_106"/>
+                    <include name="WS_TC_108"/>
+                </methods>
+            </class>
+            <class name="localTestCases.CheckOutTC">
+                <methods>
+                    <include name="WS_TC_140"/>
+                    <include name="WS_TC_141"/>
+                    <include name="WS_TC_142"/>
                 </methods>
             </class>
         </classes>

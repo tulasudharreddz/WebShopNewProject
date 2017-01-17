@@ -37,7 +37,7 @@ public class ShoppingCart {
     static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Shipping Charges')]/parent::div/following-sibling::div");
     static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Sales VAT')]/parent::div/following-sibling::div");
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
-    static private By ProceedtocheckoutXpath = By.xpath("//button[contains(text(),'Proceed to checkout')]");
+    static private By ProceedtocheckoutXpath = By.xpath("//button[contains(text(),'Checkout')]");
     static private By ContinueShoppingXpath = By.xpath("//button[contains(text(),'Continue Shopping')]");
     static private By NoOfCartProducts = By.xpath("//div[@class='product-row']");
     static private By ImageXpath = By.xpath("//img[@class='img-responsive']");
@@ -305,12 +305,13 @@ public class ShoppingCart {
         return ActualCartGrandTotal;
     }
 
-    public static void ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        String ProceedtoCheckoutText = driver.findElement(ProceedtocheckoutXpath).getText();
+    public static void ClickonCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
+
         ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
-        Assert.assertEquals(ProceedtoCheckoutText, "Proceed to checkout");
-        if (driver.findElement(ProceedtocheckoutXpath).isDisplayed()) {
-            ActualLable("'Proceed to checkout' button verified successfully", "Pass");
+        if (driver.findElements(ProceedtocheckoutXpath).size()>0) {
+            String ProceedtoCheckoutText = driver.findElement(ProceedtocheckoutXpath).getText();
+            Assert.assertEquals(ProceedtoCheckoutText, "Checkout");
+            ActualLable("'Checkout' button verified successfully", "Pass");
             log.info("Assert is verified for 'Proceed to checkout' button");
             Thread.sleep(1000);
             ExpectedLable("Click on 'Proceed to checkout' button ");
@@ -388,8 +389,8 @@ public class ShoppingCart {
         ExpectedLable("Verify Quantity change functionality");
         driver.findElements(Quantity).get(0).clear();
         driver.findElements(Quantity).get(0).sendKeys("12");
-        String QuantityText = driver.findElements(Quantity).get(0).getAttribute("innerHTML");
-        System.out.println(QuantityText);
+        String QuantityText = driver.findElements(Quantity).get(0).getAttribute("isnumericbox");
+        System.out.println("text is "+QuantityText);
         int QuantityInt = Integer.parseInt(QuantityText);
         if(QuantityInt==12){
             ActualLable("Quantity changed successfully", "Pass");

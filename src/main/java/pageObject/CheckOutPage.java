@@ -3,9 +3,7 @@ package pageObject;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.io.IOException;
@@ -33,11 +31,12 @@ public class CheckOutPage {
     static private By SelectAddress = By.xpath("//span[@class='select2-dropdown select2-dropdown--below']/span/ul/li[@data-index='1']");
     static private By ConfirmAddress = By.xpath("//button[@type='submit']");
     static private By refNumXpath = By.id("refNum");
+    static private By InstallationServiceCostText = By.xpath("//span[@class='label-link-color']");
     static private By ReviewOrderXpath = By.xpath("//button[contains(text(),'Review Order')]");
 
 
     public static void VerifyCheckoutPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        ShoppingCart.ClickonProceedtoCheckout(driver);
+        ShoppingCart.ClickonCheckout(driver);
         Thread.sleep(2000);
         ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
         if (driver.findElement(CheckOutPageTitleXpath).isDisplayed()) {
@@ -136,4 +135,31 @@ public class CheckOutPage {
         }
     }
 
+    public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException {
+        ExpectedLable(" Check Installation Service Cost Message is displaying or not");
+        boolean status;
+        if(driver.findElements(InstallationServiceCostText).size()>0){
+            status=true;
+            ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
+        }else{
+            ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
+            status=false;
+        }
+        return status;
+    }
+    public static double GetInstallationCost(WebDriver driver){
+        String Mesage = driver.findElement(InstallationServiceCostText).getText();
+        String[] terms = Mesage.split("\\€");
+        String s= terms[1];
+        String t = s.replaceAll(" ", "");
+        String t1 = t.replaceAll("[?]", "");
+        double InstallCost = Double.parseDouble(t1);
+        return InstallCost;
+    }
+    /*public static boolean VerifyInstallationCost(){
+
+
+        double ExpectedInstallationCost = 0;
+
+    }*/
 }

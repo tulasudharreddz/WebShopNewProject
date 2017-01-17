@@ -55,13 +55,7 @@ public class LandingPageTC extends Browser
 		driver=getDriver();
 		//sheet = excel.ReadSheet(sheet);
 	}
-	@BeforeMethod
-	public void Url() throws WriteException, IOException, BiffException {
-		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-		log.info("URL entered in browser");
-	}
-	@AfterMethod
-	public void ResultStatus() throws WriteException { ReportResult();}
+
 
 		/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 

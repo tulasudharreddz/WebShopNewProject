@@ -40,13 +40,6 @@ public class FavoritesTC extends Browser {
     public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
     }
-    @BeforeMethod
-    public void Url() throws IOException, BiffException, WriteException {
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-        log.info("URL entered in browser");
-    }
-    @AfterMethod
-    public void ResultStatus() throws WriteException { ReportResult();}
 
     @Test
     public void WS_TC_90() throws IOException, InterruptedException ,WriteException{

@@ -291,30 +291,14 @@ public class HomePage {
                 log.info("Name of Sub Category is  " +SubmenuName);
                 driver.findElement(By.xpath("(//div[@class='row']/div/ul/li/a)["+i+"]")).click();
                 Thread.sleep(2000);
-
-                if(i== 4){
-                    String AssertName1 = driver.findElement(By.xpath("(//h2)[1]")).getText();
-                    Assert.assertEquals(AssertName1,"Applications");
-                    log.info("Assert is verified for "+ AssertName1);
-                    ActualLable("Link is verified for "+ AssertName1,"Pass");
-                }
-                else if(i== 8) {
-                    String AssertName1 = driver.findElement(By.xpath("(//h2)[1]")).getText();
-                    Assert.assertEquals(AssertName1, "Audio & Video");
-                    log.info("Assert is verified for "+ AssertName1);
-                    ActualLable("Link is verified for "+ AssertName1,"Pass");
-                }
-                else if(i== 21) {
-                    String AssertName1 = driver.findElement(By.xpath("(//h2)[1]")).getText();
-                    Assert.assertEquals(AssertName1, "Storage & Memory");
-                    log.info("Assert is verified for "+ AssertName1);
-                    ActualLable("Link is verified for "+ AssertName1,"Pass");
-                }
-                else {
+                if(!(SubmenuName.contentEquals("Show All"))){
                     String AssertName = driver.findElement(By.xpath("//h2/i")).getText();
                     Assert.assertEquals(SubmenuName, AssertName);
-                    log.info("Assert is verified for "+ AssertName);
                     ActualLable("Link is verified for "+ AssertName,"Pass");
+                }
+                else{
+                    String AssertName = driver.findElement(By.xpath("//h2/i")).getText();
+                    ActualLable("Link is verified for "+AssertName,"Pass");
                 }
             }
         }
