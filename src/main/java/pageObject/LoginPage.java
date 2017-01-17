@@ -388,8 +388,6 @@ public class LoginPage {
 	}
 
 	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException, WriteException {
-		try {
-
 			WebDriverWait waitCulture = new WebDriverWait(driver, 40);
 			waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 			Thread.sleep(2000);
@@ -411,11 +409,6 @@ public class LoginPage {
 			ExpectedLable("Verify User Login function");
 			LoginPage.ClickLogin(driver).click();
 			ActualLable("Successfully Loged into the application","Pass");
-		}
-		catch (Exception e){
-			log.info("Exception for the product is " + e);
-		}
-
 	}
 
 }

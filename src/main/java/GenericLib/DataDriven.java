@@ -169,7 +169,8 @@ public class DataDriven {
 	}
 	static int counting=1;
 	public static void StepLable(String resu) throws IOException, WriteException {
-		int i = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
+		//int i = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
+		int i = DataDriven();
 		wsheet = wbook.getSheet("ResultSheet");
 		WritableCellFormat cellFormat = null;
 		WritableFont cellFont = null;
@@ -182,13 +183,15 @@ public class DataDriven {
 		wsheet.addCell(new Label(0 , i , resu, cellFormat));
 		counting=1;
 	}
-
+public static int numberForColumn;
 	public static void ExpectedLable(String resu) throws IOException, WriteException {
-
+		numberForColumn= DataDriven();
 		wsheet = wbook.getSheet("ResultSheet");
-		wsheet.addCell(new Label(1 , DataDriven() , resu, CellFormat()));
+		//wsheet.addCell(new Label(1 , DataDriven() , resu, CellFormat()));
+		wsheet.addCell(new Label(1 , numberForColumn , resu, CellFormat()));
 		String numberAsString = Integer.toString(counting);
-		wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
+		//wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
+		wsheet.addCell(new Label(0 , numberForColumn , numberAsString,CellFormat1()));
 		counting++;
 	}
 
@@ -196,7 +199,8 @@ public class DataDriven {
 	public static void ActualLable(String ACText,String result) throws IOException, WriteException {
 
 		wsheet = wbook.getSheet("ResultSheet");
-		wsheet.addCell(new Label(2 , DataDriven1() , ACText,CellFormat()));
+		//wsheet.addCell(new Label(2 , DataDriven1() , ACText,CellFormat()));
+		wsheet.addCell(new Label(2 , numberForColumn , ACText,CellFormat()));
 		if(result=="Fail"){
 			WritableCellFormat cellFormat = null;
 			WritableFont cellFont = null;
@@ -206,7 +210,8 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
-			int num = DataDriven2();
+			//int num = DataDriven2();
+			int num = numberForColumn;
 			String folderName = ObjectRepository.DateSt();
 			Browser.screenshots();
 			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
@@ -225,19 +230,23 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.GREEN);
-			wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
+			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
+			wsheet.addCell(new Label(3 , numberForColumn , result,cellFormat));
 		}
 		else{
-			wsheet.addCell(new Label(3 , DataDriven2() , result,CellFormat1()));
+			//wsheet.addCell(new Label(3 , DataDriven2() , result,CellFormat1()));
+			wsheet.addCell(new Label(3 , numberForColumn , result,CellFormat1()));
 		}
-		wsheet.addCell(new Label(4 , DataDriven3() , ObjectRepository.TimeSt(),CellFormat1()));
+		//wsheet.addCell(new Label(4 , DataDriven3() , ObjectRepository.TimeSt(),CellFormat1()));
+		wsheet.addCell(new Label(4 , numberForColumn , ObjectRepository.TimeSt(),CellFormat1()));
 		/*String numberAsString = Integer.toString(counting);
 		wsheet.addCell(new Label(0 , DataDriven4() , numberAsString,CellFormat1()));
 		counting++;*/
 	}
 	static String ScID;
 	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
-		int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
+		//int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
+		int k = DataDriven();
 		ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
 		String ScDis= ReadTestCases(TestCasesheet).getCell(2,j).getContents();
@@ -256,6 +265,7 @@ public class DataDriven {
 		int i = DataDriven5();
 		WritableHyperlink hlk =new WritableHyperlink(0,i,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
 		wsheet = wbook.getSheet("TestCaseDiscription");
+		wsheet.addCell(new Label(3 , 3, "QA2 / "+Browser.BrowserNameForSuite,CellFormat1()));
 		wsheet.addHyperlink(hlk);
 		wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , i, ScName, CellFormat()));
