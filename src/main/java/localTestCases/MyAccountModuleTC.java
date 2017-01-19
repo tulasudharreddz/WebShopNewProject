@@ -15,14 +15,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.HomePage;
 import pageObject.LoginPage;
+import pageObject.OrdersPage;
 import pageObject.ProfilePage;
 
 import java.awt.*;
 import java.io.IOException;
 
-import static GenericLib.DataDriven.ActualLable;
-import static GenericLib.DataDriven.ReportResult;
-import static GenericLib.DataDriven.StepLable;
+import static GenericLib.DataDriven.*;
 
 /**
  * Created by t.mirasipally on 14-Nov-16.
@@ -123,14 +122,12 @@ public class MyAccountModuleTC extends Browser {
         try{
             obje.repository(driver);
             DataDriven.ReportStartup(37);
-            log.info("WS_TC_37: AssertVerifyForDefaultAddress the GUI of  'Addresses' page");
-            Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
             Thread.sleep(1000);
             HomePage.ClickonMyAccount(driver);
             Thread.sleep(1000);
             HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
-            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+
             Thread.sleep(1000);
             ProfilePage.VerifyAddressHeaders(driver);
             Thread.sleep(1000);
@@ -384,14 +381,11 @@ public class MyAccountModuleTC extends Browser {
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-
         }
     }
-
 
     @Test
     public void WS_TC_50() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
@@ -418,14 +412,11 @@ public class MyAccountModuleTC extends Browser {
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-
         } catch (Exception e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
-
         }
     }
-
 
     @Test
     public void WS_TC_53() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
@@ -527,9 +518,9 @@ public class MyAccountModuleTC extends Browser {
             Thread.sleep(1000);
             ProfilePage.VerifySaveNewAddressFunctionalityWithOutData(driver);
             Thread.sleep(1000);
-            //ProfilePage.VerifySaveNewAddressFunctionalityWithData(driver);
+            ProfilePage.VerifySaveNewAddressFunctionalityWithData(driver);
             Thread.sleep(1000);
-            //ProfilePage.EmailVerificationForNewAddress(driver);
+            ProfilePage.EmailVerificationForNewAddress(driver);
 
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -542,4 +533,28 @@ public class MyAccountModuleTC extends Browser {
         }
     }
 
+    @Test
+    public void WS_TC_155() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(155);
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login Functionality is completed");
+            HomePage.ClickonMyAccount(driver);
+            log.info("Clicked on My Account");
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,2);
+            OrdersPage.VerifyHeaderInformationAtOrderLevel(driver);
+            OrdersPage.VerifyExpandAndCollapse(driver);
+            OrdersPage.VerifyTheOrdersSequenceFunctionality(driver);
+
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
 }

@@ -100,7 +100,7 @@ public class ShoppingCart {
                 driver.findElements(DeleteItem).get(0).click();
                 Thread.sleep(1000);
                 driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             }
             while (driver.findElements(DeleteItem).size()>0);
             ActualLable("All products are deleted, items are not available in shopping cart" ,"Pass");

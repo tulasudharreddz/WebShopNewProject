@@ -7,17 +7,13 @@ import java.util.List;
 import GenericLib.DataDriven;
 import GenericLib.ObjectRepository;
 import jxl.write.WritableSheet;
-import localTestCases.ShopModuleTC;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
 import jxl.write.WriteException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -34,6 +30,12 @@ public class LoginPage {
 	static private WritableSheet wsheet;
 
 	static protected WebDriver driver;
+	//Page Elements
+	static private By ResetPasswordLinkXpath = By.xpath("//a[contains(text(),'Reset Password')]");
+	static private By LanguageDropDownXpath = By.xpath("//span[@class='select2-selection select2-selection--single']");
+	static private By UserNameXpath = By.id("email");
+	static private By PasswordXpath = By.id("password");
+	static private By LoginButtonXpath = By.xpath("//button[contains(text(),'Login')]");
 
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -54,6 +56,34 @@ public class LoginPage {
 		log.info("Title of the Log in page is " + LoginTitle);
 		ActualLable("Successfully verified Login fields and Title of the Log in page is " + LoginTitle,"Pass");
 	}
+
+	public static void LoginFieldsAssertVerify(WebDriver driver) throws IOException, WriteException {
+
+		ExpectedLable("Verify 'Drop down for language' is available or not ?");
+		if(driver.findElements(LanguageDropDownXpath).size()>0){
+			ActualLable("Successfully verified 'Drop down for language' is available on login page" ,"Pass");
+		}
+		else{			ActualLable("'Drop down for language' is not available on login page" ,"Fail");		}
+
+		ExpectedLable("Verify 'User name field' is available on login page or not ?");
+		if(driver.findElements(UserNameXpath).size()>0){
+			ActualLable("Successfully verified 'User name field' is available on login page" ,"Pass");
+		}
+		else{			ActualLable("'User name field' is not available on login page" ,"Fail");		}
+
+		ExpectedLable("Verify 'Password field' is available or not ?");
+		if(driver.findElements(PasswordXpath).size()>0){
+			ActualLable("Successfully verified 'Password field' is available on login page" ,"Pass");
+		}
+		else{			ActualLable("'Password field' is not available on login page" ,"Fail");		}
+		ExpectedLable("Verify 'Log in button' is available or not ?");
+		if(driver.findElements(LoginButtonXpath).size()>0){
+			ActualLable("Successfully verified 'Log in button' is available on login page" ,"Pass");
+		}
+		else{			ActualLable("'Log in button' is not available on login page" ,"Fail");		}
+
+	}
+
 
 	public static void ResetPasswordAssert(WebDriver driver) throws IOException, WriteException {
 		ExpectedLable("Reset password link should available on home page");
@@ -136,10 +166,36 @@ public class LoginPage {
 
 	public static WebElement ResetPasswordLink(WebDriver driver)
 	{
-
 		element = driver.findElement(By.xpath("//a[contains(text(),'Reset Password')]"));
 
 		return element;
+	}
+	public static void ClickOnResetPasswordLink(WebDriver driver) throws IOException, WriteException {
+		ExpectedLable("Click on Reset password link");
+		LoginPage.ResetPasswordLink(driver).click();
+		ActualLable("Successfully clicked on reset password link","Pass");
+	}
+	public static void ResetPasswordFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+		ClickOnResetPasswordLink(driver);
+		ExpectedLable("Enter user name into email blank");
+		LoginPage.ResetPasswordEmail(driver).sendKeys("t.mirasipally@dimensiondata.com");
+		ActualLable("Successfully entered user name into email blank","Pass");
+		//Assert.assertNotNull(RegistrationPage.AmNotRobot(driver));
+		ExpectedLable("Click on AmNotRobot check box");
+		if(driver.findElements(By.xpath("//div[@class='recaptcha-checkbox-checkmark']")).size()>0){
+			RegistrationPage.AmNotRobot(driver).click();
+			ActualLable("Successfully clicked on AmNotRobot check box","Pass");
+			ExpectedLable("Wait till robot functionality completed");
+			Thread.sleep(15000);
+			ActualLable("Waiting completed for robot functionality","Pass");
+			ExpectedLable("Click on Reset password button check box");
+			LoginPage.SubmitOnResetPassword(driver).click();
+			ActualLable("Successfully clicked on Reset password button","Pass");
+		}
+		else{
+			log.info("Robot Check is not visible, test case fail");
+			ActualLable("Failed to execute Robot functionality","Fail");
+		}
 	}
 
 	public static WebElement ResetPasswordEmail(WebDriver driver)
@@ -281,21 +337,26 @@ public class LoginPage {
 		driver.switchTo().window(tabs.get(0));
 	}
 
-	public static WebElement ServiceCenterLinkHomePage(WebDriver driver)
+	public static WebElement FAQLinkHomePage(WebDriver driver)
 	{
-
-		element = driver.findElement(By.xpath("//a[contains(text(),'Service Center')]"));
+		element = driver.findElement(By.xpath("//a[contains(text(),'FAQ')]"));
 		return element;
 	}
 
-	public static void AsertVerifyForServiceCenterLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
-		ExpectedLable("Verify Service Center link available on landing page");
-		String HREFValue = ServiceCenterLinkHomePage(driver).getAttribute("href");
-		ActualLable("Successfully Verified Service Center link available on landing page","Pass");
-		log.info("Service center link will navigate to  "+HREFValue);
-		ExpectedLable("Verify mail address link for  Service Center");
-		Assert.assertEquals(HREFValue, "mailto:client.contact@dimensiondata.com");
-		ActualLable("Href link is verified successfully ","Pass");
+	public static void AsertVerifyForFAQLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+		ExpectedLable("Click on FAQ link on landing page");
+		FAQLinkHomePage(driver).click();
+		Thread.sleep(3000);
+		ActualLable("Successfully clicked on FAQ link","Pass");
+		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		String Title = driver.getTitle();
+		log.info("Title of the page is "+Title);
+		ExpectedLable("Corresponding Page should be open and assert should verify");
+		Assert.assertEquals(Title, "FAQ");
+		ActualLable("FAQ page is opened and Assert verified ","Pass");
+		driver.close();
+		driver.switchTo().window(tabs.get(0));
 	}
 
 	public static WebElement PrivacyPolicyLinkHomePage(WebDriver driver)

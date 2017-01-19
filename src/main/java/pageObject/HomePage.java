@@ -420,15 +420,20 @@ public class HomePage {
     }
 
     public static void ClickonShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
-
+        Thread.sleep(2000);
         ExpectedLable("Click on Shopping cart link");
-        driver.findElement(ShoppingCart).click();
-        ActualLable("Successfully clicked on shopping cart page ","Pass");
-        Thread.sleep(5000);
-        ExpectedLable("Verify Assert for Shopping cart page");
-        String AssertName = driver.findElement(By.xpath("//h2")).getText();
-        Assert.assertEquals("Shopping Cart", AssertName);
-        ActualLable("Successfully verified asser for Shopping cart page","Pass");
+        if(driver.findElements(ShoppingCart).size()>0) {
+            driver.findElement(ShoppingCart).click();
+            ActualLable("Successfully clicked on shopping cart page ", "Pass");
+            Thread.sleep(5000);
+            ExpectedLable("Verify Assert for Shopping cart page");
+            String AssertName = driver.findElement(By.xpath("//h2")).getText();
+            Assert.assertEquals("Shopping Cart", AssertName);
+            ActualLable("Successfully verified asser for Shopping cart page", "Pass");
+        }
+        else{
+            ActualLable("Shopping cart is not available ", "Fail");
+        }
     }
     public static List<WebElement> NoOfShoppingCartProducts(WebDriver driver){
 

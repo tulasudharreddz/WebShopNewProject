@@ -135,7 +135,9 @@ public class CheckOutPage {
         }
     }
 
-    public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException {
+    public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        HomePage.ClickonShoppingCart(driver);
+        ShoppingCart.ClickonCheckout(driver);
         ExpectedLable(" Check Installation Service Cost Message is displaying or not");
         boolean status;
         if(driver.findElements(InstallationServiceCostText).size()>0){
@@ -156,10 +158,5 @@ public class CheckOutPage {
         double InstallCost = Double.parseDouble(t1);
         return InstallCost;
     }
-    /*public static boolean VerifyInstallationCost(){
 
-
-        double ExpectedInstallationCost = 0;
-
-    }*/
 }

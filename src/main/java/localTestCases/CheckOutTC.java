@@ -42,10 +42,7 @@ public class CheckOutTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             ShoppingCart.DeleteExistItem(driver);
             HomePage.MovingToCategory(driver);
-            ProductSearchPage.AddFlagOneProduct(driver);
-            Thread.sleep(2000);
-            HomePage.ClickonShoppingCart(driver);
-            ShoppingCart.ClickonCheckout(driver);
+            ProductSearchPage.AddFlagOneProduct(driver,1);
             boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
             ExpectedLable(" Check Installation Service Cost message, status message should not display");
             if(messageStatus==false){
@@ -74,9 +71,6 @@ public class CheckOutTC extends Browser {
             ShoppingCart.DeleteExistItem(driver);
             HomePage.MovingToCategory(driver);
             ProductSearchPage.AddFlagTwoProduct(driver,1);
-            Thread.sleep(2000);
-            HomePage.ClickonShoppingCart(driver);
-            ShoppingCart.ClickonCheckout(driver);
             boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
             ExpectedLable(" Check Installation Service Cost message, status message should not display");
             if(messageStatus==false){
@@ -104,9 +98,6 @@ public class CheckOutTC extends Browser {
             ShoppingCart.DeleteExistItem(driver);
             HomePage.MovingToCategory(driver);
             ProductSearchPage.AddFlagTwoProduct(driver,2);
-            Thread.sleep(2000);
-            HomePage.ClickonShoppingCart(driver);
-            ShoppingCart.ClickonCheckout(driver);
             boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
             ExpectedLable(" Check Installation Service Cost message, status message should not display");
             if(messageStatus==false){
@@ -138,19 +129,199 @@ public class CheckOutTC extends Browser {
             ShoppingCart.DeleteExistItem(driver);
             HomePage.MovingToCategory(driver);
             ProductSearchPage.AddFlagThreeProduct(driver,1);
-            Thread.sleep(2000);
-            HomePage.ClickonShoppingCart(driver);
-            ShoppingCart.ClickonCheckout(driver);
             boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
             ExpectedLable(" Check Installation Service Cost message, status message should not display");
             if(messageStatus==false){
-                ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
             }
             else{
-                ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
                 ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
                 ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+    @Test
+    public void WS_TC_145() throws IOException, WriteException, InterruptedException {
+
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(145);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagOneProduct(driver,2);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if(messageStatus==false){
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
+            }
+            else{
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
+                ExpectedLable(" Get Installation charges from aplication");
+                Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
+                ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_146() throws IOException, WriteException, InterruptedException {
+
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(146);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagOneProduct(driver,1);
+            ProductSearchPage.AddFlagTwoProduct(driver,1);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if(messageStatus==false){
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
+            }
+            else{
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
+                ExpectedLable(" Get Installation charges from aplication");
+                Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
+                ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+    @Test
+    public void WS_TC_147() throws IOException, WriteException, InterruptedException {
+
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(147);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagOneProduct(driver, 1);
+            ProductSearchPage.AddFlagThreeProduct(driver, 1);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if (messageStatus == false) {
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
+            } else {
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
+                ExpectedLable(" Get Installation charges from aplication");
+                Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
+                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_149() throws IOException, WriteException, InterruptedException {
+
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(149);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagTwoProduct(driver, 2);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if (messageStatus == false) {
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
+            } else {
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
+                ExpectedLable(" Get Installation charges from aplication");
+                Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
+                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_150() throws IOException, WriteException, InterruptedException {
+
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(149);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagTwoProduct(driver, 1);
+            ProductSearchPage.AddFlagThreeProduct(driver, 1);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if (messageStatus == false) {
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
+            } else {
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
+                ExpectedLable(" Get Installation charges from aplication");
+                Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
+                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_152() throws IOException, WriteException, InterruptedException {
+
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(149);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagThreeProduct(driver,2);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if (messageStatus == false) {
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
+            } else {
+                ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
+                ExpectedLable(" Get Installation charges from aplication");
+                Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
+                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();

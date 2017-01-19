@@ -5,12 +5,13 @@
         <classes>
             <class name="localTestCases.LandingPageTC">
                 <methods>
-                    <!--<include name="TC01"/>
-                    <include name="TC02"/>-->
-                    <include name="TC03"/>
-                    <!--<include name="TC04"/>
-                    <include name="TC05"/>
-                    <include name="TC06"/>-->
+                    <include name="WS_TC_01"/>
+                    <include name="WS_TC_02"/>
+                    <include name="WS_TC_03"/>
+                    <include name="WS_TC_04"/>
+                    <include name="WS_TC_05"/>
+                    <include name="WS_TC_06"/>
+                    <include name="WS_TC_07"/>
                 </methods>
             </class>
         </classes>

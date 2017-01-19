@@ -1,34 +1,17 @@
 package browserStackTC;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import GenericLib.*;
 import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
 import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
 
 import pageObject.ForgotPassword;
@@ -56,7 +39,7 @@ public class LandingPageBSTC extends BrowserStack
 		driver=getDriver();
 	}
 
-	/*TC01: AssertVerifyForDefaultAddress the launch of Login page & and its content
+	/*WS_TC_01: AssertVerifyForDefaultAddress the launch of Login page & and its content
 
 	Disc:  The 'Buyer login' page should be displayed with the following sections
 		Sections:
@@ -80,7 +63,7 @@ public class LandingPageBSTC extends BrowserStack
 	}
 
 	/*	  
-	TC02: Validate the Login functionality
+	WS_TC_03: Validate the Login functionality
 	a) Select a value from "Select your language" dropdown
 	b) Enter valid User Name and Password
 
@@ -104,7 +87,7 @@ public class LandingPageBSTC extends BrowserStack
 	}
 
 	/*
-	 TC03: AssertVerifyForDefaultAddress the GUI of 'Reset Password' Section
+	 WS_TC_04: AssertVerifyForDefaultAddress the GUI of 'Reset Password' Section
 	 Below controls should be displayed in Reset Password' Page
 		Textbox - User Name
 		Label Text - "if you forgot your password, please enter your user name below and click on email password"
@@ -172,7 +155,7 @@ public class LandingPageBSTC extends BrowserStack
 
 	}
 
-	/*TC05: AssertVerifyForDefaultAddress the GUI of "Request Registration" Section
+	/*WS_TC_06: AssertVerifyForDefaultAddress the GUI of "Request Registration" Section
 
 	The "Request Registration" Section should be displayed with the following
 	a) Label Text - �If your company is not yet a registered client of Dimension Data, or you would like user-access to the Dimension Data Store for your registered company, click below to request registration�  
@@ -216,7 +199,7 @@ public class LandingPageBSTC extends BrowserStack
 
 		log.info("Asert for Safe Harbor Policy link is verified");
 
-		LoginPage.AsertVerifyForServiceCenterLinkHomePage(driver);
+		LoginPage.AsertVerifyForFAQLinkHomePage(driver);
 
 		log.info("Asert for ServiceCenter link is verified");
 

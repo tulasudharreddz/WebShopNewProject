@@ -526,28 +526,36 @@ public class ProductSearchPage {
         }
     }
 
-    public static void AddFlagOneProduct(WebDriver driver) throws InterruptedException, IOException, WriteException {
-        ExpectedLable("Searching for the Flag One product" );
-        Thread.sleep(1000);
-        SearchField(driver).clear();
-        SearchField(driver).sendKeys("WS-C2960S-48TD-L");
-        SearchField(driver).sendKeys(Keys.ENTER);
-        ActualLable("Successfully Searched for Flag One the product","Pass");
-        ExpectedLable("Check Searched result showing or not ?" );
-        if(driver.findElements(AddToCart).size()>0){
-            ActualLable("Successfully Searched for Flag One the product","Pass");
-            ExpectedLable("Click on 'Add to Cart' Button on product" );
-            driver.findElements(AddToCart).get(0).click();
-            ActualLable("Successfully clicked on 'Add to Cart' button","Pass");
-        }
-        else{
-            ActualLable("Searched product not found","Fail");
+    public static void AddFlagOneProduct(WebDriver driver,int k) throws InterruptedException, IOException, WriteException {
+        ArrayList<String> FlagOne =new ArrayList<String>();//creating arraylist
+        FlagOne.add("WS-C2960S-48TD-L");
+        FlagOne.add("AIR-SAP2602I-SK9-5");
+        FlagOne.add("ASA5500-CF-256MB=");
+        for(int i=0;i<=k-1;i++) {
+            ExpectedLable("Searching for the Flag One product"+FlagOne.get(i));
+            SearchField(driver).clear();
+            SearchField(driver).sendKeys(FlagOne.get(i));
+            SearchField(driver).sendKeys(Keys.ENTER);
+            Thread.sleep(3000);
+            ActualLable("Successfully Searched for Flag One the product"+FlagOne.get(i), "Pass");
+            ExpectedLable("Check Searched result showing or not ?");
+            if (driver.findElements(AddToCart).size() > 0) {
+                ActualLable("Successfully Searched for Flag One the product", "Pass");
+                ExpectedLable("Click on 'Add to Cart' Button on product");
+                driver.findElements(AddToCart).get(0).click();
+                ActualLable("Successfully clicked on 'Add to Cart' button", "Pass");
+            } else {
+                ActualLable("Searched product not found", "Fail");
+            }
         }
     }
     public static void AddFlagTwoProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException {
         ArrayList<String> FlagTwo =new ArrayList<String>();//creating arraylist
         FlagTwo.add("2215-07155-001");
-        FlagTwo.add("2230-40300-122");//adding object in arraylist
+        FlagTwo.add("2230-40300-122");
+        FlagTwo.add("2200-07800-120");
+        FlagTwo.add("2200-07300-120");
+        FlagTwo.add("2200-07142-120");//adding object in arraylist
         for(int i=0;i<=j-1;i++) {
             ExpectedLable("Searching for the Flag Two product"+FlagTwo.get(i));
             Thread.sleep(1000);
@@ -555,7 +563,7 @@ public class ProductSearchPage {
             SearchField(driver).sendKeys(FlagTwo.get(i));
             SearchField(driver).sendKeys(Keys.ENTER);
             ActualLable("Successfully Searched for Flag Two product"+FlagTwo.get(i), "Pass");
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             ExpectedLable("Check Searched result showing or not ?");
             if (driver.findElements(AddToCart).size() > 0) {
                 ActualLable("Successfully Searched for Flag Two product", "Pass");
@@ -569,16 +577,15 @@ public class ProductSearchPage {
     }
     public static void AddFlagThreeProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException {
         ArrayList<String> FlagTwo =new ArrayList<String>();//creating arraylist
-        FlagTwo.add("");
-        FlagTwo.add("");//adding object in arraylist
+        FlagTwo.add("92714-01");
+        FlagTwo.add("2200-07840-101");//adding object in arraylist
         for(int i=0;i<=j-1;i++) {
             ExpectedLable("Searching for the Flag Two product"+FlagTwo.get(i));
-            Thread.sleep(1000);
             SearchField(driver).clear();
             SearchField(driver).sendKeys(FlagTwo.get(i));
             SearchField(driver).sendKeys(Keys.ENTER);
             ActualLable("Successfully Searched for Flag Two product"+FlagTwo.get(i), "Pass");
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             ExpectedLable("Check Searched result showing or not ?");
             if (driver.findElements(AddToCart).size() > 0) {
                 ActualLable("Successfully Searched for Flag Two product", "Pass");

@@ -41,7 +41,6 @@ public class Browser {
 	public static String BrowserNameForSuite;
 	private void setDriver(String browser) throws Exception{
 		BrowserNameForSuite = browser;
-
 		if (browser.equalsIgnoreCase("Firefox")) {
 			System.setProperty("webdriver.gecko.driver","lib/geckodriver.exe");
 			driver = new FirefoxDriver();
@@ -62,7 +61,6 @@ public class Browser {
 		}
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 	}
 
 	private Sheet sheet;
