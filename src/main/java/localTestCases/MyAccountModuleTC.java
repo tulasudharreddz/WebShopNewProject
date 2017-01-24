@@ -152,20 +152,26 @@ public class MyAccountModuleTC extends Browser {
 
     @Test
     public void WS_TC_38() throws InterruptedException, IOException, WriteException, BiffException {
-        obje.repository(driver);
-        DataDriven.ReportStartup(38);
-        log.info("WS_TC_38: Validate the expand & collapse functionality for the following headers");
-        Thread.sleep(1000);
-        LoginPage.Loginfunctionality(driver);
-        Thread.sleep(1000);
-        HomePage.ClickonMyAccount(driver);
-        Thread.sleep(1000);
-        HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
-        //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
-        Thread.sleep(1000);
-        ProfilePage.VerifyExpandCollapse(driver);
-        log.info("WS_TC_38: Expand & Collapse functionality is verified");
-        StepLable("WS_TC_38: is successfully verified");
+        try{
+            obje.repository(driver);
+            DataDriven.ReportStartup(38);
+            log.info("WS_TC_38: Validate the expand & collapse functionality for the following headers");
+            Thread.sleep(1000);
+            LoginPage.Loginfunctionality(driver);
+            Thread.sleep(1000);
+            HomePage.ClickonMyAccount(driver);
+            Thread.sleep(1000);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,1);
+            //HomePage.MyAccountMenuDropDownListonHomePage(driver).get(1).click();
+            Thread.sleep(1000);
+            ProfilePage.VerifyExpandCollapse(driver);
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
 
     }
     /*
