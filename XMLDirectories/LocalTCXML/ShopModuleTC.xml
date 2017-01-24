@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Home Page Test cases Executions with browser stack">
     <test name="LocalExecution">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="localTestCases.ShopModuleTC">
                 <methods>
                     <include name="WS_TC_57"/>
-                    <!--<include name="WS_TC_58"/>
+                    <include name="WS_TC_58"/>
                     <include name="WS_TC_59"/>
-                    <include name="WS_TC_60"/>-->
+                    <include name="WS_TC_60"/>
+                    <include name="WS_TC_61"/>
                 </methods>
             </class>
         </classes>

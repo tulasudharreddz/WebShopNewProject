@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="suite of suites">
     <test name="TotalExecution">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="localTestCases.LandingPageTC">
                 <methods>
@@ -41,6 +41,9 @@
                     <include name="WS_TC_54"/>
                     <include name="WS_TC_55"/>
                     <include name="WS_TC_56"/>
+                    <include name="WS_TC_155"/>
+                    <include name="WS_TC_156"/>
+                    <include name="WS_TC_157"/>
                 </methods>
             </class>
             <class name="localTestCases.ShopModuleTC">

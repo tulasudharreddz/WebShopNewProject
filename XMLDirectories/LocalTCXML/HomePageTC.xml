@@ -2,7 +2,7 @@
 <suite name="Home Page Test cases Executions with Local browsers">
 
     <test name="ChromeTest">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="localTestCases.HomePageTC">
                 <methods>

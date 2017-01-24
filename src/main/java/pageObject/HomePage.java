@@ -145,9 +145,10 @@ public class HomePage {
     }
 
     public static void SelectSubMenuOptUnderMyAccount(WebDriver driver, int index) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(2000);
         String exLable = HomePage.MyAccountMenuDropDownListonHomePage(driver).get(index).getText();
         ExpectedLable("Click on "+exLable +" under My Account menu on home page ");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         MyAccountMenuDropDownListonHomePage(driver).get(index).click();
         ActualLable("Successfully Clicked on sub menu under My Account menu on home page","Pass");
     }

@@ -2,7 +2,7 @@
 <suite name="My Account Module Test cases Executions with Local browsers">
 
     <test name="ChromeTest">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="localTestCases.MyAccountModuleTC">
                 <methods>
@@ -24,6 +24,8 @@
                     <include name="WS_TC_55"/>
                     <include name="WS_TC_56"/>
                     <include name="WS_TC_155"/>
+                    <include name="WS_TC_156"/>
+                    <include name="WS_TC_157"/>
                 </methods>
             </class>
         </classes>

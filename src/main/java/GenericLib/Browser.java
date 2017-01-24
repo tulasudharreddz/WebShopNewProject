@@ -46,7 +46,7 @@ public class Browser {
 			driver = new FirefoxDriver();
 		}
 
-		else if (browser.equalsIgnoreCase("chrome")) {
+		else if (browser.equalsIgnoreCase("Chrome")) {
 			System.setProperty("webdriver.chrome.driver","lib/chromedriver.exe");
 			driver = new ChromeDriver();
 		}
@@ -60,7 +60,7 @@ public class Browser {
 			driver = new EdgeDriver();
 		}
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 
 	private Sheet sheet;

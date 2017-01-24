@@ -27,7 +27,7 @@
         </classes>
     </test>-->
     <test name="ChromeTest">
-        <parameter name="browser" value="chrome"/>
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="localTestCases.DemoLocal">
                 <methods>
