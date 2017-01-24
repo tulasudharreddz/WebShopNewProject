@@ -67,7 +67,7 @@ public class OrdersPage {
     static private By SelectSecondEndDateElement = By.xpath("(//is-datepicker[@id='endDate']/div/div/ul/li/div/div/table/tbody/tr/td[contains(text(),'24')])[1]");
     static private By DocumentLink = By.xpath("//span[contains(text(),'Document #')]/following-sibling::span");
     static private By StatusLink = By.xpath("//span[contains(text(),'Status :')]/following-sibling::span");
-    static private By  DocumentBreadCrumb= By.xpath("//span[contains(text(),'Document #')]/following-sibling::span");
+    static private By  DocumentBreadCrumb= By.xpath("//ol[@class='breadcrumb']/li[3]/span");
 
 
 
@@ -213,7 +213,6 @@ public class OrdersPage {
         }
 
     }
-
     public static Date PrevoiusDateFromToday(int noOfDays){
 
         DateFormat dateFormat= new SimpleDateFormat("dd/MM/yyyy");
@@ -223,8 +222,7 @@ public class OrdersPage {
         System.out.println(dateFormat.format(addedDate));
         return addedDate;
     }
-    public static Date addDays(Date d, int days)
-    {
+    public static Date addDays(Date d, int days){
         d.setTime(d.getTime() - (long)days * 1000 * 60 * 60 * 24);
         return d;
     }
@@ -477,13 +475,12 @@ public class OrdersPage {
         //int noOfPages= InstallCost/10+1;
         return InstallCost;
     }
-
-    public static void VerificationOfLinksInOrdersPage() throws IOException, WriteException, InterruptedException {
-
+    public static void VerificationOfLinksInOrdersPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(1000);
         ExpectedLable("Check that the first listed order is expanded or collapsed ?");
         if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
             ActualLable("Verified successfully, first listed order is expanded", "Pass");
-            VerifyLinksInOrdersPage();
+            VerifyLinksInOrdersPage(driver);
         }
         else{
             ActualLable("Verified successfully, first listed order is not expanded", "Pass");
@@ -491,13 +488,12 @@ public class OrdersPage {
             driver.findElement(FirstOrderElement).click();
             if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
                 ActualLable("Verified successfully, Expand functionality is working properly", "Pass");
-                VerifyLinksInOrdersPage();
+                VerifyLinksInOrdersPage(driver);
             }
             else{ ActualLable("Verification failed , Expand functionality is not working", "Fail"); }
         }
     }
-
-    public static void VerifyLinksInOrdersPage() throws IOException, WriteException, InterruptedException {
+    public static void VerifyLinksInOrdersPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("Verify the link is available on 'Document Number' or not ..?");
         String ActualDocumentNumber = driver.findElements(DocumentLink).get(0).getText();
         if (driver.findElements(DocumentLink).get(0).isEnabled()) {

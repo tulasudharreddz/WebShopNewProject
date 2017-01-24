@@ -582,7 +582,8 @@ public class MyAccountModuleTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickonMyAccount(driver);
             HomePage.SelectSubMenuOptUnderMyAccount(driver,2);
-            OrdersPage.VerificationOfLinksInOrdersPage();
+            OrdersPage.VerificationOfLinksInOrdersPage(driver);
+
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");

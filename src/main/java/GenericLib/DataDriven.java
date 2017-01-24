@@ -244,6 +244,7 @@ public static int numberForColumn;
 		counting++;*/
 	}
 	static String ScID;
+	static int ReportStartNumber;
 	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
 		//int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
 		int k = DataDriven();
@@ -262,14 +263,14 @@ public static int numberForColumn;
 		wsheet.mergeCells(0, k, 4, k);
 		wsheet.addCell(new Label(0 , k , text, cellFormat));
 		//wsheet = wbook.getSheet("TestCaseDiscription");
-		int i = DataDriven5();
-		WritableHyperlink hlk =new WritableHyperlink(0,i,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
+		ReportStartNumber = DataDriven5();
+		WritableHyperlink hlk =new WritableHyperlink(0,ReportStartNumber,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(3 , 3, "QA2 / "+Browser.BrowserNameForSuite,CellFormat1()));
 		wsheet.addHyperlink(hlk);
-		wsheet.addCell(new Label(0 , i, ScID,CellFormat1()));
-		wsheet.addCell(new Label(1 , i, ScName, CellFormat()));
-		wsheet.addCell(new Label(2 , i, ScDis, CellFormat()));
+		wsheet.addCell(new Label(0 , ReportStartNumber, ScID,CellFormat1()));
+		wsheet.addCell(new Label(1 , ReportStartNumber, ScName, CellFormat()));
+		wsheet.addCell(new Label(2 , ReportStartNumber, ScDis, CellFormat()));
 		counting=1;
 	}
 	public static String FolderName() throws WriteException, IOException {
@@ -279,7 +280,7 @@ public static int numberForColumn;
 
 	static boolean sResult;
 	public static void ReportResult() throws WriteException {
-		int ResultColumn= DataDriven6();
+		//int ResultColumn= DataDriven6();
 		wsheet = wbook.getSheet("TestCaseDiscription");//sResult
 		if(sResult==true){
 			//if(Scresult=="Fail"){
@@ -291,7 +292,7 @@ public static int numberForColumn;
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
-			wsheet.addCell(new Label(3 , ResultColumn , "Fail",cellFormat));
+			wsheet.addCell(new Label(3 , ReportStartNumber , "Fail",cellFormat));
 			sResult=false;
 		}
 		else {
@@ -304,12 +305,12 @@ public static int numberForColumn;
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.GREEN);
-			wsheet.addCell(new Label(3 , ResultColumn , "Pass",cellFormat));
+			wsheet.addCell(new Label(3 , ReportStartNumber , "Pass",cellFormat));
 		}
 		/*else{
 			wsheet.addCell(new Label(3 , ResultColumn, Scresult,CellFormat1()));
 		}*/
-		wsheet.addCell(new Label(4 , ResultColumn , ObjectRepository.dateString(),CellFormat1()));
+		wsheet.addCell(new Label(4 , ReportStartNumber , ObjectRepository.dateString(),CellFormat1()));
 	}
 
 	public void closedoc() throws IOException, WriteException{

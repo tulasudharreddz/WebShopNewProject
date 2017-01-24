@@ -133,8 +133,11 @@ public class HomePage {
         ExpectedLable("Click on My Account menu on home page ");
         // driver.findElement(MyAccountMenuonHomePage).click();
         Thread.sleep(3000);
-        ClickElementByLocator(driver,MyAccountMenuonHomePage);
-        ActualLable("Successfully Clicked on My Account menu on home page","Pass");
+        if( driver.findElements(MyAccountMenuonHomePage).size()>0) {
+            ClickElementByLocator(driver, MyAccountMenuonHomePage);
+            ActualLable("Successfully Clicked on My Account menu on home page", "Pass");
+        }
+        else{  ActualLable(" My Account menu is not available on home page", "Fail");     }
     }
 
     public static List<WebElement> MyAccountMenuDropDownListonHomePage(WebDriver driver) throws IOException, WriteException {
@@ -146,11 +149,13 @@ public class HomePage {
 
     public static void SelectSubMenuOptUnderMyAccount(WebDriver driver, int index) throws IOException, WriteException, InterruptedException {
         Thread.sleep(2000);
-        String exLable = HomePage.MyAccountMenuDropDownListonHomePage(driver).get(index).getText();
-        ExpectedLable("Click on "+exLable +" under My Account menu on home page ");
-        Thread.sleep(1000);
-        MyAccountMenuDropDownListonHomePage(driver).get(index).click();
-        ActualLable("Successfully Clicked on sub menu under My Account menu on home page","Pass");
+        if(MyAccountMenuDropDownListonHomePage(driver).size()>0) {
+            String exLable = HomePage.MyAccountMenuDropDownListonHomePage(driver).get(index).getText();
+            ExpectedLable("Click on " + exLable + " under My Account menu on home page ");
+            Thread.sleep(1000);
+            MyAccountMenuDropDownListonHomePage(driver).get(index).click();
+            ActualLable("Successfully Clicked on sub menu under My Account menu on home page", "Pass");
+        }
     }
 
 
