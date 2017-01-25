@@ -26,6 +26,10 @@
                     <include name="WS_TC_155"/>
                     <include name="WS_TC_156"/>
                     <include name="WS_TC_157"/>
+                    <include name="WS_TC_158"/>
+                    <include name="WS_TC_160"/>
+                    <include name="WS_TC_161"/>
+                    <include name="WS_TC_163"/>
                 </methods>
             </class>
         </classes>

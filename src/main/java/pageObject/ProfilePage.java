@@ -775,12 +775,12 @@ public class ProfilePage {
                 }
             }
         }
-        else {
+        else  {
             AddressHeaders(driver).get(0).click();
             Thread.sleep(1000);
-            ExpectedLable("Verify assert for the block" + HeaderTitle);
+            /*ExpectedLable("Verify assert for the block" + HeaderTitle);
             Assert.assertEquals(HeaderTitle, "Shipping Addresses");
-            ActualLable("Successfully verified for " + HeaderTitle, "Pass");
+            ActualLable("Successfully verified for " + HeaderTitle, "Pass");*/
             ExpectedLable("Verify " + HeaderTitle + " block is already expanded or not");
             if (driver.findElements(By.xpath("//div[contains(text(),'" + HeaderTitle + "')]/parent::div/parent::div/parent::a/parent::div/following-sibling::div[@class='panel-collapse collapse in']")).size() > 0) {
                 ActualLable("Address block for ' " + HeaderTitle + " ' is already opened", "Pass");

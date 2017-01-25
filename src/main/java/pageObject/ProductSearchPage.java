@@ -513,9 +513,7 @@ public class ProductSearchPage {
             ExpectedLable("Assert Verify ' Availability Status ' for the product ");
             System.out.println(driver.findElement(AvailabilityStatus).getText());
             ActualLable("' Availability Status ' is verified successfully ","Pass");
-            ExpectedLable("Now Delete the Product from Favorites");
             FavoriesPage.DeleteFavorites(driver);
-            ActualLable("Product deleted Successfully from Favorites ","Pass");
         }
         else{
             ActualLable("Product not found with '" +status+ " '","Pass");

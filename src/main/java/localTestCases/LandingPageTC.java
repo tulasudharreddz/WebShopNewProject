@@ -185,7 +185,7 @@ public class LandingPageTC extends Browser
 			log.info("Request Registration is exist with link " + LoginPage.Register(driver).getText());
 			ActualLable("Successfully verified Registration link on home page ","Pass");
 			log.info("test cases is verified and Passed");
-			StepLable("WS_TC_06: Assert Verification For the GUI of 'Request Registration'  Section is verified successfully");
+
 		} catch (AssertionError e) {
 			String error = "Exception " + e.getClass().getSimpleName();
 			ActualLable(error, "Fail");

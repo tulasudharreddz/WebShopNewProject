@@ -276,7 +276,7 @@ public class CheckOutTC extends Browser {
 
         try {
             obje.repository(driver);
-            DataDriven.ReportStartup(149);
+            DataDriven.ReportStartup(150);
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             ShoppingCart.DeleteExistItem(driver);
@@ -307,7 +307,7 @@ public class CheckOutTC extends Browser {
 
         try {
             obje.repository(driver);
-            DataDriven.ReportStartup(149);
+            DataDriven.ReportStartup(152);
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             ShoppingCart.DeleteExistItem(driver);

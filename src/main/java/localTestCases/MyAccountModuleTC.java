@@ -13,10 +13,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pageObject.HomePage;
-import pageObject.LoginPage;
-import pageObject.OrdersPage;
-import pageObject.ProfilePage;
+import pageObject.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -584,6 +581,83 @@ public class MyAccountModuleTC extends Browser {
             HomePage.SelectSubMenuOptUnderMyAccount(driver,2);
             OrdersPage.VerificationOfLinksInOrdersPage(driver);
 
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_158() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try{
+            DataDriven.ReportStartup(158);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagTwoProduct(driver,1);
+            Double ExpectedInstallationCost  =CheckOutPage.VerifyStatusForInstallationServices(driver);
+            Double ActualInstallationCost  =OrdersPage.SearchCreatedOrderInOrdersPage(driver);
+            ExpectedLable("Now Verify 'Installation Charges' are same on both the pages or not ..?");
+            if(ExpectedInstallationCost==ActualInstallationCost){
+                ActualLable("Verification is successful, 'Installation Charges' are same on both the pages  ", "Pass");
+            }else{ ActualLable("Verification Failed, 'Installation Charges' are different in both the pages  ", "Fail"); }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_160() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(160);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickonMyAccount(driver);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
+            OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_161() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(161);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickonMyAccount(driver);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
+            OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+            OrdersPage.VerifyRequestReturnPageContent(driver);
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_163() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(163);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickonMyAccount(driver);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
+            OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+            OrdersPage.VerifyQuantityFunctionalityinRequestReturn(driver);
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");

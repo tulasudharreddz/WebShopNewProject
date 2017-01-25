@@ -3,6 +3,7 @@ package pageObject;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class OrdersPage {
     static private By ExtendedPriceElement = By.xpath("//div[contains(text(),'Extended Price')]");
     static private By SerialElement = By.xpath("//div[contains(text(),'Serial #')]");
     static private By FielldStatusElement = By.xpath("//div[contains(text(),'Status')]");
-    static private By RequestReturnElement = By.xpath("//a[contains(text(),'Request Return')]");
+    static private By RequestReturnElement = By.xpath("//a[contains(text(),'Request a Return')]");
     static private By FilterBlockElement = By.xpath("//a[contains(text(),'Filter')]");
     static private By DateRangeFilterElement = By.xpath("//span[@class='select2-selection__rendered']");
     static private By Last7DaysElement = By.xpath("//li[contains(text(),'Last 7 Days')]");
@@ -68,7 +69,13 @@ public class OrdersPage {
     static private By DocumentLink = By.xpath("//span[contains(text(),'Document #')]/following-sibling::span");
     static private By StatusLink = By.xpath("//span[contains(text(),'Status :')]/following-sibling::span");
     static private By  DocumentBreadCrumb= By.xpath("//ol[@class='breadcrumb']/li[3]/span");
-
+    static private By  InstallationChargesElement= By.xpath("//label[contains(text(),'Installation Services')]/parent::div/following-sibling::div");
+    static private By  RequestReturnPageTitleElement= By.xpath("(//div[@class='is-alert-header'][contains(text(),'Request a Product Return')])[1]");
+    static private By  NonEditableFields= By.xpath("//div[@class='row']/div/div/label");
+    static private By  EditableFields= By.xpath("//div[@class='row']/is-input/div/label");
+    static private By  NoOfQuantity= By.xpath("(//div[@class='product-row']/div[3]/div)[1]");
+    static private By  ReturnQuantityElement= By.id("returnQty");
+    static private By  ErrorMessageQuantity= By.xpath("//input[@id='returnQty']/following-sibling::div[@class='text-danger']");
 
 
 
@@ -547,4 +554,132 @@ public class OrdersPage {
 
     }
 
+    public static Double SearchCreatedOrderInOrdersPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        Double ActualInstallationCharges = null;
+        String ReferenceNumber =CheckOutPage.ClickonProceedtoCheckout(driver);
+        ReviewOrderPage.COnfirmAndPlaceOrder(driver);
+        OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
+        HomePage.ClickonMyAccount(driver);
+        HomePage.SelectSubMenuOptUnderMyAccount(driver,2);
+        Thread.sleep(3000);
+        ExpectedLable("Check that Created 'Order Reference number' is displaying in Orders page or not  ..?");
+        if(driver.findElements(By.xpath("//span[contains(text(),'Document #')]/following-sibling::span/a[contains(text(),'"+ReferenceNumber+"')]")).size()>0){
+            ActualLable("Verification is successful, Created 'Order Reference number' is displaying in Orders page ", "Pass");
+            driver.findElement(By.xpath("//span[contains(text(),'Document #')]/following-sibling::span/a[contains(text(),'"+ReferenceNumber+"')]")).click();
+            ExpectedLable("Check that 'Installation Charges' is displaying in Orders summery page or not  ..?");
+            if(driver.findElements(InstallationChargesElement).size()>0){
+                ActualLable("Verification is successful, 'Installation Charges' is displaying in Orders summery page ", "Pass");
+                ExpectedLable("Get the 'Installation Charges' frfom page");
+                String InstallationChargesString =driver.findElement(InstallationChargesElement).getText();
+                String s1 = InstallationChargesString.replaceAll("[€$£₹,]","");
+                ActualInstallationCharges = Double.parseDouble(s1);
+                ActualLable("Verification is successful, 'Installation Charges' are : "+ActualInstallationCharges, "Pass");
+            }
+            else{ ActualLable("Verification Failed, 'Installation Charges' is not displaying  in Orders summery page ", "Fail"); }
+        }
+        else{ ActualLable("Verification Failed, Created 'Order Reference number' is not displaying in Orders page ", "Fail");}
+        return ActualInstallationCharges;
+    }
+    static String QuantityOfProduct;
+    public static String VerificationOfRequestReturnButtonAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        Thread.sleep(1000);
+        StepLable("Verify Request&Return Form");
+        ExpectedLable("Check that the first listed order is expanded or collapsed ?");
+        if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
+            ActualLable("Verified successfully, first listed order is expanded", "Pass");
+            QuantityOfProduct=driver.findElement(NoOfQuantity).getText();
+            VerifyRequestReturnPage(driver);
+        }
+        else{
+            ActualLable("Verified successfully, first listed order is not expanded", "Pass");
+            ExpectedLable("Now try to Expand the first order details ");
+            driver.findElement(FirstOrderElement).click();
+            if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
+                ActualLable("Verified successfully, Expand functionality is working properly", "Pass");
+                QuantityOfProduct=driver.findElement(NoOfQuantity).getText();
+                VerifyRequestReturnPage(driver);
+            }
+            else{ ActualLable("Verification failed , Expand functionality is not working", "Fail"); }
+        }
+        return QuantityOfProduct;
+    }
+
+    public static void VerifyRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        ExpectedLable("Check that the 'Request Return' button is available in Order or not ?");
+        if(driver.findElements(RequestReturnElement).size()>0){
+            ActualLable("Verification is successful , 'Request Return' button is available in Order", "Pass");
+            ExpectedLable("Click on 'Request Return' button ?");
+            driver.findElements(RequestReturnElement).get(0).click();
+            ActualLable("Successfully Clicked on 'Request Return' button ", "Pass");
+            Thread.sleep(2000);
+            ExpectedLable("Verify'Request Return Form' is opened or not ?");
+            if(driver.findElements(RequestReturnPageTitleElement).size()>0) {
+                ActualLable("Verified successfully, 'Request Return Form' is opened ", "Pass");
+                String RequestReturnTitleText=driver.findElement(RequestReturnPageTitleElement).getText();
+                ExpectedLable("Verify page title for Request Return Form");
+                if(RequestReturnTitleText.contentEquals("Request a Product Return")){
+                    ActualLable("Verified successfully, Title of 'Request Return' Form ", "Pass");
+                }else{ActualLable("Verification failed, Title is not available of 'Request Return' Form ", "Fail");  }
+            }
+            else{ActualLable("Verification failed , 'Request Return' form is not Opened", "Fail");}
+        }
+        else{ ActualLable("Verification failed , 'Request Return' button is not available in Order", "Fail"); }
+    }
+
+    public static void VerifyRequestReturnPageContent(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Verify content on Request Return page ");
+        ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
+        AssertName.add("Reason for Return *");
+        AssertName.add("Quantity to be Returned *");
+        AssertName.add("Please provide details about the reason for return *");
+        AssertName.add("Order Number");//adding object in arraylist
+        AssertName.add("Product Name");
+        AssertName.add("Manufacturer Part #");
+        AssertName.add("Client-Company Name");
+        AssertName.add("Client-User Name");
+        AssertName.add("Installation Address");
+
+        for(int j=0;j<=2;j++){
+            ExpectedLable("Verify '"+AssertName.get(j)+"' is available on Request return page or not ?");
+            String FieldsTitle=driver.findElements(EditableFields).get(j).getText();
+            if(FieldsTitle.contentEquals(AssertName.get(j))) {
+                ActualLable("Verification is successful , '" + AssertName.get(j) + "' is available on Request return page", "Pass");
+            }
+            else{     ActualLable("Verification failed , '" + AssertName.get(j) + "' is not available on Request return page", "Fail");     }
+        }
+        for(int i=3;i<=8;i++){
+            ExpectedLable("Verify '"+AssertName.get(i)+"' is available on Request return page or not ?");
+            String FieldsTitle=driver.findElements(NonEditableFields).get(i).getText();
+            if(FieldsTitle.contentEquals(AssertName.get(i))) {
+                ActualLable("Verification is successful , '" + AssertName.get(i) + "' is available on Request return page", "Pass");
+            }
+            else{     ActualLable("Verification failed , '" + AssertName.get(i) + "' is not available on Request return page", "Fail");     }
+        }
+    }
+
+    public static void VerifyQuantityFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        ExpectedLable("Get the Exist Quantity value for the product ");
+        int QuantityOfProductint= Integer.parseInt(QuantityOfProduct);
+        ActualLable("Verification is successful , Exist Quantity value for the product is :  ' "+QuantityOfProductint+" '", "Pass");
+        ArrayList<Integer> AssertName=new ArrayList<Integer>();//creating arraylist
+        AssertName.add(QuantityOfProductint-1);
+        AssertName.add(QuantityOfProductint);
+        AssertName.add(QuantityOfProductint+1);
+        for(int i=0;i<=2;i++) {
+            String QuantityOfProductStr = Integer.toString(AssertName.get(i));
+            driver.findElement(ReturnQuantityElement).clear();
+            driver.findElement(ReturnQuantityElement).sendKeys(QuantityOfProductStr);
+            driver.findElement(ReturnQuantityElement).sendKeys(Keys.TAB);
+            Thread.sleep(1000);
+            ExpectedLable("Check for error message for Quantity field with the quantity Value :"+QuantityOfProductStr);
+            if(driver.findElements(ErrorMessageQuantity).size()>0){
+                if(i==2){  ActualLable("Verification is successful , Error message is showing for invalid input", "Pass");  }
+                else{ ActualLable("Verification Failed , Error message is showing for valid input", "Fail"); }
+            }
+            else{
+                if(i==2){ActualLable("Verification Failed , Error message is not showing for invalid input", "Fail"); }
+                else{ActualLable("Verification is successful , Error message is not showing for Valid input", "Pass");}
+            }
+        }
+    }
 }

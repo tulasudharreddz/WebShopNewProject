@@ -170,9 +170,7 @@ public class FavoriesPage {
             driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
             Thread.sleep(1000);
             ActualLable("Product deleted successfully from ' Favorites ' menu" ,"Pass");
-
         }
-
     }
     public static void VerifyFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
 

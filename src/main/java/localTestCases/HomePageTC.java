@@ -46,29 +46,6 @@ public class HomePageTC extends Browser{
     }
 
 
-    @Test
-    public void TC_Home_01() throws Exception {
-        try {
-            DataDriven.ReportStartup(1);
-            log.info("URL entered and page is loaded");
-            Thread.sleep(2000);
-            LoginPage.Loginfunctionality(driver);
-            Thread.sleep(2000);
-            //To verify Shoping cart link
-            HomePage.AsertVerifyForShoppingCartLinkHomePage(driver);
-            log.info("Shopping Cart link Asert is verified");
-            //To verify Home link
-            HomePage.AsertVerifyForHomeLinkHomePage(driver);
-            log.info("Home link on home page Asert is verified");
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
-    }
-
     /*
 
     WS_TC_30: AssertVerifyForDefaultAddress that Shop menu button is displaying or not and options under Shop menu are available or not

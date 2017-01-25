@@ -109,14 +109,15 @@ public class CheckOutPage {
 
     }
 
-    public static void ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static String ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Complete Check out page action");
         SelectingAddress(driver);
         ExpectedLable("Provide Reference Number in the blank");
         Random rand = new Random();
-        int  ReferenceNumber = rand.nextInt(9999) + 1000;
-        String ReferenceNumberString=Integer.toString(ReferenceNumber);
-        driver.findElement(refNumXpath).sendKeys("IRN"+ReferenceNumberString);
+        int  ReferenceNumbe = rand.nextInt(9999) + 1000;
+        String ReferenceNumberString=Integer.toString(ReferenceNumbe);
+        String ReferenceNumber = "IRN"+ReferenceNumberString;
+        driver.findElement(refNumXpath).sendKeys(ReferenceNumber);
         ActualLable("Successfully provided Refference number in the blank ", "Pass");
         String ProceedtoCheckoutText = driver.findElement(ReviewOrderXpath).getText();
 
@@ -133,6 +134,7 @@ public class CheckOutPage {
         else{
             ActualLable("'Proceed to checkout' button is not available", "Fail");
         }
+        return ReferenceNumber;
     }
 
     public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException, InterruptedException {
@@ -142,6 +144,7 @@ public class CheckOutPage {
         boolean status;
         if(driver.findElements(InstallationServiceCostText).size()>0){
             status=true;
+            driver.findElement(InstallationServiceCostText).click();
             ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
         }else{
             ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
@@ -158,5 +161,19 @@ public class CheckOutPage {
         double InstallCost = Double.parseDouble(t1);
         return InstallCost;
     }
-
+    public static Double VerifyStatusForInstallationServices(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+        Double InstallationCost = null;
+        ExpectedLable(" Check Installation Service Cost message, status message should not display");
+        if(messageStatus==false){
+            ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
+        }
+        else{
+            ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
+            ExpectedLable(" Get Installation charges from aplication");
+            InstallationCost = CheckOutPage.GetInstallationCost(driver);
+            ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
+        }
+        return InstallationCost;
+    }
 }
