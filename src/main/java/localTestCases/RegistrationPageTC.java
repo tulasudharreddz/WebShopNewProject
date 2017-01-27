@@ -82,10 +82,10 @@ public class RegistrationPageTC extends Browser {
     public void WS_TC_84() throws IOException, WriteException, InterruptedException {
         try {
             DataDriven.ReportStartup(84);
-            /*HomePage.ClickOnRegisterHereLink(driver);
+            HomePage.ClickOnRegisterHereLink(driver);
             RegistrationPage.SingleUserRegistration(driver);
             RegistrationPage.AssertVerifyForRegistrationUserList(driver);
-            RegistrationPage.VerifyTermsOfUselink(driver);*/
+            RegistrationPage.VerifyTermsOfUselink(driver);
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
