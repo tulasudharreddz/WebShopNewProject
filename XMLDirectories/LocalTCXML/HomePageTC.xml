@@ -6,7 +6,6 @@
         <classes>
             <class name="localTestCases.HomePageTC">
                 <methods>
-                    <include name="TC_Home_01"/>
                     <include name="WS_TC_30"/>
                     <include name="WS_TC_31"/>
                     <include name="WS_TC_32"/>
