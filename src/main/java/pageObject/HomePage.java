@@ -33,6 +33,7 @@ public class HomePage {
     static private By NoOFCartItems = By.xpath("//b[@class='badge']");
     static private By Favorites = By.xpath("//a[@href='/Webshop/users/favorites']");
     static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
+    static private By RegisterHereLink = By.xpath("//a[contains(text(),'Register Here')]");
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
         driver.findElement(byElementLocator).click();
@@ -42,7 +43,15 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
-
+    public static void ClickOnRegisterHereLink(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        ExpectedLable("Check that Register here link is available or not  ?");
+        if(driver.findElements(RegisterHereLink).size()>0){
+            Thread.sleep(1000);
+            driver.findElement(RegisterHereLink).click();
+            ActualLable("Successfully verified, Register Here Link and clicked on it " ,"Pass");
+        }
+        else {ActualLable("Verification verified, Register Here link is not available on home page" ,"Fail");}
+    }
 
     public static void PageTitle(WebDriver driver) throws IOException, WriteException {
         //WebDriver driver = null;

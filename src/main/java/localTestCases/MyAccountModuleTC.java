@@ -9,9 +9,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.*;
 
@@ -579,8 +577,8 @@ public class MyAccountModuleTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickonMyAccount(driver);
             HomePage.SelectSubMenuOptUnderMyAccount(driver,2);
-            OrdersPage.VerificationOfLinksInOrdersPage(driver);
-
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            OrdersPage.VerifyLinksInOrdersPage(driver);
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
@@ -621,7 +619,9 @@ public class MyAccountModuleTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickonMyAccount(driver);
             HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
-            OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            //OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+            OrdersPage.VerifyRequestReturnPage(driver);
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
@@ -638,7 +638,8 @@ public class MyAccountModuleTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickonMyAccount(driver);
             HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
-            OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            OrdersPage.VerifyRequestReturnPage(driver);
             OrdersPage.VerifyRequestReturnPageContent(driver);
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -656,8 +657,46 @@ public class MyAccountModuleTC extends Browser {
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickonMyAccount(driver);
             HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
-            OrdersPage.VerificationOfRequestReturnButtonAssert(driver);
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            OrdersPage.VerifyRequestReturnPage(driver);
             OrdersPage.VerifyQuantityFunctionalityinRequestReturn(driver);
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+    @Test
+    public void WS_TC_164() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(164);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickonMyAccount(driver);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            OrdersPage.VerifyRequestReturnPage(driver);
+            OrdersPage.VerifyCloseButtonFunctionalityinRequestReturn(driver);
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+    @Test
+    public void WS_TC_165() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(165);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickonMyAccount(driver);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver, 2);
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            OrdersPage.VerifyRequestReturnPage(driver);
+            OrdersPage.VerifySubmitButtonFunctionalityinRequestReturnPage(driver);
+
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");

@@ -183,7 +183,7 @@ public class LoginPage {
 		//Assert.assertNotNull(RegistrationPage.AmNotRobot(driver));
 		ExpectedLable("Click on AmNotRobot check box");
 		if(driver.findElements(By.xpath("//div[@class='recaptcha-checkbox-checkmark']")).size()>0){
-			RegistrationPage.AmNotRobot(driver).click();
+			//RegistrationPage.AmNotRobot(driver).click();
 			ActualLable("Successfully clicked on AmNotRobot check box","Pass");
 			ExpectedLable("Wait till robot functionality completed");
 			Thread.sleep(15000);

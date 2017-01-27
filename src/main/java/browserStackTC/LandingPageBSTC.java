@@ -110,7 +110,7 @@ public class LandingPageBSTC extends BrowserStack
 		LoginPage.ResetPasswordEmail(driver).sendKeys("t.mirasipally@dimensiondata.com");
 		//Assert.assertNotNull(RegistrationPage.AmNotRobot(driver));
 		if(driver.findElements(By.xpath("//*[@id='recaptcha-anchor']/div[5]")).size()>0){
-			RegistrationPage.AmNotRobot(driver).click();
+			//RegistrationPage.AmNotRobot(driver).click();
 			Thread.sleep(15000);
 			LoginPage.SubmitOnResetPassword(driver).click();
 		}

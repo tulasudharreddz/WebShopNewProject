@@ -30,9 +30,10 @@
                     <include name="WS_TC_160"/>
                     <include name="WS_TC_161"/>
                     <include name="WS_TC_163"/>
+                    <include name="WS_TC_164"/>
+                    <include name="WS_TC_165"/>
                 </methods>
             </class>
         </classes>
     </test>
-
 </suite>

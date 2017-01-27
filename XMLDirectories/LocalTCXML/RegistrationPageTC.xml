@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="My Account Module Test cases Executions with Local browsers">
+
+    <test name="ChromeTest">
+        <parameter name="browser" value="Chrome"/>
+        <classes>
+            <class name="localTestCases.RegistrationPageTC">
+                <methods>
+                    <include name="WS_TC_80"/>
+                    <include name="WS_TC_81"/>
+                    <include name="WS_TC_83"/>
+                    <include name="WS_TC_84"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

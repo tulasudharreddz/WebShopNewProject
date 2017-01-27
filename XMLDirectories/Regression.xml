@@ -62,6 +62,14 @@
                     <include name="WS_TC_70"/>
                 </methods>
             </class>
+            <class name="localTestCases.RegistrationPageTC">
+                <methods>
+                    <include name="WS_TC_80"/>
+                    <include name="WS_TC_81"/>
+                    <include name="WS_TC_83"/>
+                    <include name="WS_TC_84"/>
+                </methods>
+            </class>
             <class name="localTestCases.FavoritesTC">
                 <methods>
                     <include name="WS_TC_90"/>

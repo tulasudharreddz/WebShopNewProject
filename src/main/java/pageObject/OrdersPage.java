@@ -76,6 +76,11 @@ public class OrdersPage {
     static private By  NoOfQuantity= By.xpath("(//div[@class='product-row']/div[3]/div)[1]");
     static private By  ReturnQuantityElement= By.id("returnQty");
     static private By  ErrorMessageQuantity= By.xpath("//input[@id='returnQty']/following-sibling::div[@class='text-danger']");
+    static private By  CloseRequestReturnButtonElement= By.xpath("(//button[@class='is-alert-close'])[1]");
+    static private By  ReasonRequestReturnButtonDropDownElement= By.xpath("(//span[@class='select2-selection__rendered'])[3]");
+    static private By  ReasonForReturnButtonElement= By.xpath("//li[contains(text(),'Item arrived too late')]");
+    static private By  CommentForReturnButtonElement= By.id("comments");
+    static private By  SubmitOnReturnButtonElement= By.xpath("(//button[contains(text(),'Submit')])[1]");
 
 
 
@@ -218,7 +223,6 @@ public class OrdersPage {
                 ActualLable("Verification Failed, '" +Assert1Xpath.get(i)+ "' is not displaying", "Fail");
             }
         }
-
     }
     public static Date PrevoiusDateFromToday(int noOfDays){
 
@@ -482,12 +486,13 @@ public class OrdersPage {
         //int noOfPages= InstallCost/10+1;
         return InstallCost;
     }
-    public static void VerificationOfLinksInOrdersPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerificationOfOrderExpandForFirstProduct(WebDriver driver) throws IOException, WriteException, InterruptedException {
         Thread.sleep(1000);
         ExpectedLable("Check that the first listed order is expanded or collapsed ?");
         if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
             ActualLable("Verified successfully, first listed order is expanded", "Pass");
-            VerifyLinksInOrdersPage(driver);
+            QuantityOfProduct=driver.findElement(NoOfQuantity).getText();
+            //VerifyLinksInOrdersPage(driver);
         }
         else{
             ActualLable("Verified successfully, first listed order is not expanded", "Pass");
@@ -495,7 +500,7 @@ public class OrdersPage {
             driver.findElement(FirstOrderElement).click();
             if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
                 ActualLable("Verified successfully, Expand functionality is working properly", "Pass");
-                VerifyLinksInOrdersPage(driver);
+                //VerifyLinksInOrdersPage(driver);
             }
             else{ ActualLable("Verification failed , Expand functionality is not working", "Fail"); }
         }
@@ -553,7 +558,6 @@ public class OrdersPage {
         else{   ActualLable("'Status link' is not working", "Fail");}
 
     }
-
     public static Double SearchCreatedOrderInOrdersPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
         Double ActualInstallationCharges = null;
         String ReferenceNumber =CheckOutPage.ClickonProceedtoCheckout(driver);
@@ -581,30 +585,8 @@ public class OrdersPage {
         return ActualInstallationCharges;
     }
     static String QuantityOfProduct;
-    public static String VerificationOfRequestReturnButtonAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        Thread.sleep(1000);
-        StepLable("Verify Request&Return Form");
-        ExpectedLable("Check that the first listed order is expanded or collapsed ?");
-        if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
-            ActualLable("Verified successfully, first listed order is expanded", "Pass");
-            QuantityOfProduct=driver.findElement(NoOfQuantity).getText();
-            VerifyRequestReturnPage(driver);
-        }
-        else{
-            ActualLable("Verified successfully, first listed order is not expanded", "Pass");
-            ExpectedLable("Now try to Expand the first order details ");
-            driver.findElement(FirstOrderElement).click();
-            if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
-                ActualLable("Verified successfully, Expand functionality is working properly", "Pass");
-                QuantityOfProduct=driver.findElement(NoOfQuantity).getText();
-                VerifyRequestReturnPage(driver);
-            }
-            else{ ActualLable("Verification failed , Expand functionality is not working", "Fail"); }
-        }
-        return QuantityOfProduct;
-    }
-
     public static void VerifyRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Verify Request&Return Form");
         ExpectedLable("Check that the 'Request Return' button is available in Order or not ?");
         if(driver.findElements(RequestReturnElement).size()>0){
             ActualLable("Verification is successful , 'Request Return' button is available in Order", "Pass");
@@ -625,7 +607,6 @@ public class OrdersPage {
         }
         else{ ActualLable("Verification failed , 'Request Return' button is not available in Order", "Fail"); }
     }
-
     public static void VerifyRequestReturnPageContent(WebDriver driver) throws InterruptedException, IOException, WriteException {
         StepLable("Verify content on Request Return page ");
         ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
@@ -656,7 +637,6 @@ public class OrdersPage {
             else{     ActualLable("Verification failed , '" + AssertName.get(i) + "' is not available on Request return page", "Fail");     }
         }
     }
-
     public static void VerifyQuantityFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException {
         ExpectedLable("Get the Exist Quantity value for the product ");
         int QuantityOfProductint= Integer.parseInt(QuantityOfProduct);
@@ -681,5 +661,46 @@ public class OrdersPage {
                 else{ActualLable("Verification is successful , Error message is not showing for Valid input", "Pass");}
             }
         }
+    }
+    public static void VerifyCloseButtonFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException{
+        ExpectedLable("Verify that 'Close button' is Available on 'Request return' Page or not ?");
+        if(driver.findElements(CloseRequestReturnButtonElement).size()>0){
+            ActualLable("Verification is successful , 'Close button' is available on 'Request Return' page ", "Pass");
+            ExpectedLable("Click on 'Close button' on 'Request return' Page, and check that 'Close button' is working or not ?");
+            driver.findElement(CloseRequestReturnButtonElement).click();
+            if(driver.findElements(CloseRequestReturnButtonElement).size()>0){
+                ActualLable("Verification Failed , 'Close button' is not Working properly on 'Request Return' page ", "Fail");}
+            else{ ActualLable("Verification is successful , 'Close button' is Working Properly on 'Request Return' page ", "Pass");}
+        }else{  ActualLable("Verification Failed , 'Close button' is not available on 'Request Return' page ", "Fail");}
+    }
+    public static void VerifySubmitButtonFunctionalityinRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException{
+        ExpectedLable("Verify that 'Reason for Return' dropdown displaying or not ?, if yes select option from drop down.");
+        if(driver.findElements(ReasonRequestReturnButtonDropDownElement).size()>0){
+            driver.findElement(ReasonRequestReturnButtonDropDownElement).click();
+            Thread.sleep(1000);
+            driver.findElement(ReasonForReturnButtonElement).click();
+            ActualLable("Verification is successful , Reason selected from drop down ", "Pass");
+        }
+        else{ ActualLable("Verification Failed , Requesr Reason drop down not found", "Fail"); }
+        ExpectedLable("Verify that 'Return Quantity' blank is displaying or not ?, if yes Enter valid data.");
+        if(driver.findElements(ReturnQuantityElement).size()>0){
+            driver.findElement(ReturnQuantityElement).clear();
+            driver.findElement(ReturnQuantityElement).sendKeys(QuantityOfProduct);
+            ActualLable("Verification is successful , entered valid data ", "Pass");
+        }
+        else{ ActualLable("Verification Failed , 'Return Quantity' blank is not available on 'Request Return' page ", "Fail"); }
+        ExpectedLable("Verify that 'Reason Comment' dropdown displaying or not ?, if yes enter valid reason in it");
+        if(driver.findElements(CommentForReturnButtonElement).size()>0){
+            driver.findElement(CommentForReturnButtonElement).sendKeys("Test");
+            ActualLable("Verification is successful , 'Reason Comment' entered successfully ", "Pass");
+        }
+        else{ ActualLable("Verification Failed , 'Reason Comment' is not available on 'Request Return' page ", "Fail"); }
+        ExpectedLable("Verify that 'Submit' button on 'Reason for Return' dropdown displaying or not ?, if yes click on Submit");
+        if(driver.findElement(SubmitOnReturnButtonElement).isEnabled()){
+            driver.findElement(SubmitOnReturnButtonElement).click();
+            ActualLable("Verification is successful , clicked on Submit button ", "Pass");
+        }
+        else{ ActualLable("Verification Failed , 'Submit' button is not Enabled on 'Request Return' page ", "Fail"); }
+
     }
 }

@@ -58,7 +58,7 @@ public class DataDriven {
 		cellFont = new WritableFont(WritableFont.ARIAL, 9);
 		cellFormat = new WritableCellFormat(cellFont);
 		cellFormat.setWrap(true);
-		//cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 		cellFormat.setAlignment(Alignment.CENTRE);
 		return cellFormat;
 	}
@@ -266,7 +266,7 @@ public static int numberForColumn;
 		ReportStartNumber = DataDriven5();
 		WritableHyperlink hlk =new WritableHyperlink(0,ReportStartNumber,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
 		wsheet = wbook.getSheet("TestCaseDiscription");
-		wsheet.addCell(new Label(3 , 3, "QA2 / "+Browser.BrowserNameForSuite,CellFormat1()));
+		wsheet.addCell(new Label(4 , 3, "QA2 / "+Browser.BrowserNameForSuite,CellFormat1()));
 		wsheet.addHyperlink(hlk);
 		wsheet.addCell(new Label(0 , ReportStartNumber, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , ReportStartNumber, ScName, CellFormat()));
@@ -311,9 +311,35 @@ public static int numberForColumn;
 			wsheet.addCell(new Label(3 , ResultColumn, Scresult,CellFormat1()));
 		}*/
 		wsheet.addCell(new Label(4 , ReportStartNumber , ObjectRepository.dateString(),CellFormat1()));
+
+
 	}
 
 	public void closedoc() throws IOException, WriteException{
+		//wbook.write();
+		wsheet = wbook.getSheet("TestCaseDiscription");
+		int cols=0;
+		int NoOfPassedTestCases=0;
+		int NoOfFailedTestCases=0;
+		cols=wsheet.getRows();
+		for(int i=0;i<=cols;i++){
+			String Resultstatus =wsheet.getCell(3,i).getContents();
+			if(Resultstatus.contentEquals("Pass")){
+				NoOfPassedTestCases=NoOfPassedTestCases+1;
+			}else if(Resultstatus.contentEquals("Fail")){
+				NoOfFailedTestCases=NoOfFailedTestCases+1;
+			}
+		}
+		WritableCellFormat cellFormat = null;
+		WritableFont cellFont = null;
+		cellFont = new WritableFont(WritableFont.ARIAL, 9,WritableFont.BOLD);
+		cellFormat = new WritableCellFormat(cellFont);
+		cellFormat.setWrap(true);
+		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+		cellFormat.setAlignment(Alignment.CENTRE);
+
+		wsheet.addCell(new Label(2 , 3 , "No.Of Test Scenarios Executed : "+(cols-7)+" ",cellFormat));
+		wsheet.addCell(new Label(2 , 4 , "No.Of Test Scenarios Passed / Failed : "+NoOfPassedTestCases+" / "+NoOfFailedTestCases+" ",cellFormat));
 
 		count.getAndSet(3);
 		count1.getAndSet(3);
