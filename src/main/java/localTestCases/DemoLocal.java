@@ -30,7 +30,7 @@ public class DemoLocal extends Browser{
 	@Test
 	public void DemoTC() throws IOException, WriteException {
 		try {
-			DataDriven.ReportStartup(199);
+			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
 			log.info("Login in to the webshop application");

@@ -23,7 +23,7 @@ public class ReviewOrderPage {
 
     static private By PageTitle = By.xpath("//h2");
     static private By TermsAndConditionsXpath = By.xpath("//label[@class='is-check-radio-label']");
-    static private By PlaceOrderButton = By.xpath("//button[@class='btn btn-primary']");
+    static private By PlaceOrderButton = By.xpath("//button[Contains(text(),'Place Order')]");
 
 
     public static void ReviewOrderPageVerify(WebDriver driver) throws IOException, WriteException, InterruptedException {

@@ -33,6 +33,38 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
+    public void WS_TC_115() throws IOException, InterruptedException, WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(115);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart is having Products or not");
+            if(noOfItemsafterAddtoCart>0){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyCheckOutButtonFunctionality(driver);
+                CheckOutPage.ClickonProceedtoCheckout(driver);
+                ReviewOrderPage.COnfirmAndPlaceOrder(driver);
+                OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
+            }
+            else{
+                ActualLable("Products are not available in Shopping cart, now add products to cart","Pass");
+                ProductSearchPage.AddToShoppingCart(driver);
+                ShoppingCart.VerifyCheckOutButtonFunctionality(driver);
+                CheckOutPage.ClickonProceedtoCheckout(driver);
+                ReviewOrderPage.COnfirmAndPlaceOrder(driver);
+                OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
     public void WS_TC_140() throws IOException, WriteException, InterruptedException {
 
         try {

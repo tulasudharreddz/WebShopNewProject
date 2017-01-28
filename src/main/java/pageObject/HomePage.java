@@ -34,11 +34,11 @@ public class HomePage {
     static private By Favorites = By.xpath("//a[@href='/Webshop/users/favorites']");
     static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
     static private By RegisterHereLink = By.xpath("//a[contains(text(),'Register Here')]");
+    static private By HomePageAssert = By.xpath("//h2[contains(text(),'Welcome')]");
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
         driver.findElement(byElementLocator).click();
     }
-
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -52,7 +52,15 @@ public class HomePage {
         }
         else {ActualLable("Verification verified, Register Here link is not available on home page" ,"Fail");}
     }
-
+    public static void VerifyHomePageAssert(WebDriver driver) throws IOException, WriteException {
+        ExpectedLable("Verify that the Home page is opened or not ?");
+        if(driver.findElements(HomePageAssert).size()>0) {
+            ActualLable("Successfully Verified, Assert verified for Home page", "Pass");
+        }
+        else {
+            ActualLable("Failed to verify, Assert not found for Home page", "Pass");
+        }
+    }
     public static void PageTitle(WebDriver driver) throws IOException, WriteException {
         //WebDriver driver = null;
         ExpectedLable("User should land to home page");

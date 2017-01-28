@@ -80,7 +80,6 @@ public class ShoppingCart {
         }
 
     }
-
     public static void OpenItemDetails(WebDriver driver){
         if(driver.findElements(OpenItmDetailsPannel).size()>0){
         }
@@ -172,7 +171,6 @@ public class ShoppingCart {
         }
         return Totalsum;
     }
-
     public static List<WebElement> UnitPrice(WebDriver driver) {
 
         List<WebElement> noUnitPrice = driver.findElements(UnitPrice);
@@ -235,8 +233,7 @@ public class ShoppingCart {
 
         return ActualCartSubtotal;
     }
-    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException {
-
+    public static void VerifyForCartSummeryPannelOpenedOrNot(WebDriver driver) throws IOException, WriteException {
         ExpectedLable("Open Cart Summery Panel in Shopping cart page");
         if(driver.findElements(OpenCartSummeryPannel).size()>0) {
             ActualLable("Cart Summery Panel already Opened" ,"Pass");
@@ -244,6 +241,9 @@ public class ShoppingCart {
             driver.findElement(CartSummeryPannel).click();
             ActualLable("Cart Summery Panel Opened successfully" ,"Pass");
         }
+    }
+    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException {
+
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("Cart Subtotal");
         al.add("Shipping Charges");
@@ -304,9 +304,7 @@ public class ShoppingCart {
         ActualLable("Actual Cart Grand Total is "+ ActualCartGrandTotal,"Pass");
         return ActualCartGrandTotal;
     }
-
     public static void ClickonCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
-
         ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
         if (driver.findElements(ProceedtocheckoutXpath).size()>0) {
             String ProceedtoCheckoutText = driver.findElement(ProceedtocheckoutXpath).getText();
@@ -375,7 +373,6 @@ public class ShoppingCart {
             ActualLable("Failed to verify assert for 'Inventory Icon' in ' Item Details ' section", "Fail");
         }
     }
-
     public static void VerifyEditQuantityfunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("Verify Assert for ' Quantity blank ' for every product");
         long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
@@ -407,7 +404,6 @@ public class ShoppingCart {
         } else { ActualLable("Line items are combined more than one product in one block", "Fail");}
 
     }
-
     public static void VerifyLogisticCharge(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify 'Shipping Charges' in shopping cart");
         HomePage.ClickonShoppingCart(driver);
@@ -424,7 +420,6 @@ public class ShoppingCart {
             String LabelName = driver.findElements(CartSummeryLabel).get(i).getText();
             if(LabelName.contentEquals("Shipping Charges")){
                 ActualLable("assert verified successfully for label "  ,"Pass");
-
                 ExpectedLable("Get Shipping charges from Shopping cart");
                 double ExpectedShippingCharges = 6.50;
                 String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
@@ -444,4 +439,88 @@ public class ShoppingCart {
         }
 
     }
+    public static void VerifySalesTax(WebDriver driver) throws IOException, WriteException, InterruptedException{
+        StepLable("Verify 'Sales vat Charges' in shopping cart");
+        HomePage.ClickonShoppingCart(driver);
+        ShoppingCart.VerifyForCartSummeryPannelOpenedOrNot(driver);
+        ExpectedLable("Verify assert for 'Sales VAT' available in shopping cart");
+        for (int i = 0; i <= driver.findElements(CartSummeryLabel).size()- 1; i++) {
+            String LabelName = driver.findElements(CartSummeryLabel).get(i).getText();
+            if(LabelName.contentEquals("Sales VAT")){
+                ActualLable("assert verified successfully for label "  ,"Pass");
+                ExpectedLable("Get Cart Subtotal from Shopping cart");
+                String ActualCartSubTotalString =  driver.findElement(ActualCartSubtotalXpath).getText();
+                String CartSubTotalSt = ActualCartSubTotalString.replaceAll("[€$£₹,]","");
+                Double ActualCartSubTotal = Double.parseDouble(CartSubTotalSt);
+                ActualLable("Actual Cart subtotal is : "+ActualCartSubTotalString  ,"Pass");
+                ExpectedLable("Get Shipping chargers from Shopping cart");
+                String ActualShippingChargesString =  driver.findElement(ActualCartSubtotalXpath).getText();
+                String ShippingChargesSt = ActualShippingChargesString.replaceAll("[€$£₹,]","");
+                Double ActualShippingCharges = Double.parseDouble(ShippingChargesSt);
+                ActualLable("Actual Shipping chargers are : "+ActualShippingChargesString  ,"Pass");
+                ExpectedLable("Calculate Expected Sales Vat value");
+                double ExpectedSalesVatCharges1 =ExpectedSalesTax(driver, i);
+                double ExpectedSalesVatCharges = Math.round( ExpectedSalesVatCharges1 * 100.0 ) / 100.0;
+                        ActualLable("Expected Sales VAT Charges are :  "+ExpectedSalesVatCharges  ,"Pass");
+                ExpectedLable("Get Sales VAT from Shopping cart");
+                String ActualSalesVATString =  driver.findElement(ActualSalesVatXpath).getText();
+                ActualLable("Sales VAT Charges are "+ActualSalesVATString  ,"Pass");
+                String s1 = ActualSalesVATString.replaceAll("[€$£₹,]","");
+                Double ActualSalesVATCharges = Double.parseDouble(s1);
+                ExpectedLable("Verify Sales VAT charges in shopping cart");
+                //Assert.assertEquals(ActualSalesVATCharges, ExpectedSalesVatCharges);
+                if(ActualSalesVATCharges.equals(ExpectedSalesVatCharges)) {
+                    ActualLable("Sales VAT Charges verified successfully", "Pass");
+                }
+                else{
+                    ActualLable("Sales VAT charges are not same as expected", "Fail");
+                }
+                break;
+            }
+        }
+    }
+    public static double ExpectedSalesTax(WebDriver driver, int NoOfEle) throws IOException, WriteException, InterruptedException{
+        double ExpectedSalesVat = 0;
+        for (int i = 0; i <= NoOfEle-1; i++) {
+            String LabelName = driver.findElements(By.xpath("//div[@class='row totals']/div[2]")).get(i).getText();
+            String CartSubTotalSt = LabelName.replaceAll("[€$£₹,]","");
+            double ActualCartSubTotal = Double.parseDouble(CartSubTotalSt);
+            double ActualCartSubTotal1=ActualCartSubTotal*19/100;
+            ExpectedSalesVat = ExpectedSalesVat+ActualCartSubTotal1;
+        }
+        return ExpectedSalesVat;
+    }
+    public static void VerifyContinueShoppingButtonFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException{
+        StepLable("Verify Continue Shopping Button functionality");
+        HomePage.ClickonShoppingCart(driver);
+        ExpectedLable("Verify That Continue Shopping Button is available or not ?");
+        if(driver.findElements(ContinueShoppingXpath).size()>0){
+            ActualLable("Continue Shopping Button Button is available on Shopping cart", "Pass");
+            ExpectedLable("now click on 'Continue Shopping Button', then check that Page is navigate to Home page or not ?");
+            driver.findElement(ContinueShoppingXpath).click();
+            ActualLable("successfully clicked on Continue Shopping Button", "Pass");
+            HomePage.VerifyHomePageAssert(driver);
+
+        }
+        else{
+            ActualLable("Continue Shopping Button is not Available", "Pass");
+            ProductSearchPage.AddToShoppingCart(driver);
+            VerifyContinueShoppingButtonFunctionality(driver);
+        }
+    }
+    public static void VerifyCheckOutButtonFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException{
+        StepLable("Verify Check out Button functionality");
+        HomePage.ClickonShoppingCart(driver);
+        ExpectedLable("Verify That 'Checkout' Button is available or not ?");
+        if(driver.findElements(ProceedtocheckoutXpath).size()>0){
+            ActualLable("'Checkout' Button is available on Shopping cart", "Pass");
+            CheckOutPage.VerifyCheckoutPageAssert(driver);
+        }
+        else{
+            ActualLable("Checkout button is not Available", "Pass");
+            ProductSearchPage.AddToShoppingCart(driver);
+            VerifyCheckOutButtonFunctionality(driver);
+        }
+    }
+
 }

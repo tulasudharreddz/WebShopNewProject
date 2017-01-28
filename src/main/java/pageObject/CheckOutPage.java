@@ -28,21 +28,21 @@ public class CheckOutPage {
     static private By BillingAddressDropdown = By.xpath("(//span[@class='select2-selection select2-selection--single'])[1]");
     static private By ShippingAddressDropdown = By.xpath("(//span[@class='select2-selection select2-selection--single'])[1]");
     static private By InstallAddressDropdown = By.xpath("(//span[@class='select2-selection select2-selection--single'])[1]");
-    static private By SelectAddress = By.xpath("//span[@class='select2-dropdown select2-dropdown--below']/span/ul/li[@data-index='1']");
+    static private By SelectAddress = By.xpath("//span[@class='select2-dropdown select2-dropdown--below']/span/ul/li[@data-index='0']");
     static private By ConfirmAddress = By.xpath("//button[@type='submit']");
     static private By refNumXpath = By.id("refNum");
     static private By InstallationServiceCostText = By.xpath("//span[@class='label-link-color']");
     static private By ReviewOrderXpath = By.xpath("//button[contains(text(),'Review Order')]");
 
 
-    public static void VerifyCheckoutPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyCheckoutPageAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ShoppingCart.ClickonCheckout(driver);
         Thread.sleep(2000);
-        ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
+        ExpectedLable("Check 'checkout' title is displaying or not");
         if (driver.findElement(CheckOutPageTitleXpath).isDisplayed()) {
             String CheckOutPageTitle = driver.findElement(CheckOutPageTitleXpath).getText();
             Assert.assertEquals(CheckOutPageTitle, "Checkout");
-            ActualLable("'Proceed to checkout' button verified successfully", "Pass");
+            ActualLable("'checkout' Page title verified successfully", "Pass");
             log.info("Assert is verified for 'Proceed to checkout' button");
         }
         else{
@@ -50,8 +50,7 @@ public class CheckOutPage {
         }
     }
     public static void SelectingAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        VerifyCheckoutPageTitle(driver);
-
+        VerifyCheckoutPageAssert(driver);
         for(int i =0; i<3;i++) {
             ExpectedLable("Select"+ i +"from Drop down");
             log.info(driver.findElements(SelectAddressXpath).get(i).getText());
@@ -74,7 +73,7 @@ public class CheckOutPage {
     }
 
     public static void SelectAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        VerifyCheckoutPageTitle(driver);
+        VerifyCheckoutPageAssert(driver);
         //select Billing Address
         ExpectedLable("Select Billing address from Drop down");
         driver.findElement(BillingAddressXpath).click();

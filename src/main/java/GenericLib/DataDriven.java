@@ -251,7 +251,7 @@ public static int numberForColumn;
 		ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
 		String ScDis= ReadTestCases(TestCasesheet).getCell(2,j).getContents();
-		String text = ScID+";"+ScName;
+		String text = ScID+" : "+ScName;
 		WritableCellFormat cellFormat = null;
 		WritableFont cellFont = null;
 		cellFont = new WritableFont(WritableFont.ARIAL, 9);

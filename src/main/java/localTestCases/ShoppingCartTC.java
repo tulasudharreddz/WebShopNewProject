@@ -115,6 +115,7 @@ public class ShoppingCartTC extends Browser {
             ExpectedLable("Verify cart count functionality by adding product to cart");
             if(noOfItemsafterAddtoCart>noOfItems){
                 ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyForCartSummeryPannelOpenedOrNot(driver);
                 ShoppingCart.ContentVerifyForCartSummery(driver);
             }
             else{
@@ -173,6 +174,84 @@ public class ShoppingCartTC extends Browser {
                 ActualLable("Products are not available in Shopping cart, now add products to cart","Pass");
                 ProductSearchPage.AddToShoppingCart(driver);
                 ShoppingCart.VerifyLogisticCharge(driver);
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_109() throws IOException, InterruptedException, WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(109);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart is having Products or not");
+            if(noOfItemsafterAddtoCart>0){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifySalesTax(driver);
+            }
+            else{
+                ActualLable("Products are not available in Shopping cart, now add products to cart","Pass");
+                ProductSearchPage.AddToShoppingCart(driver);
+                ShoppingCart.VerifySalesTax(driver);
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_112() throws IOException, InterruptedException, WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(112);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart is having Products or not");
+            if(noOfItemsafterAddtoCart>0){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyContinueShoppingButtonFunctionality(driver);
+            }
+            else{
+                ActualLable("Products are not available in Shopping cart, now add products to cart","Pass");
+                ProductSearchPage.AddToShoppingCart(driver);
+                ShoppingCart.VerifyContinueShoppingButtonFunctionality(driver);
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
+    public void WS_TC_113() throws IOException, InterruptedException, WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(113);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart is having Products or not");
+            if(noOfItemsafterAddtoCart>0){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyCheckOutButtonFunctionality(driver);
+            }
+            else{
+                ActualLable("Products are not available in Shopping cart, now add products to cart","Pass");
+                ProductSearchPage.AddToShoppingCart(driver);
+                ShoppingCart.VerifyCheckOutButtonFunctionality(driver);
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
