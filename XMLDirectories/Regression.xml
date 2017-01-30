@@ -94,10 +94,14 @@
                     <include name="WS_TC_105"/>
                     <include name="WS_TC_106"/>
                     <include name="WS_TC_108"/>
+                    <include name="WS_TC_109"/>
+                    <include name="WS_TC_112"/>
+                    <include name="WS_TC_113"/>
                 </methods>
             </class>
             <class name="localTestCases.CheckOutTC">
                 <methods>
+                    <include name="WS_TC_115"/>
                     <include name="WS_TC_140"/>
                     <include name="WS_TC_141"/>
                     <include name="WS_TC_142"/>

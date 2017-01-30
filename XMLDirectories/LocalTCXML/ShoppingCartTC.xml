@@ -9,6 +9,7 @@
                     <include name="WS_TC_102"/>
                     <include name="WS_TC_103"/>
                     <include name="WS_TC_105"/>
+                    <include name="WS_TC_106"/>
                     <include name="WS_TC_108"/>
                     <include name="WS_TC_109"/>
                     <include name="WS_TC_112"/>
