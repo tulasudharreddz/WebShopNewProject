@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -51,15 +52,20 @@ public class CheckOutPage {
     }
     public static void SelectingAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
         VerifyCheckoutPageAssert(driver);
+        StepLable("Complete Check out page action");
+        ArrayList<String> AddressNames=new ArrayList<String>();
+        AddressNames.add("Billing Addresses");
+        AddressNames.add("Shipping Addresses");
+        AddressNames.add("Install Addresses");
         for(int i =0; i<3;i++) {
-            ExpectedLable("Select"+ i +"from Drop down");
+            ExpectedLable("Select "+AddressNames.get(i)+" from drop down ");
             log.info(driver.findElements(SelectAddressXpath).get(i).getText());
             if(driver.findElements(SelectAddressXpath).get(i).getText().contentEquals("Select an address")) {
                 driver.findElements(SelectAddressXpath).get(i).click();
                 driver.findElement(InstallAddressDropdown).click();
                 driver.findElement(SelectAddress).click();
                 driver.findElement(ConfirmAddress).click();
-                ActualLable( i+"address selected successfully ", "Pass");
+                ActualLable( AddressNames.get(i)+"address selected successfully ", "Pass");
             }
             else{
                 driver.findElements(SelectAddressXpath).get(i).click();
@@ -67,11 +73,10 @@ public class CheckOutPage {
                 driver.findElement(InstallAddressDropdown).click();
                 driver.findElement(SelectAddress).click();
                 driver.findElement(ConfirmAddress).click();
-                ActualLable(i+" selected successfully ", "Pass");
+                ActualLable(AddressNames.get(i)+" selected successfully ", "Pass");
             }
         }
     }
-
     public static void SelectAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
         VerifyCheckoutPageAssert(driver);
         //select Billing Address
@@ -107,7 +112,6 @@ public class CheckOutPage {
         ActualLable("install address selected successfully ", "Pass");
 
     }
-
     public static String ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Complete Check out page action");
         SelectingAddress(driver);
@@ -115,7 +119,7 @@ public class CheckOutPage {
         Random rand = new Random();
         int  ReferenceNumbe = rand.nextInt(9999) + 1000;
         String ReferenceNumberString=Integer.toString(ReferenceNumbe);
-        String ReferenceNumber = "IRN"+ReferenceNumberString;
+        String ReferenceNumber = "IRNQATEAMTESTORDER"+ReferenceNumberString;
         driver.findElement(refNumXpath).sendKeys(ReferenceNumber);
         ActualLable("Successfully provided Refference number in the blank ", "Pass");
         String ProceedtoCheckoutText = driver.findElement(ReviewOrderXpath).getText();
@@ -135,7 +139,6 @@ public class CheckOutPage {
         }
         return ReferenceNumber;
     }
-
     public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException, InterruptedException {
         HomePage.ClickonShoppingCart(driver);
         ShoppingCart.ClickonCheckout(driver);
@@ -151,13 +154,20 @@ public class CheckOutPage {
         }
         return status;
     }
-    public static double GetInstallationCost(WebDriver driver){
-        String Mesage = driver.findElement(InstallationServiceCostText).getText();
-        String[] terms = Mesage.split("\\€");
-        String s= terms[1];
-        String t = s.replaceAll(" ", "");
-        String t1 = t.replaceAll("[?]", "");
-        double InstallCost = Double.parseDouble(t1);
+    public static double GetInstallationCost(WebDriver driver) throws IOException, WriteException {
+        double InstallCost = 0.00;
+        ExpectedLable(" Get Installation charges from aplication");
+        if(driver.findElements(InstallationServiceCostText).size()>0) {
+            String Mesage = driver.findElement(InstallationServiceCostText).getText();
+            String[] terms = Mesage.split("\\€");
+            String s = terms[1];
+            String t = s.replaceAll(" ","");
+            String t1 = t.replaceAll("[?]", "");
+            InstallCost = Double.parseDouble(t1);
+            driver.findElement(InstallationServiceCostText).click();
+            ActualLable("'Installation Service Cost ' is '€"+InstallCost+" '", "Pass");
+
+        }
         return InstallCost;
     }
     public static Double VerifyStatusForInstallationServices(WebDriver driver) throws IOException, WriteException, InterruptedException {
@@ -169,10 +179,66 @@ public class CheckOutPage {
         }
         else{
             ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
-            ExpectedLable(" Get Installation charges from aplication");
             InstallationCost = CheckOutPage.GetInstallationCost(driver);
-            ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
         }
         return InstallationCost;
+    }
+    public static ArrayList<String> GetInstallChargesIntoArray(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        ArrayList<String> CartSummeryValues = ShoppingCart.VerifyCartSummeryTotalDemo(driver);
+        SelectingAddress(driver);
+        double InstallationCost = GetInstallationCost(driver);
+        String InstallationCostSt = "€" + InstallationCost;
+        CartSummeryValues.add(InstallationCostSt);
+        String SalesVat = CartSummeryValues.get(2);
+        String s2 = SalesVat.replaceAll("[€$£₹,]","");
+        Double UpdatedSalesVat = Double.parseDouble(s2);
+        UpdatedSalesVat= InstallationCost*19/100 + UpdatedSalesVat;
+        double UpdatedSalesVat1 = Math.round( UpdatedSalesVat * 100.0 ) / 100.0;
+        String UpdatedSalesVatFinal=String.format("%,.2f", UpdatedSalesVat1);
+        String UpdatedSalesVatSt = "€"+UpdatedSalesVatFinal;
+        //String UpdatedSalesVatSt = Double.toString(UpdatedSalesVat);
+        CartSummeryValues.get(2).replace(SalesVat,UpdatedSalesVatSt);
+        String CartGrandTotalSt = CartSummeryValues.get(3);
+        String s3 = CartGrandTotalSt.replaceAll("[€$£₹,]","");
+        Double UpdatedGrandTotal = Double.parseDouble(s3);
+        UpdatedGrandTotal=UpdatedGrandTotal+InstallationCost*19/100+InstallationCost;
+        double UpdatedGrandTotal1 = Math.round( UpdatedGrandTotal * 100.0 ) / 100.0;
+        String UpdatedGrandTotalFinal=String.format("%,.2f", UpdatedGrandTotal1);
+        String UpdatedGrandTotalSt = "€"+UpdatedGrandTotalFinal;
+        //String UpdatedGrandTotalSt = Double.toString(UpdatedGrandTotal);
+        CartSummeryValues.get(3).replace(CartGrandTotalSt,UpdatedGrandTotalSt);
+        ArrayList<String> CartSummeryUpdated=new ArrayList<String>();
+        CartSummeryUpdated.add(CartSummeryValues.get(0));
+        CartSummeryUpdated.add(CartSummeryValues.get(1));
+        CartSummeryUpdated.add(UpdatedSalesVatSt);
+        CartSummeryUpdated.add(UpdatedGrandTotalSt);
+        CartSummeryUpdated.add(InstallationCostSt);
+
+        return CartSummeryUpdated;
+    }
+    public static String CompleteCheckOutPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        ExpectedLable("Provide Reference Number in the blank");
+        Random rand = new Random();
+        int  ReferenceNumbe = rand.nextInt(9999) + 1000;
+        String ReferenceNumberString=Integer.toString(ReferenceNumbe);
+        String ReferenceNumber = "IRNQATEAMTESTORDER"+ReferenceNumberString;
+        driver.findElement(refNumXpath).sendKeys(ReferenceNumber);
+        ActualLable("Successfully provided Refference number in the blank ", "Pass");
+        String ProceedtoCheckoutText = driver.findElement(ReviewOrderXpath).getText();
+
+        ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
+        Assert.assertEquals(ProceedtoCheckoutText, "Review Order");
+        if (driver.findElement(ReviewOrderXpath).isEnabled()) {
+            ActualLable("'Proceed to checkout' button verified successfully", "Pass");
+            log.info("Assert is verified for 'Proceed to checkout' button");
+            Thread.sleep(1000);
+            ExpectedLable("Click on 'Proceed to checkout' button ");
+            driver.findElement(ReviewOrderXpath).click();
+            ActualLable("'Proceed to checkout' button clicked successfully", "Pass");
+        }
+        else{
+            ActualLable("'Proceed to checkout' button is not available", "Fail");
+        }
+        return ReferenceNumber;
     }
 }

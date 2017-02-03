@@ -1,6 +1,7 @@
 package pageObject;
 
 import jxl.write.WriteException;
+import localTestCases.DemoLocal;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -44,9 +45,12 @@ public class OrdersPage {
     static private By ImageElement = By.xpath("//img[@class='img-responsive']");
     static private By NameElement = By.xpath("//p[@class='product-name clickable']/a");
     static private By FieldMfrElement = By.xpath("//span[@class='field-name'][contains(text(),'Mfr Part#')]");
+    static private By FieldMfrElementValue = By.xpath("//span[@class='field-name'][contains(text(),'Mfr Part#')]/parent::div");
     static private By FieldManufacturerElement = By.xpath("//span[@class='field-name'][contains(text(),'Manufacturer:')]");
     static private By FieldQuantityElement = By.xpath("//div[contains(text(),'Quantity')]");
     static private By UnitPriceElement = By.xpath("//div[contains(text(),'Unit Price')]");
+    static private By UnitPrice = By.xpath("//div[@class='col-md-1 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-7 small-font vertical-margin-auto']/p[@class='product-price']");
+    static private By QuantityValue = By.xpath("//div[@class='col-md-1 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-push-0 col-xs-5 vertical-margin-auto text-center product-row-qty']/div");
     static private By ExtendedPriceElement = By.xpath("//div[contains(text(),'Extended Price')]");
     static private By SerialElement = By.xpath("//div[contains(text(),'Serial #')]");
     static private By FielldStatusElement = By.xpath("//div[contains(text(),'Status')]");
@@ -77,10 +81,17 @@ public class OrdersPage {
     static private By  ReturnQuantityElement= By.id("returnQty");
     static private By  ErrorMessageQuantity= By.xpath("//input[@id='returnQty']/following-sibling::div[@class='text-danger']");
     static private By  CloseRequestReturnButtonElement= By.xpath("(//button[@class='is-alert-close'])[1]");
-    static private By  ReasonRequestReturnButtonDropDownElement= By.xpath("(//span[@class='select2-selection__rendered'])[3]");
+    static private By  ReasonRequestReturnButtonDropDownElement= By.xpath("//span[@class='select2-selection__rendered']");
     static private By  ReasonForReturnButtonElement= By.xpath("//li[contains(text(),'Item arrived too late')]");
     static private By  CommentForReturnButtonElement= By.id("comments");
     static private By  SubmitOnReturnButtonElement= By.xpath("(//button[contains(text(),'Submit')])[1]");
+    static private By  PoNumberXpath= By.xpath("//div[1]/div[@class='form-group']");
+    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Shipping Charges')]/parent::div/following-sibling::div");
+    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Sales VAT')]/parent::div/following-sibling::div");
+    static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
+    static private By ActualInstallationChargesXpath = By.xpath("//label[contains(text(),'Installation Services')]/parent::div/following-sibling::div");
+    static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");
+
 
 
 
@@ -161,9 +172,7 @@ public class OrdersPage {
             String pageTitle = driver.findElement(OrderPageTitleElement).getText();
             if (pageTitle.contentEquals("Orders")) {
                 ActualLable("'Orders page' Title Verified successfully", "Pass");
-            } else {
-                ActualLable("Verification failed for 'Orders page' Title", "Fail");
-            }
+            } else {     ActualLable("Verification failed for 'Orders page' Title", "Fail");      }
         }
         else{ ActualLable("Verification failed for 'Orders page' Title", "Fail");}
     }
@@ -521,7 +530,7 @@ public class OrdersPage {
             } else { ActualLable("Verification failed for Document link ", "Fail"); }
         } else { ActualLable("Document number link is not working", "Fail"); }
 
-        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop/orders");
+        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop24/orders");
 
         ExpectedLable("Verify the link is available on 'Product Name' or not ..?");
         String ActualProductname = driver.findElements(NameElement).get(0).getText();
@@ -538,7 +547,7 @@ public class OrdersPage {
             } else {ActualLable("Verification failed for Product name link ", "Fail");}
         } else {ActualLable("Product Name link is not working", "Fail");}
 
-        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop/orders");
+        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop24/orders");
 
         ExpectedLable("Verify the link is available on 'Product Name' or not ..?");
         String ActualStatusName =driver.findElements(StatusLink).get(0).getText();
@@ -685,7 +694,8 @@ public class OrdersPage {
         ExpectedLable("Verify that 'Return Quantity' blank is displaying or not ?, if yes Enter valid data.");
         if(driver.findElements(ReturnQuantityElement).size()>0){
             driver.findElement(ReturnQuantityElement).clear();
-            driver.findElement(ReturnQuantityElement).sendKeys(QuantityOfProduct);
+            //driver.findElement(ReturnQuantityElement).sendKeys(QuantityOfProduct);
+            driver.findElement(ReturnQuantityElement).sendKeys("1");
             ActualLable("Verification is successful , entered valid data ", "Pass");
         }
         else{ ActualLable("Verification Failed , 'Return Quantity' blank is not available on 'Request Return' page ", "Fail"); }
@@ -702,5 +712,99 @@ public class OrdersPage {
         }
         else{ ActualLable("Verification Failed , 'Submit' button is not Enabled on 'Request Return' page ", "Fail"); }
 
+    }
+    public static String VerifyOrderDetailsFromEmail(WebDriver driver) throws InterruptedException, IOException, WriteException{
+        Thread.sleep(2000);
+        VerifyOrderPageTitle(driver);
+        ExpectedLable("Get Reference Number from Orders Page");
+        String PoNumberTotal = driver.findElement(PoNumberXpath).getText();
+        String[] terms = PoNumberTotal.split("Number");
+        String s = terms[1];
+        String t1 = s.replaceAll(" ","");
+        String PoNumber = t1.replaceAll("\n","");
+        ActualLable("Reference Number on Orders Page is: "+ PoNumber, "Pass");
+        return PoNumber;
+    }
+    public static ArrayList<String> GetProductDetailsFromOrderPage(WebDriver driver, int ProductNumber) throws IOException, WriteException, InterruptedException{
+        String ProductNameSt = driver.findElements(NameElement).get(ProductNumber).getText();
+        String PartNumber1 = driver.findElements(FieldMfrElementValue).get(ProductNumber).getText();
+        String MfrPartNumberSt= FavoriesPage.TrimMfrNumber(driver,PartNumber1);
+        String AvailabilityStatus = "Not Available";
+        String UnitPriceSt = driver.findElements(UnitPrice).get(ProductNumber).getText();
+        String QuantityST = driver.findElements(QuantityValue).get(ProductNumber).getText();
+        /*if(ProductNumber == 1){   QuantityST="5";  }
+        else{QuantityST="1";}*/
+        ArrayList<String> AssertNamesSC=new ArrayList<String>();
+        AssertNamesSC.add(ProductNameSt);
+        AssertNamesSC.add(MfrPartNumberSt);
+        AssertNamesSC.add(UnitPriceSt);
+        AssertNamesSC.add(AvailabilityStatus);
+        AssertNamesSC.add(QuantityST);
+        return AssertNamesSC;
+    }
+    public static boolean VerifyProductDetailsOnOrderPageFromMailReturn(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        boolean Status = true;
+        ArrayList<String> AssertNamesText = new ArrayList<String>();
+        AssertNamesText.add("Name Of Item");
+        AssertNamesText.add("MFR Part Number");
+        AssertNamesText.add("Product Price");
+        AssertNamesText.add("Availability Status");
+        AssertNamesText.add("Quantity Of the Product");
+        for (int i = 0; i <= 2; i++) {
+            ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(i);
+            ArrayList<String> ActualValue = GetProductDetailsFromOrderPage(driver, i);
+            for (int j = 0; j <= 4; j++) {
+                if(j==3){ActualLable("Availability status will not available on Orders page","Pass");}
+                else {
+                String ExpectedText = AssertNameFromPSearchPage1.get(j);
+                String ActualText = ActualValue.get(j);
+                ExpectedLable("Verify ' " + AssertNamesText.get(j) + " On Review order page ");
+                    if (ExpectedText.contentEquals(ActualText)) {
+                        ActualLable("Expected and Actual values are same, Expected Value : " + ExpectedText + " Actual Value :" + ActualText, "Pass");
+                    } else {
+                        ActualLable("Failed to verify ' " + AssertNamesText.get(j) + " ' On Review order page, Expected Value : " + ExpectedText + " Actual Value :" + ActualText, "Fail");
+                        Status = false;
+                    }
+                }
+            }
+        }
+        return Status;
+    }
+    public static boolean VerifyCartSummeryDetailsOnOrderPageFromMailReturn(WebDriver driver) throws IOException, WriteException, InterruptedException{
+        boolean Status = true;
+        ArrayList<String> AssertNamesText = new ArrayList<String>();
+        AssertNamesText.add("Cart Subtotal");
+        AssertNamesText.add("Shipping Charges");
+        AssertNamesText.add("Sales VAT");
+        AssertNamesText.add("Cart Grand Total");
+        AssertNamesText.add("Installation Services");
+        for (int j = 0; j <= 4; j++) {
+            String ExpectedText = ReviewOrderPage.ExpectedCartSummeryArray.get(j);
+            String ActualText = GetCartSummeryDetailsOnReviewOrderPage(driver).get(j);
+            ExpectedLable("Verify ' " + AssertNamesText.get(j) + " ' on Review order Page ");
+            if (ExpectedText.contentEquals(ActualText)) {
+                ActualLable(" Expected and Actual values of ' "+AssertNamesText.get(j)+" ' are same, Expected Value : "+ExpectedText+" Actual Value :"+ActualText, "Pass");
+            } else {
+                ActualLable("Failed to verify "+AssertNamesText.get(j)+", Expected Value : "+ExpectedText+" Actual Value :"+ActualText, "Fail");
+                Status = false;
+            }
+        }
+        return Status;
+    }
+    public static ArrayList<String> GetCartSummeryDetailsOnReviewOrderPage(WebDriver driver) throws IOException, WriteException, InterruptedException{
+        String ActualCartSubtotalString = driver.findElement(ActualCartSubtotalXpath).getText();
+        String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
+        String ActualSalesVatChargesString =  driver.findElement(ActualSalesVatXpath).getText();
+        String ActualCartGrandTotalString =  driver.findElement(ActualCartGrandTotalXpath).getText();
+        String ActualInstallationChargesString =  driver.findElement(ActualInstallationChargesXpath).getText();
+
+        ArrayList<String> AssertName1=new ArrayList<String>();
+        AssertName1.add(ActualCartSubtotalString);
+        AssertName1.add(ActualShippingChargesString);
+        AssertName1.add(ActualSalesVatChargesString);
+        AssertName1.add(ActualCartGrandTotalString);
+        AssertName1.add(ActualInstallationChargesString);
+
+        return AssertName1;
     }
 }

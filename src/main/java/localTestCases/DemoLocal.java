@@ -1,6 +1,8 @@
 package localTestCases;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import GenericLib.*;
@@ -26,43 +28,44 @@ public class DemoLocal extends Browser{
 	public void setUp() throws WriteException, IOException, BiffException {
 		driver=getDriver();
 	}
-
+	public static ArrayList<ArrayList> ProductDetailsArrayList;
 	@Test
-	public void DemoTC() throws IOException, WriteException {
+	public void Demo_TC_01() throws IOException, WriteException {
 		try {
 			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
 			log.info("Login in to the webshop application");
 			double noOfItems = ShoppingCart.DeleteExistItem(driver);
-			ProductSearchPage.AddToShoppingCart(driver);
-			ProductSearchPage.AddToShoppingCart(driver);
-			double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+			StepLable("Add product to Shopping Cart from Product search page");
+			ArrayList<String> AssertNameFromPSearchPage =ProductSearchPage.SelectProductFromSearchResultPage(driver);
+			ArrayList<String> AssertNameFromPCartPage = ProductCartPage.SelectProductFromPCartPage(driver);
+			ArrayList<String> AssertNameFromFavoritesPage= FavoriesPage.SelectProductFromFavoritesPage(driver);
+			ProductDetailsArrayList= new ArrayList<ArrayList>();
+			ProductDetailsArrayList.add(AssertNameFromPSearchPage);
+			ProductDetailsArrayList.add(AssertNameFromPCartPage);
+			ProductDetailsArrayList.add(AssertNameFromFavoritesPage);
+			double noOfItemsAfterAddToCart = HomePage.VerifyCart(driver);
 			ExpectedLable("Verify cart count functionality by adding product to cart");
-			if(noOfItemsafterAddtoCart>noOfItems){
+			if(noOfItemsAfterAddToCart>noOfItems){
 				ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
 				ShoppingCart.VerifyItemCount(driver);
-				ShoppingCart.VerifyCartGrandTotal(driver);
-				CheckOutPage.ClickonProceedtoCheckout(driver);
-				ReviewOrderPage.COnfirmAndPlaceOrder(driver);
+				StepLable("Verify Product Details on Shopping cart with Details on Product Cart page details");
+				boolean ResultStatus = ShoppingCart.VerifyProductDetailsOnShoppingCart(driver);
+				String ReferenceNumber = ReviewOrderPage.ConfirmAndPlaceOrderDemo(driver);
 				OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
-			}
-			else{
-				ActualLable("verification failed for cart Number functionality","Fail");
-			}
+				boolean Stuas =EmailVerificationDetails.VerifyOrderEmailInOutLook(driver);
+				if(Stuas==true) {
+					EmailVerificationDetails.VerifyReferenceLink(driver, ReferenceNumber);
+					OrdersPage.VerifyRequestReturnPage(driver);
+					OrdersPage.VerifySubmitButtonFunctionalityinRequestReturnPage(driver);
+					EmailVerificationDetails.VerifyRequestReturnEmailInOutLook(driver);
+				}
+			}else{ActualLable("verification failed for cart Number functionality","Fail");}
 		}
-		catch (AssertionError e){
-			log.info("Exception for the product is " + e);
-			String error =  "Exception " +  e.getClass().getSimpleName();
-			ActualLable(error,"Fail");
-		}
-		catch (Exception e){
-			log.info("Exception for the product is " + e);
-			String error =  "Exception " +  e.getClass().getSimpleName();
-			ActualLable(error,"Fail");
-		}
+		catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
-
 	@Test
 	public void MobileAutomation() throws Exception ,WriteException{
 		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");

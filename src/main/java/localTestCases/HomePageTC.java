@@ -45,20 +45,12 @@ public class HomePageTC extends Browser{
         driver=getDriver();
     }
 
-
-    /*
-
-    WS_TC_30: AssertVerifyForDefaultAddress that Shop menu button is displaying or not and options under Shop menu are available or not
-
-    */
+    /*   WS_TC_30: AssertVerifyForDefaultAddress that Shop menu button is displaying or not and options under Shop menu are available or not */
 
     @Test
     public void WS_TC_30() throws InterruptedException, IOException, WriteException, BiffException {
         try{
-            log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
-
             DataDriven.ReportStartup(30);
-
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             Thread.sleep(2000);

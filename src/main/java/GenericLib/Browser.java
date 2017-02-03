@@ -39,6 +39,8 @@ public class Browser {
 		return driver;
 	}
 	public static String BrowserNameForSuite;
+	static ObjectRepository obr = new ObjectRepository();
+
 	private void setDriver(String browser) throws Exception{
 		BrowserNameForSuite = browser;
 		if (browser.equalsIgnoreCase("Firefox")) {
@@ -60,7 +62,7 @@ public class Browser {
 			driver = new EdgeDriver();
 		}
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
 	private Sheet sheet;
@@ -104,7 +106,9 @@ public class Browser {
 
 	@BeforeMethod
 	public void Url() throws IOException, BiffException, WriteException {
-		driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+		obr.repository(driver);
+		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+		driver.get(obr.obj.getProperty("url"));
 		//log.info("URL entered in browser");
 	}
 	@AfterMethod

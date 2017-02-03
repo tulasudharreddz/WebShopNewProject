@@ -4,6 +4,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static GenericLib.DataDriven.ActualLable;
 import static GenericLib.DataDriven.ExpectedLable;
@@ -29,12 +32,14 @@ public class HomePage {
 
     //Page Elements
     static private By MyAccountMenuonHomePage = By.xpath("//a[contains(text(),'My Account')]");
-    static private By ShoppingCart = By.xpath("//a[@href='/Webshop/cart']");
+    static private By ShoppingCart = By.xpath("//a[@href='/Webshop24/cart']");
     static private By NoOFCartItems = By.xpath("//b[@class='badge']");
-    static private By Favorites = By.xpath("//a[@href='/Webshop/users/favorites']");
+    static private By Favorites = By.xpath("//a[@href='/Webshop24/users/favorites']");
     static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
     static private By RegisterHereLink = By.xpath("//a[contains(text(),'Register Here')]");
     static private By HomePageAssert = By.xpath("//h2[contains(text(),'Welcome')]");
+    static private By ProductSearchField = By.xpath("//div[@class='input-group']/is-typeahead/span/input");
+    static private By ReturnHome = By.xpath("//a[@href='/Webshop24/home']");
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
         driver.findElement(byElementLocator).click();
@@ -353,9 +358,9 @@ public class HomePage {
 
     public static double UnitPrice(WebDriver driver) {
 
-        double ListPrice= 333.2;
-        double DiscountListRate= 25;
-        double Surcharge=2.5;
+        double ListPrice=  516.64;
+        double DiscountListRate= 0;
+        double Surcharge=1.5;
         log.info("List Price for the product is " + ListPrice);
         double Discount = ListPrice*(1 - (DiscountListRate/100));
         log.info("Discount for the product is " + DiscountListRate  +"Product price after Discount is "+Discount);
@@ -363,11 +368,11 @@ public class HomePage {
         log.info("Surcharge for the product is " + Surcharge  +"Surcharge amount is "+ListFactor);
         double DiscountedByPrice = Discount+ListFactor;
         log.info("Product Price after discount is " + DiscountedByPrice);
-        double CostFactor1=1;
-        double CostFactor2=1;
-        double CostFactor3=1;
-        double CostFactor4=1;
-        double CostFactor5=1;
+        double CostFactor1=1.5;
+        double CostFactor2=1.5;
+        double CostFactor3=1.5;
+        double CostFactor4=1.5;
+        double CostFactor5=1.5;
         double CostFactor1Value = DiscountedByPrice*CostFactor1/100;
         log.info("Cost Factor for the product is " + CostFactor1  +"Cost factor 1 price for the product is "+CostFactor1Value);
         double CostFactor2Value = DiscountedByPrice*CostFactor2/100;
@@ -380,7 +385,7 @@ public class HomePage {
         log.info("Cost Factor for the product is " + CostFactor5  +"Cost factor 5 price for the product is "+CostFactor5Value);
         double CostOFItem = DiscountedByPrice+CostFactor1Value+CostFactor2Value+CostFactor3Value+CostFactor4Value+CostFactor5Value;
         log.info("Product Price with Cost Factors is " + CostOFItem);
-        double Margin = 10;
+        double Margin = 25;
         log.info("Margin for the product is " + Margin);
         double UnitPrice = CostOFItem/(1- (Margin/100));
         double FinalUnitPrice = Math.round(UnitPrice * 100.0) / 100.0;
@@ -492,4 +497,33 @@ public class HomePage {
         else{  ActualLable("' Favorites ' menu is not on home page", "Fail");    }
 
     }
+    public static final AtomicInteger count7 = new AtomicInteger(-1);
+    public static void SearchProductFromHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        if(driver.findElements(ReturnHome).size()>0) {
+            driver.findElement(ReturnHome).click();
+            ArrayList<String> ProductMfr = new ArrayList<String>();
+            ProductMfr.add("2215-07155-001");
+            ProductMfr.add("2200-07142-120");
+            ProductMfr.add("2230-40300-122");
+            ProductMfr.add("2200-07800-120");
+            ProductMfr.add("2200-07300-120");
+            int i = count7.incrementAndGet();
+            ExpectedLable("Check that the Product search field is available on home page or not ?");
+            if (driver.findElements(ProductSearchField).size() > 0) {
+                ActualLable("Successfully verified, Product search field is available on Home page", "Pass");
+                ExpectedLable("Searching for the product with Mfr Part Number : " + ProductMfr.get(i));
+                Thread.sleep(1000);
+                driver.findElement(ProductSearchField).clear();
+                Thread.sleep(1000);
+                driver.findElement(ProductSearchField).sendKeys(ProductMfr.get(i));
+                Thread.sleep(1000);
+                driver.findElement(ProductSearchField).sendKeys(Keys.ENTER);
+                ActualLable("Successfully Searched for product : " + ProductMfr.get(i), "Pass");
+                Thread.sleep(3000);
+            } else {
+                ActualLable("Verification Failed, Product search field is not available", "Fail");
+            }
+        }
+    }
+
 }

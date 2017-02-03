@@ -30,6 +30,8 @@ public class FavoriesPage {
     static protected ObjectRepository obje = new ObjectRepository();
 
     //Page Elements
+    static private By ProductNamePcart = By.xpath("//div[@class='product-name']");
+    static private By MfrPartNumber = By.xpath("//span[contains(text(),'Mfr Part#')]/parent::div");
     static private By DeleteItem = By.xpath("//a[@class='anchor-delete']");
     static private By PageHeader = By.xpath("//h2");
     static private By ProductName = By.xpath("//p[@class='product-name clickable']/a");
@@ -62,9 +64,7 @@ public class FavoriesPage {
             }
         }
     }
-
     public static int NoOfFavoritesProducts(WebDriver driver) throws IOException, WriteException {
-
         ExpectedLable("verify No of products on ' Favorites ' page");
         int NoProducts;
         if(driver.findElements(NoOfProducts).size()>0) {
@@ -77,7 +77,6 @@ public class FavoriesPage {
         }
         return NoProducts;
     }
-
     public static void FavoritesPageContentVerify(WebDriver driver) throws InterruptedException, IOException, WriteException {
         Thread.sleep(2000);
         StepLable("Content verification on ' Favorites ' page");
@@ -120,7 +119,6 @@ public class FavoriesPage {
             }
         }
     }
-
     public static double DeleteFavorites(WebDriver driver) throws InterruptedException, IOException, WriteException {
         Thread.sleep(2000);
         ExpectedLable("Verify number of items available in the ' Favorites ' menu");
@@ -144,7 +142,6 @@ public class FavoriesPage {
         }
         return noOfItem;
     }
-
     public static void DeleteFavoritesFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
         Thread.sleep(2000);
         ExpectedLable("Verify number of items available in the ' Favorites ' menu");
@@ -184,12 +181,11 @@ public class FavoriesPage {
             ActualLable("Product with MFR Part Number ' "+ExpectPartNum+" ' is listed successfully in Favorites" ,"Pass");
         }else{ActualLable("Product with MFR Part Number ' "+ExpectPartNum+" is not showing in Favorites list" ,"Fail");}
     }
-
     public static void VerifyAddToCartOnFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
         ExpectedLable("Check 'Add to Cart' button is available on Favorites Page");
         if(driver.findElements(AddToCart).size()>0) {
             ActualLable("Successfully Verified 'Add to Cart' is available in Favorites Page", "Pass");
-            ExpectedLable("Add one product to 'Shopping cart'");
+            ExpectedLable("Add Searched product to 'Shopping cart'");
             driver.findElements(AddToCart).get(0).click();
             Thread.sleep(2000);
             ActualLable("Successfully Clicked on Add to cart button for first product", "Pass");
@@ -198,7 +194,6 @@ public class FavoriesPage {
             ActualLable("Products are not available in Favorites Page", "Fail");
         }
     }
-
     public static String SelectProductOnFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
         ExpectedLable("Get the Prooduct name and Part number for the first item in the list");
@@ -213,8 +208,6 @@ public class FavoriesPage {
         log.info("Clicked on Learn more button");
         return NameOfItem;
     }
-
-
     public static void StatusVerifyForPro(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Availability Status for the product with respect to no of Quantity availability");
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
@@ -273,9 +266,8 @@ public class FavoriesPage {
         }
 
     }
-    public static void AddToFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
-
-        ProductSearchPage.SelectProductOnSearchResultPage(driver);
+    public static String AddToFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        String AssertName =ProductSearchPage.SelectProductOnSearchResultPage(driver);
         Thread.sleep(2000);
         ExpectedLable("Verify Assert for Add to Favorites button ");
         if(driver.findElements(AddToFavorites).size()>0){
@@ -284,15 +276,116 @@ public class FavoriesPage {
             driver.findElement(AddToFavorites).click();
             ActualLable("Successfully clicked on Add to Favorites button","Pass");
         }
-        else{
-            ActualLable("Assert verified Failed for Add to Favorites button","Fail");
-        }
-
+        else{ ActualLable("Assert verified Failed for Add to Favorites button","Fail");   }
+        return AssertName;
     }
-
-
     public static void StatusVerifyForProducts(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
         ProductSearchPage.GetStatusProducts(driver);
+    }
+    public static ArrayList<String> SelectProductFromFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Adding Product From Favorites page");
+        Thread.sleep(3000);
+        HomePage.ClickOnFavoritesMenu(driver);
+        DeleteFavorites(driver);
+        HomePage.SearchProductFromHomePage(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Get the Product name for searched Product");
+        String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
+        ActualLable("Successfully Stored the product Name, i.e : "+NameOfItem,"Pass");
+        ExpectedLable("Get the Product Part Number for searched Product");
+        String PartNumbertotal = ProductSearchPage.PartNumber(driver).get(0).getText();
+        String PartNumber= TrimMfrNumber(driver,PartNumbertotal);
+        ActualLable("Successfully Stored the product Part Number, i.e : "+PartNumber,"Pass");
+        ExpectedLable("Get the Price for searched Product");
+        String ProductPriceValue = driver.findElements(ProductPrice).get(0).getText();
+        ActualLable("Successfully Stored the product Price, i.e : "+ProductPriceValue,"Pass");
+        ExpectedLable("Get the Product Availability Status for searched Product");
+        String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(0).getText();
+        ActualLable("Successfully Stored the product Availability Status, i.e : "+AvailabilityStatus,"Pass");
+        ExpectedLable("Get the Product Quantity for searched Product");
+        String Quant="1";
+        ActualLable("Successfully Stored the product Quantity, i.e : "+Quant,"Pass");
+        ArrayList<String> AssertName=new ArrayList<String>();
+        AssertName.add(NameOfItem);
+        AssertName.add(PartNumber);
+        AssertName.add(ProductPriceValue);
+        AssertName.add(AvailabilityStatus);
+        AssertName.add(Quant);
+        ExpectedLable("Click on Learn more button for perticular Item ");
+        Thread.sleep(1000);
+        driver.findElement(LearnMore).click();
+        ActualLable("Successfully clicked on Learn more button for perticular Item ","Pass");
+        Thread.sleep(2000);
+        String NameOfItem1 = driver.findElements(ProductNamePcart).get(0).getText();
+        String PartNumbertotal1 = driver.findElements(MfrPartNumber).get(0).getText();
+        String PartNumber1= TrimMfrNumber(driver,PartNumbertotal1);
+        String ProductPriceValue1 = driver.findElements(ProductPrice).get(0).getText();
+        String AvailabilityStatus1 = driver.findElements(AvailabilityBlock).get(0).getText();
+        ArrayList<String> AssertName1=new ArrayList<String>();
+        AssertName1.add(NameOfItem1);
+        AssertName1.add(PartNumber1);
+        AssertName1.add(ProductPriceValue1);
+        AssertName1.add(AvailabilityStatus1);
+        AssertName1.add(Quant);
+        ArrayList<String> AssertNames=new ArrayList<String>();
+        AssertNames.add("Name Of Item");
+        AssertNames.add("MFR Part Number");
+        AssertNames.add("Product Price");
+        AssertNames.add("Availability Status");
+        AssertNames.add("Quantity Of the Product");
+        StepLable("Verify Product Details on Product Cart Page are same as on Product Search Page");
+        boolean StatusOfProduct = true;
+        for(int i=0;i<=4;i++){
+            ExpectedLable("Verify ' "+AssertNames.get(i)+" ' on Product Cart page is same on Product Search Page or not..?");
+            if(AssertName1.get(i).contentEquals(AssertName.get(i))){
+                ActualLable("Successfully Verified, ' "+AssertNames.get(i)+" ' on Product Cart page is same as on Product Search Page.","Pass");
+            }
+            else{ StatusOfProduct =false;  ActualLable("Failed to Verify, ' "+AssertNames.get(i)+" ' on Product Cart page is not same on Product Search Page.","Fail");     }
+        }
+        Thread.sleep(1000);
+        ExpectedLable("Click on ' Add To Favorites ' Button if All the details Are matched on Both the pages..? ");
+        if(StatusOfProduct ==true) {
+            ActualLable("Successfully Verified',  All the details Are matched on Both the pages","Pass");
+            ProductCartPage.AddToFavoritesFunctionalityPCart(driver);
+            HomePage.ClickOnFavoritesMenu(driver);
+
+            String NameOfItem2 = driver.findElements(ProductName).get(0).getText();
+            String PartNumbertotal2 = driver.findElements(MfrPartNumber).get(0).getText();
+            String PartNumber2= TrimMfrNumber(driver,PartNumbertotal2);
+            String ProductPriceValue2 = driver.findElements(ProductPrice).get(0).getText();
+            String AvailabilityStatus2 = driver.findElements(AvailabilityBlock).get(0).getText();
+            ArrayList<String> AssertName2=new ArrayList<String>();
+            AssertName2.add(NameOfItem2);
+            AssertName2.add(PartNumber2);
+            AssertName2.add(ProductPriceValue2);
+            AssertName2.add(AvailabilityStatus2);
+            AssertName2.add(Quant);
+            StepLable("Verify Product Details on Favorites page are same as on Product Search Page");
+            for(int i=0;i<=4;i++){
+                ExpectedLable("Verify ' "+AssertNames.get(i)+" ' on Product Cart page is same on Product Search Page or not..?");
+                if(AssertName2.get(i).contentEquals(AssertName.get(i))){
+                    ActualLable("Successfully Verified, ' "+AssertNames.get(i)+" ' on Product Cart page is same as on Product Search Page.","Pass");
+                }
+                else{ StatusOfProduct =false;  ActualLable("Failed to Verify, ' "+AssertNames.get(i)+" ' on Product Cart page is not same on Product Search Page.","Fail");     }
+            }
+            Thread.sleep(1000);
+            ExpectedLable("Click on ' Add To Favorites ' Button if All the details Are matched on Both the pages..? ");
+            if(StatusOfProduct ==true) {
+                ActualLable("Successfully Verified',  All the details Are matched on Both the pages","Pass");
+                VerifyAddToCartOnFavoritesPage(driver);
+            }
+            else{  ActualLable("Failed to Verify, Details Are not matched on Both the pages","Fail");     }
+        }
+        else{  ActualLable("Failed to Verify, Details Are not matched on Both the pages","Fail");     }
+        return AssertName;
+    }
+    public static String TrimMfrNumber(WebDriver driver,String RealTxt){
+        String MfrT = driver.findElement(By.xpath("//span[contains(text(),'Mfr Part#')]")).getText();
+        String[] terms2 = RealTxt.split(MfrT);
+        String s2 = terms2[1];
+        String t12 = s2.replaceAll(" ","");
+        String PartNumber = t12.replaceAll("\n","");
+       return PartNumber;
     }
 }

@@ -29,7 +29,8 @@ public class ProductCartPage {
 
     //Page Elements
     static private By ProductName = By.xpath("//div[@class='product-name']");
-    static private By MfrPart = By.xpath("//span[contains(text(),'Mfr Part#:')]");
+    static private By MfrPart = By.xpath("//span[contains(text(),'Mfr Part#')]");
+    static private By MfrPartNumber = By.xpath("//span[contains(text(),'Mfr Part#')]/parent::div");
     static private By PRODUCTName = By.xpath("//div[@class='product-name']");
     static private By Manufacturer = By.xpath("//span[contains(text(),'Manufacturer:')]");
     static private By Discription = By.xpath("//ul[@class='key-selling-points']");
@@ -43,6 +44,8 @@ public class ProductCartPage {
     static private By OverView = By.xpath("//i[@class='ion-ios-world']/parent::a");
     static private By ActiveOverView = By.xpath("//i[@class='ion-ios-world']/parent::a/parent::li[@class='active']");
     static private By ConfirmationAlert = By.xpath("//div[@class='is-notify-msg']");
+    static private By AvailabilityBlock = By.xpath("//span[@class='product-availability-text text-right']");
+    static private By LearnMore = By.xpath("//button[contains(text(),'Learn More')]");
 
 
 
@@ -169,7 +172,7 @@ public class ProductCartPage {
                 driver.findElement(AddToFavorites).click();
                 ActualLable("Successful clicked on Add To Favorites Button for second time", "Pass");
                 Thread.sleep(2000);
-                ExpectedLable("Confirmation Popup Should show ");
+                ExpectedLable("Confirmation Popup Should show");
                 String AlertText1 = driver.findElement(ConfirmationAlert).getText();
                 System.out.println(AlertText1);
                 if(AlertText1.contentEquals("Product has been added to your favorites")){
@@ -184,5 +187,76 @@ public class ProductCartPage {
         }
         else{ ActualLable("Verification failed for ' Add To Favorites ' Button","Fail"); }
         return MFRPartNumberText;
+    }
+
+    public static ArrayList<String> SelectProductFromPCartPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        StepLable("Adding Product From Product Cart page");
+        HomePage.SearchProductFromHomePage(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Get the Product name for searched Product");
+        String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
+        ActualLable("Successfully Stored the product Name, i.e : "+NameOfItem,"Pass");
+        ExpectedLable("Get the Product Part Number for searched Product");
+        String PartNumbertotal = ProductSearchPage.PartNumber(driver).get(0).getText();
+        String PartNumber= FavoriesPage.TrimMfrNumber(driver,PartNumbertotal);
+        ActualLable("Successfully Stored the product Part Number, i.e : "+PartNumber,"Pass");
+        ExpectedLable("Get the Price for searched Product");
+        String ProductPriceValue = driver.findElements(UnitPrice).get(0).getText();
+        ActualLable("Successfully Stored the product Price, i.e : "+ProductPriceValue,"Pass");
+        ExpectedLable("Get the Product Availability Status for searched Product");
+        String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(0).getText();
+        ActualLable("Successfully Stored the product Availability Status, i.e : "+AvailabilityStatus,"Pass");
+        ExpectedLable("Get the Product Quantity for searched Product");
+        String Quant ="5";
+        ActualLable("Successfully Stored the product Quantity, i.e : "+Quant,"Pass");
+        ArrayList<String> AssertName=new ArrayList<String>();
+        AssertName.add(NameOfItem);
+        AssertName.add(PartNumber);
+        AssertName.add(ProductPriceValue);
+        AssertName.add(AvailabilityStatus);
+        AssertName.add(Quant);
+        ExpectedLable("Click on Learn more button for particular Item ");
+        Thread.sleep(1000);
+        driver.findElement(LearnMore).click();
+        Thread.sleep(2000);
+        ActualLable("Successfully clicked on Learn more button for particular Item ","Pass");
+
+        String NameOfItem1 = driver.findElements(ProductName).get(0).getText();
+        String PartNumbertotal1 = driver.findElements(MfrPartNumber).get(0).getText();
+        String PartNumber1= FavoriesPage.TrimMfrNumber(driver,PartNumbertotal1);
+        String ProductPriceValue1 = driver.findElements(UnitPrice).get(0).getText();
+        String AvailabilityStatus1 = driver.findElements(AvailabilityBlock).get(0).getText();
+        driver.findElement(Quantity).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//li[@data-index='4']")).click();
+        ArrayList<String> AssertName1=new ArrayList<String>();
+        AssertName1.add(NameOfItem1);
+        AssertName1.add(PartNumber1);
+        AssertName1.add(ProductPriceValue1);
+        AssertName1.add(AvailabilityStatus1);
+        AssertName1.add(Quant);
+        ArrayList<String> AssertNames=new ArrayList<String>();
+        AssertNames.add("Name Of Item");
+        AssertNames.add("MFR Part Number");
+        AssertNames.add("Product Price");
+        AssertNames.add("Availability Status");
+        AssertNames.add("Quantity Of the Product");
+        StepLable("Verify Product Details on Product Cart page are same as on Product Search Page");
+        boolean StatusOfProduct = true;
+        for(int i=0;i<=4;i++){
+            ExpectedLable("Verify ' "+AssertNames.get(i)+" ' on Product Cart page is same on Product Search Page or not..?");
+            if(AssertName1.get(i).contentEquals(AssertName.get(i))){
+                ActualLable("Successfully Verified, ' "+AssertNames.get(i)+" ' on Product Cart page is same as on Product Search Page.","Pass");
+            }
+            else{ StatusOfProduct =false; ActualLable("Failed to Verify, ' "+AssertNames.get(i)+" ' on Product Cart page is not same on Product Search Page.","Fail");  }
+        }
+        Thread.sleep(1000);
+        ExpectedLable("Click on ' Add To Cart ' Button if All the details Are matched on Both the pages..? ");
+        if(StatusOfProduct ==true) {
+            driver.findElement(AddToCart).click();
+            ActualLable("Successfully Clicked on ' Add To Cart ',  All the details Are matched on Both the pages","Pass");
+        }
+        else{  ActualLable("Failed to Verify, Details Are not matched on Both the pages","Fail");     }
+        return AssertName;
     }
 }

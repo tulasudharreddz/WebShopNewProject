@@ -56,8 +56,6 @@ public class BrowserStackTC  extends Browser {
 
     }
 
-
-
     @Test
     public void WS_TC_30() throws IOException, WriteException, InterruptedException, BiffException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         ob.repository(driver);

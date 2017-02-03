@@ -112,13 +112,10 @@ public class ShopModuleTC extends Browser {
     @Test
     public void WS_TC_59() throws IOException, InterruptedException, WriteException {
         try {
-
             DataDriven.ReportStartup(59);
             obje.repository(driver);
-            log.info("WS_TC_59: Validate the 'Learn More' button functionality");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
             String NameonSearchPage = ProductSearchPage.SelectProductOnSearchResultPage(driver);
             ExpectedLable("Expected Assert Name: "+NameonSearchPage);
             String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
@@ -126,8 +123,6 @@ public class ShopModuleTC extends Browser {
             ExpectedLable("Verify Assert for Learn more");
             Assert.assertEquals(NameonSearchPage, NameonProductCartPage);
             ActualLable("Successfully verified for Learn more button functionality ","Pass");
-            log.info("Assert Verified for the selected Product ");
-            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");

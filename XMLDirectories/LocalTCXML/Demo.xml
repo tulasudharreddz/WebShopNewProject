@@ -31,7 +31,7 @@
         <classes>
             <class name="localTestCases.DemoLocal">
                 <methods>
-                    <include name="DemoTC"/>
+                    <include name="Demo_TC_01"/>
                 </methods>
             </class>
         </classes>

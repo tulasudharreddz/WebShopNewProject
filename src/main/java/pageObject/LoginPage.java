@@ -40,8 +40,7 @@ public class LoginPage {
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
 	}
-	public static void PageTitle(WebDriver driver)
-	{
+	public static void PageTitle(WebDriver driver)	{
 		//WebDriver driver = null;
 		String Actualtext= driver.getTitle();
 		Assert.assertEquals(Actualtext, "Dimension Data Direct");
@@ -52,9 +51,9 @@ public class LoginPage {
 	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException {
 		String LoginTitle = driver.findElement(By.xpath("//span[@class='login-header']")).getText();
 		ExpectedLable("Login fields should available");
-		Assert.assertEquals(LoginTitle, "Log In");
-		log.info("Title of the Log in page is " + LoginTitle);
-		ActualLable("Successfully verified Login fields and Title of the Log in page is " + LoginTitle,"Pass");
+		if(LoginTitle.contentEquals("Log In")) {
+			ActualLable("Successfully verified Login fields and Title of the Log in page is " + LoginTitle, "Pass");
+		}else{ActualLable("Failed to verify, Log in page is not opened", "Fail");}
 	}
 
 	public static void LoginFieldsAssertVerify(WebDriver driver) throws IOException, WriteException {

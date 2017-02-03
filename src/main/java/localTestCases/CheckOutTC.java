@@ -65,6 +65,39 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
+    public void WS_TC_116() throws IOException, InterruptedException, WriteException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(116);
+            LoginPage.Loginfunctionality(driver);
+            log.info("Login in to the webshop application");
+            double noOfItems = ShoppingCart.DeleteExistItem(driver);
+            ProductSearchPage.AddToShoppingCart(driver);
+            ProductSearchPage.AddToShoppingCart(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart count functionality by adding product to cart");
+            if(noOfItemsafterAddtoCart>noOfItems){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyItemCount(driver);
+                ShoppingCart.VerifyCartGrandTotal(driver);
+                CheckOutPage.ClickonProceedtoCheckout(driver);
+                ReviewOrderPage.COnfirmAndPlaceOrder(driver);
+                OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
+                EmailVerificationDetails.VerifyOrderEmailInOutLook(driver);
+            }
+            else{
+                ActualLable("verification failed for cart Number functionality","Fail");
+            }
+        } catch (AssertionError e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        } catch (Exception e) {
+            String error = "Exception " + e.getClass().getSimpleName();
+            ActualLable(error, "Fail");
+        }
+    }
+
+    @Test
     public void WS_TC_140() throws IOException, WriteException, InterruptedException {
 
         try {
@@ -137,9 +170,7 @@ public class CheckOutTC extends Browser {
             }
             else{
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -168,9 +199,7 @@ public class CheckOutTC extends Browser {
             }
             else{
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -198,9 +227,7 @@ public class CheckOutTC extends Browser {
             }
             else{
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -230,9 +257,7 @@ public class CheckOutTC extends Browser {
             }
             else{
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€"+InstallationCost+" '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -260,9 +285,7 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
             } else {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -290,9 +313,7 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
             } else {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -321,9 +342,7 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
             } else {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
@@ -351,9 +370,7 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
             } else {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
-                ExpectedLable(" Get Installation charges from aplication");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
-                ActualLable("'Installation Service Cost ' is '€" + InstallationCost + " '", "Pass");
             }
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();

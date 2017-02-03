@@ -1,6 +1,7 @@
 package pageObject;
 
 import jxl.write.WriteException;
+import localTestCases.DemoLocal;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -42,9 +43,10 @@ public class ShoppingCart {
     static private By NoOfCartProducts = By.xpath("//div[@class='product-row']");
     static private By ImageXpath = By.xpath("//img[@class='img-responsive']");
     static private By InventoryIcon = By.xpath("//is-availability[@class='hidden-xs']");
-    static private By ProductName = By.xpath("//p[@class='product-name clickable']");
+    static private By ProductName = By.xpath("//p[@class='product-name clickable']/a");
     static private By MfrPartText = By.xpath("//span[@class='field-name'][contains(text(),'Mfr Part#')]/parent::div");
     static private By CartSummeryLabel = By.xpath("//div[@class='row totals']/div/label");
+    static private By AvailabilityBlock = By.xpath("//is-availability[@class='hidden-xs']/div/span[@class='product-availability-text text-right']");
 
 
     public static void VerifyShoppingCartPageAsserts(WebDriver driver) throws InterruptedException, IOException, WriteException {
@@ -149,7 +151,7 @@ public class ShoppingCart {
         HomePage.ClickonShoppingCart(driver);
         int noQuantity = QuantityBlank(driver).size();
         int Totalsum = 0;
-        ExpectedLable("Verify Quantity available in the shopping cart");
+        /*ExpectedLable("Verify Quantity available in the shopping cart");
         if(noQuantity>0) {
             for (int i = 1; i <= noQuantity; i++) {
                 String ValueInBlank = QuantityBlank(driver).get(noQuantity-1).getAttribute("value");
@@ -158,17 +160,12 @@ public class ShoppingCart {
                 int QuantityperBlank = Integer.parseInt(ValueInBlank);
                 Totalsum = Totalsum+QuantityperBlank;
             }
-            log.info("Total number of items are "+Totalsum);
             if(HomePage.VerifyCart(driver)==Totalsum) {
                 ActualLable("Successfully Verified Total Quantity, Total Quantity is " + Totalsum, "Pass");
             }
-            else{
-                ActualLable("Verification failed for Quantity in cart ", "Fail");
-            }
+            else{  ActualLable("Verification failed for Quantity in cart ", "Fail");   }
         }
-        else{
-            ActualLable("There are no items available in Shoping cart" ,"Pass");
-        }
+        else{ ActualLable("There are no items available in Shoping cart" ,"Pass");  }*/
         return Totalsum;
     }
     public static List<WebElement> UnitPrice(WebDriver driver) {
@@ -177,7 +174,6 @@ public class ShoppingCart {
         return noUnitPrice;
     }
     public static List<WebElement> ExtendedPrice(WebDriver driver) {
-
         List<WebElement> noExtendedPrice = driver.findElements(ExtendedPrice);
         return noExtendedPrice;
     }
@@ -268,7 +264,7 @@ public class ShoppingCart {
         ExpectedLable("Get Shipping charges from Shopping cart");
         //Double ExpectedShippingCharges1 = CartSubtotal*10/100;
         //double ExpectedShippingCharges = Math.round( ExpectedShippingCharges1 * 100.0 ) / 100.0;
-        double ExpectedShippingCharges = 6.50;
+        double ExpectedShippingCharges = 7.00;
         String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
         ActualLable("Shipping Charges are "+ActualShippingChargesString  ,"Pass");
         String s1 = ActualShippingChargesString.replaceAll("[€$£₹,]","");
@@ -461,7 +457,7 @@ public class ShoppingCart {
                 ExpectedLable("Calculate Expected Sales Vat value");
                 double ExpectedSalesVatCharges1 =ExpectedSalesTax(driver, i);
                 double ExpectedSalesVatCharges = Math.round( ExpectedSalesVatCharges1 * 100.0 ) / 100.0;
-                        ActualLable("Expected Sales VAT Charges are :  "+ExpectedSalesVatCharges  ,"Pass");
+                ActualLable("Expected Sales VAT Charges are :  "+ExpectedSalesVatCharges  ,"Pass");
                 ExpectedLable("Get Sales VAT from Shopping cart");
                 String ActualSalesVATString =  driver.findElement(ActualSalesVatXpath).getText();
                 ActualLable("Sales VAT Charges are "+ActualSalesVATString  ,"Pass");
@@ -522,5 +518,134 @@ public class ShoppingCart {
             VerifyCheckOutButtonFunctionality(driver);
         }
     }
+    public static ArrayList<String> GetProductDetailsFromShoppingCart(WebDriver driver, int ProductNumber) throws IOException, WriteException, InterruptedException{
+        String ProductNameSt = driver.findElements(ProductName).get(ProductNumber).getText();
+        String  PartNumber1 = driver.findElements(MfrPartText).get(ProductNumber).getText();
+        String MfrPartNumberSt= FavoriesPage.TrimMfrNumber(driver,PartNumber1);
+        String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(ProductNumber).getText();
+        String UnitPriceSt = driver.findElements(UnitPrice).get(ProductNumber).getText();
+        String QuantityST;
+        if(ProductNumber == 1){   QuantityST="5";  }
+        else{QuantityST="1";}
+        ArrayList<String> AssertNamesSC=new ArrayList<String>();
+        AssertNamesSC.add(ProductNameSt);
+        AssertNamesSC.add(MfrPartNumberSt);
+        AssertNamesSC.add(UnitPriceSt);
+        AssertNamesSC.add(AvailabilityStatus);
+        AssertNamesSC.add(QuantityST);
+        return AssertNamesSC;
+    }
+    public static double CalculateExtendedPrice(WebDriver driver) throws IOException, WriteException, InterruptedException{
+        StepLable("Extended Price calculation");
+        ExpectedLable("Get the Number of Products Added to Shopping cart");
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        ActualLable("No of Products available in the shopping cart is ' "+NoOfProductAddedToCart+" '", "Pass");
+        Double ExtendedPriceSum = 0.00;
+        for(int i=0;i<=NoOfProductAddedToCart-1;i++){
+            String MfrPartNumberSt = driver.findElements(MfrPartText).get(i).getText();
+            ExpectedLable("Calculate the extended Price of the product : "+MfrPartNumberSt);
+            String UnitPriceSt = driver.findElements(UnitPrice).get(i).getText();
+            String s = UnitPriceSt.replaceAll("[€,$,£,₹]","");
+            Double UnitCast = Double.parseDouble(s);
+            int QuantityST;
+            if(i == 1){   QuantityST=5;  }
+            else{QuantityST=1;}
+            Double UnitExtendedPrice = UnitCast*QuantityST;
+            double ExpectedUnitExtendedPrice = Math.round( UnitExtendedPrice * 100.0 ) / 100.0;
+            ActualLable(" Unit cast is : "+UnitPriceSt+" and No of Quantity : "+QuantityST+" and Extended price is : "+ExpectedUnitExtendedPrice, "Pass");
+            String s1 = ExtendedPrice(driver).get(i).getText().replaceAll("[€$£₹,]","");
+            Double ActualExtendedPrice = Double.parseDouble(s1);
+            ExpectedLable("Compare expected and Actual Extended price");
+            if(ExpectedUnitExtendedPrice==ActualExtendedPrice) {
+                ActualLable("Expected and Actual Extended prices are same, expected Price : '" + ExpectedUnitExtendedPrice + " ' Actual Price : '" + ActualExtendedPrice, "Pass");
+            }else {ActualLable("Expected and Actual Extended price is not same, expected Price : '" + ExpectedUnitExtendedPrice + " ' Actual Price : '" + ActualExtendedPrice, "Fail");}
+            ExtendedPriceSum = ExtendedPriceSum + UnitExtendedPrice;
+        }
+        return ExtendedPriceSum;
+    }
+    public static ArrayList<String> VerifyCartSummeryTotalDemo(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        double ExpectedCartSubTotal = CalculateExtendedPrice(driver);
+        double ExpectedCartSubTotalis = Math.round( ExpectedCartSubTotal * 100.0 ) / 100.0;
+        ExpectedLable("Calculate Cart sub total value ");
+        ActualLable("Expected Cart sub total is : ' "+ExpectedCartSubTotal+"  '", "Pass");
+        StepLable("Verify Cart Grand total");
+        VerifyForCartSummeryPannelOpenedOrNot(driver);
+        Thread.sleep(1000);
+        ExpectedLable("Get the actual Cart sub total from Application");
+        String ActualCartSubtotalString = driver.findElement(ActualCartSubtotalXpath).getText();
+        ActualLable("Actual Cart sub total is : ' "+ActualCartSubtotalString+" '", "Pass");
+        String s2 = ActualCartSubtotalString.replaceAll("[€$£₹,]","");
+        Double ActualCartSubtotal = Double.parseDouble(s2);
+        ExpectedLable("Verify Actual Cart sub total value is same as expected or not ?");
+        if(ActualCartSubtotal==ExpectedCartSubTotalis){
+            ActualLable("Actual Cart sub total values is same, Expected Value :"+ExpectedCartSubTotalis+" Actual value : "+ActualCartSubtotal, "Pass");
+        }else{ActualLable("Expected and actual value is not matched, Expected Value :"+ExpectedCartSubTotalis+" Actual value : "+ActualCartSubtotal, "Fail");}
 
+        ExpectedLable("Get Shipping charges from Shopping cart");
+        double ExpectedShippingCharges = 7.00;
+        String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
+        ActualLable("Shipping Charges are "+ActualShippingChargesString  ,"Pass");
+        String s1 = ActualShippingChargesString.replaceAll("[€$£₹,]","");
+        Double ActualShippingCharges = Double.parseDouble(s1);
+        ExpectedLable("Verify Shipping charges in shopping cart is same as expected or not ?");
+        if(ActualShippingCharges==ExpectedShippingCharges){
+        ActualLable("Shipping Charges verified successfully, Expected Value :"+ExpectedShippingCharges+" Actual value : "+ActualShippingCharges ,"Pass");}
+        else{ActualLable("Expected and actual value is not matched, Expected Value :"+ExpectedShippingCharges+" Actual value : "+ActualShippingCharges, "Fail");}
+
+        ExpectedLable("Get Sales Vat charges from Shopping cart");
+        Double ExpectedSalesVatCharges1 = (ExpectedCartSubTotal*19/100)+(ActualShippingCharges*19/100);
+        double ExpectedSalesVatCharges = Math.round( ExpectedSalesVatCharges1 * 100.0 ) / 100.0;
+        String ActualSalesVatChargesString =  driver.findElement(ActualSalesVatXpath).getText();
+        ActualLable("Sales Vat Charges are "+ActualSalesVatChargesString  ,"Pass");
+        String s3 = ActualSalesVatChargesString.replaceAll("[€$£₹,]","");
+        Double ActualSalesVatCharges = Double.parseDouble(s3);
+        ExpectedLable("Verify Sales Vat charges in shopping cart is same as expected or not ?");
+        if(ActualSalesVatCharges==ExpectedSalesVatCharges){
+            ActualLable("Sales Vat Charges verified successfully,Expected Value :"+ExpectedSalesVatCharges+" Actual value : "+ActualSalesVatCharges,"Pass");
+        }else{ActualLable("Expected and actual value is not matched, Expected Value :"+ExpectedSalesVatCharges+" Actual value : "+ActualSalesVatCharges, "Fail");}
+
+        ExpectedLable("Get Cart Grand Total from Shopping cart");
+        Double ExpectedCartGrandTotal1 = ExpectedCartSubTotal+ExpectedShippingCharges+ExpectedSalesVatCharges;
+        double ExpectedCartGrandTotal = Math.round( ExpectedCartGrandTotal1 * 100.0 ) / 100.0;
+        String ActualCartGrandTotalString =  driver.findElement(ActualCartGrandTotalXpath).getText();
+        ActualLable("Cart Grand Total is "+ActualCartGrandTotalString  ,"Pass");
+        String s4 = ActualCartGrandTotalString.replaceAll("[€$£₹,]","");
+        Double ActualCartGrandTotal = Double.parseDouble(s4);
+        ExpectedLable("Verify Cart Grand Total in shopping cart is same as expected or not ?");
+        if(ActualCartGrandTotal==ExpectedCartGrandTotal){
+            ActualLable("Cart Grand Total verified successfully, Expected Value :"+ExpectedCartGrandTotal+" Actual value : "+ActualCartGrandTotal, "Pass");
+        }else{ActualLable("Expected and actual value is not matched, Expected Value :"+ExpectedCartGrandTotal+" Actual value : "+ActualCartGrandTotal, "Fail");}
+
+        ArrayList<String> AssertName1=new ArrayList<String>();
+        AssertName1.add(ActualCartSubtotalString);
+        AssertName1.add(ActualShippingChargesString);
+        AssertName1.add(ActualSalesVatChargesString);
+        AssertName1.add(ActualCartGrandTotalString);
+        return AssertName1;
+    }
+    public static boolean VerifyProductDetailsOnShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        boolean Status = true;
+        ArrayList<String> AssertNamesText = new ArrayList<String>();
+        AssertNamesText.add("Name Of Item");
+        AssertNamesText.add("MFR Part Number");
+        AssertNamesText.add("Product Price");
+        AssertNamesText.add("Availability Status");
+        AssertNamesText.add("Quantity Of the Product");
+        for (int i = 0; i <= 2; i++) {
+            ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(i);
+            ArrayList<String> ActualValue = ShoppingCart.GetProductDetailsFromShoppingCart(driver, i);
+            for (int j = 0; j <= 4; j++) {
+                String ExpectedText = AssertNameFromPSearchPage1.get(j);
+                String ActualText = ActualValue.get(j);
+                ExpectedLable("Verify "+ AssertNamesText.get(j)+" on Shopping Cart Page");
+                if (ExpectedText.contentEquals(ActualText)) {
+                    ActualLable("Expected, Actual values are same. Expected Value is : "+ExpectedText+" Actual values is : " + ActualText, "Pass");
+                } else {
+                    ActualLable("Failed to verify : "+AssertNamesText.get(j)+" Expected Value is : "+ExpectedText+" Actual values is : " + ActualText, "Fail");
+                    Status = false;
+                }
+            }
+        }
+        return Status;
+    }
 }

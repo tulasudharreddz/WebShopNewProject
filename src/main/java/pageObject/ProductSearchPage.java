@@ -91,44 +91,44 @@ public class ProductSearchPage {
         return Product;
     }
     public static final AtomicInteger count6 = new AtomicInteger(-1);
-    public static void AddToShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
-
+    public static ArrayList<String> AddToShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Moving to Product Cart Page");
         String s=HomePage.ShopMenuOnHomePage(driver).getText();
-        //ExpectedLable("Click on "+ s);
         Thread.sleep(2000);
-        //HomePage.ShopMenuOnHomePage(driver).click();
         HomePage.ClickonShopmenuonHomePage(driver);
-        log.info("Clicked on Shop menu");
-        //HomePage.SubCategoryListUnderShopMenu(driver).get(1).click();
         HomePage.ClickonCategoryinShopmenu(driver);
-        log.info("Clicked on Accesseries Sub category");
         Thread.sleep(2000);
         ExpectedLable("Get the Prooduct name and Part number for the first item in the list");
         String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
-        log.info("Name of the for the product is: "+ NameOfItem);
         String PartNumber = ProductSearchPage.PartNumber(driver).get(0).getText();
-        log.info("Partnumber for the product is: "+ PartNumber);
+        System.out.println("Part number"+PartNumber);
+        String ProductPriceValue = driver.findElements(ProductPrice).get(0).getText();
+        String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(0).getText();
         ActualLable("Successfully Stored the product name and part number","Pass");
         ExpectedLable("Add the same product to 'Shopping cart'");
-
         driver.findElements(AddToCart).get(count6.incrementAndGet()).click();
         Thread.sleep(2000);
         ActualLable("Successfully Clicked on Add to cart button","Pass");
+        ArrayList<String> AssertName=new ArrayList<String>();
+        AssertName.add(NameOfItem);
+        AssertName.add(PartNumber);
+        AssertName.add(ProductPriceValue);
+        AssertName.add(AvailabilityStatus);
+        return AssertName;
     }
 
     public static String SelectProductOnSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
-
         StepLable("Moving to Product Cart Page");
         Thread.sleep(2000);
-        //HomePage.ShopMenuOnHomePage(driver).click();
         HomePage.ClickonShopmenuonHomePage(driver);
         HomePage.ClickonCategoryinShopmenu(driver);
         Thread.sleep(2000);
-        ExpectedLable("Get the Prooduct name and Part number for the first item in the list");
+        ExpectedLable("Get the Product name and Part number for the first item in the list");
         String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
         log.info("Name of the for the product is: "+ NameOfItem);
         String PartNumber = ProductSearchPage.PartNumber(driver).get(0).getText();
+        String ProductPriceValue = driver.findElements(ProductPrice).get(0).getText();
+        String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(0).getText();
         log.info("Partnumber for the product is: "+ PartNumber);
         ActualLable("Successfully Stored the product name and part number","Pass");
         ExpectedLable("Click on Learn more button for perticular Item ");
@@ -137,7 +137,36 @@ public class ProductSearchPage {
         log.info("Clicked on Learn more button");
         return NameOfItem;
     }
-
+    public static ArrayList<String> SelectProductFromSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+        HomePage.SearchProductFromHomePage(driver);
+        Thread.sleep(2000);
+        ExpectedLable("Get the Product name for searched Product");
+        String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
+        ActualLable("Successfully Stored the product Name, i.e : "+NameOfItem,"Pass");
+        ExpectedLable("Get the Product Part Number for searched Product");
+        String PartNumbertotal = ProductSearchPage.PartNumber(driver).get(0).getText();
+        String PartNumber= FavoriesPage.TrimMfrNumber(driver,PartNumbertotal);
+        ActualLable("Successfully Stored the product Part Number, i.e : "+PartNumber,"Pass");
+        ExpectedLable("Get the Price for searched Product");
+        String ProductPriceValue = driver.findElements(ProductPrice).get(0).getText();
+        ActualLable("Successfully Stored the product Price, i.e : "+ProductPriceValue,"Pass");
+        ExpectedLable("Get the Product Availability Status for searched Product");
+        String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(0).getText();
+        ActualLable("Successfully Stored the product Availability Status, i.e : "+AvailabilityStatus,"Pass");
+        ExpectedLable("Get the Product Quantity for searched Product");
+        String Quantity="1";
+        ActualLable("Successfully Stored the product Quantity, i.e : "+Quantity,"Pass");
+        ArrayList<String> AssertName=new ArrayList<String>();
+        AssertName.add(NameOfItem);
+        AssertName.add(PartNumber);
+        AssertName.add(ProductPriceValue);
+        AssertName.add(AvailabilityStatus);
+        AssertName.add(Quantity);
+        ExpectedLable("Click on 'Add to Cart ' button for Searched Item ");
+        driver.findElement(AddToCart).click();
+        ActualLable("Successfully clicked on 'Add to Cart ' button on Searched Item ","Pass");
+        return AssertName;
+    }
 
     public static void MovingToProductSearch(WebDriver driver) throws InterruptedException, IOException, WriteException {
 
