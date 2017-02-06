@@ -59,7 +59,7 @@ public class DemoLocal extends Browser{
 					EmailVerificationDetails.VerifyReferenceLink(driver, ReferenceNumber);
 					OrdersPage.VerifyRequestReturnPage(driver);
 					OrdersPage.VerifySubmitButtonFunctionalityinRequestReturnPage(driver);
-					EmailVerificationDetails.VerifyRequestReturnEmailInOutLook(driver);
+					EmailVerificationDetails.VerifyRequestReturnEmailInOutLookDemo(driver);
 				}
 			}else{ActualLable("verification failed for cart Number functionality","Fail");}
 		}

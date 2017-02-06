@@ -5,9 +5,10 @@
         <classes>
             <class name="localTestCases.CheckOutTC">
                 <methods>
-                    <!--<include name="WS_TC_115"/>-->
+                    <include name="WS_TC_115"/>
                     <include name="WS_TC_116"/>
-                    <!--<include name="WS_TC_140"/>
+                    <include name="WS_TC_117"/>
+                    <include name="WS_TC_140"/>
                     <include name="WS_TC_141"/>
                     <include name="WS_TC_142"/>
                     <include name="WS_TC_143"/>
@@ -16,7 +17,7 @@
                     <include name="WS_TC_147"/>
                     <include name="WS_TC_149"/>
                     <include name="WS_TC_150"/>
-                    <include name="WS_TC_152"/>-->
+                    <include name="WS_TC_152"/>
                 </methods>
             </class>
         </classes>

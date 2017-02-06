@@ -102,6 +102,7 @@
             <class name="localTestCases.CheckOutTC">
                 <methods>
                     <include name="WS_TC_115"/>
+                    <include name="WS_TC_116"/>
                     <include name="WS_TC_140"/>
                     <include name="WS_TC_141"/>
                     <include name="WS_TC_142"/>

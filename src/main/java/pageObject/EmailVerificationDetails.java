@@ -32,6 +32,7 @@ public class EmailVerificationDetails {
     static private By ReLoadEmails = By.xpath("//*[@id='lnkHdrcheckmessages']/img");
     static private By ViewAllFolders = By.id("lnkBrwsAllFldrs");
     static private By SelectFolderName = By.id("selbrfld");
+    static private By InboxFolder = By.xpath("//a[@title='Inbox']");
     static private By EnterIntoFolder = By.xpath("//a[@id='lnkGotoFldr']/img");
     static private By ReferenceNumberLink = By.xpath("//div[@class='bdy']/div/div[3]/div/a");
     static private By SelectGlobalDirectFolder = By.xpath("//a[@name='lnkFldr'][@title='Global.direct']");
@@ -128,8 +129,6 @@ public class EmailVerificationDetails {
         Thread.sleep(2000);
         ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
-        /*LoginPage.LoginPageTitle(driver);
-        LoginPage.Loginfunctionality(driver);*/
         String ExpectedRefNumber = RefNumbe;
         String ActualRefNumber =  OrdersPage.VerifyOrderDetailsFromEmail(driver);
         ExpectedLable("Verify Reference Number in the Order Page is same as provided ?");
@@ -168,6 +167,41 @@ public class EmailVerificationDetails {
                     ActualLable("Verified successfully, Email subject is verified", "Pass");
                 }else{  Status=false; ActualLable("Email Not received and Verification is failed", "Fail"); }
             }
+        return Status;
+    }
+    public static boolean VerifyRequestReturnEmailInOutLookDemo(WebDriver driver) throws InterruptedException, AWTException, IOException, WriteException {
+        boolean Status = true;
+        StepLable(" Email Verification for Request Return Email ");
+        ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(0));
+        if(driver.findElements(InboxFolder).size()>0) {
+            driver.findElement(InboxFolder).click();
+            Thread.sleep(5000);
+            driver.findElement(ReLoadEmails).click();
+            Thread.sleep(3000);
+            ExpectedLable("Verify email Received for Order Details Email");
+            if (driver.findElements(ProductReturnEmailLink).size() > 0) {
+                ActualLable("Email received successfully", "Pass");
+                ExpectedLable("Now verify Email subject in Order email");
+                driver.findElement(ProductReturnEmailLink).click();
+                String Subject = driver.findElement(EmailSubject).getText();
+                Assert.assertEquals(Subject, "Product Return Request");
+                ActualLable("Verified successfully, Email subject is verified", "Pass");
+            } else {
+                driver.findElement(ReLoadEmails).click();
+                if (driver.findElements(ProductReturnEmailLink).size() > 0) {
+                    ActualLable("Email received successfully", "Pass");
+                    ExpectedLable("Now verify Email subject in Order email");
+                    driver.findElement(ProductReturnEmailLink).click();
+                    String Subject = driver.findElement(EmailSubject).getText();
+                    Assert.assertEquals(Subject, "Product Return Request");
+                    ActualLable("Verified successfully, Email subject is verified", "Pass");
+                } else {
+                    Status = false;
+                    ActualLable("Email Not received and Verification is failed", "Fail");
+                }
+            }
+        }
         return Status;
     }
 }

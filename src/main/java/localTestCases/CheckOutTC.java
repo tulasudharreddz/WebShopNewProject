@@ -31,7 +31,6 @@ public class CheckOutTC extends Browser {
     public void setUp() throws WriteException, IOException, BiffException {
         driver=getDriver();
     }
-
     @Test
     public void WS_TC_115() throws IOException, InterruptedException, WriteException {
         try {
@@ -55,13 +54,8 @@ public class CheckOutTC extends Browser {
                 ReviewOrderPage.COnfirmAndPlaceOrder(driver);
                 OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
@@ -85,21 +79,39 @@ public class CheckOutTC extends Browser {
                 OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
                 EmailVerificationDetails.VerifyOrderEmailInOutLook(driver);
             }
-            else{
-                ActualLable("verification failed for cart Number functionality","Fail");
-            }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+            else{  ActualLable("verification failed for cart Number functionality","Fail");     }
+        } catch (AssertionError e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
+    }
+
+    @Test
+    public void WS_TC_117() throws IOException, InterruptedException, WriteException {
+        try {
+            DataDriven.ReportStartup(117);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItems = ShoppingCart.DeleteExistItem(driver);
+            ProductSearchPage.AddToShoppingCart(driver);
+            ProductSearchPage.AddToShoppingCart(driver);
+            double noOfItemsafterAddtoCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart count functionality by adding product to cart");
+            if(noOfItemsafterAddtoCart>noOfItems){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyItemCount(driver);
+                ShoppingCart.VerifyCartGrandTotal(driver);
+                String ReferenceNumber = CheckOutPage.ClickonProceedtoCheckout(driver);
+                ReviewOrderPage.COnfirmAndPlaceOrder(driver);
+                OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
+                boolean Stuas = EmailVerificationDetails.VerifyOrderEmailInOutLook(driver);
+                if(Stuas==true) {
+                    EmailVerificationDetails.VerifyReferenceLink(driver, ReferenceNumber);
+                }
+            } else{  ActualLable("verification failed for cart Number functionality","Fail");     }
+        } catch (AssertionError e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
     public void WS_TC_140() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(140);
@@ -110,24 +122,14 @@ public class CheckOutTC extends Browser {
             ProductSearchPage.AddFlagOneProduct(driver,1);
             boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
             ExpectedLable(" Check Installation Service Cost message, status message should not display");
-            if(messageStatus==false){
-                ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");
-            }
-            else{
-                ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
-            }
+            if(messageStatus==false){   ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass"); }
+            else{ ActualLable("'Installation Service Cost ' Message is Displaying", "Fail"); }
 
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
     public void WS_TC_141() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(141);
@@ -144,17 +146,11 @@ public class CheckOutTC extends Browser {
             else{
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
     public void WS_TC_142() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(142);
@@ -172,18 +168,12 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
     public void WS_TC_143() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(143);
@@ -201,17 +191,11 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
     public void WS_TC_145() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(145);
@@ -229,18 +213,12 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
     public void WS_TC_146() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(146);
@@ -259,17 +237,11 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
     public void WS_TC_147() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(147);
@@ -287,18 +259,12 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
     public void WS_TC_149() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(149);
@@ -315,18 +281,12 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
     public void WS_TC_150() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(150);
@@ -344,18 +304,12 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 
     @Test
     public void WS_TC_152() throws IOException, WriteException, InterruptedException {
-
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(152);
@@ -372,12 +326,7 @@ public class CheckOutTC extends Browser {
                 ActualLable("'Installation Service Cost ' Message is Displaying", "Fail");
                 Double InstallationCost = CheckOutPage.GetInstallationCost(driver);
             }
-        } catch (AssertionError e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        } catch (Exception e) {
-            String error = "Exception " + e.getClass().getSimpleName();
-            ActualLable(error, "Fail");
-        }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
 }

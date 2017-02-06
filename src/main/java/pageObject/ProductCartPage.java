@@ -120,32 +120,25 @@ public class ProductCartPage {
         ExpectedLable("' Add To Favorites ' Button Should available on Product cart page");
         if(driver.findElements(AddToFavorites).size()>0){
             ActualLable("Assert verified successfully for ' Add To Favorites '","Pass");
-            if(driver.findElement(AddToFavorites).isDisplayed()) {
+            if(driver.findElement(AddToFavorites).isDisplayed()){
                 ExpectedLable("Click on  Add To Favorites Button");
                 driver.findElement(AddToFavorites).click();
                 MFRPartNumberText= driver.findElement(PRODUCTName).getText();
                 ActualLable("Successful clicked on Add To Favorites Button", "Pass");
                 ExpectedLable("Confirmation Popup Should show ");
+                Thread.sleep(2000);
                 if(driver.findElements(ConfirmationAlert).size()>0) {
                     String AlertText = driver.findElement(ConfirmationAlert).getText();
                     if (AlertText.contentEquals("Product has been added to your favorites")) {
                         ActualLable("Successful Message shown ", "Pass");
                     } else if (AlertText.contentEquals("This product already exists in your favorites")) {
                         ActualLable("Warning message shown that the product is already added ", "Pass");
-                    }
-                    else{
-                        ActualLable("Confirmation message is displayed with error message", "Fail");
-                    }
-                }
-                else{
-                    ActualLable("Confirmation message is not displayed", "Fail");
-                }
+                    }   else{ ActualLable("Confirmation message is displayed with error message", "Fail");  }
+                } else{   ActualLable("Confirmation message is not displayed", "Fail");  }
             }
-        }
-        else{ ActualLable("Verification failed for ' Add To Favorites ' Button","Fail"); }
+        }  else{ ActualLable("Verification failed for ' Add To Favorites ' Button","Fail"); }
         return MFRPartNumberText;
     }
-
     public static String  AddToFavoritesWithSameProductPCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
         String MFRPartNumberText = null;
         StepLable("Validate the Add to Favorites functionality; which is already added to Favorites. ");
@@ -188,7 +181,6 @@ public class ProductCartPage {
         else{ ActualLable("Verification failed for ' Add To Favorites ' Button","Fail"); }
         return MFRPartNumberText;
     }
-
     public static ArrayList<String> SelectProductFromPCartPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
         StepLable("Adding Product From Product Cart page");
         HomePage.SearchProductFromHomePage(driver);
