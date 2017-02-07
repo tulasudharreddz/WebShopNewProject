@@ -16,26 +16,36 @@ import java.io.IOException;
  * Created by t.mirasipally on 09-Dec-16.
  */
 public class BaseClass {
-    private WebDriver driver;
-    private Sheet sheet;
-    private WritableSheet wsheet;
-    DataDriven Baseexcel = new DataDriven();
 
-    @Test
-    public void Starttest() throws WriteException, IOException, BiffException, InterruptedException {
+    // a class that extends thread that is to be called when program is exiting
+    static class Message extends Thread {
 
-        System.setProperty("webdriver.chrome.driver","lib/chromedriver.exe");
-        driver = new ChromeDriver();
-
-        driver.get("https://accounts.google.com/AddSession?sacu=1&continue=https%3A%2F%2Fmyaccount.google.com%2F%3Futm_source%3DOGB%26pli%3D1&service=accountsettings#identifier");
-
-        driver.findElement(By.id("Email")).sendKeys("TetingText");
-        Thread.sleep(5000);
-        driver.findElement(By.id("Email")).getAttribute("Value");
-        System.out.println("Out put text is: " +driver.findElement(By.id("Email")).getAttribute("value"));
+        public void run() {
+            System.out.println("Bye.");
+        }
     }
 
+    public static void main(String[] args) {
+        try {
 
+            // register Message as shutdown hook
+            Runtime.getRuntime().addShutdownHook(new Message());
+
+            // print the state of the program
+            System.out.println("Program is starting...");
+
+            // cause thread to sleep for 3 seconds
+            System.out.println("Waiting for 3 seconds...");
+            Thread.sleep(3000);
+
+            // print that the program is closing
+            System.out.println("Program is closing...");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

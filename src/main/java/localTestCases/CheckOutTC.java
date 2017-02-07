@@ -109,6 +109,25 @@ public class CheckOutTC extends Browser {
         } catch (AssertionError e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
         } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
+    @Test
+    public void WS_TC_138() throws IOException, WriteException, InterruptedException {
+        try {
+            obje.repository(driver);
+            DataDriven.ReportStartup(138);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            ShoppingCart.DeleteExistItem(driver);
+            HomePage.MovingToCategory(driver);
+            ProductSearchPage.AddFlagTwoProduct(driver,1);
+            boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
+            ExpectedLable(" Check Installation Service Cost message, status message should not display");
+            if(messageStatus==false){
+                ActualLable("'Installation Service Cost ' Message is not Displaying", "Fail");
+            }
+            else{ ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");    }
+        } catch (AssertionError e) { ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
+    }
 
     @Test
     public void WS_TC_140() throws IOException, WriteException, InterruptedException {

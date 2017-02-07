@@ -81,9 +81,9 @@ public class DataDriven {
 		book = Workbook.getWorkbook(new File(obr.obj.getProperty("testData")));
 		sheet = book.getSheet("ResultSheet");
 		String folderName = ObjectRepository.DateSt();
-		wbook = Workbook.createWorkbook(new File("./ResultReports/" + folderName + "/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
+		//wbook = Workbook.createWorkbook(new File("./ResultReports/" + folderName + "/"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
 		//To save in commonShare
-		//wbook = Workbook.createWorkbook(new File("//10.45.34.14//DDUS_Team//WebShopAutomation//Result//"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
+		wbook = Workbook.createWorkbook(new File(obr.obj.getProperty("CreateWorkBookPath") +"//"+ folderName + "//"+"Detailed Test Report_" +ObjectRepository.dateString()+".xls"), book);
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(0 , 0 ,"DD WebShop Test Report",CellFormat3()));
 		wsheet.addCell(new Label(1 , 4 ,ObjectRepository.DateSt(),CellFormat2()));
@@ -214,7 +214,8 @@ public static int numberForColumn;
 			int num = numberForColumn;
 			String folderName = ObjectRepository.DateSt();
 			Browser.screenshots();
-			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
+			//WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
+			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File(obr.obj.getProperty("CreateWorkBookPath")+"//"+folderName+"//"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
 			wsheet.addHyperlink(hlk);
 			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
 			wsheet.addCell(new Label(3 , num , result,cellFormat));

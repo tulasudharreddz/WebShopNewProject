@@ -91,6 +91,8 @@ public class OrdersPage {
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ActualInstallationChargesXpath = By.xpath("//label[contains(text(),'Installation Services')]/parent::div/following-sibling::div");
     static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");
+    static private By NoOfCartProducts = By.xpath("//div[@class='product-row']");
+    static private By ProductDetails = By.xpath("//div[@class='form-group col-md-6']/div");
 
 
 
@@ -662,11 +664,11 @@ public class OrdersPage {
             Thread.sleep(1000);
             ExpectedLable("Check for error message for Quantity field with the quantity Value :"+QuantityOfProductStr);
             if(driver.findElements(ErrorMessageQuantity).size()>0){
-                if(i==2){  ActualLable("Verification is successful , Error message is showing for invalid input", "Pass");  }
+                if(i==2||AssertName.get(i)==0){  ActualLable("Verification is successful , Error message is showing for invalid input", "Pass");  }
                 else{ ActualLable("Verification Failed , Error message is showing for valid input", "Fail"); }
             }
             else{
-                if(i==2){ActualLable("Verification Failed , Error message is not showing for invalid input", "Fail"); }
+                if(i==2||AssertName.get(i)==0){ActualLable("Verification Failed , Error message is not showing for invalid input", "Fail"); }
                 else{ActualLable("Verification is successful , Error message is not showing for Valid input", "Pass");}
             }
         }
@@ -750,7 +752,8 @@ public class OrdersPage {
         AssertNamesText.add("Product Price");
         AssertNamesText.add("Availability Status");
         AssertNamesText.add("Quantity Of the Product");
-        for (int i = 0; i <= 2; i++) {
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        for (int i = 0; i <= NoOfProductAddedToCart-1; i++) {
             ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(i);
             ArrayList<String> ActualValue = GetProductDetailsFromOrderPage(driver, i);
             for (int j = 0; j <= 4; j++) {
@@ -806,5 +809,29 @@ public class OrdersPage {
         AssertName1.add(ActualInstallationChargesString);
 
         return AssertName1;
+    }
+    public static boolean VerifyProductDetailsOnRequestReturnPage(WebDriver driver, String OrderNo) throws IOException, WriteException, InterruptedException{
+        boolean Status = true;
+        ArrayList<String> AssertNamesText = new ArrayList<String>();
+        AssertNamesText.add("Order No");
+        AssertNamesText.add("Product Name");
+        AssertNamesText.add("Manufacturer Part #");
+            ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(0);
+        ExpectedLable("Verify ' Order No' On Review order page ");
+        String ActualOrderNum = driver.findElements(ProductDetails).get(0).getText();
+        if(ActualOrderNum.contentEquals(OrderNo)){
+            ActualLable("Order number verified successfully, Expected OrderNum : '"+OrderNo+"' Actual Order No : "+ActualOrderNum,"Pass");
+        }else{ Status = false; ActualLable("Order number Not Matched, Expected OrderNum : '"+OrderNo+"' Actual Order No : "+ActualOrderNum,"Fail"); }
+        ExpectedLable("Verify ' Product Name' On Review order page ");
+        String ActualProductName = driver.findElements(ProductDetails).get(1).getText();
+        if(ActualProductName.contentEquals(AssertNameFromPSearchPage1.get(0))){
+            ActualLable("Product Name verified successfully, Expected OrderNum : '"+ActualProductName+"' Actual Order No : "+AssertNameFromPSearchPage1.get(0),"Pass");
+        }else{ Status = false; ActualLable("Product Name Not Matched, Expected OrderNum : '"+ActualProductName+"' Actual Order No : "+AssertNameFromPSearchPage1.get(0),"Fail"); }
+        ExpectedLable("Verify ' Manufacturer Part #' On Review order page ");
+        String ActualMFR = driver.findElements(ProductDetails).get(2).getText();
+        if(ActualMFR.contentEquals(AssertNameFromPSearchPage1.get(1))){
+            ActualLable("Manufacturer Part # verified successfully, Expected OrderNum : '"+ActualMFR+"' Actual Order No : "+AssertNameFromPSearchPage1.get(1),"Pass");
+        }else{ Status = false; ActualLable("Manufacturer Part # Not Matched, Expected OrderNum : '"+ActualMFR+"' Actual Order No : "+AssertNameFromPSearchPage1.get(1),"Fail"); }
+        return Status;
     }
 }

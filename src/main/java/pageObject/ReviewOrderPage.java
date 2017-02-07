@@ -36,6 +36,7 @@ public class ReviewOrderPage {
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ActualInstallationChargesXpath = By.xpath("//label[contains(text(),'Installation Services')]/parent::div/following-sibling::div");
     static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");
+    static private By NoOfCartProducts = By.xpath("//div[@class='product-row']");
 
 
 
@@ -142,7 +143,8 @@ public class ReviewOrderPage {
         AssertNamesText.add("Product Price");
         AssertNamesText.add("Availability Status");
         AssertNamesText.add("Quantity Of the Product");
-        for (int i = 0; i <= 2; i++) {
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        for (int i = 0; i <= NoOfProductAddedToCart-1; i++) {
             ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(i);
             ArrayList<String> ActualValue = GetProductDetailsFromReviewOrderPage(driver, i);
             for (int j = 0; j <= 4; j++) {

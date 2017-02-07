@@ -29,6 +29,7 @@
                     <include name="WS_TC_158"/>
                     <include name="WS_TC_160"/>
                     <include name="WS_TC_161"/>
+                    <include name="WS_TC_162"/>
                     <include name="WS_TC_163"/>
                     <include name="WS_TC_164"/>
                     <include name="WS_TC_165"/>

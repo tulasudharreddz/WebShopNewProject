@@ -84,8 +84,10 @@ public class Browser {
 
 	@BeforeSuite
 	public void initializeexc() throws WriteException, IOException, BiffException {
+		obr.repository(driver);
 		String folderName = ObjectRepository.DateSt();
-		new File(".\\ResultReports\\" + folderName + "").mkdir();
+		//new File(".\\ResultReports\\" + folderName + "").mkdir();
+		new File(obr.obj.getProperty("CreateWorkBookPath")+"//" + folderName + "").mkdir();
 		sheet = Broexcel.ReadSheet(sheet);
 	}
 	@AfterSuite
@@ -94,22 +96,24 @@ public class Browser {
 
 	}
 	public static String screenshots() throws IOException, WriteException {
-
+		obr.repository(driver);
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		String Folder = DataDriven.FolderName();
 		String folderName = ObjectRepository.DateSt();
-		String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
+
+		//String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
+		String name = obr.obj.getProperty("CreateWorkBookPath") +"\\"+ folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
 		SCcount++;
 		return name;
 	}
 
 	@BeforeMethod
-	public void Url() throws IOException, BiffException, WriteException {
+	public void Url() throws IOException, BiffException, WriteException, InterruptedException {
 		obr.repository(driver);
-		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+		driver.manage().deleteAllCookies();
+		Thread.sleep(2000);
 		driver.get(obr.obj.getProperty("url"));
-		//log.info("URL entered in browser");
 	}
 	@AfterMethod
 	public void ResultStatus() throws WriteException { ReportResult();}

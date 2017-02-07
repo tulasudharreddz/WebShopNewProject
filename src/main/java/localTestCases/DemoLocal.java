@@ -19,23 +19,20 @@ import static GenericLib.DataDriven.*;
 
 public class DemoLocal extends Browser{
 
-	AlertHandle popup = new AlertHandle();
-	Logger log = Logger.getLogger("Testing Cases");
-
+	Logger log = Logger.getLogger("Testing Demo");
 	private WebDriver driver;
 
 	@BeforeClass
-	public void setUp() throws WriteException, IOException, BiffException {
-		driver=getDriver();
-	}
+	public void setUp() throws WriteException, IOException, BiffException {driver=getDriver();}
+
 	public static ArrayList<ArrayList> ProductDetailsArrayList;
 	@Test
 	public void Demo_TC_01() throws IOException, WriteException {
 		try {
+
 			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
-			log.info("Login in to the webshop application");
 			double noOfItems = ShoppingCart.DeleteExistItem(driver);
 			StepLable("Add product to Shopping Cart from Product search page");
 			ArrayList<String> AssertNameFromPSearchPage =ProductSearchPage.SelectProductFromSearchResultPage(driver);
@@ -68,8 +65,6 @@ public class DemoLocal extends Browser{
 	}
 	@Test
 	public void MobileAutomation() throws Exception ,WriteException{
-		//driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-
 		Thread.sleep(1000);
 		LoginPage.Loginfunctionality(driver);
 		log.info("Login in to the webshop application");
@@ -87,8 +82,6 @@ public class DemoLocal extends Browser{
 
 		Double UnitPrice = HomePage.UnitPrice(driver);
 		Assert.assertEquals(UnitCost, "$"+UnitPrice);
-
-
 	}
 
 

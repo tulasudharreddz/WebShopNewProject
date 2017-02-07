@@ -631,7 +631,8 @@ public class ShoppingCart {
         AssertNamesText.add("Product Price");
         AssertNamesText.add("Availability Status");
         AssertNamesText.add("Quantity Of the Product");
-        for (int i = 0; i <= 2; i++) {
+        long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
+        for (int i = 0; i <= NoOfProductAddedToCart-1; i++) {
             ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(i);
             ArrayList<String> ActualValue = ShoppingCart.GetProductDetailsFromShoppingCart(driver, i);
             for (int j = 0; j <= 4; j++) {

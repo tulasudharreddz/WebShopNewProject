@@ -420,6 +420,7 @@ public class ProfilePage {
                     String email = obje.obj.getProperty("email");
                     Assert.assertEquals(split_one, email);
                     ActualLable("Successfully verified Email sender", "Pass");
+                    driver.findElement(By.id("lo")).click();
                 }else{     ActualLable("Email sender name Verification is failed", "Fail");}
             } else {driver.findElement(ReLoadEmails).click();
                 if (driver.findElements(By.xpath("//td[@class='frst']/h1/a[contains(text(),'Address Delete Request')]")).size() > 0) {
@@ -437,8 +438,9 @@ public class ProfilePage {
                         String email = obje.obj.getProperty("email");
                         Assert.assertEquals(split_one, email);
                         ActualLable("Successfully verified Email sender", "Pass");
-                    }else{     ActualLable("Email sender name Verification is failed", "Fail");}
-                } else{  ActualLable("Email Not received and Verification is failed", "Fail");}
+                        driver.findElement(By.id("lo")).click();
+                    }else{     driver.findElement(By.id("lo")).click(); ActualLable("Email sender name Verification is failed", "Fail");}
+                } else{  driver.findElement(By.id("lo")).click(); ActualLable("Email Not received and Verification is failed", "Fail");}
             }
         }
     }
@@ -661,7 +663,8 @@ public class ProfilePage {
                     String email = obje.obj.getProperty("email");
                     Assert.assertEquals(split_one, email);
                     ActualLable("Successfully verified Email sender", "Pass");
-                } catch (Exception e) { ActualLable("Email sender name Verification is failed", "Fail");     }
+                    driver.findElement(By.id("lo")).click();
+                } catch (Exception e) { driver.findElement(By.id("lo")).click();ActualLable("Email sender name Verification is failed", "Fail");     }
             } else {
                 driver.findElement(ReLoadEmails).click();
                 Thread.sleep(2000);
@@ -679,8 +682,9 @@ public class ProfilePage {
                         String email = obje.obj.getProperty("email");
                         Assert.assertEquals(split_one, email);
                         ActualLable("Successfully verified Email sender", "Pass");
-                    } catch (Exception e) {   ActualLable("Email sender name Verification is failed", "Fail");    }
-                }  else{ActualLable("Email Not received and Verification is failed", "Fail");  }
+                        driver.findElement(By.id("lo")).click();
+                    } catch (Exception e) { driver.findElement(By.id("lo")).click();  ActualLable("Email sender name Verification is failed", "Fail");    }
+                }  else{driver.findElement(By.id("lo")).click();ActualLable("Email Not received and Verification is failed", "Fail");  }
             }
         }
     }
