@@ -16,16 +16,15 @@
             </class>
             <class name="localTestCases.HomePageTC">
                 <methods>
-                    <include name="WS_TC_32"/>
                     <include name="WS_TC_30"/>
                     <include name="WS_TC_31"/>
+                    <include name="WS_TC_32"/>
                 </methods>
             </class>
             <class name="localTestCases.MyAccountModuleTC">
                 <methods>
                     <include name="WS_TC_34"/>
                     <include name="WS_TC_35"/>
-                    <include name="WS_TC_36"/>
                     <include name="WS_TC_37"/>
                     <include name="WS_TC_38"/>
                     <include name="WS_TC_41"/>
@@ -104,6 +103,7 @@
                 <methods>
                     <include name="WS_TC_115"/>
                     <include name="WS_TC_116"/>
+                    <include name="WS_TC_117"/>
                     <include name="WS_TC_138"/>
                     <include name="WS_TC_140"/>
                     <include name="WS_TC_141"/>
