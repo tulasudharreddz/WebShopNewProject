@@ -49,7 +49,6 @@ public class LandingPageTC extends Browser
 
 	@Test
 	public void WS_TC_01() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
-		//check that user able to login with valid credentials or not
 		try{
 			DataDriven.ReportStartup(1);
 			LoginPage.PageTitle(driver);
@@ -57,13 +56,8 @@ public class LandingPageTC extends Browser
 			LoginPage.LoginPageTitle(driver);
 			LoginPage.ResetPasswordAssert(driver);
 			LoginPage.RegisterAsert(driver);
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 
 	/*WS_TC_02:Verify the GUI of "Login" Section
@@ -74,17 +68,11 @@ public class LandingPageTC extends Browser
 	@Test
 	public void WS_TC_02() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
 		try{
-			//check that user able to login with valid credentials or not
 			DataDriven.ReportStartup(2);
 			LoginPage.LoginFieldsAssertVerify(driver);
 
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 
 	/*	  
@@ -103,13 +91,8 @@ public class LandingPageTC extends Browser
 			LoginPage.PageTitle(driver);
 			LoginPage.Loginfunctionality(driver);
 			HomePage.PageTitle(driver);
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 
 	/* WS_TC_04: AssertVerifyForDefaultAddress the GUI of 'Reset Password' Section
@@ -129,13 +112,8 @@ public class LandingPageTC extends Browser
 			LoginPage.ClickOnResetPasswordLink(driver);
 			ForgotPassword.AssertVerifyForResetPassword(driver);
 
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 	/*
 	Validate the Email Password functionality
@@ -152,13 +130,8 @@ public class LandingPageTC extends Browser
 			DataDriven.ReportStartup(5);
 			LoginPage.ClickOnResetPasswordLink(driver);
 			ForgotPassword.ErrorMessageForEmail(driver);
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 
 	/*WS_TC_06: AssertVerifyForDefaultAddress the GUI of "Request Registration" Section
@@ -177,32 +150,21 @@ public class LandingPageTC extends Browser
 			StepLable("Assert Verify For the GUI of 'Request Registration'  Section");
 			ExpectedLable("Check Label Text available on Landing page");
 			String labeltext= LoginPage.LableForRegistration(driver).getText();
-
-			log.info("Label Text for Request registration  is  " +labeltext);
 			ActualLable("Successfully verified Label Text "+labeltext,"Pass");
 			//check that Button for Request Registration is exist or not.
 			ExpectedLable("Check Registration link is available on Landing page");
 			log.info("Request Registration is exist with link " + LoginPage.Register(driver).getText());
 			ActualLable("Successfully verified Registration link on home page ","Pass");
-			log.info("test cases is verified and Passed");
-
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 
 	// AssertVerifyForDefaultAddress that all the static links are working or not.
 	@Test
-	public void WS_TC_07() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {DataDriven.ReportStartup(6);
+	public void WS_TC_07() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
 		try{
-
 			DataDriven.ReportStartup(7);
 			StepLable("Verify All static links on Landing page");
-
 			LoginPage.AsertVerifyForAboutUSLinkHomePage(driver);
 			LoginPage.AsertVerifyForNEWSLinkHomePage(driver);
 			LoginPage.AsertVerifyForCareerLinkHomePage(driver);
@@ -220,14 +182,8 @@ public class LandingPageTC extends Browser
 			LoginPage.AsertVerifyForContactDDLinkHomePage(driver);
 			log.info("Asert for ContactDD link is verified");
 			StepLable("WS_TC_07:Successfully verified all static links");
-			//LoginPage.AsertVerifyForFooterLinksHomePage(driver);
-		} catch (AssertionError e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		} catch (Exception e) {
-			String error = "Exception " + e.getClass().getSimpleName();
-			ActualLable(error, "Fail");
-		}
+		} catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 
 }

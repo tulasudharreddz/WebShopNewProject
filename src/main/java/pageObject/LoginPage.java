@@ -352,8 +352,9 @@ public class LoginPage {
 		String Title = driver.getTitle();
 		log.info("Title of the page is "+Title);
 		ExpectedLable("Corresponding Page should be open and assert should verify");
-		Assert.assertEquals(Title, "FAQ");
-		ActualLable("FAQ page is opened and Assert verified ","Pass");
+		if(Title.contentEquals("FAQ")){
+		ActualLable("FAQ page is opened and Assert verified ","Pass");}
+		else{ActualLable("FAQ page is not opened and Assert Failed ","Fail");}
 		driver.close();
 		driver.switchTo().window(tabs.get(0));
 	}
