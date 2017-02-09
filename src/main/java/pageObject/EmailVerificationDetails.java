@@ -36,6 +36,7 @@ public class EmailVerificationDetails {
     static private By EnterIntoFolder = By.xpath("//a[@id='lnkGotoFldr']/img");
     static private By ReferenceNumberLink = By.xpath("//div[@class='bdy']/div/div[3]/div/a");
     static private By SelectGlobalDirectFolder = By.xpath("//a[@name='lnkFldr'][@title='Global.direct']");
+    static private By ContentInEmail = By.xpath("//b/parent::td");
 
 
 
@@ -145,10 +146,19 @@ public class EmailVerificationDetails {
         boolean Status = true;
         StepLable(" Email Verification for Request Return Email ");
         OutLookAccess(driver);
-            Thread.sleep(5000);
+        Thread.sleep(5000);
+        driver.findElement(ReLoadEmails).click();
+        Thread.sleep(3000);
+        ExpectedLable("Verify email Received for Order Details Email");
+        if (driver.findElements(ProductReturnEmailLink).size() > 0) {
+            ActualLable("Email received successfully", "Pass");
+            ExpectedLable("Now verify Email subject in Order email");
+            driver.findElement(ProductReturnEmailLink).click();
+            String Subject = driver.findElement(EmailSubject).getText();
+            Assert.assertEquals(Subject, "Product Return Request");
+            ActualLable("Verified successfully, Email subject is verified", "Pass");
+        } else {
             driver.findElement(ReLoadEmails).click();
-            Thread.sleep(3000);
-            ExpectedLable("Verify email Received for Order Details Email");
             if (driver.findElements(ProductReturnEmailLink).size() > 0) {
                 ActualLable("Email received successfully", "Pass");
                 ExpectedLable("Now verify Email subject in Order email");
@@ -156,17 +166,8 @@ public class EmailVerificationDetails {
                 String Subject = driver.findElement(EmailSubject).getText();
                 Assert.assertEquals(Subject, "Product Return Request");
                 ActualLable("Verified successfully, Email subject is verified", "Pass");
-            } else {
-                driver.findElement(ReLoadEmails).click();
-                if (driver.findElements(ProductReturnEmailLink).size() > 0) {
-                    ActualLable("Email received successfully", "Pass");
-                    ExpectedLable("Now verify Email subject in Order email");
-                    driver.findElement(ProductReturnEmailLink).click();
-                    String Subject = driver.findElement(EmailSubject).getText();
-                    Assert.assertEquals(Subject, "Product Return Request");
-                    ActualLable("Verified successfully, Email subject is verified", "Pass");
-                }else{  Status=false; ActualLable("Email Not received and Verification is failed", "Fail"); }
-            }
+            }else{  Status=false; ActualLable("Email Not received and Verification is failed", "Fail"); }
+        }
         return Status;
     }
     public static boolean VerifyRequestReturnEmailInOutLookDemo(WebDriver driver) throws InterruptedException, AWTException, IOException, WriteException {
@@ -203,5 +204,22 @@ public class EmailVerificationDetails {
             }
         }
         return Status;
+    }
+    public static boolean VerifyRequestReturnEmailValues(WebDriver driver, ArrayList<String> ExpectArray) throws IOException, WriteException {
+        StepLable("Verify Request Return Email Values with Order Details");
+        boolean ResultStatus = false;
+        for(int i=0;i<=5; i++) {
+            String ActualValueInEmail1 = driver.findElements(ContentInEmail).get(i).getText();
+            String RemoveText = driver.findElements(By.xpath("//b")).get(i).getText();
+            String ActualValueInEmail2 = ActualValueInEmail1.replace(RemoveText,"");
+            String ActualValueInEmail = ActualValueInEmail2.replace("\n","");
+            String ExpectedValues1 = ExpectArray.get(i);
+            String ExpectedValues = ExpectedValues1.replace("\n","");
+            ExpectedLable("Validate '"+RemoveText+"' Value with Order details ");
+            if(ActualValueInEmail.contentEquals(ExpectedValues)){
+                ActualLable("'"+RemoveText +"' Verified, Expected : "+ExpectedValues+"Actual :"+ActualValueInEmail, "Pass");
+            }else{ResultStatus=true; ActualLable("'"+RemoveText +"' Verification failed, Expected : "+ExpectedValues+"Actual :"+ActualValueInEmail, "Fail");}
+        }
+        return ResultStatus;
     }
 }

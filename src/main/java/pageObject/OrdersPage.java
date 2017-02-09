@@ -93,6 +93,7 @@ public class OrdersPage {
     static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");
     static private By NoOfCartProducts = By.xpath("//div[@class='product-row']");
     static private By ProductDetails = By.xpath("//div[@class='form-group col-md-6']/div");
+    static private By RequestReturnValues = By.xpath("//div[@class='form-group col-md-6']/div[@class='text-value-label']");
 
 
 
@@ -234,7 +235,6 @@ public class OrdersPage {
         }
     }
     public static Date PrevoiusDateFromToday(int noOfDays){
-
         DateFormat dateFormat= new SimpleDateFormat("dd/MM/yyyy");
         Date now = new Date();
         System.out.println(dateFormat.format(now));
@@ -758,9 +758,9 @@ public class OrdersPage {
             for (int j = 0; j <= 4; j++) {
                 if(j==3){ActualLable("Availability status will not available on Orders page","Pass");}
                 else {
-                String ExpectedText = AssertNameFromPSearchPage1.get(j);
-                String ActualText = ActualValue.get(j);
-                ExpectedLable("Verify ' " + AssertNamesText.get(j) + " On Review order page ");
+                    String ExpectedText = AssertNameFromPSearchPage1.get(j);
+                    String ActualText = ActualValue.get(j);
+                    ExpectedLable("Verify ' " + AssertNamesText.get(j) + " On Review order page ");
                     if (ExpectedText.contentEquals(ActualText)) {
                         ActualLable("Expected and Actual values are same, Expected Value : " + ExpectedText + " Actual Value :" + ActualText, "Pass");
                     } else {
@@ -815,7 +815,7 @@ public class OrdersPage {
         AssertNamesText.add("Order No");
         AssertNamesText.add("Product Name");
         AssertNamesText.add("Manufacturer Part #");
-            ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(0);
+        ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(0);
         ExpectedLable("Verify ' Order No' On Review order page ");
         String ActualOrderNum = driver.findElements(ProductDetails).get(0).getText();
         if(ActualOrderNum.contentEquals(OrderNo)){
@@ -832,5 +832,15 @@ public class OrdersPage {
             ActualLable("Manufacturer Part # verified successfully, Expected OrderNum : '"+ActualMFR+"' Actual Order No : "+AssertNameFromPSearchPage1.get(1),"Pass");
         }else{ Status = false; ActualLable("Manufacturer Part # Not Matched, Expected OrderNum : '"+ActualMFR+"' Actual Order No : "+AssertNameFromPSearchPage1.get(1),"Fail"); }
         return Status;
+    }
+    public static ArrayList<String> GetProductDetailsFromRReturnPage(WebDriver driver) throws IOException, WriteException {
+        ExpectedLable("Get All the values and Store");
+        ArrayList<String> ValueOfRReturn=new ArrayList<String>();
+        for(int i=0;i<=driver.findElements(RequestReturnValues).size()-1;i++) {
+            String ValueOfDetails = driver.findElements(RequestReturnValues).get(i).getText();
+            ValueOfRReturn.add(ValueOfDetails);
+        }
+        ActualLable("Successfully Stored all the details in Product Request Return Page", "Pass");
+        return ValueOfRReturn;
     }
 }

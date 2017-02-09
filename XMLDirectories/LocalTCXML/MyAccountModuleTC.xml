@@ -33,6 +33,7 @@
                     <include name="WS_TC_163"/>
                     <include name="WS_TC_164"/>
                     <include name="WS_TC_165"/>
+                    <include name="WS_TC_166"/>
                 </methods>
             </class>
         </classes>

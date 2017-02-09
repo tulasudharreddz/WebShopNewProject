@@ -586,4 +586,27 @@ public class MyAccountModuleTC extends Browser {
         }  catch (AssertionError e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
         } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
+    @Test
+    public void WS_TC_166() throws IOException, InterruptedException, AWTException, WriteException, BiffException {
+        try {
+            DataDriven.ReportStartup(166);
+            LoginPage.Loginfunctionality(driver);
+            HomePage.ClickonMyAccount(driver);
+            HomePage.SelectSubMenuOptUnderMyAccount(driver,2);
+            OrdersPage.VerificationOfOrderExpandForFirstProduct(driver);
+            OrdersPage.VerifyRequestReturnPage(driver);
+            ArrayList<String> ExpectedValues = OrdersPage.GetProductDetailsFromRReturnPage(driver);
+            OrdersPage.VerifySubmitButtonFunctionalityinRequestReturnPage(driver);
+            boolean EmailStaus = EmailVerificationDetails.VerifyRequestReturnEmailInOutLook(driver);
+            if(EmailStaus==true){
+                boolean FinalStaus = EmailVerificationDetails.VerifyRequestReturnEmailValues(driver,ExpectedValues);
+                ExpectedLable("Verify All values Status in mail");
+                if(FinalStaus==false){
+                    ActualLable("All Valus are same as in Orders page", "Pass");
+                }else{ActualLable("Verification Failed", "Fail");}}
+
+        }  catch (AssertionError e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
+        } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
+    }
+
 }
