@@ -216,10 +216,7 @@ public class HomePage {
         if (MyAccountMenuonHomePage(driver).isDisplayed()){
             ActualLable("My account menu is available on home page","Pass");
             log.info("Assert is verified for My Account menu on Home page");
-            ExpectedLable("Click on my account menu on home page");
             ClickonMyAccount(driver);
-            ActualLable("Successfully clicked on My account menu","Pass");
-            log.info("Clicked on My Account menu on home page");
             ExpectedLable("Check options under My account menu ");
             for(WebElement e : MyAccountMenuDropDownListonHomePage(driver)) {
                 log.info("List under My Menu modules are "+ e.getText());
@@ -325,7 +322,7 @@ public class HomePage {
                     ActualLable("Link is verified for "+ AssertName,"Pass");
                 }
                 else{
-                    String AssertName = driver.findElement(By.xpath("//h2/i")).getText();
+                    String AssertName = driver.findElement(By.xpath("//h2")).getText();
                     ActualLable("Link is verified for "+AssertName,"Pass");
                 }
             }

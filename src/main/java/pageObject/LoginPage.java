@@ -353,7 +353,7 @@ public class LoginPage {
 		log.info("Title of the page is "+Title);
 		ExpectedLable("Corresponding Page should be open and assert should verify");
 		if(Title.contentEquals("FAQ")){
-		ActualLable("FAQ page is opened and Assert verified ","Pass");}
+			ActualLable("FAQ page is opened and Assert verified ","Pass");}
 		else{ActualLable("FAQ page is not opened and Assert Failed ","Fail");}
 		driver.close();
 		driver.switchTo().window(tabs.get(0));
@@ -449,27 +449,28 @@ public class LoginPage {
 	}
 
 	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException, WriteException {
-			WebDriverWait waitCulture = new WebDriverWait(driver, 40);
-			waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
-			Thread.sleep(2000);
-			StepLable("Verify User Login");
-			LoginPage.Language(driver).click();
-			ExpectedLable("Set Language as:"+ Selectlanguage(driver).getText());
-			Thread.sleep(2000);
-			LoginPage.Selectlanguage(driver).click();
-			ActualLable("Successfully Placed/Selected Language ","Pass");
-			obje.repository(driver);
-			ExpectedLable("Set value as: "+obje.obj.getProperty("email")+"for User name");
-			LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
-			ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("email"),"Pass");
+		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
+		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
+		Thread.sleep(2000);
+		StepLable("Verify User Login");
+		LoginPage.Language(driver).click();
+		ExpectedLable("Set Language as:"+ Selectlanguage(driver).getText());
+		Thread.sleep(2000);
+		LoginPage.Selectlanguage(driver).click();
+		ActualLable("Successfully Placed/Selected Language ","Pass");
+		Thread.sleep(1000);
+		obje.repository(driver);
+		ExpectedLable("Set value as: "+obje.obj.getProperty("email")+"for User name");
+		LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
+		ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("email"),"Pass");
 
-			ExpectedLable("Set value as: "+obje.obj.getProperty("password")+"for User name");
-			LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
-			ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("password"),"Pass");
-
-			ExpectedLable("Verify User Login function");
-			LoginPage.ClickLogin(driver).click();
-			ActualLable("Successfully Loged into the application","Pass");
+		ExpectedLable("Set value as: "+obje.obj.getProperty("password")+"for User name");
+		LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
+		ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("password"),"Pass");
+		Thread.sleep(1000);
+		ExpectedLable("Verify User Login function");
+		LoginPage.ClickLogin(driver).click();
+		ActualLable("Successfully Loged into the application","Pass");
 	}
 
 }

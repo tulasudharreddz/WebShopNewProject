@@ -125,16 +125,13 @@ public class ProductSearchPage {
         Thread.sleep(2000);
         ExpectedLable("Get the Product name and Part number for the first item in the list");
         String NameOfItem = ProductSearchPage.ProductNameSearchPage(driver).get(0).getText();
-        log.info("Name of the for the product is: "+ NameOfItem);
         String PartNumber = ProductSearchPage.PartNumber(driver).get(0).getText();
         String ProductPriceValue = driver.findElements(ProductPrice).get(0).getText();
         String AvailabilityStatus = driver.findElements(AvailabilityBlock).get(0).getText();
-        log.info("Partnumber for the product is: "+ PartNumber);
         ActualLable("Successfully Stored the product name and part number","Pass");
         ExpectedLable("Click on Learn more button for perticular Item ");
         ProductSearchPage.LearnMoreButtons(driver).get(0).click();
-        ActualLable("Successfully clicked on Learn more button for perticular Item ","Pass");
-        log.info("Clicked on Learn more button");
+        ActualLable("Successfully clicked on Learn more button for particular Item ","Pass");
         return NameOfItem;
     }
     public static ArrayList<String> SelectProductFromSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
@@ -184,9 +181,9 @@ public class ProductSearchPage {
     public static void StatusVerifyForProducts(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Availability Status for the product with respect to no of Quantity availability");
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
-        al.add("130113");//adding object in arraylist
-        al.add("105155");
-        al.add("130459");
+        al.add("2200-15660-122");//adding object in arraylist
+        al.add("2200-16155-015");
+        al.add("2215-07155-001");
         ArrayList<String> a2=new ArrayList<String>();
         a2.add("Available");
         a2.add("Limited Availability");
@@ -204,17 +201,15 @@ public class ProductSearchPage {
             ActualLable("Successfully Searched for the product"+al.get(i),"Pass");
             ExpectedLable("Verify Availability Status For Product "+al.get(i));
             Thread.sleep(2000);
-            String status = driver.findElement(AvailabilityStatus).getText();
-            log.info("Actual Status of product for Part number " + al.get(i)+" is "+ status);
-            log.info("No of item for the part nuber " + al.get(i)+" is " + a3.get(i));
-            ActualLable("Successfully verified Availability of the product and No of item for the part number " + al.get(i)+" is " + a3.get(i),"Pass");
-
-            ExpectedLable("Verify Assert and Status For Product "+al.get(i));
-            Assert.assertEquals(status, a2.get(i));
-            log.info("Assert is verified for the product with part number " + al.get(i));
-            ActualLable("Assert verified successfully for the product"+al.get(i),"Pass");
+            if(driver.findElements(AvailabilityStatus).size()>0) {
+                String status = driver.findElement(AvailabilityStatus).getText();
+                ActualLable("Successfully verified Availability of the product and No of item for the part number " + al.get(i) + " is " + a3.get(i), "Pass");
+                ExpectedLable("Verify Assert and Status For Product " + al.get(i));
+                if(status.contentEquals(a2.get(i))){
+                    ActualLable("Assert verified successfully for the product" + al.get(i), "Pass");
+                }else{ActualLable("Assert verification failed for the product" + al.get(i), "Fail");}
+            }else{ActualLable("Product Not found for Part number : " + al.get(i), "Fail");}
         }
-
     }
 
     public static int NoofResults(WebDriver driver) throws IOException, WriteException {
@@ -451,58 +446,49 @@ public class ProductSearchPage {
     public static void SearchingFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
         StepLable("Search engine functionality with different type of inputs");
         ArrayList<String> SearchText =new ArrayList<String>();//creating arraylist
-        SearchText.add("ASR 9000 OAM 10Gbps Right to Use License 10-pack Bundle");
-        SearchText.add("Cisco");//adding object in arraylist
-        SearchText.add("S-A9K-OAMRTU-100");
-        SearchText.add("Cisco ASR 9000 Series");
-        SearchText.add("Gigabit Hubs & Switches");
+        SearchText.add("Polycom SoundStation VTX 1000 - Conference phone with caller ID/call waiting - single-line operation");
+        SearchText.add("Polycom");//adding object in arraylist
+        SearchText.add("2200-07300-120");
+        SearchText.add("Conference Phones");
         ArrayList<String> FieldsXpaths=new ArrayList<String>();
         FieldsXpaths.add("//p[@class='product-name clickable']");
-        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[3])[1]");
-        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[1])[1]");
-        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[2])[1]");
-        FieldsXpaths.add("(//p[@class='product-name clickable']/following-sibling::div[3])[1]");
+        FieldsXpaths.add("//span[contains(text(),'Manufacturer:')]/parent::div");
+        FieldsXpaths.add("//span[contains(text(),'Mfr Part#:')]/parent::div");
+        FieldsXpaths.add("//span[contains(text(),'Category:')]/parent::div");
         ArrayList<String> TypeOfSearch =new ArrayList<String>();//creating arraylist
         TypeOfSearch.add("Name Of the Product");
         TypeOfSearch.add("Manufacturer");//adding object in arraylist
         TypeOfSearch.add("Mfr Part#");
-        TypeOfSearch.add("Family");
         TypeOfSearch.add("Category");
 
 
-        for(int i = 0;i<5;i++) {
+        for(int i = 0;i<=3;i++) {
             ExpectedLable("Search Product with "+TypeOfSearch.get(i)+", Result should show related to search criteria");
             Thread.sleep(1000);
             SearchField(driver).clear();
-            System.out.println(1);
             SearchField(driver).sendKeys(SearchText.get(i));
             System.out.println(2);
             Thread.sleep(1000);
             SearchField(driver).sendKeys(Keys.ENTER);
             Thread.sleep(2000);
-            String ResultText=driver.findElement(By.xpath(FieldsXpaths.get(i))).getText();
-
-            if(i==0){
-                ActualLable("Successfully with provided criteria i.e " + TypeOfSearch.get(i) + "", "Pass");
-
-                ExpectedLable("Verify result is related to searched criteria or not ?");
-                if (ResultText.contentEquals(SearchText.get(i))) {
-                    ActualLable("Searched result matched with entered text", "Pass");
+            if(driver.findElements(By.xpath(FieldsXpaths.get(i))).size()>0) {
+                String ResultText = driver.findElements(By.xpath(FieldsXpaths.get(i))).get(0).getText();
+                if (i == 0) {
+                    ActualLable("Successfully with provided criteria i.e " + TypeOfSearch.get(i) + "", "Pass");
+                    ExpectedLable("Verify result is related to searched criteria or not ?");
+                    if (ResultText.contentEquals(SearchText.get(i))) {
+                        ActualLable("Searched result matched with entered text", "Pass");
+                    } else {  ActualLable("Failed to get searched result+", "Fail"); }
                 } else {
-                    ActualLable("Failed to get searched result+", "Fail");
+                    ActualLable("Successfully with provided criteria i.e " + TypeOfSearch.get(i) + "", "Pass");
+                    String[] parts = ResultText.split(": ");
+                    String part1 = parts[1];
+                    ExpectedLable("Verify result is related to searched criteria or not ?");
+                    if (part1.contentEquals(SearchText.get(i))) {
+                        ActualLable("Searched result matched with entered text", "Pass");
+                    } else {  ActualLable("Failed to get searched result ", "Fail");   }
                 }
-            }
-            else {
-                ActualLable("Successfully with provided criteria i.e " + TypeOfSearch.get(i) + "", "Pass");
-                String[] parts = ResultText.split(": ");
-                String part1 = parts[1];
-                ExpectedLable("Verify result is related to searched criteria or not ?");
-                if (part1.contentEquals(SearchText.get(i))) {
-                    ActualLable("Searched result matched with entered text", "Pass");
-                } else {
-                    ActualLable("Failed to get searched result+", "Fail");
-                }
-            }
+            }else{ActualLable("Failed to get searched result "+ TypeOfSearch.get(i), "Fail");}
         }
     }
     public static void GetStatusProducts(WebDriver driver) throws InterruptedException, IOException, WriteException {
@@ -532,6 +518,7 @@ public class ProductSearchPage {
         if(driver.findElements(x).size()>0){
             ActualLable("Found Product with '" +status+ " '","Pass");
             ExpectedLable("Clicking on Learn More button to the same product");
+            Thread.sleep(1000);
             driver.findElements(x1).get(0).click();
             ActualLable("Successfully clicked on Learn more button for selected Product ","Pass");
             Thread.sleep(2000);

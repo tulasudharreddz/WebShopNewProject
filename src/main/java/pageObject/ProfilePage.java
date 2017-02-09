@@ -153,7 +153,9 @@ public class ProfilePage {
         StepLable("Verify Mandatory fields functionality");
         int NoOfMandatory = NoOfMandatoryFields(driver).size();
         for (int i = 0; i <= NoOfMandatory - 1; i++) {
-            NoOfMandatoryFields(driver).get(i).clear();
+            //NoOfMandatoryFields(driver).get(i).clear();
+            NoOfMandatoryFields(driver).get(i).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            NoOfMandatoryFields(driver).get(i).sendKeys(Keys.BACK_SPACE);
             NoOfMandatoryFields(driver).get(i).sendKeys(Keys.TAB);
             List<WebElement> Lablename = driver.findElements(By.xpath("//label"));
             String Lablenames = Lablename.get(i).getText();
@@ -420,7 +422,7 @@ public class ProfilePage {
                     String email = obje.obj.getProperty("email");
                     Assert.assertEquals(split_one, email);
                     ActualLable("Successfully verified Email sender", "Pass");
-                    driver.findElement(By.id("lo")).click();
+                    //driver.findElement(By.id("lo")).click();
                 }else{     ActualLable("Email sender name Verification is failed", "Fail");}
             } else {driver.findElement(ReLoadEmails).click();
                 if (driver.findElements(By.xpath("//td[@class='frst']/h1/a[contains(text(),'Address Delete Request')]")).size() > 0) {
@@ -438,9 +440,9 @@ public class ProfilePage {
                         String email = obje.obj.getProperty("email");
                         Assert.assertEquals(split_one, email);
                         ActualLable("Successfully verified Email sender", "Pass");
-                        driver.findElement(By.id("lo")).click();
-                    }else{     driver.findElement(By.id("lo")).click(); ActualLable("Email sender name Verification is failed", "Fail");}
-                } else{  driver.findElement(By.id("lo")).click(); ActualLable("Email Not received and Verification is failed", "Fail");}
+                        //driver.findElement(By.id("lo")).click();
+                    }else{    ActualLable("Email sender name Verification is failed", "Fail");}
+                } else{   ActualLable("Email Not received and Verification is failed", "Fail");}
             }
         }
     }
@@ -452,13 +454,12 @@ public class ProfilePage {
     public static void RequestDeleteFunctionality(WebDriver driver) throws IOException, WriteException {
         StepLable("Verify Request delete address functionality");
         ExpectedLable("Click on Request delete address for the first address");
-        try {
+        if(RequestDeleteElement(driver).size()>0){
             RequestDeleteElement(driver).get(1).click();
-            log.info("Clicked on Request Delete button ");
             driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
             log.info("Clicked on OK button to confirm ");
             ActualLable("Address delete request successfully", "Pass");
-        } catch (Exception e) {
+        } else {
             ActualLable("Failed to send address delete request", "Fail");
         }
     }
@@ -561,10 +562,8 @@ public class ProfilePage {
         ExpectedLable("Verify Save button is enabled with only Name field data");
         driver.findElement(by.id("name")).sendKeys("test");
         if (statusOfSaveButton(driver) == true) {
-            log.info("Verification is faiiiled for save button functionality");
             ActualLable("Failed to Verify and save button is enabled", "Fail");
         } else {
-            log.info("Verification is successful for save button functionality");
             driver.findElement(by.id("name")).clear();
             ActualLable("Successfully Verified and save button is not enabled with only Name data", "Pass");
         }
@@ -584,8 +583,9 @@ public class ProfilePage {
             log.info("Verification is faiiiled for save button functionality");
             ActualLable("Failed to Verify and save button is not enabled", "Fail");
         } else {
-            log.info("Verification is successful for save button functionality");
-            driver.findElement(by.id("city")).clear();
+            driver.findElement(by.id("city")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+            driver.findElement(by.id("city")).sendKeys(Keys.BACK_SPACE);
+            driver.findElement(by.id("city")).sendKeys(Keys.TAB);
             ActualLable("Successfully Verified and save button is not enabled with only City Name data", "Pass");
         }
         ExpectedLable("Verify Save button is enabled with only Country field data");
@@ -597,7 +597,6 @@ public class ProfilePage {
             ActualLable("Failed to Verify and save button is not enabled", "Fail");
         } else {
             log.info("Verification is successful for save button functionality");
-            driver.findElement(by.xpath("//span[@class='select2-selection select2-selection--single']")).clear();
             ActualLable("Successfully Verified and save button is not enabled with only Country Name data", "Pass");
         }
 
@@ -654,17 +653,17 @@ public class ProfilePage {
                 driver.findElement(By.xpath("//td[@class='frst']/h1/a")).click();
                 String Subject = driver.findElement(By.xpath("//td[@class='sub']")).getText();
                 try {
-                    ExpectedLable("Verify Email sender Name");
                     Assert.assertEquals(Subject, "Address Create Request");
+                    /*ExpectedLable("Verify Email sender Name");
                     String MailSender = driver.findElement(By.xpath("//span[@class='rwRRO']")).getText();
                     String[] splited = MailSender.split("\\s+");
                     String split_one = splited[0];
                     obje.repository(driver);
                     String email = obje.obj.getProperty("email");
                     Assert.assertEquals(split_one, email);
-                    ActualLable("Successfully verified Email sender", "Pass");
-                    driver.findElement(By.id("lo")).click();
-                } catch (Exception e) { driver.findElement(By.id("lo")).click();ActualLable("Email sender name Verification is failed", "Fail");     }
+                    ActualLable("Successfully verified Email sender", "Pass");*/
+                    //driver.findElement(By.id("lo")).click();
+                } catch (Exception e) { ActualLable("Email sender name Verification is failed", "Fail");     }
             } else {
                 driver.findElement(ReLoadEmails).click();
                 Thread.sleep(2000);
@@ -682,9 +681,9 @@ public class ProfilePage {
                         String email = obje.obj.getProperty("email");
                         Assert.assertEquals(split_one, email);
                         ActualLable("Successfully verified Email sender", "Pass");
-                        driver.findElement(By.id("lo")).click();
-                    } catch (Exception e) { driver.findElement(By.id("lo")).click();  ActualLable("Email sender name Verification is failed", "Fail");    }
-                }  else{driver.findElement(By.id("lo")).click();ActualLable("Email Not received and Verification is failed", "Fail");  }
+                        //driver.findElement(By.id("lo")).click();
+                    } catch (Exception e) {   ActualLable("Email sender name Verification is failed", "Fail");    }
+                }  else{ActualLable("Email Not received and Verification is failed", "Fail");  }
             }
         }
     }

@@ -56,8 +56,6 @@ public class MyAccountModuleTC extends Browser {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(34);
-            log.info("WS_TC_30: AssertVerifyForDefaultAddress the GUI of  'User Profile' page a) AssertVerifyForDefaultAddress the title  b) AssertVerifyForDefaultAddress the display of controls");
-            log.debug("Expected Result");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             HomePage.ClickOnProfile(driver);
@@ -243,8 +241,6 @@ public class MyAccountModuleTC extends Browser {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(44);
-            log.info("WS_TC_43: Verify the GUI of Request new address page");
-            StepLable("WS_TC_44: Validate the Create New Billing Address functionality");
             Thread.sleep(1000);
             LoginPage.Loginfunctionality(driver);
             log.info("Login Functionality is completed");
@@ -486,11 +482,9 @@ public class MyAccountModuleTC extends Browser {
             Double ExpectedInstallationCost = CheckOutPage.VerifyStatusForInstallationServices(driver);
             Double ActualInstallationCost = OrdersPage.SearchCreatedOrderInOrdersPage(driver);
             ExpectedLable("Now Verify 'Installation Charges' are same on both the pages or not ..?");
-            if (ExpectedInstallationCost == ActualInstallationCost) {
-                ActualLable("Verification is successful, 'Installation Charges' are same on both the pages  ", "Pass");
-            } else {
-                ActualLable("Verification Failed, 'Installation Charges' are different in both the pages  ", "Fail");
-            }
+            if (ExpectedInstallationCost.equals(ActualInstallationCost)) {
+                ActualLable("Verification is successful, Expected Value :"+ExpectedInstallationCost+" Actual Value :"+ActualInstallationCost, "Pass");
+            } else {  ActualLable("Verification Failed,  Expected Value :"+ExpectedInstallationCost+" Actual Value :"+ActualInstallationCost, "Fail"); }
         }  catch (AssertionError e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");
         } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }

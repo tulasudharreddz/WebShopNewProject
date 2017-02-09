@@ -98,7 +98,7 @@ public class ProductCartPage {
                     else{ ActualLable("Verification Failed and Over view section is not active default", "Fail"); }
                 }
             }
-            else{ ActualLable("Verification failed for ' "+AssertName.get(i)+" '","Fail"); }
+            else{ ActualLable("Assert is not verified for ' "+AssertName.get(i)+" '","Pass"); }
         }
     }
     public static void  AddToCartFunctionalityPCart(WebDriver driver) throws InterruptedException, IOException, WriteException {

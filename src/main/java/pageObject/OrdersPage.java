@@ -210,7 +210,7 @@ public class OrdersPage {
         AssertXpath.add(FieldQuantityElement);
         AssertXpath.add(UnitPriceElement);
         AssertXpath.add(ExtendedPriceElement);
-        AssertXpath.add(SerialElement);
+        //AssertXpath.add(SerialElement);
         AssertXpath.add(FielldStatusElement);
         AssertXpath.add(RequestReturnElement);
         ArrayList<String> Assert1Xpath=new ArrayList<String>();
@@ -220,19 +220,17 @@ public class OrdersPage {
         Assert1Xpath.add("Quantity");
         Assert1Xpath.add("UnitPrice");
         Assert1Xpath.add("Extended Price");
-        Assert1Xpath.add("Serial");
+        //Assert1Xpath.add("Serial");
         Assert1Xpath.add("Fielld Status");
         Assert1Xpath.add("Request Return button");
 
-        for(int i=0;i<=8;i++) {
+        for(int i=0;i<=7;i++) {
             ExpectedLable("Check that '" +Assert1Xpath.get(i)+ "' is displaying on orders or not ?");
             Thread.sleep(1000);
             if (driver.findElements(AssertXpath.get(i)).size() > 0) {
                 ActualLable("Verification Successful, '" +Assert1Xpath.get(i)+ "' is displaying on orders", "Pass");
             }
-            else{
-                ActualLable("Verification Failed, '" +Assert1Xpath.get(i)+ "' is not displaying", "Fail");
-            }
+            else{    ActualLable("Verification Failed, '" +Assert1Xpath.get(i)+ "' is not displaying", "Fail");      }
         }
     }
     public static Date PrevoiusDateFromToday(int noOfDays){
@@ -571,7 +569,8 @@ public class OrdersPage {
     }
     public static Double SearchCreatedOrderInOrdersPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
         Double ActualInstallationCharges = null;
-        String ReferenceNumber =CheckOutPage.ClickonProceedtoCheckout(driver);
+        //String ReferenceNumber =CheckOutPage.ClickonProceedtoCheckout(driver);
+        String ReferenceNumber =CheckOutPage.CompleteCheckOut(driver);
         ReviewOrderPage.COnfirmAndPlaceOrder(driver);
         OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
         HomePage.ClickonMyAccount(driver);
@@ -622,7 +621,7 @@ public class OrdersPage {
         StepLable("Verify content on Request Return page ");
         ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
         AssertName.add("Reason for Return *");
-        AssertName.add("Quantity to be Returned *");
+        AssertName.add("Quantity to be returned *");
         AssertName.add("Please provide details about the reason for return *");
         AssertName.add("Order Number");//adding object in arraylist
         AssertName.add("Product Name");
@@ -679,7 +678,7 @@ public class OrdersPage {
             ActualLable("Verification is successful , 'Close button' is available on 'Request Return' page ", "Pass");
             ExpectedLable("Click on 'Close button' on 'Request return' Page, and check that 'Close button' is working or not ?");
             driver.findElement(CloseRequestReturnButtonElement).click();
-            if(driver.findElements(CloseRequestReturnButtonElement).size()>0){
+            if(driver.findElements(ProductDetails).size()>0){
                 ActualLable("Verification Failed , 'Close button' is not Working properly on 'Request Return' page ", "Fail");}
             else{ ActualLable("Verification is successful , 'Close button' is Working Properly on 'Request Return' page ", "Pass");}
         }else{  ActualLable("Verification Failed , 'Close button' is not available on 'Request Return' page ", "Fail");}
@@ -687,7 +686,7 @@ public class OrdersPage {
     public static void VerifySubmitButtonFunctionalityinRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException{
         ExpectedLable("Verify that 'Reason for Return' dropdown displaying or not ?, if yes select option from drop down.");
         if(driver.findElements(ReasonRequestReturnButtonDropDownElement).size()>0){
-            driver.findElement(ReasonRequestReturnButtonDropDownElement).click();
+            driver.findElements(ReasonRequestReturnButtonDropDownElement).get(2).click();
             Thread.sleep(1000);
             driver.findElement(ReasonForReturnButtonElement).click();
             ActualLable("Verification is successful , Reason selected from drop down ", "Pass");

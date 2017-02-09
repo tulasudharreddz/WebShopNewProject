@@ -43,7 +43,6 @@ public class ProductCartTC extends Browser {
             obje.repository(driver);
             DataDriven.ReportStartup(67);
             LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
             String NameonSearchPage=ProductSearchPage.SelectProductOnSearchResultPage(driver);
             ExpectedLable("Expected Assert Name: "+NameonSearchPage);
             String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);

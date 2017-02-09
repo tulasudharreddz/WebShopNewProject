@@ -26,8 +26,8 @@ public class ShoppingCart {
     static Logger log = Logger.getLogger("Testing Cases");
 
     //Page Elements
-    static private By OpenItmDetailsPannel = By.xpath("//is-tabsetpanel[@header='Item Details']/div/div[@class='panel-collapse collapse in']");
-    static private By OpenCartSummeryPannel = By.xpath("//is-tabsetpanel[@header='Cart Summary']/div/div[@class='panel-collapse collapse in']");
+    static private By OpenItmDetailsPannel = By.xpath("//a[contains(text(),'Item Details')]/parent::div/following-sibling::div[@class='panel-collapse collapse in']");
+    static private By OpenCartSummeryPannel = By.xpath("//a[contains(text(),'Cart Summary')]/parent::div/following-sibling::div[@class='panel-collapse collapse in']");
     static private By ItemDetails = By.xpath("//a[contains(text(),'Item Details')]");
     static private By DeleteItem = By.xpath("//a[@class='anchor-delete']");
     static private By Quantity = By.xpath("//div[@class='text-center']/input");
@@ -229,7 +229,7 @@ public class ShoppingCart {
 
         return ActualCartSubtotal;
     }
-    public static void VerifyForCartSummeryPannelOpenedOrNot(WebDriver driver) throws IOException, WriteException {
+    public static void VerifyForCartSummeryPannelOpenedOrNot(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("Open Cart Summery Panel in Shopping cart page");
         if(driver.findElements(OpenCartSummeryPannel).size()>0) {
             ActualLable("Cart Summery Panel already Opened" ,"Pass");
@@ -239,7 +239,6 @@ public class ShoppingCart {
         }
     }
     public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException {
-
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("Cart Subtotal");
         al.add("Shipping Charges");
@@ -249,11 +248,11 @@ public class ShoppingCart {
             ExpectedLable("Verify assert for label '"+al.get(j)+"' in shopping cart");
             for (int i = 0; i <= driver.findElements(CartSummeryLabel).size()- 1; i++) {
                 String LabelName = driver.findElements(CartSummeryLabel).get(i).getText();
-                System.out.println(LabelName);
                 if(LabelName.contentEquals(al.get(j))){
                     ActualLable("assert verified successfully for label " +al.get(j) ,"Pass");
                     break;
                 }
+
             }
         }
     }
@@ -306,7 +305,6 @@ public class ShoppingCart {
             String ProceedtoCheckoutText = driver.findElement(ProceedtocheckoutXpath).getText();
             Assert.assertEquals(ProceedtoCheckoutText, "Checkout");
             ActualLable("'Checkout' button verified successfully", "Pass");
-            log.info("Assert is verified for 'Proceed to checkout' button");
             Thread.sleep(1000);
             ExpectedLable("Click on 'Proceed to checkout' button ");
             driver.findElement(ProceedtocheckoutXpath).click();
@@ -431,7 +429,7 @@ public class ShoppingCart {
                     ActualLable("Shipping charges are not equals to 6.50", "Fail");
                 }
                 break;
-            }
+            }else{ActualLable("Shipping charges NotFound", "Fail");}
         }
 
     }
@@ -468,11 +466,9 @@ public class ShoppingCart {
                 if(ActualSalesVATCharges.equals(ExpectedSalesVatCharges)) {
                     ActualLable("Sales VAT Charges verified successfully", "Pass");
                 }
-                else{
-                    ActualLable("Sales VAT charges are not same as expected", "Fail");
-                }
+                else{  ActualLable("Sales VAT charges are not same as expected", "Fail");   }
                 break;
-            }
+            }{  ActualLable("Sales VAT charges are not Found", "Fail"); }
         }
     }
     public static double ExpectedSalesTax(WebDriver driver, int NoOfEle) throws IOException, WriteException, InterruptedException{

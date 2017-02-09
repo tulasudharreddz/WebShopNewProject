@@ -115,6 +115,7 @@ public class ShoppingCartTC extends Browser {
             ExpectedLable("Verify cart count functionality by adding product to cart");
             if(noOfItemsafterAddtoCart>noOfItems){
                 ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                HomePage.ClickonShoppingCart(driver);
                 ShoppingCart.VerifyForCartSummeryPannelOpenedOrNot(driver);
                 ShoppingCart.ContentVerifyForCartSummery(driver);
             }

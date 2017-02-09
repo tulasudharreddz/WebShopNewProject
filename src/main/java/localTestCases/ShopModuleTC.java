@@ -83,21 +83,13 @@ public class ShopModuleTC extends Browser {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(58);
-            log.info("WS_TC_58: 1. Verify the content in search results page, 2. Validate the Pagination Functionality in search results page");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
             HomePage.ClickonShopmenuonHomePage(driver);
-            log.info("Cliked on Shop menu");
             HomePage.ClickonCategoryinShopmenu(driver);
-            log.info("Clicked on sub menu");
             ProductSearchPage.ContentinSearchReasult(driver);
-            log.info("Content verified on search result page");
             ProductSearchPage.PaginationFunctionality(driver);
-            log.info("pagination verified on search result page");
             ProductSearchPage.NoOfReultsChangeFunctionality(driver);
-            StepLable("WS_TC_58: Successfully verified 1. content in search results page, 2. Pagination Functionality in search results page");
-            
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();
             ActualLable(error, "Fail");
@@ -143,11 +135,9 @@ public class ShopModuleTC extends Browser {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(60);
-            log.info("WS_TC_60: Validate the display of 'Inventory Color' against the products in search results page");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
-            log.info("Login in to the webshop application");
-            HomePage.MovingToCategory(driver);
+            //HomePage.MovingToCategory(driver);
             Thread.sleep(1000);
             ProductSearchPage.StatusVerifyForProducts(driver);
             

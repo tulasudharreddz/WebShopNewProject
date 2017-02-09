@@ -141,9 +141,9 @@ public class FavoritesTC extends Browser {
             ExpectedLable("Expected Assert Name: "+NameOnSearchPage);
             String NameonProductCartPage= ProductCartPage.AssertVerifyForProduct(driver);
             ActualLable("Actual assert name: "+ NameonProductCartPage,"Pass");
-            ExpectedLable("Verify Assert for Learn more");
+            ExpectedLable("Verify Assert for Name of the product");
             Assert.assertEquals(NameOnSearchPage, NameonProductCartPage);
-            ActualLable("Successfully verified for Learn more button functionality ","Pass");
+            ActualLable("Assert Successfully verified for Name of the product ","Pass");
 
         } catch (AssertionError e) {
             String error = "Exception " + e.getClass().getSimpleName();

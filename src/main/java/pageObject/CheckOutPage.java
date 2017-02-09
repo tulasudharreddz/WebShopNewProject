@@ -44,7 +44,6 @@ public class CheckOutPage {
             String CheckOutPageTitle = driver.findElement(CheckOutPageTitleXpath).getText();
             Assert.assertEquals(CheckOutPageTitle, "Checkout");
             ActualLable("'checkout' Page title verified successfully", "Pass");
-            log.info("Assert is verified for 'Proceed to checkout' button");
         }
         else{
             ActualLable("'Proceed to checkout' button is not available", "Fail");
@@ -78,43 +77,65 @@ public class CheckOutPage {
         }
     }
     public static void SelectAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
-        VerifyCheckoutPageAssert(driver);
+        //VerifyCheckoutPageAssert(driver);
         //select Billing Address
-        ExpectedLable("Select Billing address from Drop down");
-        driver.findElement(BillingAddressXpath).click();
-        driver.findElement(BillingAddressDropdown).click();
-        Thread.sleep(2000);
-        driver.findElement(BillingAddressDropdown).click();
-        driver.findElement(SelectAddress).click();
-        driver.findElements(By.xpath("//div[@class='editable-buttons']/button[@type='submit']")).get(0).click();
-        ActualLable("Billing address selected successfully ", "Pass");
-        Thread.sleep(2000);
-
-        //select Shipping Address
-        ExpectedLable("Select Shipping address from Drop down");
-        driver.findElement(ShippingAddressXpath).click();
-        driver.findElement(ShippingAddressDropdown).click();
-        Thread.sleep(1000);
-        driver.findElement(ShippingAddressDropdown).click();
-        driver.findElement(By.xpath("//li[@data-index='1']")).click();
-        driver.findElement(ConfirmAddress).click();
-        ActualLable("Shipping address selected successfully ", "Pass");
-        Thread.sleep(3000);
-
-        //select Install Address
-        ExpectedLable("Select install address from Drop down");
-        driver.findElement(InstallAddressXpath).click();
-        driver.findElement(InstallAddressDropdown).click();
-        Thread.sleep(1000);
-        driver.findElement(InstallAddressDropdown).click();
-        driver.findElement(SelectAddress).click();
-        driver.findElement(ConfirmAddress).click();
-        ActualLable("install address selected successfully ", "Pass");
+        StepLable("Complete Check out page action");
+        ArrayList<String> AddressNames=new ArrayList<String>();
+        AddressNames.add("Billing Addresses");
+        AddressNames.add("Shipping Addresses");
+        AddressNames.add("Install Addresses");
+        for(int i =0; i<3;i++) {
+            ExpectedLable("Select "+AddressNames.get(i)+" from drop down ");
+            log.info(driver.findElements(SelectAddressXpath).get(i).getText());
+            if(driver.findElements(SelectAddressXpath).get(i).getText().contentEquals("Select an address")) {
+                driver.findElements(SelectAddressXpath).get(i).click();
+                driver.findElement(InstallAddressDropdown).click();
+                driver.findElement(SelectAddress).click();
+                driver.findElement(ConfirmAddress).click();
+                ActualLable( AddressNames.get(i)+"address selected successfully ", "Pass");
+            }
+            else{
+                driver.findElements(SelectAddressXpath).get(i).click();
+                Thread.sleep(3000);
+                driver.findElement(InstallAddressDropdown).click();
+                driver.findElement(SelectAddress).click();
+                driver.findElement(ConfirmAddress).click();
+                ActualLable(AddressNames.get(i)+" selected successfully ", "Pass");
+            }
+        }
 
     }
     public static String ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Complete Check out page action");
         SelectingAddress(driver);
+        ExpectedLable("Provide Reference Number in the blank");
+        Random rand = new Random();
+        int  ReferenceNumbe = rand.nextInt(9999) + 1000;
+        String ReferenceNumberString=Integer.toString(ReferenceNumbe);
+        String ReferenceNumber = "IRNQATEAMTESTORDER"+ReferenceNumberString;
+        driver.findElement(refNumXpath).sendKeys(ReferenceNumber);
+        ActualLable("Successfully provided Refference number in the blank ", "Pass");
+        String ProceedtoCheckoutText = driver.findElement(ReviewOrderXpath).getText();
+
+        ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
+        Assert.assertEquals(ProceedtoCheckoutText, "Review Order");
+        if (driver.findElement(ReviewOrderXpath).isEnabled()) {
+            ActualLable("'Proceed to checkout' button verified successfully", "Pass");
+            log.info("Assert is verified for 'Proceed to checkout' button");
+            Thread.sleep(1000);
+            ExpectedLable("Click on 'Proceed to checkout' button ");
+            driver.findElement(ReviewOrderXpath).click();
+            ActualLable("'Proceed to checkout' button clicked successfully", "Pass");
+        }
+        else{
+            ActualLable("'Proceed to checkout' button is not available", "Fail");
+        }
+        return ReferenceNumber;
+    }
+
+    public static String CompleteCheckOut(WebDriver driver) throws IOException, WriteException, InterruptedException {
+        StepLable("Complete Check out page action");
+        SelectAddress(driver);
         ExpectedLable("Provide Reference Number in the blank");
         Random rand = new Random();
         int  ReferenceNumbe = rand.nextInt(9999) + 1000;
@@ -146,7 +167,8 @@ public class CheckOutPage {
         boolean status;
         if(driver.findElements(InstallationServiceCostText).size()>0){
             status=true;
-            driver.findElement(InstallationServiceCostText).click();
+            Thread.sleep(1000);
+            //driver.findElement(InstallationServiceCostText).click();
             ActualLable("'Installation Service Cost ' Message is Displaying", "Pass");
         }else{
             ActualLable("'Installation Service Cost ' Message is not Displaying", "Pass");

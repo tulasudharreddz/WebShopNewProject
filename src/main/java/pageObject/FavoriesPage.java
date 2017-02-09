@@ -136,8 +136,7 @@ public class FavoriesPage {
             while (driver.findElements(DeleteItem).size()>0);
             ActualLable("All products are deleted, items are not available in ' Favorites ' menu" ,"Pass");
         }
-        else{
-            ActualLable("Products are not available in ' Favorites ' menu " ,"Pass");
+        else{  ActualLable("Products are not available in ' Favorites ' menu " ,"Pass");
             noOfItem=0;
         }
         return noOfItem;

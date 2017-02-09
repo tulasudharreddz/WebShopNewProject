@@ -66,22 +66,15 @@ public class HomePageTC extends Browser{
         }
     }
 
-    /*
-
-    WS_TC_31: AssertVerifyForDefaultAddress Each menu under Shop Menu
-
-
-    */
+    /* WS_TC_31: AssertVerifyForDefaultAddress Each menu under Shop Menu */
 
     @Test
     public void WS_TC_31() throws InterruptedException, IOException, WriteException, BiffException {
         try {
             DataDriven.ReportStartup(31);
-            log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
             Thread.sleep(2000);
             LoginPage.Loginfunctionality(driver);
             Thread.sleep(2000);
-            log.info("Login in to the webshop application");
             HomePage.AssertVerifyForHomePage(driver);
             HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
 
