@@ -31,8 +31,9 @@ public class ReviewOrderPage {
     static private By MfrPartText = By.xpath("//span[@class='field-name'][contains(text(),'Mfr Part#')]/parent::div");
     static private By AvailabilityBlock = By.xpath("//is-availability[@class='hidden-xs']/div/span[@class='product-availability-text text-right']");
     static private By UnitPrice = By.xpath("//div[@class='col-md-2 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-7 vertical-margin-auto']/p[@class='product-price']");
-    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Shipping Charges')]/parent::div/following-sibling::div");
-    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Sales VAT')]/parent::div/following-sibling::div");
+    //Change for shipping Charges
+    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Logistikgebühr')]/parent::div/following-sibling::div");
+    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Mehrwertsteuer')]/parent::div/following-sibling::div");
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ActualInstallationChargesXpath = By.xpath("//label[contains(text(),'Installation Services')]/parent::div/following-sibling::div");
     static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");

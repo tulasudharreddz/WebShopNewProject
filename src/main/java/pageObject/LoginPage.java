@@ -1,5 +1,6 @@
 package pageObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,10 +8,9 @@ import java.util.List;
 import GenericLib.DataDriven;
 import GenericLib.ObjectRepository;
 import jxl.write.WritableSheet;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,6 +19,7 @@ import jxl.write.WriteException;
 import static GenericLib.DataDriven.ActualLable;
 import static GenericLib.DataDriven.ExpectedLable;
 import static GenericLib.DataDriven.StepLable;
+import static GenericLib.ObjectRepository.TimeConstatnt;
 
 public class LoginPage {
 
@@ -46,7 +47,6 @@ public class LoginPage {
 		Assert.assertEquals(Actualtext, "Dimension Data Direct");
 		log.info("title of the page is " + Actualtext);
 	}
-
 
 	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException {
 		String LoginTitle = driver.findElement(By.xpath("//span[@class='login-header']")).getText();
@@ -449,28 +449,31 @@ public class LoginPage {
 	}
 
 	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException, WriteException {
-		WebDriverWait waitCulture = new WebDriverWait(driver, 40);
-		waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
+		//WebDriverWait waitCulture = new WebDriverWait(driver, 40);
+		//waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 		Thread.sleep(2000);
-		StepLable("Verify User Login");
-		LoginPage.Language(driver).click();
-		ExpectedLable("Set Language as:"+ Selectlanguage(driver).getText());
-		Thread.sleep(2000);
-		LoginPage.Selectlanguage(driver).click();
-		ActualLable("Successfully Placed/Selected Language ","Pass");
-		Thread.sleep(1000);
-		obje.repository(driver);
-		ExpectedLable("Set value as: "+obje.obj.getProperty("email")+"for User name");
-		LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
-		ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("email"),"Pass");
+		if(driver.findElements(By.xpath("//span[@class='select2-selection select2-selection--single']")).size()>0) {
+			Thread.sleep(1000);
+			StepLable("Verify User Login");
+			LoginPage.Language(driver).click();
+			ExpectedLable("Set Language as:" + Selectlanguage(driver).getText());
+			Thread.sleep(2000);
+			LoginPage.Selectlanguage(driver).click();
+			ActualLable("Successfully Placed/Selected Language ", "Pass");
+			Thread.sleep(1000);
+			obje.repository(driver);
+			ExpectedLable("Set value as: " + obje.obj.getProperty("email") + "for User name");
+			LoginPage.UserName(driver).sendKeys(obje.obj.getProperty("email"));
+			ActualLable("Successfully Placed/Selected value as:" + obje.obj.getProperty("email"), "Pass");
 
-		ExpectedLable("Set value as: "+obje.obj.getProperty("password")+"for User name");
-		LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
-		ActualLable("Successfully Placed/Selected value as:"+ obje.obj.getProperty("password"),"Pass");
-		Thread.sleep(1000);
-		ExpectedLable("Verify User Login function");
-		LoginPage.ClickLogin(driver).click();
-		ActualLable("Successfully Loged into the application","Pass");
+			ExpectedLable("Set value as: " + obje.obj.getProperty("password") + "for User name");
+			LoginPage.Password(driver).sendKeys(obje.obj.getProperty("password"));
+			ActualLable("Successfully Placed/Selected value as:" + obje.obj.getProperty("password"), "Pass");
+			Thread.sleep(1000);
+			ExpectedLable("Verify User Login function");
+			LoginPage.ClickLogin(driver).click();
+			ActualLable("Successfully Loged into the application", "Pass");
+		}
 	}
 
 }

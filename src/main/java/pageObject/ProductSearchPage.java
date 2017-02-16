@@ -542,6 +542,9 @@ public class ProductSearchPage {
 
     public static void AddFlagOneProduct(WebDriver driver,int k) throws InterruptedException, IOException, WriteException {
         ArrayList<String> FlagOne =new ArrayList<String>();//creating arraylist
+        FlagOne.add("CISCO3925E/K9");
+        FlagOne.add("CISCO2951-HSEC+/K9");
+        FlagOne.add("CISCO3945E-SEC/K9");
         FlagOne.add("WS-C2960S-48TD-L");
         FlagOne.add("AIR-SAP2602I-SK9-5");
         FlagOne.add("ASA5500-CF-256MB=");
@@ -565,6 +568,9 @@ public class ProductSearchPage {
     }
     public static void AddFlagTwoProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException {
         ArrayList<String> FlagTwo =new ArrayList<String>();//creating arraylist
+        FlagTwo.add("2200-30900-025");
+        FlagTwo.add("5593-823-109");
+        FlagTwo.add("2399-829-109");
         FlagTwo.add("2215-07155-001");
         FlagTwo.add("2230-40300-122");
         FlagTwo.add("2200-07800-120");
@@ -591,6 +597,8 @@ public class ProductSearchPage {
     }
     public static void AddFlagThreeProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException {
         ArrayList<String> FlagTwo =new ArrayList<String>();//creating arraylist
+        FlagTwo.add("92714-01");
+        FlagTwo.add("2200-07840-101");
         FlagTwo.add("92714-01");
         FlagTwo.add("2200-07840-101");//adding object in arraylist
         for(int i=0;i<=j-1;i++) {

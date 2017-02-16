@@ -13,18 +13,27 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 
+import static GenericLib.ObjectRepository.TimeConstatnt;
+
 public class ScreenShots {
 	private static int count=0;
 	//static protected WebDriver driver;
-Browser brow =  new Browser();
+	Browser brow =  new Browser();
 	static private WebDriver driver;
+	static ObjectRepository obr = new ObjectRepository();
+	private static int SCcount=1;
 
-	public static String screenshots() throws IOException {
+	public static String screenshots(WebDriver driver) throws IOException, WriteException {
 
+		obr.repository(driver);
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String name = ".\\screenshots\\screen-"+count+".jpeg";
+		String Folder = DataDriven.FolderName();
+		String folderName = ObjectRepository.DateSt();
+
+		//String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
+		String name = obr.obj.getProperty("CreateWorkBookPath") +"\\"+ folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
-		count++;
+		SCcount++;
 		return name;
 
 	}

@@ -49,8 +49,8 @@ public class OrdersPage {
     static private By FieldManufacturerElement = By.xpath("//span[@class='field-name'][contains(text(),'Manufacturer:')]");
     static private By FieldQuantityElement = By.xpath("//div[contains(text(),'Quantity')]");
     static private By UnitPriceElement = By.xpath("//div[contains(text(),'Unit Price')]");
-    static private By UnitPrice = By.xpath("//div[@class='col-md-1 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-7 small-font vertical-margin-auto']/p[@class='product-price']");
-    static private By QuantityValue = By.xpath("//div[@class='col-md-1 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-push-0 col-xs-5 vertical-margin-auto text-center product-row-qty']/div");
+    static private By UnitPrice = By.xpath("//div[@class='col-md-1 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-7 small vertical-margin-auto']/p[@class='product-price']");
+    static private By QuantityValue = By.xpath("//div[@class='col-md-1 col-md-push-0 col-sm-push-3 col-sm-9 col-xs-push-0 col-xs-5 small vertical-margin-auto text-center product-row-qty']/div");
     static private By ExtendedPriceElement = By.xpath("//div[contains(text(),'Extended Price')]");
     static private By SerialElement = By.xpath("//div[contains(text(),'Serial #')]");
     static private By FielldStatusElement = By.xpath("//div[contains(text(),'Status')]");
@@ -86,8 +86,9 @@ public class OrdersPage {
     static private By  CommentForReturnButtonElement= By.id("comments");
     static private By  SubmitOnReturnButtonElement= By.xpath("(//button[contains(text(),'Submit')])[1]");
     static private By  PoNumberXpath= By.xpath("//div[1]/div[@class='form-group']");
-    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Shipping Charges')]/parent::div/following-sibling::div");
-    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Sales VAT')]/parent::div/following-sibling::div");
+    //Changing for shipping charges
+    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Logistikgebühr')]/parent::div/following-sibling::div");
+    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Mehrwertsteuer')]/parent::div/following-sibling::div");
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ActualInstallationChargesXpath = By.xpath("//label[contains(text(),'Installation Services')]/parent::div/following-sibling::div");
     static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");
@@ -686,7 +687,7 @@ public class OrdersPage {
     public static void VerifySubmitButtonFunctionalityinRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException{
         ExpectedLable("Verify that 'Reason for Return' dropdown displaying or not ?, if yes select option from drop down.");
         if(driver.findElements(ReasonRequestReturnButtonDropDownElement).size()>0){
-            driver.findElements(ReasonRequestReturnButtonDropDownElement).get(2).click();
+            driver.findElement(ReasonRequestReturnButtonDropDownElement).click();
             Thread.sleep(1000);
             driver.findElement(ReasonForReturnButtonElement).click();
             ActualLable("Verification is successful , Reason selected from drop down ", "Pass");

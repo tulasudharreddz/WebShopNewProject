@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Home Page Test cases Executions with Local browsers">
 <!--<suite name="Suite" parallel="tests" thread-count="2" >-->
-    <!--<test name="FirstTest">
-        <parameter name="browserName" value="iPhone" />
-        <parameter name="platform" value="MAC" />
-        <parameter name="device" value="iPhone 6S Plus" />
+    <test name="ChromeTest">
+        <parameter name="browser" value="Chrome"/>
         <classes>
             <class name="localTestCases.DemoLocal">
                 <methods>
-                    <include name="MobileAutomation"/>
+                    <include name="Demo_TC_01"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="SecondTest">
+    <!--<test name="FirstTest">
+        <parameter name="browserName" value="iPhone" />
+        <parameter name="platform" value="MAC" />
+        <parameter name="device" value="iPhone 6S Plus" />
+        <classes>
+            <class name="localTestCases.BrowserStackTC">
+                <methods>
+                    <include name="DemoMobile_TC_01"/>
+                </methods>
+            </class>
+        </classes>
+    </test>-->
+
+    <!--<test name="SecondTest">
         <parameter name="browserName" value="android" />
         <parameter name="platform" value="ANDROID" />
         <parameter name="device" value="Samsung Galaxy S5" />
@@ -26,16 +37,7 @@
             </class>
         </classes>
     </test>-->
-    <test name="ChromeTest">
-        <parameter name="browser" value="Chrome"/>
-        <classes>
-            <class name="localTestCases.DemoLocal">
-                <methods>
-                    <include name="Demo_TC_01"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+
 
 </suite>
 

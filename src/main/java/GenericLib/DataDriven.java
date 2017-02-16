@@ -167,6 +167,18 @@ public class DataDriven {
 		cellFormat.setAlignment(Alignment.CENTRE);
 		return cellFormat;
 	}
+
+	public static WritableCellFormat CellFormat4() throws WriteException {
+		//int counted = 14;
+		WritableCellFormat cellFormat = null;
+		WritableFont cellFont = null;
+		cellFont = new WritableFont(WritableFont.ARIAL, 9,WritableFont.BOLD);
+		cellFormat = new WritableCellFormat(cellFont);
+		cellFormat.setWrap(true);
+		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+		return cellFormat;
+	}
+
 	static int counting=1;
 	public static void StepLable(String resu) throws IOException, WriteException {
 		//int i = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
@@ -174,11 +186,11 @@ public class DataDriven {
 		wsheet = wbook.getSheet("ResultSheet");
 		WritableCellFormat cellFormat = null;
 		WritableFont cellFont = null;
-		cellFont = new WritableFont(WritableFont.ARIAL, 9);
+		cellFont = new WritableFont(WritableFont.ARIAL, 9,WritableFont.BOLD);
 		cellFormat = new WritableCellFormat(cellFont);
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.MEDIUM);
-		cellFormat.setBackground(Colour.PERIWINKLE);
+		cellFormat.setBackground(Colour.GREY_40_PERCENT);
 		wsheet.mergeCells(0, i, 4, i);
 		wsheet.addCell(new Label(0 , i , resu, cellFormat));
 		counting=1;
@@ -213,7 +225,9 @@ public static int numberForColumn;
 			//int num = DataDriven2();
 			int num = numberForColumn;
 			String folderName = ObjectRepository.DateSt();
-			Browser.screenshots();
+			if(AlertHandle.BrowserNameForSuite=="iPhone") {
+				MobileBrowserStack.screenshots();
+			}else{ Browser.screenshots();}
 			//WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
 			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File(obr.obj.getProperty("CreateWorkBookPath")+"//"+folderName+"//"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
 			wsheet.addHyperlink(hlk);
@@ -259,7 +273,7 @@ public static int numberForColumn;
 		cellFormat = new WritableCellFormat(cellFont);
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.MEDIUM);
-		cellFormat.setBackground(Colour.PINK);
+		cellFormat.setBackground(Colour.AQUA);
 		wsheet = wbook.getSheet("ResultSheet");
 		wsheet.mergeCells(0, k, 4, k);
 		wsheet.addCell(new Label(0 , k , text, cellFormat));
@@ -267,10 +281,10 @@ public static int numberForColumn;
 		ReportStartNumber = DataDriven5();
 		WritableHyperlink hlk =new WritableHyperlink(0,ReportStartNumber,ScID,wsheet = wbook.getSheet("ResultSheet"),0,k);
 		wsheet = wbook.getSheet("TestCaseDiscription");
-		wsheet.addCell(new Label(4 , 3, "QA2 / "+Browser.BrowserNameForSuite,CellFormat1()));
+		wsheet.addCell(new Label(4 , 3, "QA2 / "+AlertHandle.BrowserNameForSuite,CellFormat1()));
 		wsheet.addHyperlink(hlk);
 		wsheet.addCell(new Label(0 , ReportStartNumber, ScID,CellFormat1()));
-		wsheet.addCell(new Label(1 , ReportStartNumber, ScName, CellFormat()));
+		wsheet.addCell(new Label(1 , ReportStartNumber, ScName, CellFormat4()));
 		wsheet.addCell(new Label(2 , ReportStartNumber, ScDis, CellFormat()));
 		counting=1;
 	}

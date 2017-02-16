@@ -2,6 +2,7 @@ package localTestCases;
 
 import GenericLib.Browser;
 import GenericLib.DataDriven;
+import GenericLib.MobileBrowserStack;
 import GenericLib.ObjectRepository;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -14,16 +15,21 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
-import pageObject.HomePage;
+import pageObject.*;
+
+import static GenericLib.DataDriven.ActualLable;
+import static GenericLib.DataDriven.ExpectedLable;
+import static GenericLib.DataDriven.StepLable;
 
 /**
  * Created by t.mirasipally on 10/28/2016.
  */
-public class BrowserStackTC  extends Browser {
+public class BrowserStackTC  extends MobileBrowserStack {
 
     ObjectRepository ob = new ObjectRepository();
     //Logger log=Logger.getLogger("Testing Cases");
@@ -43,18 +49,44 @@ public class BrowserStackTC  extends Browser {
     public void setUp() {
         driver=getDriver();
     }
-
-    @BeforeMethod
-    public void Url() throws IOException, BiffException, WriteException {
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
-        log.info("URL entered in browser");
-        sheet = excel.ReadSheet(sheet);
+    //public static ArrayList<ArrayList> ProductDetailsArrayList;
+    @Test
+    public void DemoMobile_TC_01() throws IOException, WriteException {
+        try {
+            DataDriven.ReportStartup(136);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+            double noOfItems = ShoppingCart.DeleteExistItem(driver);
+            StepLable("Add product to Shopping Cart from Product search page");
+            ArrayList<String> AssertNameFromPSearchPage = ProductSearchPage.SelectProductFromSearchResultPage(driver);
+            ArrayList<String> AssertNameFromPCartPage = ProductCartPage.SelectProductFromPCartPage(driver);
+            //ArrayList<String> AssertNameFromFavoritesPage= FavoriesPage.SelectProductFromFavoritesPage(driver);
+            DemoLocal.ProductDetailsArrayList= new ArrayList<ArrayList>();
+            DemoLocal.ProductDetailsArrayList.add(AssertNameFromPSearchPage);
+            DemoLocal.ProductDetailsArrayList.add(AssertNameFromPCartPage);
+            //ProductDetailsArrayList.add(AssertNameFromFavoritesPage);
+            double noOfItemsAfterAddToCart = HomePage.VerifyCart(driver);
+            ExpectedLable("Verify cart count functionality by adding product to cart");
+            if(noOfItemsAfterAddToCart>noOfItems){
+                ActualLable("successfully verified cart Number functionality and items in cart is increased","Pass");
+                ShoppingCart.VerifyItemCount(driver);
+                StepLable("Verify Product Details on Shopping cart with Details on Product Cart page details");
+                boolean ResultStatus = ShoppingCart.VerifyProductDetailsOnShoppingCart(driver);
+                String ReferenceNumber = ReviewOrderPage.ConfirmAndPlaceOrderDemo(driver);
+                OrderAcknowledgementPage.GetOrderAcknowledgement(driver);
+                boolean Stuas =EmailVerificationDetails.VerifyOrderEmailInOutLook(driver);
+                if(Stuas==true) {
+                    EmailVerificationDetails.VerifyReferenceLink(driver, ReferenceNumber);
+                    OrdersPage.VerifyRequestReturnPage(driver);
+                    OrdersPage.VerifySubmitButtonFunctionalityinRequestReturnPage(driver);
+                    EmailVerificationDetails.VerifyRequestReturnEmailInOutLookDemo(driver);
+                }
+            }else{ActualLable("verification failed for cart Number functionality","Fail");}
+        }
+        catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+        catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
     }
-    @AfterMethod
-    public void EndMethod() throws IOException, BiffException, WriteException {
-        excel.closedoc();
 
-    }
 
     @Test
     public void WS_TC_30() throws IOException, WriteException, InterruptedException, BiffException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, ClassNotFoundException, InstantiationException {

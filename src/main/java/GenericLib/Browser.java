@@ -38,11 +38,11 @@ public class Browser {
 	public WebDriver getDriver() {
 		return driver;
 	}
-	public static String BrowserNameForSuite;
+
 	static ObjectRepository obr = new ObjectRepository();
 
 	private void setDriver(String browser) throws Exception{
-		BrowserNameForSuite = browser;
+		AlertHandle.BrowserNameForSuite = browser;
 		if (browser.equalsIgnoreCase("Firefox")) {
 			System.setProperty("webdriver.gecko.driver","lib/geckodriver.exe");
 			driver = new FirefoxDriver();

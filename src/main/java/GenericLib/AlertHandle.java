@@ -11,7 +11,7 @@ public class AlertHandle {
 
 	Browser brow = new Browser();
     static Logger log = Logger.getLogger("Alert Handle page");
-
+	public static String BrowserNameForSuite;
 	public static void acceptAlert(WebDriver driver){
 
 		Alert alt=driver.switchTo().alert();

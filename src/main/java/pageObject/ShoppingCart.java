@@ -35,8 +35,9 @@ public class ShoppingCart {
     static private By ExtendedPrice = By.xpath("//div[@class='col-md-2 col-md-push-0 col-sm-push-3 col-sm-9 hidden-xs vertical-margin-auto price-column']/p[@class='product-price']");
     static private By CartSummeryPannel = By.xpath("//a[contains(text(),'Cart Summary')]");
     static private By ActualCartSubtotalXpath = By.xpath("//label[contains(text(),'Cart Subtotal')]/parent::div/following-sibling::div");
-    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Shipping Charges')]/parent::div/following-sibling::div");
-    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Sales VAT')]/parent::div/following-sibling::div");
+    //For shipping Chagres
+    static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Logistikgebühr')]/parent::div/following-sibling::div");
+    static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Mehrwertsteuer')]/parent::div/following-sibling::div");
     static private By ActualCartGrandTotalXpath = By.xpath("//label[contains(text(),'Cart Grand Total')]/parent::div/following-sibling::div");
     static private By ProceedtocheckoutXpath = By.xpath("//button[contains(text(),'Checkout')]");
     static private By ContinueShoppingXpath = By.xpath("//button[contains(text(),'Continue Shopping')]");
@@ -241,8 +242,8 @@ public class ShoppingCart {
     public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException {
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("Cart Subtotal");
-        al.add("Shipping Charges");
-        al.add("Sales VAT");
+        al.add("Logistikgebühr");
+        al.add("Mehrwertsteuer");
         al.add("Cart Grand Total");
         for(int j=0;j<=3;j++) {
             ExpectedLable("Verify assert for label '"+al.get(j)+"' in shopping cart");
@@ -578,7 +579,7 @@ public class ShoppingCart {
         }else{ActualLable("Expected and actual value is not matched, Expected Value :"+ExpectedCartSubTotalis+" Actual value : "+ActualCartSubtotal, "Fail");}
 
         ExpectedLable("Get Shipping charges from Shopping cart");
-        double ExpectedShippingCharges = 7.00;
+        double ExpectedShippingCharges = 6.50;
         String ActualShippingChargesString =  driver.findElement(ActualShippingChargesXpath).getText();
         ActualLable("Shipping Charges are "+ActualShippingChargesString  ,"Pass");
         String s1 = ActualShippingChargesString.replaceAll("[€$£₹,]","");
