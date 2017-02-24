@@ -176,6 +176,7 @@ public class DataDriven {
 		cellFormat = new WritableCellFormat(cellFont);
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+        cellFormat.setAlignment(Alignment.CENTRE);
 		return cellFormat;
 	}
 
@@ -262,6 +263,7 @@ public static int numberForColumn;
 	static int ReportStartNumber;
 	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
 		//int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
+       String UserName =  System.getProperty("user.name");
 		int k = DataDriven();
 		ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
@@ -283,6 +285,7 @@ public static int numberForColumn;
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(4 , 3, "QA2 / "+AlertHandle.BrowserNameForSuite,CellFormat1()));
 		wsheet.addHyperlink(hlk);
+        wsheet.addCell(new Label(1 , 3, UserName,CellFormat4()));
 		wsheet.addCell(new Label(0 , ReportStartNumber, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , ReportStartNumber, ScName, CellFormat4()));
 		wsheet.addCell(new Label(2 , ReportStartNumber, ScDis, CellFormat()));
