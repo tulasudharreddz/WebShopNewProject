@@ -531,7 +531,7 @@ public class OrdersPage {
             } else { ActualLable("Verification failed for Document link ", "Fail"); }
         } else { ActualLable("Document number link is not working", "Fail"); }
 
-        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop24/orders");
+        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop/orders");
 
         ExpectedLable("Verify the link is available on 'Product Name' or not ..?");
         String ActualProductname = driver.findElements(NameElement).get(0).getText();
@@ -548,7 +548,7 @@ public class OrdersPage {
             } else {ActualLable("Verification failed for Product name link ", "Fail");}
         } else {ActualLable("Product Name link is not working", "Fail");}
 
-        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop24/orders");
+        driver.navigate().to("https://directqa2.dimensiondata.com/Webshop/orders");
 
         ExpectedLable("Verify the link is available on 'Product Name' or not ..?");
         String ActualStatusName =driver.findElements(StatusLink).get(0).getText();

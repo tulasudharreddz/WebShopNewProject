@@ -32,14 +32,14 @@ public class HomePage {
 
     //Page Elements
     static private By MyAccountMenuonHomePage = By.xpath("//a[contains(text(),'My Account')]");
-    static private By ShoppingCart = By.xpath("//a[@href='/Webshop24/cart']");
+    static private By ShoppingCart = By.xpath("//a[@href='/Webshop/cart']");
     static private By NoOFCartItems = By.xpath("//b[@class='badge']");
-    static private By Favorites = By.xpath("//a[@href='/Webshop24/users/favorites']");
+    static private By Favorites = By.xpath("//a[@href='/Webshop/users/favorites']");
     static private By Category = By.xpath("//ol/li/a[contains(text(),'Categories')]");
     static private By RegisterHereLink = By.xpath("//a[contains(text(),'Register Here')]");
     static private By HomePageAssert = By.xpath("//h2[contains(text(),'Welcome')]");
     static private By ProductSearchField = By.xpath("//div[@class='input-group']/is-typeahead/span/input");
-    static private By ReturnHome = By.xpath("//a[@href='/Webshop24/home']");
+    static private By ReturnHome = By.xpath("//a[@href='/Webshop/home']");
 
     public static void ClickElementByLocator( WebDriver driver,By byElementLocator){
         driver.findElement(byElementLocator).click();
