@@ -85,7 +85,7 @@ public class OrdersPage {
     static private By  ReasonForReturnButtonElement= By.xpath("//li[contains(text(),'Item arrived too late')]");
     static private By  CommentForReturnButtonElement= By.id("comments");
     static private By  SubmitOnReturnButtonElement= By.xpath("(//button[contains(text(),'Submit')])[1]");
-    static private By  PoNumberXpath= By.xpath("//div[1]/div[@class='form-group']");
+    static private By  PoNumberXpath= By.xpath("//label[contains(text(),'PO Number')]/parent::div");
     //Changing for shipping charges
     static private By ActualShippingChargesXpath = By.xpath("//label[contains(text(),'Logistikgebühr')]/parent::div/following-sibling::div");
     static private By ActualSalesVatXpath = By.xpath("//label[contains(text(),'Mehrwertsteuer')]/parent::div/following-sibling::div");

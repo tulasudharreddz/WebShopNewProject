@@ -338,9 +338,9 @@ public class FavoriesPage {
         for(int i=0;i<=4;i++){
             ExpectedLable("Verify ' "+AssertNames.get(i)+" ' on Product Cart page is same on Product Search Page or not..?");
             if(AssertName1.get(i).contentEquals(AssertName.get(i))){
-                ActualLable("Successfully Verified, ' "+AssertNames.get(i)+" ' on Product Cart page is same as on Product Search Page.","Pass");
+                ActualLable("Successfully Verified, ' "+AssertNames.get(i)+ "  Expected: "+AssertName.get(i)+" Actual: "+AssertName1.get(i),"Pass");
             }
-            else{ StatusOfProduct =false;  ActualLable("Failed to Verify, ' "+AssertNames.get(i)+" ' on Product Cart page is not same on Product Search Page.","Fail");     }
+            else{ StatusOfProduct =false;  ActualLable("Failed to Verify, ' "+AssertNames.get(i)+"  Expected: "+AssertName.get(i)+" Actual: "+AssertName1.get(i),"Fail");     }
         }
         Thread.sleep(1000);
         ExpectedLable("Click on ' Add To Favorites ' Button if All the details Are matched on Both the pages..? ");
@@ -364,9 +364,9 @@ public class FavoriesPage {
             for(int i=0;i<=4;i++){
                 ExpectedLable("Verify ' "+AssertNames.get(i)+" ' on Product Cart page is same on Product Search Page or not..?");
                 if(AssertName2.get(i).contentEquals(AssertName.get(i))){
-                    ActualLable("Successfully Verified, ' "+AssertNames.get(i)+" ' on Product Cart page is same as on Product Search Page.","Pass");
+                    ActualLable("Successfully Verified, ' "+AssertNames.get(i)+" Expected: "+AssertName.get(i)+" Actual: "+AssertName2.get(i),"Pass");
                 }
-                else{ StatusOfProduct =false;  ActualLable("Failed to Verify, ' "+AssertNames.get(i)+" ' on Product Cart page is not same on Product Search Page.","Fail");     }
+                else{ StatusOfProduct =false;  ActualLable("Failed to Verify, ' "+AssertNames.get(i)+" Expected: "+AssertName.get(i)+" Actual: "+AssertName2.get(i),"Fail");     }
             }
             Thread.sleep(1000);
             ExpectedLable("Click on ' Add To Favorites ' Button if All the details Are matched on Both the pages..? ");
