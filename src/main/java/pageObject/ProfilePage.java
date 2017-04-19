@@ -60,7 +60,7 @@ public class ProfilePage {
     public ProfilePage(WebDriver driver) {
         this.driver = driver;
     }
-    public static void AssertVerifyForFieldsOFProfile(WebDriver driver) throws IOException, WriteException {
+    public static void AssertVerifyForFieldsOFProfile(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("Verify first Name fields are availabel or not");
         if (driver.findElements(FirstName).size() > 0) {
             log.info("Assert is verified for first Name Field");
@@ -149,7 +149,7 @@ public class ProfilePage {
         List<WebElement> NoOfMandatoryFields = driver.findElements(MandatoryFields);
         return NoOfMandatoryFields;
     }
-    public static void MandatoryFieldsProfilePage(WebDriver driver) throws IOException, WriteException {
+    public static void MandatoryFieldsProfilePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Mandatory fields functionality");
         int NoOfMandatory = NoOfMandatoryFields(driver).size();
         for (int i = 0; i <= NoOfMandatory - 1; i++) {
@@ -175,7 +175,7 @@ public class ProfilePage {
         List<WebElement> AddressHeaders = driver.findElements(Address);
         return AddressHeaders;
     }
-    public static void VerifyAddressHeaders(WebDriver driver) throws IOException, WriteException {
+    public static void VerifyAddressHeaders(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Available address blocks");
         int noOfHeaders = AddressHeaders(driver).size();
         for (int i = 0; i <= noOfHeaders - 1; i++) {
@@ -221,7 +221,7 @@ public class ProfilePage {
         List<WebElement> OpeninAddress = driver.findElements(OpenAddress);
         return OpeninAddress;
     }
-    public static void VerifyDefaultOpenBlocks(WebDriver driver) throws IOException, WriteException {
+    public static void VerifyDefaultOpenBlocks(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Default no of open Address blocks");
         int NoOfOpenBlocks = HeaderOpeninAddress(driver).size();
         ExpectedLable("Default no of open Address blocks Should be only one");
@@ -239,7 +239,7 @@ public class ProfilePage {
         List<WebElement> PannelHeaders = driver.findElements(PannelHeading);
         return PannelHeaders;
     }
-    public static void VerifyExpandCollapse(WebDriver driver) throws IOException, WriteException {
+    public static void VerifyExpandCollapse(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable(" Verify Expand and collapse functionality for address blocks");
         int noOfHeaders = AddressHeaders(driver).size();
         for (int i = 0; i <= noOfHeaders - 1; i++) {
@@ -451,7 +451,7 @@ public class ProfilePage {
         List<WebElement> DeleteButton = driver.findElements(By.xpath("//div[@class='panel-collapse collapse in']/div/is-addresses/div/div/div/p/button[contains(text(),'Request Delete')]"));
         return DeleteButton;
     }
-    public static void RequestDeleteFunctionality(WebDriver driver) throws IOException, WriteException {
+    public static void RequestDeleteFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Request delete address functionality");
         ExpectedLable("Click on Request delete address for the first address");
         if(RequestDeleteElement(driver).size()>0){
@@ -468,7 +468,7 @@ public class ProfilePage {
         List<WebElement> Label = driver.findElements(By.xpath("//label[@class='is-check-radio-label']"));
         return Label;
     }
-    public static void AssertVerifyForDefaultAddress(WebDriver driver) throws IOException, WriteException {
+    public static void AssertVerifyForDefaultAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
         //String Defaultxpath =LabelSymbol(driver).get(0)+"/i[@class='is-check-radio-helper on']";
         StepLable("Verify Default address is marked as Star ");
         //String Defaultxpath = "(//label[@class='is-check-radio-label'])[1]/i[@class='is-check-radio-helper on']";
@@ -500,7 +500,7 @@ public class ProfilePage {
         List<WebElement> NewAddress = driver.findElements(RequestNewAddress);
         return NewAddress;
     }
-    public static void ClickonNewAddress(WebDriver driver,int indexNum) throws IOException, WriteException {
+    public static void ClickonNewAddress(WebDriver driver,int indexNum) throws IOException, WriteException, InterruptedException {
         String st = RequestNewAdd(driver).get(indexNum).getText();
         ExpectedLable("Click on " + st + " under My Account menu on home page ");
         RequestNewAdd(driver).get(indexNum).click();
@@ -510,7 +510,7 @@ public class ProfilePage {
         List<WebElement> Lable = driver.findElements(By.xpath("//label"));
         return Lable;
     }
-    public static void AssertVerifyForLable(WebDriver driver,String AddressName) throws IOException, WriteException {
+    public static void AssertVerifyForLable(WebDriver driver,String AddressName) throws IOException, WriteException, InterruptedException {
         StepLable("Verify All Labels are Available or not");
         int noOfLable = LableForNewAddress(driver).size();
 

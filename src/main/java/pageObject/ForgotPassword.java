@@ -24,7 +24,7 @@ public class ForgotPassword {
 
 
 	
-	public static String ErrorMessageForEmail(WebDriver driver) throws IOException, WriteException {
+	public static String ErrorMessageForEmail(WebDriver driver) throws IOException, WriteException, InterruptedException {
 		ExpectedLable("Enter invalid user name in email blank");
 		LoginPage.ResetPasswordEmail(driver).sendKeys("tt");
 		ActualLable("Successfully entered invalid user name into email blank","Pass");
@@ -40,7 +40,7 @@ public class ForgotPassword {
 		return errormessage;
 	}
 
-	public static void AssertVerifyForResetPassword(WebDriver driver) throws IOException, WriteException {
+	public static void AssertVerifyForResetPassword(WebDriver driver) throws IOException, WriteException, InterruptedException {
 
 		ExpectedLable("Verify 'Label text' is available or not ?");
 		if(driver.findElements(LabeltextElement).size()>0){

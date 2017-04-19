@@ -57,7 +57,7 @@ public class HomePage {
         }
         else {ActualLable("Verification verified, Register Here link is not available on home page" ,"Fail");}
     }
-    public static void VerifyHomePageAssert(WebDriver driver) throws IOException, WriteException {
+    public static void VerifyHomePageAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("Verify that the Home page is opened or not ?");
         if(driver.findElements(HomePageAssert).size()>0) {
             ActualLable("Successfully Verified, Assert verified for Home page", "Pass");
@@ -66,7 +66,7 @@ public class HomePage {
             ActualLable("Failed to verify, Assert not found for Home page", "Pass");
         }
     }
-    public static void PageTitle(WebDriver driver) throws IOException, WriteException {
+    public static void PageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
         //WebDriver driver = null;
         ExpectedLable("User should land to home page");
         String Actualtext = driver.getTitle();
@@ -104,7 +104,7 @@ public class HomePage {
         element = driver.findElement(By.xpath("//ol[@class = 'breadcrumb']/li/a[contains(text(),'Home')]"));
         return element;
     }
-    public static WebElement AssertVerifyForHomePage(WebDriver driver) throws IOException, WriteException {
+    public static WebElement AssertVerifyForHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
 
         ExpectedLable("Verify Home Pages is opened or not");
         List<WebElement> MenuList = driver.findElements(By.xpath("//h2[contains(text(),'Best Sellers')]"));
@@ -192,7 +192,7 @@ public class HomePage {
         return element;
     }
 
-    public static boolean AssertVerifyForTitleProfile(WebDriver driver) throws IOException, WriteException {
+    public static boolean AssertVerifyForTitleProfile(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Title for Profile Page");
         String ProfileTitle = driver.findElement(By.xpath("//h2")).getText();
         ExpectedLable("Profile page name should be Profile");
@@ -262,7 +262,7 @@ public class HomePage {
         return MenuList;
     }
 
-    public static WebElement VerifyDropDownListUnderShopMenu(WebDriver driver) throws IOException, WriteException {
+    public static WebElement VerifyDropDownListUnderShopMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
         StepLable("Verify Category under shop menu");
         String ShopTitle = ShopMenuOnHomePage(driver).getText();
         ExpectedLable("Check Shop menu available or not ");

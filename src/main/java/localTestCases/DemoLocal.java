@@ -27,9 +27,8 @@ public class DemoLocal extends Browser{
 
 	public static ArrayList<ArrayList> ProductDetailsArrayList;
 	@Test
-	public void Demo_TC_01() throws IOException, WriteException {
+	public void Demo_TC_01() throws IOException, WriteException, InterruptedException {
 		try {
-
 			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
@@ -64,24 +63,19 @@ public class DemoLocal extends Browser{
 		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 	@Test
-	public void MobileAutomation() throws Exception ,WriteException{
-		Thread.sleep(1000);
-		LoginPage.Loginfunctionality(driver);
-		log.info("Login in to the webshop application");
-		Thread.sleep(3000);
-		HomePage.ClicoOnShopMenuMobile(driver);
+	public void MobileAutomation() throws IOException, WriteException, InterruptedException {
+		try {
+			DataDriven.ReportStartup(136);
+			Thread.sleep(2000);
+			LoginPage.Loginfunctionality(driver);
+			UITesting.HomePageUIVerification(driver);
+			/*JiraAccess.JiraFunctionality(driver);
+			LoginPage.Loginfunctionality(driver);*/
 
-		Thread.sleep(2000);
-		String PartNumber =HomePage.PartNumber(driver).get(0).getText();
-		log.info("Partnumber for the product is: "+ PartNumber);
-		HomePage.LearnMoreButtons(driver).get(0).click();
-		log.info("Clicked on Learn more button");
-		String UnitCost= HomePage.UnitCost(driver).get(0).getText();
-		Thread.sleep(3000);
-		log.info("Unit cost of the Selected item is : "+ UnitCost);
+		}
+		catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 
-		Double UnitPrice = HomePage.UnitPrice(driver);
-		Assert.assertEquals(UnitCost, "$"+UnitPrice);
 	}
 
 

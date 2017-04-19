@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import TestRail_Inte.APIException;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -100,7 +101,6 @@ public class Browser {
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		String Folder = DataDriven.FolderName();
 		String folderName = ObjectRepository.DateSt();
-
 		//String name = ".\\ResultReports\\" + folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 		String name = obr.obj.getProperty("CreateWorkBookPath") +"\\"+ folderName + "\\"+Folder+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 		FileUtils.copyFile(scrFile, new File(name));
@@ -116,5 +116,7 @@ public class Browser {
 		driver.get(obr.obj.getProperty("url"));
 	}
 	@AfterMethod
-	public void ResultStatus() throws WriteException { ReportResult();}
+	public void ResultStatus() throws WriteException, IOException, APIException { boolean testRailTCStatus =ReportResult();
+		TestRail_Integration.UploadResults(testRailTCStatus);
+	}
 }

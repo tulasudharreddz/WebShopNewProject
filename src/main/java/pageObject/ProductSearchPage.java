@@ -212,7 +212,7 @@ public class ProductSearchPage {
         }
     }
 
-    public static int NoofResults(WebDriver driver) throws IOException, WriteException {
+    public static int NoofResults(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("verify total number of searched results");
         String noOfResu = driver.findElement(NoOfSearchResults).getText();
         String s= noOfResu.substring(0,noOfResu.indexOf(' '));

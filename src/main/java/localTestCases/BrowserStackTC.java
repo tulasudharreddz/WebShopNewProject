@@ -51,7 +51,7 @@ public class BrowserStackTC  extends MobileBrowserStack {
     }
     //public static ArrayList<ArrayList> ProductDetailsArrayList;
     @Test
-    public void DemoMobile_TC_01() throws IOException, WriteException {
+    public void DemoMobile_TC_01() throws IOException, WriteException, InterruptedException {
         try {
             DataDriven.ReportStartup(136);
             Thread.sleep(2000);

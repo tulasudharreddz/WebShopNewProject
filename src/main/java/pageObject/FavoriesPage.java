@@ -64,7 +64,7 @@ public class FavoriesPage {
             }
         }
     }
-    public static int NoOfFavoritesProducts(WebDriver driver) throws IOException, WriteException {
+    public static int NoOfFavoritesProducts(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("verify No of products on ' Favorites ' page");
         int NoProducts;
         if(driver.findElements(NoOfProducts).size()>0) {

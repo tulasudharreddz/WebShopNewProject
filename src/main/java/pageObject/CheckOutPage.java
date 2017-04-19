@@ -176,7 +176,7 @@ public class CheckOutPage {
         }
         return status;
     }
-    public static double GetInstallationCost(WebDriver driver) throws IOException, WriteException {
+    public static double GetInstallationCost(WebDriver driver) throws IOException, WriteException, InterruptedException {
         double InstallCost = 0.00;
         ExpectedLable(" Get Installation charges from aplication");
         if(driver.findElements(InstallationServiceCostText).size()>0) {

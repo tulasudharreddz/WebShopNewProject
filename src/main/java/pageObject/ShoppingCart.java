@@ -239,7 +239,7 @@ public class ShoppingCart {
             ActualLable("Cart Summery Panel Opened successfully" ,"Pass");
         }
     }
-    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException {
+    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("Cart Subtotal");
         al.add("Logistikgebühr");

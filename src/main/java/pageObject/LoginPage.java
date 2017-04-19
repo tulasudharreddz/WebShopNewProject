@@ -48,7 +48,7 @@ public class LoginPage {
 		log.info("title of the page is " + Actualtext);
 	}
 
-	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException {
+	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
 		String LoginTitle = driver.findElement(By.xpath("//span[@class='login-header']")).getText();
 		ExpectedLable("Login fields should available");
 		if(LoginTitle.contentEquals("Log In")) {
@@ -56,7 +56,7 @@ public class LoginPage {
 		}else{ActualLable("Failed to verify, Log in page is not opened", "Fail");}
 	}
 
-	public static void LoginFieldsAssertVerify(WebDriver driver) throws IOException, WriteException {
+	public static void LoginFieldsAssertVerify(WebDriver driver) throws IOException, WriteException, InterruptedException {
 
 		ExpectedLable("Verify 'Drop down for language' is available or not ?");
 		if(driver.findElements(LanguageDropDownXpath).size()>0){
@@ -84,7 +84,7 @@ public class LoginPage {
 	}
 
 
-	public static void ResetPasswordAssert(WebDriver driver) throws IOException, WriteException {
+	public static void ResetPasswordAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
 		ExpectedLable("Reset password link should available on home page");
 		if(driver.findElements(By.xpath("//a[contains(text(),'Reset Password.')]")).size() > 0){
 			String ResetPassword = driver.findElement(By.xpath("//a[contains(text(),'Reset Password.')]")).getText();
@@ -99,7 +99,7 @@ public class LoginPage {
 		}
 	}
 
-	public static WebElement RegisterAsert(WebDriver driver) throws IOException, WriteException {
+	public static WebElement RegisterAsert(WebDriver driver) throws IOException, WriteException, InterruptedException {
 		ExpectedLable("Register Here link should available on home page");
 		if(driver.findElements(By.xpath("//a[contains(text(),'Register Here')]")).size() > 0){
 
@@ -169,7 +169,7 @@ public class LoginPage {
 
 		return element;
 	}
-	public static void ClickOnResetPasswordLink(WebDriver driver) throws IOException, WriteException {
+	public static void ClickOnResetPasswordLink(WebDriver driver) throws IOException, WriteException, InterruptedException {
 		ExpectedLable("Click on Reset password link");
 		LoginPage.ResetPasswordLink(driver).click();
 		ActualLable("Successfully clicked on reset password link","Pass");

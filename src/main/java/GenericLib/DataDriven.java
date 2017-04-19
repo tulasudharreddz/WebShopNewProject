@@ -8,6 +8,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import TestRail_Inte.APIException;
 import jdk.nashorn.internal.ir.Flags;
 import jxl.Cell;
 import jxl.CellReferenceHelper;
@@ -26,6 +27,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import org.w3c.dom.css.RGBColor;
+import pageObject.JiraAccess;
 import pageObject.ProductSearchPage;
 
 import javax.swing.tree.FixedHeightLayoutCache;
@@ -176,11 +178,16 @@ public class DataDriven {
 		cellFormat = new WritableCellFormat(cellFont);
 		cellFormat.setWrap(true);
 		cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-        cellFormat.setAlignment(Alignment.CENTRE);
+		cellFormat.setAlignment(Alignment.CENTRE);
 		return cellFormat;
 	}
 
 	static int counting=1;
+	static String LetestStepLabel;
+	public static String LetestStep(){
+		String string =LetestStepLabel;
+		return string;
+	}
 	public static void StepLable(String resu) throws IOException, WriteException {
 		//int i = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
 		int i = DataDriven();
@@ -196,8 +203,19 @@ public class DataDriven {
 		wsheet.addCell(new Label(0 , i , resu, cellFormat));
 		counting=1;
 	}
-public static int numberForColumn;
+	static String LetestActualResultLabel;
+	static String LetestExpectedResultLabel;
+	public static String LetestExpected(){
+		String string =LetestExpectedResultLabel;
+		return string;
+	}
+	public static String LetestActual(){
+		String string =LetestActualResultLabel;
+		return string;
+	}
+	public static int numberForColumn;
 	public static void ExpectedLable(String resu) throws IOException, WriteException {
+		LetestExpectedResultLabel = resu;
 		numberForColumn= DataDriven();
 		wsheet = wbook.getSheet("ResultSheet");
 		//wsheet.addCell(new Label(1 , DataDriven() , resu, CellFormat()));
@@ -208,9 +226,8 @@ public static int numberForColumn;
 		counting++;
 	}
 
-
-	public static void ActualLable(String ACText,String result) throws IOException, WriteException {
-
+	public static void ActualLable(String ACText,String result) throws IOException, WriteException, InterruptedException {
+		LetestActualResultLabel= ACText;
 		wsheet = wbook.getSheet("ResultSheet");
 		//wsheet.addCell(new Label(2 , DataDriven1() , ACText,CellFormat()));
 		wsheet.addCell(new Label(2 , numberForColumn , ACText,CellFormat()));
@@ -234,6 +251,7 @@ public static int numberForColumn;
 			wsheet.addHyperlink(hlk);
 			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
 			wsheet.addCell(new Label(3 , num , result,cellFormat));
+			String JiraTicket = JiraAccess.JiraFunctionality(driver);
 			sResult = true;
 			SCcount++;
 		}
@@ -261,12 +279,14 @@ public static int numberForColumn;
 	}
 	static String ScID;
 	static int ReportStartNumber;
-	public static void ReportStartup(int j) throws IOException, WriteException, BiffException {
+	public static String ScenarioNameForJira;
+	public static void ReportStartup(int j) throws IOException, WriteException, BiffException, APIException {
 		//int k = DataDriven();DataDriven1();DataDriven2();DataDriven3();DataDriven4();
-       String UserName =  System.getProperty("user.name");
+		String UserName =  System.getProperty("user.name");
 		int k = DataDriven();
 		ScID= ReadTestCases(TestCasesheet).getCell(0,j).getContents();
 		String ScName= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
+		ScenarioNameForJira= ReadTestCases(TestCasesheet).getCell(1,j).getContents();
 		String ScDis= ReadTestCases(TestCasesheet).getCell(2,j).getContents();
 		String text = ScID+" : "+ScName;
 		WritableCellFormat cellFormat = null;
@@ -285,10 +305,13 @@ public static int numberForColumn;
 		wsheet = wbook.getSheet("TestCaseDiscription");
 		wsheet.addCell(new Label(4 , 3, "QA2 / "+AlertHandle.BrowserNameForSuite,CellFormat1()));
 		wsheet.addHyperlink(hlk);
-        wsheet.addCell(new Label(1 , 3, UserName,CellFormat4()));
+		wsheet.addCell(new Label(1 , 3, UserName,CellFormat4()));
 		wsheet.addCell(new Label(0 , ReportStartNumber, ScID,CellFormat1()));
 		wsheet.addCell(new Label(1 , ReportStartNumber, ScName, CellFormat4()));
 		wsheet.addCell(new Label(2 , ReportStartNumber, ScDis, CellFormat()));
+		String TestrailCaseNo= ReadTestCases(TestCasesheet).getCell(4,j).getContents();
+		int TestrailCaseNoInt = Integer.parseInt(TestrailCaseNo);
+		TestRail_Integration.GetTestCaseTitle(TestrailCaseNoInt);
 		counting=1;
 	}
 	public static String FolderName() throws WriteException, IOException {
@@ -297,8 +320,9 @@ public static int numberForColumn;
 	}
 
 	static boolean sResult;
-	public static void ReportResult() throws WriteException {
+	public static boolean ReportResult() throws WriteException {
 		//int ResultColumn= DataDriven6();
+		boolean testrailStatus = false;
 		wsheet = wbook.getSheet("TestCaseDiscription");//sResult
 		if(sResult==true){
 			//if(Scresult=="Fail"){
@@ -310,6 +334,7 @@ public static int numberForColumn;
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
+			testrailStatus= false;
 			wsheet.addCell(new Label(3 , ReportStartNumber , "Fail",cellFormat));
 			sResult=false;
 		}
@@ -323,14 +348,14 @@ public static int numberForColumn;
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.GREEN);
+			testrailStatus= true;
 			wsheet.addCell(new Label(3 , ReportStartNumber , "Pass",cellFormat));
 		}
 		/*else{
 			wsheet.addCell(new Label(3 , ResultColumn, Scresult,CellFormat1()));
 		}*/
 		wsheet.addCell(new Label(4 , ReportStartNumber , ObjectRepository.dateString(),CellFormat1()));
-
-
+		return testrailStatus;
 	}
 
 	public void closedoc() throws IOException, WriteException{

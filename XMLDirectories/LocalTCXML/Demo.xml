@@ -7,6 +7,7 @@
             <class name="localTestCases.DemoLocal">
                 <methods>
                     <include name="Demo_TC_01"/>
+                    <!--<include name="MobileAutomation"/>-->
                 </methods>
             </class>
         </classes>

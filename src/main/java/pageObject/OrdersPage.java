@@ -834,7 +834,7 @@ public class OrdersPage {
         }else{ Status = false; ActualLable("Manufacturer Part # Not Matched, Expected OrderNum : '"+ActualMFR+"' Actual Order No : "+AssertNameFromPSearchPage1.get(1),"Fail"); }
         return Status;
     }
-    public static ArrayList<String> GetProductDetailsFromRReturnPage(WebDriver driver) throws IOException, WriteException {
+    public static ArrayList<String> GetProductDetailsFromRReturnPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
         ExpectedLable("Get All the values and Store");
         ArrayList<String> ValueOfRReturn=new ArrayList<String>();
         for(int i=0;i<=driver.findElements(RequestReturnValues).size()-1;i++) {
