@@ -1,5 +1,6 @@
 package browserStackTC;
 
+import java.awt.*;
 import java.io.IOException;
 
 import GenericLib.*;
@@ -49,8 +50,7 @@ public class LandingPageBSTC extends BrowserStack
 	*/
 
 @Test
-	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC01() throws RowsExceededException, WriteException, IOException, InterruptedException, AWTException {
 		//check that user able to login with valid credentials or not
 		Thread.sleep(3000);		
 
@@ -70,8 +70,7 @@ public class LandingPageBSTC extends BrowserStack
 	Expe result : Login should be successful and user should be redirected to 'Home' page
 	 */
 
-	public void TC02() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC02() throws RowsExceededException, WriteException, IOException, InterruptedException, AWTException {
 		//check that user able to login with valid credentials or not
 		Thread.sleep(2000);
 
@@ -97,8 +96,7 @@ public class LandingPageBSTC extends BrowserStack
 
 	 */
 
-	public void TC03() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC03() throws RowsExceededException, WriteException, IOException, InterruptedException, AWTException {
 		//check that user able to login with valid credentials or not
 		Thread.sleep(2000);
 
@@ -132,8 +130,7 @@ public class LandingPageBSTC extends BrowserStack
 
 
 	
-	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC04() throws RowsExceededException, WriteException, IOException, InterruptedException, AWTException {
 
 		LoginPage.ResetPasswordLink(driver).click();
 
@@ -180,8 +177,7 @@ public class LandingPageBSTC extends BrowserStack
 	}
 	// AssertVerifyForDefaultAddress that all the static links are working or not.
 	@Test
-	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException
-	{
+	public void TC06() throws RowsExceededException, WriteException, IOException, InterruptedException, AWTException {
 
 		LoginPage.AsertVerifyForAboutUSLinkHomePage(driver);
 

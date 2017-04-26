@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
-    public static void ClickOnRegisterHereLink(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickOnRegisterHereLink(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Check that Register here link is available or not  ?");
         if(driver.findElements(RegisterHereLink).size()>0){
             Thread.sleep(1000);
@@ -57,7 +58,7 @@ public class HomePage {
         }
         else {ActualLable("Verification verified, Register Here link is not available on home page" ,"Fail");}
     }
-    public static void VerifyHomePageAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyHomePageAssert(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Verify that the Home page is opened or not ?");
         if(driver.findElements(HomePageAssert).size()>0) {
             ActualLable("Successfully Verified, Assert verified for Home page", "Pass");
@@ -66,7 +67,7 @@ public class HomePage {
             ActualLable("Failed to verify, Assert not found for Home page", "Pass");
         }
     }
-    public static void PageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void PageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         //WebDriver driver = null;
         ExpectedLable("User should land to home page");
         String Actualtext = driver.getTitle();
@@ -82,7 +83,7 @@ public class HomePage {
         return element;
     }
 
-    public static void AsertVerifyForShoppingCartLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void AsertVerifyForShoppingCartLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         StepLable("Verify Shoping cart link on home page");
         ExpectedLable("Click on shoping cart link");
@@ -104,7 +105,7 @@ public class HomePage {
         element = driver.findElement(By.xpath("//ol[@class = 'breadcrumb']/li/a[contains(text(),'Home')]"));
         return element;
     }
-    public static WebElement AssertVerifyForHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static WebElement AssertVerifyForHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 
         ExpectedLable("Verify Home Pages is opened or not");
         List<WebElement> MenuList = driver.findElements(By.xpath("//h2[contains(text(),'Best Sellers')]"));
@@ -123,7 +124,7 @@ public class HomePage {
         return element;
     }
 
-    public static void AsertVerifyForHomeLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void AsertVerifyForHomeLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         AsertVerifyForShoppingCartLinkHomePage(driver);
         log.info("System is navigate to the Shipping page");
         log.info("Now clicking on Home link");
@@ -151,7 +152,7 @@ public class HomePage {
 
         return element;
     }
-    public static void ClickonMyAccount(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickonMyAccount(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Click on My Account menu on home page ");
         // driver.findElement(MyAccountMenuonHomePage).click();
 
@@ -170,7 +171,7 @@ public class HomePage {
         return MenuList;
     }
 
-    public static void SelectSubMenuOptUnderMyAccount(WebDriver driver, int index) throws IOException, WriteException, InterruptedException {
+    public static void SelectSubMenuOptUnderMyAccount(WebDriver driver, int index) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(2000);
         if(MyAccountMenuDropDownListonHomePage(driver).size()>0) {
             //String exLable = HomePage.MyAccountMenuDropDownListonHomePage(driver).get(index).getText();
@@ -181,7 +182,7 @@ public class HomePage {
     }
 
 
-    public static WebElement ClickOnProfile(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static WebElement ClickOnProfile(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         ClickonMyAccount(driver);
         log.info("Clicked on my account");
@@ -192,7 +193,7 @@ public class HomePage {
         return element;
     }
 
-    public static boolean AssertVerifyForTitleProfile(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static boolean AssertVerifyForTitleProfile(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Title for Profile Page");
         String ProfileTitle = driver.findElement(By.xpath("//h2")).getText();
         ExpectedLable("Profile page name should be Profile");
@@ -208,7 +209,7 @@ public class HomePage {
         return true;
     }
 
-    public static void ListOfOptionsMyAccountMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ListOfOptionsMyAccountMenu(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify List of My menu options");
         String MyAccountTitle = MyAccountMenuonHomePage(driver).getText();
         ExpectedLable("Verify My menu option is available on Home page");
@@ -262,7 +263,7 @@ public class HomePage {
         return MenuList;
     }
 
-    public static WebElement VerifyDropDownListUnderShopMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static WebElement VerifyDropDownListUnderShopMenu(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Category under shop menu");
         String ShopTitle = ShopMenuOnHomePage(driver).getText();
         ExpectedLable("Check Shop menu available or not ");
@@ -292,7 +293,7 @@ public class HomePage {
 
         return element;
     }
-    public static WebElement AsertVerificationForCategoryUnderShopMenu(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static WebElement AsertVerificationForCategoryUnderShopMenu(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Verify Category under Shop menu");
         String ShopTitle = ShopMenuOnHomePage(driver).getText();
         ExpectedLable("Check Shop menu is displaying or not");
@@ -393,7 +394,7 @@ public class HomePage {
 
     }
 
-    public static void ClickonShopmenuonHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickonShopmenuonHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         //StepLable("Verify Category under Shop menu");
         String ShopTitle = ShopMenuOnHomePage(driver).getText();
         ExpectedLable("Check Shop menu is displaying or not");
@@ -408,7 +409,7 @@ public class HomePage {
             ActualLable("Shop menu is not available", "Fail");
         }
     }
-    public static void ClickonCategoryinShopmenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickonCategoryinShopmenu(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(1000);
         String SubmenuName = SubCategoryListUnderShopMenu(driver).get(1).getText();
         ExpectedLable("Verify link is working for "+SubmenuName);
@@ -423,7 +424,7 @@ public class HomePage {
 
     }
 
-    public static void MovingToCategory(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void MovingToCategory(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Moving to Product Search Page");
         //ExpectedLable("Clicking on Shop Menu");
         Thread.sleep(2000);
@@ -444,7 +445,7 @@ public class HomePage {
         Thread.sleep(2000);
     }
 
-    public static void ClickonShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickonShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(2000);
         ExpectedLable("Click on Shopping cart link");
         if(driver.findElements(ShoppingCart).size()>0) {
@@ -466,7 +467,7 @@ public class HomePage {
         return NoOFItems;
     }
 
-    public static double  VerifyCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static double  VerifyCart(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(2000);
         ExpectedLable("Check the products available on shopping cart");
         double noOfCartItemsAavailable;
@@ -482,7 +483,7 @@ public class HomePage {
         return noOfCartItemsAavailable;
     }
 
-    public static void ClickOnFavoritesMenu(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickOnFavoritesMenu(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(1000);
         ExpectedLable("Check ' Favorites ' menu is displaying on home page ");
         if(driver.findElements(Favorites).size()>0) {
@@ -495,7 +496,7 @@ public class HomePage {
 
     }
     public static final AtomicInteger count7 = new AtomicInteger(-1);
-    public static void SearchProductFromHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void SearchProductFromHomePage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         if(driver.findElements(ReturnHome).size()>0) {
             driver.findElement(ReturnHome).click();
             ArrayList<String> ProductMfr = new ArrayList<String>();

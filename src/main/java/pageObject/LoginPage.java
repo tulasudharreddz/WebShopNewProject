@@ -1,5 +1,6 @@
 package pageObject;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class LoginPage {
 		log.info("title of the page is " + Actualtext);
 	}
 
-	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void LoginPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		String LoginTitle = driver.findElement(By.xpath("//span[@class='login-header']")).getText();
 		ExpectedLable("Login fields should available");
 		if(LoginTitle.contentEquals("Log In")) {
@@ -56,7 +57,7 @@ public class LoginPage {
 		}else{ActualLable("Failed to verify, Log in page is not opened", "Fail");}
 	}
 
-	public static void LoginFieldsAssertVerify(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void LoginFieldsAssertVerify(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 
 		ExpectedLable("Verify 'Drop down for language' is available or not ?");
 		if(driver.findElements(LanguageDropDownXpath).size()>0){
@@ -84,7 +85,7 @@ public class LoginPage {
 	}
 
 
-	public static void ResetPasswordAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void ResetPasswordAssert(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		ExpectedLable("Reset password link should available on home page");
 		if(driver.findElements(By.xpath("//a[contains(text(),'Reset Password.')]")).size() > 0){
 			String ResetPassword = driver.findElement(By.xpath("//a[contains(text(),'Reset Password.')]")).getText();
@@ -99,7 +100,7 @@ public class LoginPage {
 		}
 	}
 
-	public static WebElement RegisterAsert(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static WebElement RegisterAsert(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		ExpectedLable("Register Here link should available on home page");
 		if(driver.findElements(By.xpath("//a[contains(text(),'Register Here')]")).size() > 0){
 
@@ -169,12 +170,12 @@ public class LoginPage {
 
 		return element;
 	}
-	public static void ClickOnResetPasswordLink(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void ClickOnResetPasswordLink(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		ExpectedLable("Click on Reset password link");
 		LoginPage.ResetPasswordLink(driver).click();
 		ActualLable("Successfully clicked on reset password link","Pass");
 	}
-	public static void ResetPasswordFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void ResetPasswordFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		ClickOnResetPasswordLink(driver);
 		ExpectedLable("Enter user name into email blank");
 		LoginPage.ResetPasswordEmail(driver).sendKeys("t.mirasipally@dimensiondata.com");
@@ -253,7 +254,7 @@ public class LoginPage {
 		return element;
 	}
 
-	public static void AsertVerifyForAboutUSLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForAboutUSLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on About us link on landing page");
 		AboutUSLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -276,7 +277,7 @@ public class LoginPage {
 		return element;
 	}
 
-	public static void AsertVerifyForNEWSLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForNEWSLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on News and Events link on landing page");
 		NEWSLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -298,7 +299,7 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Careers')]"));
 		return element;
 	}
-	public static void AsertVerifyForCareerLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForCareerLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on Careers | Dimension Data link on landing page");
 		CareerLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -320,7 +321,7 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Safe Harbor Policy')]"));
 		return element;
 	}
-	public static void AsertVerifyForSafeHarborPolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForSafeHarborPolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on U.S. Safe Harbor Policy link on landing page");
 		SafeHarborPolicyLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -342,7 +343,7 @@ public class LoginPage {
 		return element;
 	}
 
-	public static void AsertVerifyForFAQLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForFAQLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on FAQ link on landing page");
 		FAQLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -365,7 +366,7 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Privacy')]"));
 		return element;
 	}
-	public static void AsertVerifyForPrivacyPolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForPrivacyPolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on Dimension Data Privacy Policy link on landing page");
 		PrivacyPolicyLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -387,7 +388,7 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Terms of Use')]"));
 		return element;
 	}
-	public static void AsertVerifyForTermsConditionsLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForTermsConditionsLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on Terms and Conditions link on landing page");
 		TermsConditionsLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -409,7 +410,7 @@ public class LoginPage {
 		element = driver.findElement(By.xpath("//a[contains(text(),'Cookie Policy')]"));
 		return element;
 	}
-	public static void AsertVerifyForCookiePolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForCookiePolicyLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on Cookie Policy link on landing page");
 		CookiePolicyLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -432,7 +433,7 @@ public class LoginPage {
 		return element;
 	}
 
-	public static void AsertVerifyForContactDDLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+	public static void AsertVerifyForContactDDLinkHomePage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 		ExpectedLable("Click on Contact Dimension Data link on landing page");
 		ContactDDLinkHomePage(driver).click();
 		Thread.sleep(3000);
@@ -448,7 +449,7 @@ public class LoginPage {
 		Thread.sleep(2000);
 	}
 
-	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException, WriteException {
+	public static void Loginfunctionality(WebDriver driver) throws IOException, InterruptedException, WriteException, AWTException {
 		//WebDriverWait waitCulture = new WebDriverWait(driver, 40);
 		//waitCulture.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='select2-selection select2-selection--single']")));
 		Thread.sleep(2000);

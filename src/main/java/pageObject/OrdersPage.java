@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
+import java.awt.*;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -99,7 +100,7 @@ public class OrdersPage {
 
 
 
-    public static void VerifyExpandAndCollapse(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyExpandAndCollapse(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Check that the first listed order is expanded or collapsed ?");
         if(driver.findElements(ExpandedFirstOrderElement).size()>0){
             ActualLable("Verified successfully, first listed order is expanded", "Pass");
@@ -159,7 +160,7 @@ public class OrdersPage {
         }
         return Status;
     }
-    public static void VerifyTheOrdersSequenceFunctionality(WebDriver driver) throws IOException, WriteException, ParseException, InterruptedException {
+    public static void VerifyTheOrdersSequenceFunctionality(WebDriver driver) throws IOException, WriteException, ParseException, InterruptedException, AWTException {
         ExpectedLable("Verify sequence of the listed Order should be how date to low date");
         boolean Statusresult=OrdersPage.VerifyTheOrdersDisplay(driver);
         if(Statusresult==true){
@@ -169,7 +170,7 @@ public class OrdersPage {
             ActualLable("Failed order sequence functionality", "Fail");
         }
     }
-    public static void VerifyOrderPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyOrderPageTitle(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Check that Title for Page is displaying or not ?");
         if(driver.findElements(OrderPageTitleElement).size()>0) {
             Thread.sleep(2000);
@@ -180,7 +181,7 @@ public class OrdersPage {
         }
         else{ ActualLable("Verification failed for 'Orders page' Title", "Fail");}
     }
-    public static void VerifyHeaderInformationAtOrderLevel(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyHeaderInformationAtOrderLevel(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Orders page contents");
         VerifyOrderPageTitle(driver);
         VerifyIndividualItemLevel(driver);
@@ -204,7 +205,7 @@ public class OrdersPage {
             }
         }
     }
-    public static void VerifyIndividualItemLevel(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyIndividualItemLevel(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ArrayList<By> AssertXpath=new ArrayList<org.openqa.selenium.By>();
         AssertXpath.add(ImageElement);
         AssertXpath.add(NameElement);
@@ -247,7 +248,7 @@ public class OrdersPage {
         d.setTime(d.getTime() - (long)days * 1000 * 60 * 60 * 24);
         return d;
     }
-    public static boolean VerifyFilterWithDaterange(WebDriver driver) throws IOException, WriteException, ParseException, InterruptedException {
+    public static boolean VerifyFilterWithDaterange(WebDriver driver) throws IOException, WriteException, ParseException, InterruptedException, AWTException {
         StepLable("Verify Filter Functionality ");
         boolean Status = true;
         ArrayList<By> AssertXpath=new ArrayList<org.openqa.selenium.By>();
@@ -496,7 +497,7 @@ public class OrdersPage {
         //int noOfPages= InstallCost/10+1;
         return InstallCost;
     }
-    public static void VerificationOfOrderExpandForFirstProduct(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerificationOfOrderExpandForFirstProduct(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(1000);
         ExpectedLable("Check that the first listed order is expanded or collapsed ?");
         if(driver.findElements(ExpandedFirstOrderElement).size()>0) {
@@ -515,7 +516,7 @@ public class OrdersPage {
             else{ ActualLable("Verification failed , Expand functionality is not working", "Fail"); }
         }
     }
-    public static void VerifyLinksInOrdersPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyLinksInOrdersPage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Verify the link is available on 'Document Number' or not ..?");
         String ActualDocumentNumber = driver.findElements(DocumentLink).get(0).getText();
         if (driver.findElements(DocumentLink).get(0).isEnabled()) {
@@ -568,7 +569,7 @@ public class OrdersPage {
         else{   ActualLable("'Status link' is not working", "Fail");}
 
     }
-    public static Double SearchCreatedOrderInOrdersPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static Double SearchCreatedOrderInOrdersPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Double ActualInstallationCharges = null;
         //String ReferenceNumber =CheckOutPage.ClickonProceedtoCheckout(driver);
         String ReferenceNumber =CheckOutPage.CompleteCheckOut(driver);
@@ -596,7 +597,7 @@ public class OrdersPage {
         return ActualInstallationCharges;
     }
     static String QuantityOfProduct;
-    public static void VerifyRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void VerifyRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Verify Request&Return Form");
         ExpectedLable("Check that the 'Request Return' button is available in Order or not ?");
         if(driver.findElements(RequestReturnElement).size()>0){
@@ -618,7 +619,7 @@ public class OrdersPage {
         }
         else{ ActualLable("Verification failed , 'Request Return' button is not available in Order", "Fail"); }
     }
-    public static void VerifyRequestReturnPageContent(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void VerifyRequestReturnPageContent(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Verify content on Request Return page ");
         ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
         AssertName.add("Reason for Return *");
@@ -648,7 +649,7 @@ public class OrdersPage {
             else{     ActualLable("Verification failed , '" + AssertName.get(i) + "' is not available on Request return page", "Fail");     }
         }
     }
-    public static void VerifyQuantityFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void VerifyQuantityFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         ExpectedLable("Get the Exist Quantity value for the product ");
         int QuantityOfProductint= Integer.parseInt(QuantityOfProduct);
         ActualLable("Verification is successful , Exist Quantity value for the product is :  ' "+QuantityOfProductint+" '", "Pass");
@@ -673,7 +674,7 @@ public class OrdersPage {
             }
         }
     }
-    public static void VerifyCloseButtonFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException{
+    public static void VerifyCloseButtonFunctionalityinRequestReturn(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         ExpectedLable("Verify that 'Close button' is Available on 'Request return' Page or not ?");
         if(driver.findElements(CloseRequestReturnButtonElement).size()>0){
             ActualLable("Verification is successful , 'Close button' is available on 'Request Return' page ", "Pass");
@@ -684,7 +685,7 @@ public class OrdersPage {
             else{ ActualLable("Verification is successful , 'Close button' is Working Properly on 'Request Return' page ", "Pass");}
         }else{  ActualLable("Verification Failed , 'Close button' is not available on 'Request Return' page ", "Fail");}
     }
-    public static void VerifySubmitButtonFunctionalityinRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException{
+    public static void VerifySubmitButtonFunctionalityinRequestReturnPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         ExpectedLable("Verify that 'Reason for Return' dropdown displaying or not ?, if yes select option from drop down.");
         if(driver.findElements(ReasonRequestReturnButtonDropDownElement).size()>0){
             driver.findElement(ReasonRequestReturnButtonDropDownElement).click();
@@ -715,7 +716,7 @@ public class OrdersPage {
         else{ ActualLable("Verification Failed , 'Submit' button is not Enabled on 'Request Return' page ", "Fail"); }
 
     }
-    public static String VerifyOrderDetailsFromEmail(WebDriver driver) throws InterruptedException, IOException, WriteException{
+    public static String VerifyOrderDetailsFromEmail(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(2000);
         VerifyOrderPageTitle(driver);
         ExpectedLable("Get Reference Number from Orders Page");
@@ -744,7 +745,7 @@ public class OrdersPage {
         AssertNamesSC.add(QuantityST);
         return AssertNamesSC;
     }
-    public static boolean VerifyProductDetailsOnOrderPageFromMailReturn(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static boolean VerifyProductDetailsOnOrderPageFromMailReturn(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         boolean Status = true;
         ArrayList<String> AssertNamesText = new ArrayList<String>();
         AssertNamesText.add("Name Of Item");
@@ -773,7 +774,7 @@ public class OrdersPage {
         }
         return Status;
     }
-    public static boolean VerifyCartSummeryDetailsOnOrderPageFromMailReturn(WebDriver driver) throws IOException, WriteException, InterruptedException{
+    public static boolean VerifyCartSummeryDetailsOnOrderPageFromMailReturn(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         boolean Status = true;
         ArrayList<String> AssertNamesText = new ArrayList<String>();
         AssertNamesText.add("Cart Subtotal");
@@ -810,7 +811,7 @@ public class OrdersPage {
 
         return AssertName1;
     }
-    public static boolean VerifyProductDetailsOnRequestReturnPage(WebDriver driver, String OrderNo) throws IOException, WriteException, InterruptedException{
+    public static boolean VerifyProductDetailsOnRequestReturnPage(WebDriver driver, String OrderNo) throws IOException, WriteException, InterruptedException, AWTException {
         boolean Status = true;
         ArrayList<String> AssertNamesText = new ArrayList<String>();
         AssertNamesText.add("Order No");
@@ -834,7 +835,7 @@ public class OrdersPage {
         }else{ Status = false; ActualLable("Manufacturer Part # Not Matched, Expected OrderNum : '"+ActualMFR+"' Actual Order No : "+AssertNameFromPSearchPage1.get(1),"Fail"); }
         return Status;
     }
-    public static ArrayList<String> GetProductDetailsFromRReturnPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static ArrayList<String> GetProductDetailsFromRReturnPage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Get All the values and Store");
         ArrayList<String> ValueOfRReturn=new ArrayList<String>();
         for(int i=0;i<=driver.findElements(RequestReturnValues).size()-1;i++) {

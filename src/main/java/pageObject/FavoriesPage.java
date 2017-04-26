@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +53,7 @@ public class FavoriesPage {
 
 
 
-    public static void FavoritesPageVerify(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void FavoritesPageVerify(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(3000);
         ExpectedLable("Verify Assert for ' Favorites ' Page, Page Header Text Should be ' Favorites '");
         if(driver.findElements(PageHeader).size()>0) {
@@ -64,7 +65,7 @@ public class FavoriesPage {
             }
         }
     }
-    public static int NoOfFavoritesProducts(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static int NoOfFavoritesProducts(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("verify No of products on ' Favorites ' page");
         int NoProducts;
         if(driver.findElements(NoOfProducts).size()>0) {
@@ -77,7 +78,7 @@ public class FavoriesPage {
         }
         return NoProducts;
     }
-    public static void FavoritesPageContentVerify(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void FavoritesPageContentVerify(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(2000);
         StepLable("Content verification on ' Favorites ' page");
         //Verify no of products in result page
@@ -119,7 +120,7 @@ public class FavoriesPage {
             }
         }
     }
-    public static double DeleteFavorites(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static double DeleteFavorites(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(2000);
         ExpectedLable("Verify number of items available in the ' Favorites ' menu");
         double noOfItem;
@@ -141,7 +142,7 @@ public class FavoriesPage {
         }
         return noOfItem;
     }
-    public static void DeleteFavoritesFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void DeleteFavoritesFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(2000);
         ExpectedLable("Verify number of items available in the ' Favorites ' menu");
         double noOfItem;
@@ -168,7 +169,7 @@ public class FavoriesPage {
             ActualLable("Product deleted successfully from ' Favorites ' menu" ,"Pass");
         }
     }
-    public static void VerifyFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void VerifyFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         String ExpectPartNum = ProductCartPage.AddToFavoritesFunctionalityPCart(driver);
         StepLable("Now Verify that the Product is added to Favorites or not");
@@ -180,7 +181,7 @@ public class FavoriesPage {
             ActualLable("Product with MFR Part Number ' "+ExpectPartNum+" ' is listed successfully in Favorites" ,"Pass");
         }else{ActualLable("Product with MFR Part Number ' "+ExpectPartNum+" is not showing in Favorites list" ,"Fail");}
     }
-    public static void VerifyAddToCartOnFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void VerifyAddToCartOnFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         ExpectedLable("Check 'Add to Cart' button is available on Favorites Page");
         if(driver.findElements(AddToCart).size()>0) {
             ActualLable("Successfully Verified 'Add to Cart' is available in Favorites Page", "Pass");
@@ -193,7 +194,7 @@ public class FavoriesPage {
             ActualLable("Products are not available in Favorites Page", "Fail");
         }
     }
-    public static String SelectProductOnFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static String SelectProductOnFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         ExpectedLable("Get the Prooduct name and Part number for the first item in the list");
         String NameOfItem = driver.findElements(ProductName).get(0).getText();
@@ -207,7 +208,7 @@ public class FavoriesPage {
         log.info("Clicked on Learn more button");
         return NameOfItem;
     }
-    public static void StatusVerifyForPro(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void StatusVerifyForPro(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Availability Status for the product with respect to no of Quantity availability");
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("130113");//adding object in arraylist
@@ -265,7 +266,7 @@ public class FavoriesPage {
         }
 
     }
-    public static String AddToFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static String AddToFavoritesFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         String AssertName =ProductSearchPage.SelectProductOnSearchResultPage(driver);
         Thread.sleep(2000);
         ExpectedLable("Verify Assert for Add to Favorites button ");
@@ -278,11 +279,11 @@ public class FavoriesPage {
         else{ ActualLable("Assert verified Failed for Add to Favorites button","Fail");   }
         return AssertName;
     }
-    public static void StatusVerifyForProducts(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void StatusVerifyForProducts(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         ProductSearchPage.GetStatusProducts(driver);
     }
-    public static ArrayList<String> SelectProductFromFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static ArrayList<String> SelectProductFromFavoritesPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Adding Product From Favorites page");
         Thread.sleep(3000);
         HomePage.ClickOnFavoritesMenu(driver);

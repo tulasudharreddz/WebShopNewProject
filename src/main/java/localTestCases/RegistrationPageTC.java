@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import pageObject.HomePage;
 import pageObject.RegistrationPage;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -29,7 +30,7 @@ public class RegistrationPageTC extends Browser {
     public void setUp() throws WriteException, IOException, BiffException { driver=getDriver();   }
 
     @Test
-    public void WS_TC_80() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_80() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             DataDriven.ReportStartup(80);
             HomePage.ClickOnRegisterHereLink(driver);
@@ -45,7 +46,7 @@ public class RegistrationPageTC extends Browser {
     }
 
     @Test
-    public void WS_TC_81() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_81() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             DataDriven.ReportStartup(81);
             HomePage.ClickOnRegisterHereLink(driver);
@@ -62,7 +63,7 @@ public class RegistrationPageTC extends Browser {
     }
 
     @Test
-    public void WS_TC_83() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_83() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             DataDriven.ReportStartup(83);
             HomePage.ClickOnRegisterHereLink(driver);
@@ -79,7 +80,7 @@ public class RegistrationPageTC extends Browser {
     }
 
     @Test
-    public void WS_TC_84() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_84() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             DataDriven.ReportStartup(84);
             HomePage.ClickOnRegisterHereLink(driver);

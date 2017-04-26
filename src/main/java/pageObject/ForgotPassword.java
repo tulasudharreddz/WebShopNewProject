@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -24,7 +25,7 @@ public class ForgotPassword {
 
 
 	
-	public static String ErrorMessageForEmail(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static String ErrorMessageForEmail(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		ExpectedLable("Enter invalid user name in email blank");
 		LoginPage.ResetPasswordEmail(driver).sendKeys("tt");
 		ActualLable("Successfully entered invalid user name into email blank","Pass");
@@ -40,7 +41,7 @@ public class ForgotPassword {
 		return errormessage;
 	}
 
-	public static void AssertVerifyForResetPassword(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void AssertVerifyForResetPassword(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 
 		ExpectedLable("Verify 'Label text' is available or not ?");
 		if(driver.findElements(LabeltextElement).size()>0){

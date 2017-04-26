@@ -1,5 +1,6 @@
 package localTestCases;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class DemoLocal extends Browser{
 
 	public static ArrayList<ArrayList> ProductDetailsArrayList;
 	@Test
-	public void Demo_TC_01() throws IOException, WriteException, InterruptedException {
+	public void Demo_TC_01() throws IOException, WriteException, InterruptedException, AWTException {
 		try {
 			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
@@ -63,14 +64,15 @@ public class DemoLocal extends Browser{
 		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 	}
 	@Test
-	public void MobileAutomation() throws IOException, WriteException, InterruptedException {
+	public void MobileAutomation() throws IOException, WriteException, InterruptedException, AWTException {
 		try {
 			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
 			UITesting.HomePageUIVerification(driver);
-			/*JiraAccess.JiraFunctionality(driver);
-			LoginPage.Loginfunctionality(driver);*/
+			/*String path ="D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\21-04-2017\\WS_TC_136-05-39-screen-7.jpeg";
+			JiraAccess.JiraFunctionality(driver,path);*/
+			/*LoginPage.Loginfunctionality(driver);*/
 
 		}
 		catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}

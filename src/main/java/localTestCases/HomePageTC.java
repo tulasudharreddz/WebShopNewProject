@@ -48,7 +48,7 @@ public class HomePageTC extends Browser{
     /*   WS_TC_30: AssertVerifyForDefaultAddress that Shop menu button is displaying or not and options under Shop menu are available or not */
 
     @Test
-    public void WS_TC_30() throws InterruptedException, IOException, WriteException, BiffException {
+    public void WS_TC_30() throws InterruptedException, IOException, WriteException, BiffException, AWTException {
         try{
             DataDriven.ReportStartup(30);
             Thread.sleep(2000);
@@ -69,7 +69,7 @@ public class HomePageTC extends Browser{
     /* WS_TC_31: AssertVerifyForDefaultAddress Each menu under Shop Menu */
 
     @Test
-    public void WS_TC_31() throws InterruptedException, IOException, WriteException, BiffException {
+    public void WS_TC_31() throws InterruptedException, IOException, WriteException, BiffException, AWTException {
         try {
             DataDriven.ReportStartup(31);
             Thread.sleep(2000);

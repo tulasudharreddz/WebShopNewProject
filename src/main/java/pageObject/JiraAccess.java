@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +41,7 @@ public class JiraAccess {
     static private By IssueSummery = By.xpath("//input[@id='summary']");
     static private By IssueDescription = By.xpath("//textarea[@id='description']");
     static private By IssueEnvironment = By.xpath("//textarea[@id='environment']");
+    static private By browseSc = By.xpath("//button[contains(text(),'browse')]");
     static private By AssignToMe = By.xpath("//a[@id='assign-to-me-trigger']");
     static private By ConfirmCreateIssueButton = By.xpath("//input[@id='issue-create-submit']|//*[@id='create-issue-submit']");
     static private By IssueNumber = By.xpath("//a[@class='issue-created-key issue-link']");
@@ -47,14 +51,14 @@ public class JiraAccess {
     static private By ConfirmLogOut = By.xpath("//button[@id='logout']");
 
 
-    public static String JiraFunctionality(WebDriver driver) throws InterruptedException {
+    public static String JiraFunctionality(WebDriver driver,String ScPath) throws InterruptedException, AWTException {
         //String Parent_Window = driver.getWindowHandle();
         second_driver = new ChromeDriver();
         second_driver.manage().window().maximize();
         second_driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String IssueNumber = null;
         //Keys.chord(Keys.CONTROL,"N");
-        IssueNumber= CreateIssue(second_driver);
+        IssueNumber= CreateIssue(second_driver,ScPath);
         //driver.(Keys.CONTROL + 'N')
         //Keys.chord(Keys.CONTROL,"t");
         // Switching from parent window to child window
@@ -79,7 +83,7 @@ public class JiraAccess {
         second_driver.findElement(LoginButton).click();
     }
     public static ArrayList<String> JiraIssueArray=new ArrayList<String>();
-    public static String CreateIssue(WebDriver second_driver) throws InterruptedException {
+    public static String CreateIssue(WebDriver second_driver,String Path) throws InterruptedException, AWTException {
         String IssueAttr = null;
         JiraLoginFun(second_driver);
         if(second_driver.findElement(Header).getText().contentEquals("System dashboard")){
@@ -108,6 +112,26 @@ public class JiraAccess {
                 second_driver.findElement(IssueEnvironment).clear();
                 Thread.sleep(1000);
                 second_driver.findElement(IssueEnvironment).sendKeys(IssueEnvironmentTxt);
+                //Screen shot attachment
+                Thread.sleep(1000);
+                second_driver.findElement(browseSc).click();
+                Thread.sleep(2000);
+                StringSelection ss = new StringSelection(Path);
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+                //imitate mouse events like ENTER, CTRL+C, CTRL+V
+                Robot robot = new Robot();
+                robot.keyPress(KeyEvent.VK_CONTROL);
+                robot.keyPress(KeyEvent.VK_V);
+                robot.keyRelease(KeyEvent.VK_V);
+                robot.keyRelease(KeyEvent.VK_CONTROL);
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+                robot.keyPress(KeyEvent.VK_TAB);
+                robot.keyRelease(KeyEvent.VK_TAB);
+
+                robot.keyPress(KeyEvent.VK_ENTER);
+                robot.keyRelease(KeyEvent.VK_ENTER);
+                Thread.sleep(10000);
                 second_driver.findElement(AssignToMe).click();
                 Thread.sleep(1000);
                 second_driver.findElement(ConfirmCreateIssueButton).click();

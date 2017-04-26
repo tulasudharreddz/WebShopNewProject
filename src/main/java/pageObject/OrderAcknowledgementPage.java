@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -35,7 +36,7 @@ public class OrderAcknowledgementPage {
     static private By ShowPictures = By.xpath("//a[contains(text(),'Show pictures')]");
 
 
-    public static void OrderAcknowledgementPageVerify(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void OrderAcknowledgementPageVerify(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Acknowledgement Of The Order");
         Thread.sleep(5000);
         String PageAssert = driver.findElement(PageTitle).getText();
@@ -43,7 +44,7 @@ public class OrderAcknowledgementPage {
         Assert.assertEquals(PageAssert, "Order Acknowledgement");
         ActualLable("'Order Acknowledgement' page verified successfully", "Pass");
     }
-    public static void GetOrderAcknowledgement(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void GetOrderAcknowledgement(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         OrderAcknowledgementPageVerify(driver);
         int size = driver.findElements(AcknowledgementLines).size();
         for(int i = 0;i<size;i++){
@@ -52,7 +53,7 @@ public class OrderAcknowledgementPage {
             ActualLable("line "+ i +" is "+ orderAcknowledgementText, "Pass");
         }
     }
-    public static void VerifyEmailNotificationToUser(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyEmailNotificationToUser(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         obje.repository(driver);
         driver.navigate().to("http://www.yopmail.com/en/");
         ExpectedLable("Check 'Email Blank' is available or not ? " );
@@ -67,7 +68,7 @@ public class OrderAcknowledgementPage {
             ActualLable("Verification failed, Email blank is not Available", "Fail");
         }
     }
-    public static void DeleteExistEmails(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void DeleteExistEmails(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable(" Delete Previous Emails from inbox");
         VerifyEmailNotificationToUser(driver);
         ExpectedLable("Check Emails available in inbox or not ?" );
@@ -84,7 +85,7 @@ public class OrderAcknowledgementPage {
             ActualLable("Verified successfully, There are No Emails in Inbox", "Pass");
         }
     }
-    public static void VerifyEmailHeader(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyEmailHeader(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         VerifyEmailNotificationToUser(driver);
         ExpectedLable("Check Emails available in inbox or not ?" );
         if(driver.findElements(SelectFirstEmails).size()>0){

@@ -1,5 +1,6 @@
 package localTestCases;
 
+import java.awt.*;
 import java.io.IOException;
 
 import GenericLib.Browser;
@@ -48,7 +49,7 @@ public class LandingPageTC extends Browser
 	*/
 
 	@Test
-	public void WS_TC_01() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_01() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			DataDriven.ReportStartup(1);
 			LoginPage.PageTitle(driver);
@@ -66,7 +67,7 @@ public class LandingPageTC extends Browser
 	b) Textbox - User Name & Password
 	c) Button - Login*/
 	@Test
-	public void WS_TC_02() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_02() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			DataDriven.ReportStartup(2);
 			LoginPage.LoginFieldsAssertVerify(driver);
@@ -83,7 +84,7 @@ public class LandingPageTC extends Browser
 	Expe result : Login should be successful and user should be redirected to 'Home' page
 	 */
 	@Test
-	public void WS_TC_03() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_03() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			//check that user able to login with valid credentials or not
 			Thread.sleep(2000);
@@ -103,7 +104,7 @@ public class LandingPageTC extends Browser
 		Captcha
 		Button - Email Password	 */
 	@Test
-	public void WS_TC_04() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_04() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			//check that user able to login with valid credentials or not
 			DataDriven.ReportStartup(4);
@@ -125,7 +126,7 @@ public class LandingPageTC extends Browser
 
 	 */
 	@Test
-	public void WS_TC_05() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_05() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			DataDriven.ReportStartup(5);
 			LoginPage.ClickOnResetPasswordLink(driver);
@@ -143,7 +144,7 @@ public class LandingPageTC extends Browser
 	 */
 
 	@Test
-	public void WS_TC_06() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_06() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			DataDriven.ReportStartup(6);
 			Thread.sleep(2000);
@@ -161,7 +162,7 @@ public class LandingPageTC extends Browser
 
 	// AssertVerifyForDefaultAddress that all the static links are working or not.
 	@Test
-	public void WS_TC_07() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException {
+	public void WS_TC_07() throws RowsExceededException, WriteException, IOException, InterruptedException, BiffException, AWTException {
 		try{
 			DataDriven.ReportStartup(7);
 			StepLable("Verify All static links on Landing page");

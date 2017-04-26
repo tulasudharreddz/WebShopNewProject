@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import jxl.Sheet;
 import jxl.write.WritableSheet;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +58,7 @@ public class HomePageBSTC extends BrowserStack{
 
     }*/
 
-    public void TC_Home_01() throws InterruptedException, WriteException, IOException, BiffException {
+    public void TC_Home_01() throws InterruptedException, WriteException, IOException, BiffException, AWTException {
 
         Thread.sleep(2000);
         log.info("URL entered and page is loaded");
@@ -77,7 +78,7 @@ public class HomePageBSTC extends BrowserStack{
 
 
 @Test
-    public void WS_TC_31() throws InterruptedException, IOException ,WriteException{
+    public void WS_TC_31() throws InterruptedException, IOException, WriteException, AWTException {
 
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
         Thread.sleep(2000);

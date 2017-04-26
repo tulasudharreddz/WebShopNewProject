@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class ShoppingCart {
     static private By AvailabilityBlock = By.xpath("//is-availability[@class='hidden-xs']/div/span[@class='product-availability-text text-right']");
 
 
-    public static void VerifyShoppingCartPageAsserts(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void VerifyShoppingCartPageAsserts(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(2000);
 
         ExpectedLable("Verify ' Item Details ' section available in the shopping cart or not ?");
@@ -90,7 +91,7 @@ public class ShoppingCart {
             driver.findElement(ItemDetails).click();
         }
     }
-    public static void DeleteItem(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void DeleteItem(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(2000);
         ExpectedLable("Verify number of items available in the shopping cart");
         if(driver.findElements(DeleteItem).size()>0){
@@ -111,7 +112,7 @@ public class ShoppingCart {
             ActualLable("Products are not available in shopping cart " ,"Pass");
         }
     }
-    public static double DeleteExistItem(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static double DeleteExistItem(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         Thread.sleep(1000);
         StepLable("Checking cart is already having products or not if yes delete all products");
         double noOfCartItemsAavailable = HomePage.VerifyCart(driver);
@@ -125,7 +126,7 @@ public class ShoppingCart {
         }
         return noOfCartItemsAavailable;
     }
-    public static void VerifyDeleteExistItem(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyDeleteExistItem(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 
         ExpectedLable("Verify Delete Shopping cart items functionality");
         if (driver.findElements(DeleteItem).size() > 0) {
@@ -148,7 +149,7 @@ public class ShoppingCart {
         List<WebElement> noQuantity = driver.findElements(Quantity);
         return noQuantity;
     }
-    public static int VerifyItemCount(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static int VerifyItemCount(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         HomePage.ClickonShoppingCart(driver);
         int noQuantity = QuantityBlank(driver).size();
         int Totalsum = 0;
@@ -178,7 +179,7 @@ public class ShoppingCart {
         List<WebElement> noExtendedPrice = driver.findElements(ExtendedPrice);
         return noExtendedPrice;
     }
-    public static Double VerifyCartSubtotal(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static Double VerifyCartSubtotal(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Cart Sub total");
         int noUnitPrice = UnitPrice(driver).size();
         Double CartSubtotal = 0.00;
@@ -230,7 +231,7 @@ public class ShoppingCart {
 
         return ActualCartSubtotal;
     }
-    public static void VerifyForCartSummeryPannelOpenedOrNot(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyForCartSummeryPannelOpenedOrNot(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Open Cart Summery Panel in Shopping cart page");
         if(driver.findElements(OpenCartSummeryPannel).size()>0) {
             ActualLable("Cart Summery Panel already Opened" ,"Pass");
@@ -239,7 +240,7 @@ public class ShoppingCart {
             ActualLable("Cart Summery Panel Opened successfully" ,"Pass");
         }
     }
-    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ContentVerifyForCartSummery(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("Cart Subtotal");
         al.add("Logistikgebühr");
@@ -257,7 +258,7 @@ public class ShoppingCart {
             }
         }
     }
-    public static Double VerifyCartGrandTotal(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static Double VerifyCartGrandTotal(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 
         Double CartSubtotal = VerifyCartSubtotal(driver);
         StepLable("Verify Cart Grand total");
@@ -300,7 +301,7 @@ public class ShoppingCart {
         ActualLable("Actual Cart Grand Total is "+ ActualCartGrandTotal,"Pass");
         return ActualCartGrandTotal;
     }
-    public static void ClickonCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ClickonCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Check 'Proceed to checkout' button is displaying or not");
         if (driver.findElements(ProceedtocheckoutXpath).size()>0) {
             String ProceedtoCheckoutText = driver.findElement(ProceedtocheckoutXpath).getText();
@@ -315,7 +316,7 @@ public class ShoppingCart {
             ActualLable("'Proceed to checkout' button is not available", "Fail");
         }
     }
-    public static void AssertVerifyForItemDetails(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void AssertVerifyForItemDetails(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable(" Content verification for Item details section ");
         ExpectedLable("Verify Assert for ' Item Details ' panel title ");
         String panelTitle=driver.findElement(ItemDetails).getText();
@@ -368,7 +369,7 @@ public class ShoppingCart {
             ActualLable("Failed to verify assert for 'Inventory Icon' in ' Item Details ' section", "Fail");
         }
     }
-    public static void VerifyEditQuantityfunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyEditQuantityfunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Verify Assert for ' Quantity blank ' for every product");
         long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
         if (driver.findElements(Quantity).size() > 0) {
@@ -388,7 +389,7 @@ public class ShoppingCart {
             ActualLable("Quantity changed successfully", "Pass");
         }else{ ActualLable("Edit Quantity functionality failed ", "Fail");}
     }
-    public static void VerifyDisplayOfLineItem(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyDisplayOfLineItem(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 
         ExpectedLable("Verify line items are arranged as different items or not");
         long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
@@ -399,7 +400,7 @@ public class ShoppingCart {
         } else { ActualLable("Line items are combined more than one product in one block", "Fail");}
 
     }
-    public static void VerifyLogisticCharge(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyLogisticCharge(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify 'Shipping Charges' in shopping cart");
         HomePage.ClickonShoppingCart(driver);
         ExpectedLable("Open Cart Summery Panel in Shopping cart page");
@@ -434,7 +435,7 @@ public class ShoppingCart {
         }
 
     }
-    public static void VerifySalesTax(WebDriver driver) throws IOException, WriteException, InterruptedException{
+    public static void VerifySalesTax(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify 'Sales vat Charges' in shopping cart");
         HomePage.ClickonShoppingCart(driver);
         ShoppingCart.VerifyForCartSummeryPannelOpenedOrNot(driver);
@@ -483,7 +484,7 @@ public class ShoppingCart {
         }
         return ExpectedSalesVat;
     }
-    public static void VerifyContinueShoppingButtonFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException{
+    public static void VerifyContinueShoppingButtonFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Continue Shopping Button functionality");
         HomePage.ClickonShoppingCart(driver);
         ExpectedLable("Verify That Continue Shopping Button is available or not ?");
@@ -501,7 +502,7 @@ public class ShoppingCart {
             VerifyContinueShoppingButtonFunctionality(driver);
         }
     }
-    public static void VerifyCheckOutButtonFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException{
+    public static void VerifyCheckOutButtonFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Check out Button functionality");
         HomePage.ClickonShoppingCart(driver);
         ExpectedLable("Verify That 'Checkout' Button is available or not ?");
@@ -532,7 +533,7 @@ public class ShoppingCart {
         AssertNamesSC.add(QuantityST);
         return AssertNamesSC;
     }
-    public static double CalculateExtendedPrice(WebDriver driver) throws IOException, WriteException, InterruptedException{
+    public static double CalculateExtendedPrice(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Extended Price calculation");
         ExpectedLable("Get the Number of Products Added to Shopping cart");
         long NoOfProductAddedToCart = driver.findElements(NoOfCartProducts).size();
@@ -560,7 +561,7 @@ public class ShoppingCart {
         }
         return ExtendedPriceSum;
     }
-    public static ArrayList<String> VerifyCartSummeryTotalDemo(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static ArrayList<String> VerifyCartSummeryTotalDemo(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         double ExpectedCartSubTotal = CalculateExtendedPrice(driver);
         double ExpectedCartSubTotalis = Math.round( ExpectedCartSubTotal * 100.0 ) / 100.0;
         ExpectedLable("Calculate Cart sub total value ");
@@ -620,7 +621,7 @@ public class ShoppingCart {
         AssertName1.add(ActualCartGrandTotalString);
         return AssertName1;
     }
-    public static boolean VerifyProductDetailsOnShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static boolean VerifyProductDetailsOnShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         boolean Status = true;
         ArrayList<String> AssertNamesText = new ArrayList<String>();
         AssertNamesText.add("Name Of Item");

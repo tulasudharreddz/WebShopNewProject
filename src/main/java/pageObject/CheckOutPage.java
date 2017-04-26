@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -36,7 +37,7 @@ public class CheckOutPage {
     static private By ReviewOrderXpath = By.xpath("//button[contains(text(),'Review Order')]");
 
 
-    public static void VerifyCheckoutPageAssert(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void VerifyCheckoutPageAssert(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ShoppingCart.ClickonCheckout(driver);
         Thread.sleep(2000);
         ExpectedLable("Check 'checkout' title is displaying or not");
@@ -49,7 +50,7 @@ public class CheckOutPage {
             ActualLable("'Proceed to checkout' button is not available", "Fail");
         }
     }
-    public static void SelectingAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void SelectingAddress(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         VerifyCheckoutPageAssert(driver);
         StepLable("Complete Check out page action");
         ArrayList<String> AddressNames=new ArrayList<String>();
@@ -76,7 +77,7 @@ public class CheckOutPage {
             }
         }
     }
-    public static void SelectAddress(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void SelectAddress(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         //VerifyCheckoutPageAssert(driver);
         //select Billing Address
         StepLable("Complete Check out page action");
@@ -105,7 +106,7 @@ public class CheckOutPage {
         }
 
     }
-    public static String ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static String ClickonProceedtoCheckout(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Complete Check out page action");
         SelectingAddress(driver);
         ExpectedLable("Provide Reference Number in the blank");
@@ -133,7 +134,7 @@ public class CheckOutPage {
         return ReferenceNumber;
     }
 
-    public static String CompleteCheckOut(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static String CompleteCheckOut(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Complete Check out page action");
         SelectAddress(driver);
         ExpectedLable("Provide Reference Number in the blank");
@@ -160,7 +161,7 @@ public class CheckOutPage {
         }
         return ReferenceNumber;
     }
-    public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static boolean CheckInstallationServiceCostMessage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         HomePage.ClickonShoppingCart(driver);
         ShoppingCart.ClickonCheckout(driver);
         ExpectedLable(" Check Installation Service Cost Message is displaying or not");
@@ -176,7 +177,7 @@ public class CheckOutPage {
         }
         return status;
     }
-    public static double GetInstallationCost(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static double GetInstallationCost(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         double InstallCost = 0.00;
         ExpectedLable(" Get Installation charges from aplication");
         if(driver.findElements(InstallationServiceCostText).size()>0) {
@@ -192,7 +193,7 @@ public class CheckOutPage {
         }
         return InstallCost;
     }
-    public static Double VerifyStatusForInstallationServices(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static Double VerifyStatusForInstallationServices(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         boolean messageStatus = CheckOutPage.CheckInstallationServiceCostMessage(driver);
         Double InstallationCost = null;
         ExpectedLable(" Check Installation Service Cost message, status message should not display");
@@ -205,7 +206,7 @@ public class CheckOutPage {
         }
         return InstallationCost;
     }
-    public static ArrayList<String> GetInstallChargesIntoArray(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static ArrayList<String> GetInstallChargesIntoArray(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ArrayList<String> CartSummeryValues = ShoppingCart.VerifyCartSummeryTotalDemo(driver);
         SelectingAddress(driver);
         double InstallationCost = GetInstallationCost(driver);
@@ -238,7 +239,7 @@ public class CheckOutPage {
 
         return CartSummeryUpdated;
     }
-    public static String CompleteCheckOutPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static String CompleteCheckOutPage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("Provide Reference Number in the blank");
         Random rand = new Random();
         int  ReferenceNumbe = rand.nextInt(9999) + 1000;

@@ -15,6 +15,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -52,7 +53,7 @@ public class ShopModuleTC extends Browser {
     f) Search by Category */
 
     @Test
-    public void WS_TC_57() throws IOException, InterruptedException ,WriteException{
+    public void WS_TC_57() throws IOException, InterruptedException, WriteException, AWTException {
         try{
             obje.repository(driver);
             DataDriven.ReportStartup(57);
@@ -79,7 +80,7 @@ public class ShopModuleTC extends Browser {
         c. Selected Page Navigation - Click on a specific page number
         d. No of Search Results Per Page - Select a value from Display dropdown*/
     @Test
-    public void WS_TC_58() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_58() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(58);
@@ -102,7 +103,7 @@ public class ShopModuleTC extends Browser {
     WS_TC_59:  Validate the 'Learn More' button functionality - Click on the Learn More button against a selected record
     */
     @Test
-    public void WS_TC_59() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_59() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             DataDriven.ReportStartup(59);
             obje.repository(driver);
@@ -130,7 +131,7 @@ public class ShopModuleTC extends Browser {
     c. Vendor Inventory level = 0 units
     */
     @Test
-    public void WS_TC_60() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_60() throws IOException, WriteException, InterruptedException, AWTException {
 
         try {
             obje.repository(driver);
@@ -150,7 +151,7 @@ public class ShopModuleTC extends Browser {
         }
     }
     @Test
-    public void WS_TC_61() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_61() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(61);

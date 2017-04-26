@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -41,7 +42,7 @@ public class ReviewOrderPage {
 
 
 
-    public static void ReviewOrderPageVerify(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ReviewOrderPageVerify(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Review Order Page Verification");
         Thread.sleep(2000);
         String PageAssert = driver.findElement(PageTitle).getText();
@@ -49,7 +50,7 @@ public class ReviewOrderPage {
         Assert.assertEquals(PageAssert, "Review");
         ActualLable("'Review Order' page verified successfully", "Pass");
     }
-    public static void AcceptTermsAndConditions(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void AcceptTermsAndConditions(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         String TermsAndConditionsString = driver.findElement(TermsAndConditionsXpath).getText();
         ExpectedLable("Check 'Terms And Conditions' check box is displaying or not");
         Assert.assertEquals(TermsAndConditionsString, "I have read and accept the terms and conditions of sale.");
@@ -64,7 +65,7 @@ public class ReviewOrderPage {
             ActualLable("'Terms And Conditions' Check box is not available", "Fail");
         }
     }
-    public static void COnfirmAndPlaceOrder(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void COnfirmAndPlaceOrder(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ReviewOrderPageVerify(driver);
         AcceptTermsAndConditions(driver);
         Thread.sleep(3000);
@@ -101,7 +102,7 @@ public class ReviewOrderPage {
         return AssertNamesSC;
     }
     protected static ArrayList<String> ExpectedCartSummeryArray;
-    public static String ConfirmAndPlaceOrderDemo(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static String ConfirmAndPlaceOrderDemo(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedCartSummeryArray = CheckOutPage.GetInstallChargesIntoArray(driver);
         String ExpectedReferenceNumber = CheckOutPage.CompleteCheckOutPage(driver);
         ReviewOrderPageVerify(driver);
@@ -136,7 +137,7 @@ public class ReviewOrderPage {
         }
         return ActualReferenceNumber;
     }
-    public static boolean VerifyProductDetailsOnReviewOrderPage(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static boolean VerifyProductDetailsOnReviewOrderPage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         boolean Status = true;
         ArrayList<String> AssertNamesText = new ArrayList<String>();
         AssertNamesText.add("Name Of Item");
@@ -178,7 +179,7 @@ public class ReviewOrderPage {
 
         return AssertName1;
     }
-    public static boolean VerifyCartSummeryDetailsOnReviewOrderPage(WebDriver driver) throws IOException, WriteException, InterruptedException{
+    public static boolean VerifyCartSummeryDetailsOnReviewOrderPage(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         boolean Status = true;
         ArrayList<String> AssertNamesText = new ArrayList<String>();
         AssertNamesText.add("Cart Subtotal");

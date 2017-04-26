@@ -14,6 +14,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.*;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -38,7 +39,7 @@ public class ProductCartTC extends Browser {
   WS_TC_67:  Verify the content in Product Card Page
   */
     @Test
-    public void WS_TC_67() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_67() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(67);
@@ -66,7 +67,7 @@ public class ProductCartTC extends Browser {
   WS_TC_68:  Validate the "Add to Cart" button functionality
   */
     @Test
-    public void WS_TC_68() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_68() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(68);
@@ -99,7 +100,7 @@ public class ProductCartTC extends Browser {
     WS_TC_69:Validate the "Add to Favorites" button functionality
     */
     @Test
-    public void WS_TC_69() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_69() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(69);
@@ -124,7 +125,7 @@ public class ProductCartTC extends Browser {
     WS_TC_70:  Validate the "Add to Cart" button functionality
     */
     @Test
-    public void WS_TC_70() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_70() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(69);

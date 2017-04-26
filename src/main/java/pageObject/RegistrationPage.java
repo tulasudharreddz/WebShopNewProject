@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -45,7 +46,7 @@ public class RegistrationPage {
 		element = driver.findElement(By.id(""+AssertName.get(field)+""+number));
 		return element;
 	}
-	public static void SingleUserRegistration(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void SingleUserRegistration(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		String ReferenceNumber = null;
 		ArrayList<String> AssertName=new ArrayList<String>();
 		AssertName.add("Company name");
@@ -86,7 +87,7 @@ public class RegistrationPage {
 			ActualLable("Successfully Clicked on : "+AssertName.get(5) ,"Pass");
 		}else{ActualLable(AssertName.get(5)+" is not enabled" ,"Fail");}
 	}
-	public static void AssertVerifyForRegistrationUserList(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void AssertVerifyForRegistrationUserList(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		Thread.sleep(1000);
 		ExpectedLable("Verify Registration user list page title");
 		String UserListPageTitle = driver.findElement(RegistrationUserListPageTitle).getText();
@@ -95,7 +96,7 @@ public class RegistrationPage {
 		}else{ActualLable(" Failed to verify, Assert failed for Registration User list page title " ,"Fail");}
 
 	}
-	public static void ContentVerifyForRegistrationUserList(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void ContentVerifyForRegistrationUserList(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		StepLable("Content verify on Request Register User list");
 		ArrayList<String> AssertName=new ArrayList<String>();
 		AssertName.add("firstName");
@@ -152,7 +153,7 @@ public class RegistrationPage {
 		}else{ActualLable("Failed to verify, Assert failed for '"+AssertName.get(9)+"' on Registration User list page " ,"Fail");}
 
 	}
-	public static void VerifyPrivacyPolicylink(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void VerifyPrivacyPolicylink(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		StepLable("Verify Privacy Policy link");
 		ExpectedLable("Verify that 'Privacy policy link' is available on the page or not ?");
 		if(driver.findElements(PrivacyPolicyCheckBox).size()>0){
@@ -173,7 +174,7 @@ public class RegistrationPage {
 		}else{ActualLable("Failed to verify, Assert failed for 'Privacy policy link' on Registration User list page " ,"Fail");}
 	}
 
-	public static void VerifyTermsOfUselink(WebDriver driver) throws IOException, WriteException, InterruptedException {
+	public static void VerifyTermsOfUselink(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
 		StepLable("Verify Terms of Use link");
 		ExpectedLable("Verify that 'Terms of Use link' is available on the page or not ?");
 		if(driver.findElements(TermsOfUseLink).size()>0){

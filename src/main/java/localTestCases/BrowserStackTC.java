@@ -11,6 +11,7 @@ import jxl.write.WritableSheet;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -51,7 +52,7 @@ public class BrowserStackTC  extends MobileBrowserStack {
     }
     //public static ArrayList<ArrayList> ProductDetailsArrayList;
     @Test
-    public void DemoMobile_TC_01() throws IOException, WriteException, InterruptedException {
+    public void DemoMobile_TC_01() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             DataDriven.ReportStartup(136);
             Thread.sleep(2000);

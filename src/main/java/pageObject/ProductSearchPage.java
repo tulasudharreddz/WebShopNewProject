@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class ProductSearchPage {
         return Product;
     }
     public static final AtomicInteger count6 = new AtomicInteger(-1);
-    public static ArrayList<String> AddToShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static ArrayList<String> AddToShoppingCart(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Moving to Product Cart Page");
         String s=HomePage.ShopMenuOnHomePage(driver).getText();
         Thread.sleep(2000);
@@ -117,7 +118,7 @@ public class ProductSearchPage {
         return AssertName;
     }
 
-    public static String SelectProductOnSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static String SelectProductOnSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Moving to Product Cart Page");
         Thread.sleep(2000);
         HomePage.ClickonShopmenuonHomePage(driver);
@@ -134,7 +135,7 @@ public class ProductSearchPage {
         ActualLable("Successfully clicked on Learn more button for particular Item ","Pass");
         return NameOfItem;
     }
-    public static ArrayList<String> SelectProductFromSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static ArrayList<String> SelectProductFromSearchResultPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         HomePage.SearchProductFromHomePage(driver);
         Thread.sleep(2000);
         ExpectedLable("Get the Product name for searched Product");
@@ -165,7 +166,7 @@ public class ProductSearchPage {
         return AssertName;
     }
 
-    public static void MovingToProductSearch(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void MovingToProductSearch(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         ExpectedLable("Clicking on Shop Menu");
         Thread.sleep(2000);
@@ -178,7 +179,7 @@ public class ProductSearchPage {
         ActualLable("Successfully clicked on Sub Category under Shop Menu","Pass");
     }
 
-    public static void StatusVerifyForProducts(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void StatusVerifyForProducts(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Availability Status for the product with respect to no of Quantity availability");
         ArrayList<String> al=new ArrayList<String>();//creating arraylist
         al.add("2200-15660-122");//adding object in arraylist
@@ -212,7 +213,7 @@ public class ProductSearchPage {
         }
     }
 
-    public static int NoofResults(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static int NoofResults(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         ExpectedLable("verify total number of searched results");
         String noOfResu = driver.findElement(NoOfSearchResults).getText();
         String s= noOfResu.substring(0,noOfResu.indexOf(' '));
@@ -222,7 +223,7 @@ public class ProductSearchPage {
         return result;
     }
 
-    public static void PaginationFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void PaginationFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Pagination Functionality on Search result page");
         //Verify no of products in result page
         int NoOfResults = NoofResults(driver);
@@ -292,7 +293,7 @@ public class ProductSearchPage {
 
     }
 
-    public static void ContentinSearchReasult(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void ContentinSearchReasult(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         Thread.sleep(3000);
         StepLable("Content verification on Search result page");
         //Verify no of products in result page
@@ -339,7 +340,7 @@ public class ProductSearchPage {
         }
     }
 
-    public static void NoOfReultsChangeFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException {
+    public static void NoOfReultsChangeFunctionality(WebDriver driver) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify No of records per page change functionality");
         driver.navigate().refresh();
         Thread.sleep(2000);
@@ -389,7 +390,7 @@ public class ProductSearchPage {
 
     }
 
-    public static double AddAvailableProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static double AddAvailableProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Adding Available Product to the cart");
         MovingToProductSearch(driver);
         Thread.sleep(2000);
@@ -407,7 +408,7 @@ public class ProductSearchPage {
         return noOfCartItemsAavailable;
     }
 
-    public static double AddLimitedProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static double AddLimitedProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Adding Limited Available Product to the cart");
         MovingToProductSearch(driver);
         Thread.sleep(2000);
@@ -425,7 +426,7 @@ public class ProductSearchPage {
         return noOfCartItemsAavailable;
     }
 
-    public static double AddNotAvailableProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static double AddNotAvailableProductToCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Adding Not Available Product to the cart");
         MovingToProductSearch(driver);
         Thread.sleep(2000);
@@ -443,7 +444,7 @@ public class ProductSearchPage {
         return noOfCartItemsAavailable;
     }
 
-    public static void SearchingFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void SearchingFunctionality(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Search engine functionality with different type of inputs");
         ArrayList<String> SearchText =new ArrayList<String>();//creating arraylist
         SearchText.add("Polycom SoundStation VTX 1000 - Conference phone with caller ID/call waiting - single-line operation");
@@ -491,7 +492,7 @@ public class ProductSearchPage {
             }else{ActualLable("Failed to get searched result "+ TypeOfSearch.get(i), "Fail");}
         }
     }
-    public static void GetStatusProducts(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void GetStatusProducts(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Verify Availability Status of the Products on Favorites Page");
         ArrayList<org.openqa.selenium.By> al=new ArrayList<org.openqa.selenium.By>();//creating arraylist
         al.add(AvailableStatusXpath);//adding object in arraylist
@@ -513,7 +514,7 @@ public class ProductSearchPage {
 
         }
     }
-    public static void GetS(WebDriver driver,By x,By x1,String status) throws InterruptedException, IOException, WriteException {
+    public static void GetS(WebDriver driver,By x,By x1,String status) throws InterruptedException, IOException, WriteException, AWTException {
         ExpectedLable("Search for product which the status is "+status);
         if(driver.findElements(x).size()>0){
             ActualLable("Found Product with '" +status+ " '","Pass");
@@ -540,7 +541,7 @@ public class ProductSearchPage {
         }
     }
 
-    public static void AddFlagOneProduct(WebDriver driver,int k) throws InterruptedException, IOException, WriteException {
+    public static void AddFlagOneProduct(WebDriver driver,int k) throws InterruptedException, IOException, WriteException, AWTException {
         ArrayList<String> FlagOne =new ArrayList<String>();//creating arraylist
         FlagOne.add("CISCO3925E/K9");
         FlagOne.add("CISCO2951-HSEC+/K9");
@@ -566,7 +567,7 @@ public class ProductSearchPage {
             }
         }
     }
-    public static void AddFlagTwoProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException {
+    public static void AddFlagTwoProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException, AWTException {
         ArrayList<String> FlagTwo =new ArrayList<String>();//creating arraylist
         FlagTwo.add("2200-30900-025");
         FlagTwo.add("5593-823-109");
@@ -595,7 +596,7 @@ public class ProductSearchPage {
             }
         }
     }
-    public static void AddFlagThreeProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException {
+    public static void AddFlagThreeProduct(WebDriver driver,int j) throws InterruptedException, IOException, WriteException, AWTException {
         ArrayList<String> FlagTwo =new ArrayList<String>();//creating arraylist
         FlagTwo.add("92714-01");
         FlagTwo.add("2200-07840-101");

@@ -1,5 +1,6 @@
 package GenericLib;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.format.Colour;
 import jxl.write.*;
+import jxl.write.Label;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -226,7 +228,7 @@ public class DataDriven {
 		counting++;
 	}
 
-	public static void ActualLable(String ACText,String result) throws IOException, WriteException, InterruptedException {
+	public static void ActualLable(String ACText,String result) throws IOException, WriteException, InterruptedException, AWTException {
 		LetestActualResultLabel= ACText;
 		wsheet = wbook.getSheet("ResultSheet");
 		//wsheet.addCell(new Label(2 , DataDriven1() , ACText,CellFormat()));
@@ -251,7 +253,10 @@ public class DataDriven {
 			wsheet.addHyperlink(hlk);
 			//wsheet.addCell(new Label(3 , DataDriven2() , result,cellFormat));
 			wsheet.addCell(new Label(3 , num , result,cellFormat));
-			String JiraTicket = JiraAccess.JiraFunctionality(driver);
+			String name = obr.obj.getProperty("JiraScPath")+"\\"+ folderName;
+			String Last = ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
+			String Final  = name+"\\"+Last;
+			String JiraTicket = JiraAccess.JiraFunctionality(driver,Final);
 			sResult = true;
 			SCcount++;
 		}

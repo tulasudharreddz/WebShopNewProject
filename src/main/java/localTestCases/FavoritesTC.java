@@ -16,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.*;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -42,7 +43,7 @@ public class FavoritesTC extends Browser {
     }
 
     @Test
-    public void WS_TC_90() throws IOException, InterruptedException ,WriteException{
+    public void WS_TC_90() throws IOException, InterruptedException, WriteException, AWTException {
         try{
             obje.repository(driver);
             DataDriven.ReportStartup(90);
@@ -61,7 +62,7 @@ public class FavoritesTC extends Browser {
     }
 
     @Test
-    public void WS_TC_91() throws IOException, InterruptedException ,WriteException{
+    public void WS_TC_91() throws IOException, InterruptedException, WriteException, AWTException {
         try{
             obje.repository(driver);
             DataDriven.ReportStartup(91);
@@ -87,7 +88,7 @@ public class FavoritesTC extends Browser {
         }
     }
     @Test
-    public void WS_TC_92() throws IOException, InterruptedException ,WriteException{
+    public void WS_TC_92() throws IOException, InterruptedException, WriteException, AWTException {
         try{
             obje.repository(driver);
             DataDriven.ReportStartup(92);
@@ -126,7 +127,7 @@ public class FavoritesTC extends Browser {
     }
 
     @Test
-    public void WS_TC_93() throws IOException, InterruptedException ,WriteException {
+    public void WS_TC_93() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(93);
@@ -155,7 +156,7 @@ public class FavoritesTC extends Browser {
     }
 
     @Test
-    public void WS_TC_94() throws IOException, InterruptedException ,WriteException {
+    public void WS_TC_94() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(94);
@@ -177,7 +178,7 @@ public class FavoritesTC extends Browser {
     }
 
     @Test
-    public void WS_TC_95() throws IOException, InterruptedException ,WriteException {
+    public void WS_TC_95() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(95);

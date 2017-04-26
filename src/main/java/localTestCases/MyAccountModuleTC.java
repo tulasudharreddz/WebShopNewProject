@@ -52,7 +52,7 @@ public class MyAccountModuleTC extends Browser {
     Button Controls - Clear All, Save*/
 
     @Test
-    public void WS_TC_34() throws InterruptedException, IOException, WriteException, BiffException {
+    public void WS_TC_34() throws InterruptedException, IOException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(34);
@@ -74,7 +74,7 @@ public class MyAccountModuleTC extends Browser {
 
 
     @Test
-    public void WS_TC_35() throws InterruptedException, IOException, WriteException, BiffException {
+    public void WS_TC_35() throws InterruptedException, IOException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(35);
@@ -103,7 +103,7 @@ public class MyAccountModuleTC extends Browser {
    */
 
     @Test
-    public void WS_TC_37() throws InterruptedException, IOException, WriteException, BiffException {
+    public void WS_TC_37() throws InterruptedException, IOException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(37);
@@ -131,7 +131,7 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_38() throws InterruptedException, IOException, WriteException, BiffException {
+    public void WS_TC_38() throws InterruptedException, IOException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(38);
@@ -184,7 +184,7 @@ public class MyAccountModuleTC extends Browser {
     */
 
     @Test
-    public void WS_TC_42() throws IOException, InterruptedException, WriteException, BiffException {
+    public void WS_TC_42() throws IOException, InterruptedException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(42);
@@ -209,7 +209,7 @@ public class MyAccountModuleTC extends Browser {
     b) Verify the GUI of Create New Billing Address Page
     */
     @Test
-    public void WS_TC_43() throws IOException, InterruptedException, WriteException, BiffException {
+    public void WS_TC_43() throws IOException, InterruptedException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(43);
@@ -283,7 +283,7 @@ public class MyAccountModuleTC extends Browser {
     }
 
     @Test
-    public void WS_TC_48() throws IOException, InterruptedException, WriteException, BiffException {
+    public void WS_TC_48() throws IOException, InterruptedException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(48);
@@ -303,7 +303,7 @@ public class MyAccountModuleTC extends Browser {
     }
 
     @Test
-    public void WS_TC_49() throws IOException, InterruptedException, WriteException, BiffException {
+    public void WS_TC_49() throws IOException, InterruptedException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(49);
@@ -369,7 +369,7 @@ public class MyAccountModuleTC extends Browser {
     }
 
     @Test
-    public void WS_TC_54() throws IOException, InterruptedException, WriteException, BiffException {
+    public void WS_TC_54() throws IOException, InterruptedException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(54);
@@ -388,7 +388,7 @@ public class MyAccountModuleTC extends Browser {
     }
 
     @Test
-    public void WS_TC_55() throws IOException, InterruptedException, WriteException, BiffException {
+    public void WS_TC_55() throws IOException, InterruptedException, WriteException, BiffException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(55);

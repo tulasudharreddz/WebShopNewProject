@@ -16,6 +16,7 @@ import pageObject.LoginPage;
 import pageObject.ProductSearchPage;
 import pageObject.ShoppingCart;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -37,7 +38,7 @@ public class ShoppingCartTC extends Browser {
 
 
     @Test
-    public void WS_TC_98() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_98() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(98);
@@ -55,7 +56,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_102() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_102() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(102);
@@ -78,7 +79,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_103() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_103() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(103);
@@ -103,7 +104,7 @@ public class ShoppingCartTC extends Browser {
         }
     }
     @Test
-    public void WS_TC_105() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_105() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(105);
@@ -132,7 +133,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_106() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_106() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(106);
@@ -160,7 +161,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_108() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_108() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(108);
@@ -186,7 +187,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_109() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_109() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(109);
@@ -212,7 +213,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_112() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_112() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(112);
@@ -238,7 +239,7 @@ public class ShoppingCartTC extends Browser {
     }
 
     @Test
-    public void WS_TC_113() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_113() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(113);

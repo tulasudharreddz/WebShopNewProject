@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageObject.*;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static GenericLib.DataDriven.ActualLable;
@@ -32,7 +33,7 @@ public class CheckOutTC extends Browser {
         driver=getDriver();
     }
     @Test
-    public void WS_TC_115() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_115() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(115);
@@ -59,7 +60,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_116() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_116() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(116);
@@ -85,7 +86,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_117() throws IOException, InterruptedException, WriteException {
+    public void WS_TC_117() throws IOException, InterruptedException, WriteException, AWTException {
         try {
             DataDriven.ReportStartup(117);
             LoginPage.Loginfunctionality(driver);
@@ -110,7 +111,7 @@ public class CheckOutTC extends Browser {
         } catch (Exception e) {ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
-    public void WS_TC_138() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_138() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(138);
@@ -130,7 +131,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_140() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_140() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(140);
@@ -148,7 +149,7 @@ public class CheckOutTC extends Browser {
         } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
-    public void WS_TC_141() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_141() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(141);
@@ -169,7 +170,7 @@ public class CheckOutTC extends Browser {
         } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
-    public void WS_TC_142() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_142() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(142);
@@ -192,7 +193,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_143() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_143() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(143);
@@ -214,7 +215,7 @@ public class CheckOutTC extends Browser {
         } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
-    public void WS_TC_145() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_145() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(145);
@@ -237,7 +238,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_146() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_146() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(146);
@@ -260,7 +261,7 @@ public class CheckOutTC extends Browser {
         } catch (Exception e) {  ActualLable("Exception " + e.getClass().getSimpleName(), "Fail");  }
     }
     @Test
-    public void WS_TC_147() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_147() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(147);
@@ -283,7 +284,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_149() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_149() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(149);
@@ -305,7 +306,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_150() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_150() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(150);
@@ -328,7 +329,7 @@ public class CheckOutTC extends Browser {
     }
 
     @Test
-    public void WS_TC_152() throws IOException, WriteException, InterruptedException {
+    public void WS_TC_152() throws IOException, WriteException, InterruptedException, AWTException {
         try {
             obje.repository(driver);
             DataDriven.ReportStartup(152);

@@ -205,7 +205,7 @@ public class EmailVerificationDetails {
         }
         return Status;
     }
-    public static boolean VerifyRequestReturnEmailValues(WebDriver driver, ArrayList<String> ExpectArray) throws IOException, WriteException, InterruptedException {
+    public static boolean VerifyRequestReturnEmailValues(WebDriver driver, ArrayList<String> ExpectArray) throws IOException, WriteException, InterruptedException, AWTException {
         StepLable("Verify Request Return Email Values with Order Details");
         boolean ResultStatus = false;
         for(int i=0;i<=5; i++) {

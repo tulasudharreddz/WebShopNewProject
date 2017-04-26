@@ -38,7 +38,7 @@ public class UITesting {
     static private By SubCategoryUnderShop = By.xpath("//div[@class='row']/div/ul/li/a");
     static private By SeeAllUnderShop = By.xpath("//div[@class='row']/div/ul/li/a[contains(text(),'See all')]");
 
-    public static void HomePageUIVerification(WebDriver driver) throws IOException, InterruptedException, WriteException {
+    public static void HomePageUIVerification(WebDriver driver) throws IOException, InterruptedException, WriteException, AWTException {
 
         ArrayList<By> Elements=new ArrayList<By>();
         Elements.add(HeaderOne);
@@ -102,7 +102,7 @@ public class UITesting {
         ExpectedFontType.add("Source Sans Pro");
         ExpectedFontType.add("Source Sans Pro");
 
-        for(int i=0;i<=8;i++) {
+        for(int i=0;i<=2;i++) {
             StepLable("Verify Properties for the Attribute : "+ElementNames.get(i));
             ExpectedLable("Check the ' "+ElementNames.get(i)+" ' is available or not?");
             if (driver.findElements(Elements.get(i)).size() > 0) {

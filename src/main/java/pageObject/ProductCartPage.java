@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class ProductCartPage {
         log.info("Product name on Cart page is : "+ SelectedProductName);
         return SelectedProductName;
     }
-    public static void  ContentVerifyForPCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void  ContentVerifyForPCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         Thread.sleep(2000);
         ArrayList<String> AssertName=new ArrayList<String>();//creating arraylist
@@ -101,7 +102,7 @@ public class ProductCartPage {
             else{ ActualLable("Assert is not verified for ' "+AssertName.get(i)+" '","Pass"); }
         }
     }
-    public static void  AddToCartFunctionalityPCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static void  AddToCartFunctionalityPCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
 
         ExpectedLable("' Add To Cart ' Button Should available on Product cart page");
         if(driver.findElements(AddToCart).size()>0){
@@ -115,7 +116,7 @@ public class ProductCartPage {
         else{ ActualLable("Verification failed for ' Add To Cart ' Button","Fail"); }
     }
 
-    public static String  AddToFavoritesFunctionalityPCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static String  AddToFavoritesFunctionalityPCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         String MFRPartNumberText = null;
         ExpectedLable("' Add To Favorites ' Button Should available on Product cart page");
         if(driver.findElements(AddToFavorites).size()>0){
@@ -139,7 +140,7 @@ public class ProductCartPage {
         }  else{ ActualLable("Verification failed for ' Add To Favorites ' Button","Fail"); }
         return MFRPartNumberText;
     }
-    public static String  AddToFavoritesWithSameProductPCart(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static String  AddToFavoritesWithSameProductPCart(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         String MFRPartNumberText = null;
         StepLable("Validate the Add to Favorites functionality; which is already added to Favorites. ");
         ExpectedLable("' Add To Favorites ' Button Should available on Product cart page");
@@ -181,7 +182,7 @@ public class ProductCartPage {
         else{ ActualLable("Verification failed for ' Add To Favorites ' Button","Fail"); }
         return MFRPartNumberText;
     }
-    public static ArrayList<String> SelectProductFromPCartPage(WebDriver driver) throws InterruptedException, IOException, WriteException {
+    public static ArrayList<String> SelectProductFromPCartPage(WebDriver driver) throws InterruptedException, IOException, WriteException, AWTException {
         StepLable("Adding Product From Product Cart page");
         HomePage.SearchProductFromHomePage(driver);
         Thread.sleep(2000);

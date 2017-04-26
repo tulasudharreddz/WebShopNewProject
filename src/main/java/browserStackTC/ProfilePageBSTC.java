@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 import pageObject.*;
 import sun.net.www.content.text.Generic;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +38,7 @@ public class ProfilePageBSTC extends BrowserStack{
 
 
     @Test
-    public void WS_TC_31() throws InterruptedException, IOException, WriteException {
+    public void WS_TC_31() throws InterruptedException, IOException, WriteException, AWTException {
 
         driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
