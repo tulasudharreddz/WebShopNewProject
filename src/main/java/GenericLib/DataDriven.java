@@ -256,7 +256,7 @@ public class DataDriven {
 			String name = obr.obj.getProperty("JiraScPath")+"\\"+ folderName;
 			String Last = ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 			String Final  = name+"\\"+Last;
-			String JiraTicket = JiraAccess.JiraFunctionality(driver,Final);
+			JiraAccess.JiraFunctionality(driver,Final);
 			sResult = true;
 			SCcount++;
 		}
@@ -339,8 +339,18 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.RED);
+
+			WritableCellFormat cellFormat1 = null;
+			WritableFont cellFont1 = null;
+			cellFont1 = new WritableFont(WritableFont.ARIAL, 9);
+			cellFormat1 = new WritableCellFormat(cellFont1);
+			cellFormat1.setWrap(true);
+			cellFormat1.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat1.setAlignment(Alignment.CENTRE);
+
 			testrailStatus= false;
 			wsheet.addCell(new Label(3 , ReportStartNumber , "Fail",cellFormat));
+			wsheet.addCell(new Label(5 , ReportStartNumber , JiraAccess.TestCaseFailComment(),cellFormat1));
 			sResult=false;
 		}
 		else {
@@ -353,8 +363,17 @@ public class DataDriven {
 			cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
 			cellFormat.setAlignment(Alignment.CENTRE);
 			cellFormat.setBackground(Colour.GREEN);
+
+			WritableCellFormat cellFormat1 = null;
+			WritableFont cellFont1 = null;
+			cellFont1 = new WritableFont(WritableFont.ARIAL, 9);
+			cellFormat1 = new WritableCellFormat(cellFont1);
+			cellFormat1.setWrap(true);
+			cellFormat1.setBorder(Border.ALL, BorderLineStyle.THIN);
+			cellFormat1.setAlignment(Alignment.CENTRE);
 			testrailStatus= true;
 			wsheet.addCell(new Label(3 , ReportStartNumber , "Pass",cellFormat));
+			wsheet.addCell(new Label(5 , ReportStartNumber , " ",cellFormat1));
 		}
 		/*else{
 			wsheet.addCell(new Label(3 , ResultColumn, Scresult,CellFormat1()));

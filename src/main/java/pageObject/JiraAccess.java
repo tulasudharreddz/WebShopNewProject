@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import GenericLib.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObject.*;
 
 /**
@@ -131,21 +133,39 @@ public class JiraAccess {
 
                 robot.keyPress(KeyEvent.VK_ENTER);
                 robot.keyRelease(KeyEvent.VK_ENTER);
-                Thread.sleep(10000);
-                second_driver.findElement(AssignToMe).click();
-                Thread.sleep(1000);
-                second_driver.findElement(ConfirmCreateIssueButton).click();
-                Thread.sleep(1000);
-                if(second_driver.findElements(IssueNumber).size()>0){
-                    IssueAttr = second_driver.findElement(IssueNumber).getAttribute("data-issue-key");
-                    System.out.println("Issue ID attr"+IssueAttr);
-                    JiraIssueArray.add(IssueAttr);
+                Thread.sleep(5000);
+                if(second_driver.findElements(By.xpath("//span[@style='width: 100%;']")).size()>0) {
+                    Thread.sleep(3000);
+                    second_driver.findElement(AssignToMe).click();
+                    Thread.sleep(1000);
+                    second_driver.findElement(ConfirmCreateIssueButton).click();
+                    Thread.sleep(1000);
+                    if (second_driver.findElements(IssueNumber).size() > 0) {
+                        IssueAttr = second_driver.findElement(IssueNumber).getAttribute("data-issue-key");
+                        System.out.println("Issue ID attr" + IssueAttr);
+                        JiraIssueArray.add(IssueAttr);
                     /*IssueID = second_driver.findElement(IssueNumber).getText();
                     System.out.println("Issue ID "+IssueID);*/
-                }else{System.out.println("Issue ID not found");}
-                //second_driver.findElement(UserProfileIcon).click();
-                //driver.findElement(LogOutButton).click();
-                //driver.findElement(ConfirmLogOut).click();
+                    } else {
+                        System.out.println("Issue ID not found");
+                    }
+                    //second_driver.findElement(UserProfileIcon).click();
+                    //driver.findElement(LogOutButton).click();
+                    //driver.findElement(ConfirmLogOut).click();
+                }else{
+                    Thread.sleep(10000);
+                    second_driver.findElement(AssignToMe).click();
+                    Thread.sleep(1000);
+                    second_driver.findElement(ConfirmCreateIssueButton).click();
+                    Thread.sleep(1000);
+                    if (second_driver.findElements(IssueNumber).size() > 0) {
+                        IssueAttr = second_driver.findElement(IssueNumber).getAttribute("data-issue-key");
+                        System.out.println("Issue ID attr" + IssueAttr);
+                        JiraIssueArray.add(IssueAttr);
+                    } else {
+                        System.out.println("Issue ID not found");
+                    }
+                }
             }
             else if(second_driver.findElements(NextButton).size()>0){
                 second_driver.findElement(NextButton).click();
@@ -175,12 +195,21 @@ public class JiraAccess {
     public static String TestRailDescriptionText(){
         int NoofIssues=JiraIssueArray.size();
         String  TestRailDescription = "TestCase Verification failed and Issue list raised in Jira is : ";
-       for(int i=0;i<NoofIssues;i++){
-           String text = JiraIssueArray.get(i);
-           TestRailDescription = TestRailDescription+ text+", ";
-       }
+        for(int i=0;i<NoofIssues;i++){
+            String text = JiraIssueArray.get(i);
+            TestRailDescription = TestRailDescription+ text+", ";
+        }
         return TestRailDescription;
     }
-
+    public static String TestCaseFailComment(){
+        int NoofIssues=JiraIssueArray.size();
+        String  TestRailDescription = "Test Case failed, Logged Jira Tickets are: ";
+        for(int i=0;i<NoofIssues;i++){
+            String text = JiraIssueArray.get(i);
+            int j=i+1;
+            TestRailDescription = TestRailDescription+"\n "+j+ "). "+ text+", ";
+        }
+        return TestRailDescription;
+    }
 
 }
