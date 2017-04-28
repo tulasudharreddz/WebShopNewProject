@@ -22,6 +22,8 @@ import GenericLib.*;
 import pageObject.*;
 import org.apache.log4j.Logger;
 
+import static GenericLib.DataDriven.ActualLable;
+
 
 /**
  * Created by t.mirasipally on 10/27/2016.
@@ -77,7 +79,7 @@ public class HomePageBSTC extends BrowserStack{
     }
 
 
-@Test
+    @Test
     public void WS_TC_31() throws InterruptedException, IOException, WriteException, AWTException {
 
         log.info("WS_TC_30: AssertVerifyForDefaultAddress that Shop button is displaying or not and options under Shop Menu are available or not");
@@ -88,7 +90,17 @@ public class HomePageBSTC extends BrowserStack{
         //HomePage.AssertVerifyForHomePage(driver);
         Thread.sleep(1000);
         HomePage.AsertVerificationForCategoryUnderShopMenu(driver);
+    }
 
+    @Test
+    public void BrowserStackDemo() throws IOException, WriteException, InterruptedException, AWTException {
+        try {
+            DataDriven.ReportStartup(3);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+        }
+        catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+        catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 
     }
 

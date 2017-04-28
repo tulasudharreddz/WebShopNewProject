@@ -1,46 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--<suite name="Home Page Testing cases Executions with browser stack">-->
 <suite thread-count="3" name="Suite" parallel="tests">
-     <!--<test name="SecondTest">
-        <parameter name="browserN" value="Edge" />
-        <parameter name="version" value="13.0" />
+     <test name="SecondTest">
+        <parameter name="browserN" value="firefox" />
+        <parameter name="version" value="52" />
         <parameter name="os" value="WINDOWS" />
         <parameter name="osVersion" value="10" />
         <parameter name="resolution" value="1366x768"/>
         <classes>
             <class name="browserStackTC.HomePageBSTC">
                 <methods>
-                    <include name="WS_TC_31"/>
+                    <include name="BrowserStackDemo"/>
                 </methods>
             </class>
         </classes>
-    </test>-->
-<!--    <test name="SecondTest1">
+    </test>
+    <test name="SecondTest1">
         <parameter name="browserN" value="chrome" />
         <parameter name="version" value="54" />
         <parameter name="os" value="WINDOWS" />
         <parameter name="osVersion" value="7" />
         <parameter name="resolution" value="1366x768"/>
         <classes>
-            <class name="localTestCases.DemoLocal">
+            <class name="browserStackTC.HomePageBSTC">
                 <methods>
-                    <include name="TC_Home_01"/>
+                    <include name="BrowserStackDemo"/>
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
     <test name="SecondTest2">
         <parameter name="browserName" value="iPhone" />
         <parameter name="platform" value="MAC" />
         <parameter name="device" value="iPhone 6S Plus" />
         <classes>
-            <class name="localTestCases.DemoLocal">
+            <class name="browserStackTC.HomePageBSTC">
                 <methods>
-                    <include name="MobileAutomation"/>
+                    <include name="BrowserStackDemo"/>
                 </methods>
             </class>
         </classes>
-    </test>-->
-
+    </test>
 
 </suite>
