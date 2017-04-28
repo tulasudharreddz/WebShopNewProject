@@ -247,6 +247,8 @@ public class DataDriven {
 			String folderName = ObjectRepository.DateSt();
 			if(AlertHandle.BrowserNameForSuite=="iPhone") {
 				MobileBrowserStack.screenshots();
+			}else if(AlertHandle.BrowserNameForSuite=="chrome"||AlertHandle.BrowserNameForSuite=="firefox") {
+				MobileBrowserStack.screenshots();
 			}else{ Browser.screenshots();}
 			//WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
 			WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File(obr.obj.getProperty("CreateWorkBookPath")+"//"+folderName+"//"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));

@@ -134,4 +134,15 @@ public class BrowserStackTC  extends MobileBrowserStack {
         }
 
     }
+    @Test
+    public void BrowserStackDemo() throws IOException, WriteException, InterruptedException, AWTException {
+        try {
+            DataDriven.ReportStartup(3);
+            Thread.sleep(2000);
+            LoginPage.Loginfunctionality(driver);
+        }
+        catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+        catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
+
+    }
 }

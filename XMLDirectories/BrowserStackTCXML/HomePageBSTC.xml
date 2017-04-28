@@ -34,7 +34,7 @@
         <parameter name="platform" value="MAC" />
         <parameter name="device" value="iPhone 6S Plus" />
         <classes>
-            <class name="browserStackTC.HomePageBSTC">
+            <class name="localTestCases.BrowserStackTC">
                 <methods>
                     <include name="BrowserStackDemo"/>
                 </methods>
