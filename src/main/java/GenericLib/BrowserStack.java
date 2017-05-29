@@ -1,5 +1,6 @@
 package GenericLib;
 
+import TestRail_Inte.APIException;
 import jxl.Sheet;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
+import pageObject.HomePage;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,16 +46,16 @@ public class BrowserStack {
         capability.setCapability("project", "P1");
         capability.setCapability("build", "1.0");
 
-
+        AlertHandle.BrowserNameForSuite = "BrowserStack";
         driver = new RemoteWebDriver(
-                //new URL("https://tulasidhar1:hM4bFqpv5Lo5Vqf4XyuB@hub-cloud.browserstack.com/wd/hub"),
-                //new URL("https://password395:xzEpbNtzmWrgnBAQPA1W@hub-cloud.browserstack.com/wd/hub"),
-
+                        new URL("https://anagani1:g6GPQvPnHxUusvQFqJZc@hub-cloud.browserstack.com/wd/hub"),
+                        capability);
+                /*//new URL("https://password395:xzEpbNtzmWrgnBAQPA1W@hub-cloud.browserstack.com/wd/hub"),
                 new URL("https://sreenipoc1:ajhxhQxrzzx482CY3RqQ@hub-cloud.browserstack.com/wd/hub" ),
-                capability);
+                capability);*/
         driver.manage().window().maximize();
-       // driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-        driver.get("https://directqa2.dimensiondata.com/Webshop/login");
+        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+        //driver.get("https://directqa2.dimensiondata.com/Webshop/login");
 
     }
     private Sheet sheet;
@@ -104,6 +106,10 @@ public class BrowserStack {
         driver.get(obr.obj.getProperty("url"));
     }
     @AfterMethod
-    public void ResultStatus() throws WriteException { ReportResult();}
+    public void ResultStatus() throws WriteException, IOException, APIException { boolean testRailTCStatus =ReportResult();
+
+        TestRail_Integration.UploadResults(testRailTCStatus);
+        HomePage.count7.getAndSet(-1);
+    }
 
 }

@@ -7,7 +7,7 @@
             <class name="localTestCases.DemoLocal">
                 <methods>
                     <include name="Demo_TC_01"/>
-                    <include name="MobileAutomation"/>
+                    <!--<include name="MobileAutomation"/>-->
                 </methods>
             </class>
         </classes>
@@ -20,9 +20,19 @@
         <classes>
             <class name="localTestCases.BrowserStackTC">
                 <methods>
-                    <include name="DemoMobile_TC_01"/>
+                    &lt;!&ndash;<include name="DemoMobile_TC_01"/>&ndash;&gt;
+                    <include name="TouchAct"/>
                 </methods>
             </class>
+        </classes>
+    </test>-->
+
+    <!--<test name="FirstTest">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="version" value="20.0"/>
+        <parameter name="platform" value="MAC"/>
+        <classes>
+            <class name="BaseClass"/>
         </classes>
     </test>-->
 

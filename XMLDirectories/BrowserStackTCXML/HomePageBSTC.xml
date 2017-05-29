@@ -15,7 +15,7 @@
             </class>
         </classes>
     </test>
-    <test name="SecondTest1">
+    <!--<test name="SecondTest1">
         <parameter name="browserN" value="chrome" />
         <parameter name="version" value="54" />
         <parameter name="os" value="WINDOWS" />
@@ -41,5 +41,5 @@
             </class>
         </classes>
     </test>
-
+-->
 </suite>

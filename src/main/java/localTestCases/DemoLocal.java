@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import GenericLib.*;
+import TestRail_Inte.APIException;
 import jxl.read.biff.BiffException;
 import jxl.write.WriteException;
 import org.apache.log4j.Logger;
@@ -28,8 +29,8 @@ public class DemoLocal extends Browser{
 
 	public static ArrayList<ArrayList> ProductDetailsArrayList;
 	@Test
-	public void Demo_TC_01() throws IOException, WriteException, InterruptedException, AWTException {
-		try {
+	public void Demo_TC_01() throws IOException, WriteException, InterruptedException, AWTException, APIException, BiffException {
+		//try {
 			DataDriven.ReportStartup(136);
 			Thread.sleep(2000);
 			LoginPage.Loginfunctionality(driver);
@@ -59,9 +60,9 @@ public class DemoLocal extends Browser{
 					EmailVerificationDetails.VerifyRequestReturnEmailInOutLookDemo(driver);
 				}
 			}else{ActualLable("verification failed for cart Number functionality","Fail");}
-		}
+		/*}
 		catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
-		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }*/
 	}
 	@Test
 	public void MobileAutomation() throws IOException, WriteException, InterruptedException, AWTException {
@@ -79,6 +80,7 @@ public class DemoLocal extends Browser{
 		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 
 	}
+
 
 
 

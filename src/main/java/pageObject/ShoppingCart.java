@@ -633,7 +633,7 @@ public class ShoppingCart {
         for (int i = 0; i <= NoOfProductAddedToCart-1; i++) {
             ArrayList<String> AssertNameFromPSearchPage1 = DemoLocal.ProductDetailsArrayList.get(i);
             ArrayList<String> ActualValue = ShoppingCart.GetProductDetailsFromShoppingCart(driver, i);
-            for (int j = 0; j <= 4; j++) {
+            for (int j = 0; j <= 5; j++) {
                 String ExpectedText = AssertNameFromPSearchPage1.get(j);
                 String ActualText = ActualValue.get(j);
                 ExpectedLable("Verify "+ AssertNamesText.get(j)+" on Shopping Cart Page");

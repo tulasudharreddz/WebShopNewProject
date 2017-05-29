@@ -18,9 +18,9 @@ import pageObject.JiraAccess;
 public class TestRail_Integration {
     static APIClient client;
     public static void TestRailLogin(){
-        client = new APIClient("https://demoversion3.testrail.net");
-        client.setUser("demoversion3@yopmail.com");
-        client.setPassword("$amY2020");
+        client = new APIClient("https://directqademo.testrail.net");
+        client.setUser("bindu.vasamsetti@dimensiondata.com");
+        client.setPassword("1$airaM1");
     }
 static int testNo;
     public static void GetTestCaseTitle(int TCno) throws IOException, APIException {

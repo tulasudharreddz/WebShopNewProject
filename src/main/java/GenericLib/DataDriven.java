@@ -247,7 +247,7 @@ public class DataDriven {
 			String folderName = ObjectRepository.DateSt();
 			if(AlertHandle.BrowserNameForSuite=="iPhone") {
 				MobileBrowserStack.screenshots();
-			}else if(AlertHandle.BrowserNameForSuite=="chrome"||AlertHandle.BrowserNameForSuite=="firefox") {
+			}else if(AlertHandle.BrowserNameForSuite=="BrowserStack") {
 				BrowserStack.screenshots();
 			}else{ Browser.screenshots();}
 			//WritableHyperlink hlk =new WritableHyperlink(3 , num ,new File("D:\\Projects_Idea\\WebShopNewProject\\ResultReports\\"+folderName+"\\"+ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg"));
@@ -258,7 +258,9 @@ public class DataDriven {
 			String name = obr.obj.getProperty("JiraScPath")+"\\"+ folderName;
 			String Last = ScID+"-"+TimeConstatnt()+"-screen-"+SCcount+".jpeg";
 			String Final  = name+"\\"+Last;
-			JiraAccess.JiraFunctionality(driver,Final);
+			if(!((AlertHandle.BrowserNameForSuite=="iPhone")||(AlertHandle.BrowserNameForSuite=="BrowserStack"))) {
+				JiraAccess.JiraFunctionality(driver,Final);
+			}
 			sResult = true;
 			SCcount++;
 		}
@@ -318,7 +320,7 @@ public class DataDriven {
 		wsheet.addCell(new Label(2 , ReportStartNumber, ScDis, CellFormat()));
 		String TestrailCaseNo= ReadTestCases(TestCasesheet).getCell(4,j).getContents();
 		int TestrailCaseNoInt = Integer.parseInt(TestrailCaseNo);
-		TestRail_Integration.GetTestCaseTitle(TestrailCaseNoInt);
+		//TestRail_Integration.GetTestCaseTitle(TestrailCaseNoInt);
 		counting=1;
 	}
 	public static String FolderName() throws WriteException, IOException {

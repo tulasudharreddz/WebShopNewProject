@@ -25,6 +25,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
+import pageObject.HomePage;
 
 import static GenericLib.DataDriven.ReportResult;
 import static GenericLib.ObjectRepository.TimeConstatnt;
@@ -118,5 +119,6 @@ public class Browser {
 	@AfterMethod
 	public void ResultStatus() throws WriteException, IOException, APIException { boolean testRailTCStatus =ReportResult();
 		TestRail_Integration.UploadResults(testRailTCStatus);
+		HomePage.count7.getAndSet(-1);
 	}
 }

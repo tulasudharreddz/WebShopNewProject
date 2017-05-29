@@ -4,6 +4,7 @@ import GenericLib.Browser;
 import GenericLib.DataDriven;
 import GenericLib.MobileBrowserStack;
 import GenericLib.ObjectRepository;
+import TestRail_Inte.APIException;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -135,7 +136,7 @@ public class BrowserStackTC  extends MobileBrowserStack {
 
     }
     @Test
-    public void BrowserStackDemo() throws IOException, WriteException, InterruptedException, AWTException {
+    public void BrowserStackDemo() throws IOException, BiffException, WriteException, InterruptedException, AWTException {
         try {
             DataDriven.ReportStartup(3);
             Thread.sleep(2000);
@@ -143,6 +144,17 @@ public class BrowserStackTC  extends MobileBrowserStack {
         }
         catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
         catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
+
+    }
+    @Test
+    public void TouchAct() throws IOException, WriteException, InterruptedException, AWTException, APIException, BiffException {
+        try {
+        DataDriven.ReportStartup(136);
+        //UITesting.LoginWithTouch(driver);
+
+		}
+		catch (AssertionError e){ String error ="Exception : " +  e.getClass().getSimpleName();	ActualLable(error,"Fail");}
+		catch (Exception e){ String error ="Exception : " +  e.getClass().getSimpleName();ActualLable(error,"Fail"); }
 
     }
 }
